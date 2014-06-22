@@ -34,11 +34,62 @@
  ****************************************************************/
 
 #include "shared.h"
+#include "mushroom.h"
 #include <stdio.h>
 
 static n_byte  screen[1024 * 768] = {0};
 
 extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
+
+static n_byte pixel_black(n_int px, n_int py, n_int dx, n_int dy, void * information)
+{
+    n_byte	*local_col = information;
+    local_col[ px | (py << 10) ] = 255;
+    return 0;
+}
+
+
+static n_int draw_out_of_range(n_int limit, n_int value)
+{
+    if (value < 0)
+    {
+        return 1;
+    }
+    if (value >= limit)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+void draw_line(n_int x1, n_int y1, n_int x2, n_int y2)
+{
+    n_pixel 	 * local_draw = &pixel_black;
+    n_join		   local_kind;
+    n_int        dx = x2-x1;
+    n_int        dy = y2-y1;
+    local_kind.pixel_draw = local_draw;
+    local_kind.information = screen;
+    
+    if (draw_out_of_range(1024, x1))
+    {
+        return;
+    }
+    if (draw_out_of_range(1024, x2))
+    {
+        return;
+    }
+    if (draw_out_of_range(768, y1))
+    {
+        return;
+    }
+    if (draw_out_of_range(768, y1))
+    {
+        return;
+    }
+    
+    (void)math_join(x1, y1, dx, dy, &local_kind);
+}
 
 n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number)
 {
@@ -53,6 +104,8 @@ shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_
 
 n_int shared_init(n_byte view, n_uint random)
 {
+    house_init();
+    
     return 0;
 }
 
@@ -103,19 +156,10 @@ void shared_about(n_constant_string value)
 
 n_byte * shared_draw(n_byte fIdentification)
 {
-    n_int loop = 0;
+    io_erase(screen, (1024*768));
     
-    while (loop < (1024*768))
-    {
-        n_byte value = 0;
-        n_int  y = loop >> 10;
-        if ((loop + y) & 1)
-        {
-            value = 255;
-        }
-        
-        screen[loop++] = value;
-    }
+    house_create(550,150);
+    house_move();
     
     return screen;
 }
