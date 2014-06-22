@@ -154,13 +154,20 @@ void shared_about(n_constant_string value)
     
 }
 
+static n_int time_cycle = 0;
+
 n_byte * shared_draw(n_byte fIdentification)
 {
-    io_erase(screen, (1024*768));
+    time_cycle ++;
     
-    house_create(550,150);
-    house_move();
-    
+    if (time_cycle > 12)
+    {
+        time_cycle = 0;
+        io_erase(screen, (1024*768));
+        
+        house_create(550,150);
+        house_move();
+    }
     return screen;
 }
 
