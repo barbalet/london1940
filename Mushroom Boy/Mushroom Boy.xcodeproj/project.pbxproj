@@ -1,0 +1,579 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
+		5A0D60D319567F2000090DAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C319567F2000090DAE /* main.m */; };
+		5A0D60D419567F2000090DAE /* NobleMacView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C519567F2000090DAE /* NobleMacView.m */; };
+		5A0D60D519567F2000090DAE /* audio.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C819567F2000090DAE /* audio.c */; };
+		5A0D60D619567F2000090DAE /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C919567F2000090DAE /* compress.c */; };
+		5A0D60D719567F2000090DAE /* execute.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60CA19567F2000090DAE /* execute.c */; };
+		5A0D60D819567F2000090DAE /* interpret.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60CB19567F2000090DAE /* interpret.c */; };
+		5A0D60D919567F2000090DAE /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60CC19567F2000090DAE /* io.c */; };
+		5A0D60DA19567F2000090DAE /* land.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60CD19567F2000090DAE /* land.c */; };
+		5A0D60DB19567F2000090DAE /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60CE19567F2000090DAE /* math.c */; };
+		5A0D60DC19567F2000090DAE /* network.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60CF19567F2000090DAE /* network.c */; };
+		5A0D60DD19567F2000090DAE /* parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60D119567F2000090DAE /* parse.c */; };
+		5A0D60E519567F8E00090DAE /* building.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60DF19567F8E00090DAE /* building.c */; };
+		5A0D60E619567F8E00090DAE /* enemy.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60E019567F8E00090DAE /* enemy.c */; };
+		5A0D60E719567F8E00090DAE /* house.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60E119567F8E00090DAE /* house.c */; };
+		5A0D60E819567F8E00090DAE /* shared.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60E419567F8E00090DAE /* shared.c */; };
+		5A37A3BA1955F32800D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
+		5A37A3C41955F32800D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3C21955F32800D187B0 /* InfoPlist.strings */; };
+		5A37A3CA1955F32800D187B0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3C81955F32800D187B0 /* Credits.rtf */; };
+		5A37A3D01955F32800D187B0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3CE1955F32800D187B0 /* MainMenu.xib */; };
+		5A37A3D91955F32900D187B0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3D81955F32900D187B0 /* XCTest.framework */; };
+		5A37A3DA1955F32900D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
+		5A37A3E21955F32900D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3E01955F32900D187B0 /* InfoPlist.strings */; };
+		5A37A3E41955F32900D187B0 /* Mushroom_BoyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A37A3E31955F32900D187B0 /* Mushroom_BoyTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5A37A3DB1955F32900D187B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A37A3AE1955F32800D187B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A37A3B51955F32800D187B0;
+			remoteInfo = "Mushroom Boy";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5A0D60C219567F2000090DAE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5A0D60C319567F2000090DAE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5A0D60C419567F2000090DAE /* NobleMacView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NobleMacView.h; sourceTree = "<group>"; };
+		5A0D60C519567F2000090DAE /* NobleMacView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NobleMacView.m; sourceTree = "<group>"; };
+		5A0D60C619567F2000090DAE /* shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shared.h; sourceTree = "<group>"; };
+		5A0D60C819567F2000090DAE /* audio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = audio.c; sourceTree = "<group>"; };
+		5A0D60C919567F2000090DAE /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = compress.c; sourceTree = "<group>"; };
+		5A0D60CA19567F2000090DAE /* execute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = execute.c; sourceTree = "<group>"; };
+		5A0D60CB19567F2000090DAE /* interpret.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = interpret.c; sourceTree = "<group>"; };
+		5A0D60CC19567F2000090DAE /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
+		5A0D60CD19567F2000090DAE /* land.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = land.c; sourceTree = "<group>"; };
+		5A0D60CE19567F2000090DAE /* math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = math.c; sourceTree = "<group>"; };
+		5A0D60CF19567F2000090DAE /* network.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = network.c; sourceTree = "<group>"; };
+		5A0D60D019567F2000090DAE /* noble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = noble.h; sourceTree = "<group>"; };
+		5A0D60D119567F2000090DAE /* parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parse.c; sourceTree = "<group>"; };
+		5A0D60DF19567F8E00090DAE /* building.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = building.c; sourceTree = "<group>"; };
+		5A0D60E019567F8E00090DAE /* enemy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = enemy.c; sourceTree = "<group>"; };
+		5A0D60E119567F8E00090DAE /* house.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = house.c; sourceTree = "<group>"; };
+		5A0D60E219567F8E00090DAE /* mushroom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mushroom.h; sourceTree = "<group>"; };
+		5A0D60E419567F8E00090DAE /* shared.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shared.c; sourceTree = "<group>"; };
+		5A37A3B61955F32800D187B0 /* Mushroom Boy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mushroom Boy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A37A3B91955F32800D187B0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		5A37A3BC1955F32800D187B0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		5A37A3BD1955F32800D187B0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5A37A3BE1955F32800D187B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5A37A3C11955F32800D187B0 /* Mushroom Boy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mushroom Boy-Info.plist"; sourceTree = "<group>"; };
+		5A37A3C31955F32800D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5A37A3C71955F32800D187B0 /* Mushroom Boy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mushroom Boy-Prefix.pch"; sourceTree = "<group>"; };
+		5A37A3C91955F32800D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		5A37A3CF1955F32800D187B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5A37A3D71955F32900D187B0 /* Mushroom BoyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mushroom BoyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A37A3D81955F32900D187B0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		5A37A3DF1955F32900D187B0 /* Mushroom BoyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mushroom BoyTests-Info.plist"; sourceTree = "<group>"; };
+		5A37A3E11955F32900D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5A37A3E31955F32900D187B0 /* Mushroom_BoyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mushroom_BoyTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5A37A3B31955F32800D187B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A37A3BA1955F32800D187B0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A37A3D41955F32900D187B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A37A3DA1955F32900D187B0 /* Cocoa.framework in Frameworks */,
+				5A37A3D91955F32900D187B0 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A0D60C019567F2000090DAE /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				5A0D60C119567F2000090DAE /* AppDelegate.h */,
+				5A0D60C219567F2000090DAE /* AppDelegate.m */,
+				5A0D60C319567F2000090DAE /* main.m */,
+				5A0D60C419567F2000090DAE /* NobleMacView.h */,
+				5A0D60C519567F2000090DAE /* NobleMacView.m */,
+				5A0D60C619567F2000090DAE /* shared.h */,
+			);
+			name = mac;
+			path = ../../../nobleape/sim/mac;
+			sourceTree = "<group>";
+		};
+		5A0D60C719567F2000090DAE /* noble */ = {
+			isa = PBXGroup;
+			children = (
+				5A0D60C819567F2000090DAE /* audio.c */,
+				5A0D60C919567F2000090DAE /* compress.c */,
+				5A0D60CA19567F2000090DAE /* execute.c */,
+				5A0D60CB19567F2000090DAE /* interpret.c */,
+				5A0D60CC19567F2000090DAE /* io.c */,
+				5A0D60CD19567F2000090DAE /* land.c */,
+				5A0D60CE19567F2000090DAE /* math.c */,
+				5A0D60CF19567F2000090DAE /* network.c */,
+				5A0D60D019567F2000090DAE /* noble.h */,
+				5A0D60D119567F2000090DAE /* parse.c */,
+			);
+			name = noble;
+			path = ../../../nobleape/sim/noble;
+			sourceTree = "<group>";
+		};
+		5A0D60DE19567F8E00090DAE /* game */ = {
+			isa = PBXGroup;
+			children = (
+				5A0D60DF19567F8E00090DAE /* building.c */,
+				5A0D60E019567F8E00090DAE /* enemy.c */,
+				5A0D60E119567F8E00090DAE /* house.c */,
+				5A0D60E219567F8E00090DAE /* mushroom.h */,
+			);
+			name = game;
+			path = ../../game;
+			sourceTree = "<group>";
+		};
+		5A0D60E319567F8E00090DAE /* gui */ = {
+			isa = PBXGroup;
+			children = (
+				5A0D60E419567F8E00090DAE /* shared.c */,
+			);
+			name = gui;
+			path = ../../gui;
+			sourceTree = "<group>";
+		};
+		5A37A3AD1955F32800D187B0 = {
+			isa = PBXGroup;
+			children = (
+				5A37A3BF1955F32800D187B0 /* Mushroom Boy */,
+				5A37A3DD1955F32900D187B0 /* Mushroom BoyTests */,
+				5A37A3B81955F32800D187B0 /* Frameworks */,
+				5A37A3B71955F32800D187B0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5A37A3B71955F32800D187B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A37A3B61955F32800D187B0 /* Mushroom Boy.app */,
+				5A37A3D71955F32900D187B0 /* Mushroom BoyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5A37A3B81955F32800D187B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A37A3B91955F32800D187B0 /* Cocoa.framework */,
+				5A37A3D81955F32900D187B0 /* XCTest.framework */,
+				5A37A3BB1955F32800D187B0 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A37A3BB1955F32800D187B0 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A37A3BC1955F32800D187B0 /* AppKit.framework */,
+				5A37A3BD1955F32800D187B0 /* CoreData.framework */,
+				5A37A3BE1955F32800D187B0 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		5A37A3BF1955F32800D187B0 /* Mushroom Boy */ = {
+			isa = PBXGroup;
+			children = (
+				5A0D60DE19567F8E00090DAE /* game */,
+				5A0D60E319567F8E00090DAE /* gui */,
+				5A0D60C019567F2000090DAE /* mac */,
+				5A0D60C719567F2000090DAE /* noble */,
+				5A37A3CE1955F32800D187B0 /* MainMenu.xib */,
+				5A37A3C01955F32800D187B0 /* Supporting Files */,
+			);
+			path = "Mushroom Boy";
+			sourceTree = "<group>";
+		};
+		5A37A3C01955F32800D187B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5A37A3C11955F32800D187B0 /* Mushroom Boy-Info.plist */,
+				5A37A3C21955F32800D187B0 /* InfoPlist.strings */,
+				5A37A3C71955F32800D187B0 /* Mushroom Boy-Prefix.pch */,
+				5A37A3C81955F32800D187B0 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5A37A3DD1955F32900D187B0 /* Mushroom BoyTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A37A3E31955F32900D187B0 /* Mushroom_BoyTests.m */,
+				5A37A3DE1955F32900D187B0 /* Supporting Files */,
+			);
+			path = "Mushroom BoyTests";
+			sourceTree = "<group>";
+		};
+		5A37A3DE1955F32900D187B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5A37A3DF1955F32900D187B0 /* Mushroom BoyTests-Info.plist */,
+				5A37A3E01955F32900D187B0 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5A37A3B51955F32800D187B0 /* Mushroom Boy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A37A3E71955F32900D187B0 /* Build configuration list for PBXNativeTarget "Mushroom Boy" */;
+			buildPhases = (
+				5A37A3B21955F32800D187B0 /* Sources */,
+				5A37A3B31955F32800D187B0 /* Frameworks */,
+				5A37A3B41955F32800D187B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mushroom Boy";
+			productName = "Mushroom Boy";
+			productReference = 5A37A3B61955F32800D187B0 /* Mushroom Boy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5A37A3D61955F32900D187B0 /* Mushroom BoyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A37A3EA1955F32900D187B0 /* Build configuration list for PBXNativeTarget "Mushroom BoyTests" */;
+			buildPhases = (
+				5A37A3D31955F32900D187B0 /* Sources */,
+				5A37A3D41955F32900D187B0 /* Frameworks */,
+				5A37A3D51955F32900D187B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A37A3DC1955F32900D187B0 /* PBXTargetDependency */,
+			);
+			name = "Mushroom BoyTests";
+			productName = "Mushroom BoyTests";
+			productReference = 5A37A3D71955F32900D187B0 /* Mushroom BoyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5A37A3AE1955F32800D187B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Tom Barbalet";
+				TargetAttributes = {
+					5A37A3D61955F32900D187B0 = {
+						TestTargetID = 5A37A3B51955F32800D187B0;
+					};
+				};
+			};
+			buildConfigurationList = 5A37A3B11955F32800D187B0 /* Build configuration list for PBXProject "Mushroom Boy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5A37A3AD1955F32800D187B0;
+			productRefGroup = 5A37A3B71955F32800D187B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5A37A3B51955F32800D187B0 /* Mushroom Boy */,
+				5A37A3D61955F32900D187B0 /* Mushroom BoyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5A37A3B41955F32800D187B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A37A3C41955F32800D187B0 /* InfoPlist.strings in Resources */,
+				5A37A3CA1955F32800D187B0 /* Credits.rtf in Resources */,
+				5A37A3D01955F32800D187B0 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A37A3D51955F32900D187B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A37A3E21955F32900D187B0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5A37A3B21955F32800D187B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A0D60E819567F8E00090DAE /* shared.c in Sources */,
+				5A0D60E719567F8E00090DAE /* house.c in Sources */,
+				5A0D60E619567F8E00090DAE /* enemy.c in Sources */,
+				5A0D60D319567F2000090DAE /* main.m in Sources */,
+				5A0D60D719567F2000090DAE /* execute.c in Sources */,
+				5A0D60D819567F2000090DAE /* interpret.c in Sources */,
+				5A0D60E519567F8E00090DAE /* building.c in Sources */,
+				5A0D60DD19567F2000090DAE /* parse.c in Sources */,
+				5A0D60D419567F2000090DAE /* NobleMacView.m in Sources */,
+				5A0D60DA19567F2000090DAE /* land.c in Sources */,
+				5A0D60DB19567F2000090DAE /* math.c in Sources */,
+				5A0D60D519567F2000090DAE /* audio.c in Sources */,
+				5A0D60D919567F2000090DAE /* io.c in Sources */,
+				5A0D60DC19567F2000090DAE /* network.c in Sources */,
+				5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */,
+				5A0D60D619567F2000090DAE /* compress.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A37A3D31955F32900D187B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A37A3E41955F32900D187B0 /* Mushroom_BoyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5A37A3DC1955F32900D187B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A37A3B51955F32800D187B0 /* Mushroom Boy */;
+			targetProxy = 5A37A3DB1955F32900D187B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5A37A3C21955F32800D187B0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A37A3C31955F32800D187B0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5A37A3C81955F32800D187B0 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A37A3C91955F32800D187B0 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		5A37A3CE1955F32800D187B0 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A37A3CF1955F32800D187B0 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		5A37A3E01955F32900D187B0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A37A3E11955F32900D187B0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5A37A3E51955F32900D187B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		5A37A3E61955F32900D187B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		5A37A3E81955F32900D187B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mushroom Boy/Mushroom Boy-Prefix.pch";
+				INFOPLIST_FILE = "Mushroom Boy/Mushroom Boy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5A37A3E91955F32900D187B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mushroom Boy/Mushroom Boy-Prefix.pch";
+				INFOPLIST_FILE = "Mushroom Boy/Mushroom Boy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5A37A3EB1955F32900D187B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mushroom Boy.app/Contents/MacOS/Mushroom Boy";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mushroom Boy/Mushroom Boy-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Mushroom BoyTests/Mushroom BoyTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		5A37A3EC1955F32900D187B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mushroom Boy.app/Contents/MacOS/Mushroom Boy";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mushroom Boy/Mushroom Boy-Prefix.pch";
+				INFOPLIST_FILE = "Mushroom BoyTests/Mushroom BoyTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5A37A3B11955F32800D187B0 /* Build configuration list for PBXProject "Mushroom Boy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A37A3E51955F32900D187B0 /* Debug */,
+				5A37A3E61955F32900D187B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A37A3E71955F32900D187B0 /* Build configuration list for PBXNativeTarget "Mushroom Boy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A37A3E81955F32900D187B0 /* Debug */,
+				5A37A3E91955F32900D187B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A37A3EA1955F32900D187B0 /* Build configuration list for PBXNativeTarget "Mushroom BoyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A37A3EB1955F32900D187B0 /* Debug */,
+				5A37A3EC1955F32900D187B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5A37A3AE1955F32800D187B0 /* Project object */;
+}
