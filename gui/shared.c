@@ -104,7 +104,7 @@ shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_
 
 n_int shared_init(n_byte view, n_uint random)
 {
-    house_init();
+    enemy_init();
     
     return 0;
 }
@@ -166,8 +166,9 @@ n_byte * shared_draw(n_byte fIdentification)
         io_erase(screen, (1024*768));
         
         house_create(550,150);
-        house_move();
     }
+    enemy_move();
+
     return screen;
 }
 

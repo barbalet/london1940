@@ -29,6 +29,7 @@
 		5A37A3DA1955F32900D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
 		5A37A3E21955F32900D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3E01955F32900D187B0 /* InfoPlist.strings */; };
 		5A37A3E41955F32900D187B0 /* Mushroom_BoyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A37A3E31955F32900D187B0 /* Mushroom_BoyTests.m */; };
+		5A4C2FFB1958D761009310E4 /* enemy.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A4C2FFA1958D761009310E4 /* enemy.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		5A37A3DF1955F32900D187B0 /* Mushroom BoyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mushroom BoyTests-Info.plist"; sourceTree = "<group>"; };
 		5A37A3E11955F32900D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A37A3E31955F32900D187B0 /* Mushroom_BoyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mushroom_BoyTests.m; sourceTree = "<group>"; };
+		5A4C2FFA1958D761009310E4 /* enemy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = enemy.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 		5A0D60DE19567F8E00090DAE /* game */ = {
 			isa = PBXGroup;
 			children = (
+				5A4C2FFA1958D761009310E4 /* enemy.c */,
 				5A0D60E119567F8E00090DAE /* house.c */,
 				5A0D60E219567F8E00090DAE /* mushroom.h */,
 			);
@@ -331,6 +334,7 @@
 				5A0D60E819567F8E00090DAE /* shared.c in Sources */,
 				5A0D60E719567F8E00090DAE /* house.c in Sources */,
 				5A0D60D319567F2000090DAE /* main.m in Sources */,
+				5A4C2FFB1958D761009310E4 /* enemy.c in Sources */,
 				5A0D60D719567F2000090DAE /* execute.c in Sources */,
 				5A0D60D819567F2000090DAE /* interpret.c in Sources */,
 				5A0D60DD19567F2000090DAE /* parse.c in Sources */,
