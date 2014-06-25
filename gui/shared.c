@@ -160,7 +160,7 @@ n_byte * shared_draw(n_byte fIdentification)
 {
     time_cycle ++;
     
-    if (time_cycle > 120)
+    if (time_cycle > 59)
     {
         time_cycle = 0;
         io_erase(screen, (1024*768));
