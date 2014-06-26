@@ -158,14 +158,21 @@ static n_int time_cycle = 0;
 
 n_byte * shared_draw(n_byte fIdentification)
 {
+    static n_byte2  seed[2] = {0xf728, 0xe231};
     time_cycle ++;
     
     if (time_cycle > 59)
     {
+        noble_building * building = house_create(seed);
+        n_vect2          center = {1024/2, 768/2};
         time_cycle = 0;
         io_erase(screen, (1024*768));
-        
-        house_create(1024/2,768/2);
+        if (building)
+        {
+            house_transform(building, &center, math_random(seed) & 255);
+            house_draw(building);
+            io_free((void **)&building);
+        }
     }
     enemy_move();
 
