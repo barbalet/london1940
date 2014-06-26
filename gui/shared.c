@@ -165,7 +165,7 @@ n_byte * shared_draw(n_byte fIdentification)
         time_cycle = 0;
         io_erase(screen, (1024*768));
         
-        house_create(550,150);
+        house_create(1024/2,768/2);
     }
     enemy_move();
 
