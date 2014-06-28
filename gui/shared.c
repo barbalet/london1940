@@ -39,6 +39,10 @@
 
 static n_byte  screen[1024 * 768] = {0};
 
+static n_byte  key_identification = 0;
+static n_byte2 key_value = 0;
+static n_byte  key_down = 0;
+
 extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
 
 static n_byte pixel_black(n_int px, n_int py, n_int dx, n_int dy, void * information)
@@ -47,7 +51,6 @@ static n_byte pixel_black(n_int px, n_int py, n_int dx, n_int dy, void * informa
     local_col[ px | (py << 10) ] = 255;
     return 0;
 }
-
 
 static n_int draw_out_of_range(n_int limit, n_int value)
 {
@@ -99,6 +102,11 @@ n_int draw_error(n_constant_string error_text, n_constant_string location, n_int
 
 shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_x, n_int dim_y)
 {
+    if((key_down == 1) && (key_identification == fIdentification))
+    {
+        /* control_key(key_identification, key_value); */
+    }
+    
     return SHARED_CYCLE_OK;
 }
 
@@ -126,12 +134,14 @@ void shared_rotate(n_double num, n_byte wwind)
 
 void shared_keyReceived(n_byte2 value, n_byte fIdentification)
 {
-    
+    key_down = 1;
+    key_value = value;
+    key_identification = fIdentification;
 }
 
 void shared_keyUp(void)
 {
-    
+    key_down = 0;
 }
 
 void shared_mouseOption(n_byte option)
