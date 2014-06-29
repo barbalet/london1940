@@ -37,10 +37,12 @@
 #else
 #include "noble.h"
 #endif
+
 #define POINTS_PER_ROOM             (16)
 #define POINTS_PER_ROOM_STRUCTURE   (8)
 #define MAX_ROOMS                   (8)
 #define GENETICS_COUNT              (64)
+
 typedef struct{
     n_vect2  points[POINTS_PER_ROOM];
     n_byte   window;
@@ -59,3 +61,7 @@ void enemy_move(void);
 noble_building * house_create(n_byte2 * seed);
 void house_transform(noble_building * building, n_vect2 * center, n_int direction);
 void house_draw(noble_building * building);
+
+n_int ecomony_init(n_byte2 * seeds);
+void  economy_draw(n_int px, n_int py);
+

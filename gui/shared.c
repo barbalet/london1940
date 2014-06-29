@@ -44,6 +44,7 @@ static n_byte2 key_value = 0;
 static n_byte  key_down = 0;
 
 extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
+extern n_byte * draw_screen(void);
 
 static n_byte pixel_black(n_int px, n_int py, n_int dx, n_int dy, void * information)
 {
@@ -63,6 +64,11 @@ static n_int draw_out_of_range(n_int limit, n_int value)
         return 1;
     }
     return 0;
+}
+
+n_byte * draw_screen(void)
+{
+    return screen;
 }
 
 void draw_line(n_int x1, n_int y1, n_int x2, n_int y2)
@@ -112,8 +118,9 @@ shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_
 
 n_int shared_init(n_byte view, n_uint random)
 {
+    n_byte2   seed[4] = {0x343e, 0xf323, 0xed32, 0x32fa};
     enemy_init();
-    
+    ecomony_init(seed);
     return 0;
 }
 
@@ -176,7 +183,9 @@ n_byte * shared_draw(n_byte fIdentification)
         noble_building * building = house_create(seed);
         n_vect2          center = {1024/2, 768/2};
         time_cycle = 0;
-        io_erase(screen, (1024*768));
+        /*io_erase(screen, (1024*768));*/
+        economy_draw(0, 0);
+        
         if (building)
         {
             house_transform(building, &center, math_random(seed) & 255);

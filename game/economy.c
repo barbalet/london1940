@@ -39,6 +39,9 @@ static n_byte      map[HI_RES_MAP_AREA];
 static n_byte      economy[HI_RES_MAP_AREA];
 static n_byte      road[HI_RES_MAP_AREA];
 
+extern n_byte * draw_screen(void);
+
+
 /* Roads are defined as either linking or radial from economic centers mapped onto the topology of the landscape */
 static void  economy_road(n_byte * local_map, n_byte * local_economy, n_byte * local_road)
 {
@@ -64,4 +67,13 @@ n_int ecomony_init(n_byte2 * seeds)
     return 0;
 }
 
-
+void economy_draw(n_int px, n_int py)
+{
+    n_byte * screen = draw_screen();
+    n_int loop = 0;
+    while (loop < 768)
+    {
+        io_copy(&map[HI_RES_MAP_DIMENSION * loop], &screen[1024 * loop], 1024);
+        loop++;
+    }
+}
