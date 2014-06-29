@@ -21,6 +21,7 @@
 		5A0D60DD19567F2000090DAE /* parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60D119567F2000090DAE /* parse.c */; };
 		5A0D60E719567F8E00090DAE /* house.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60E119567F8E00090DAE /* house.c */; };
 		5A0D60E819567F8E00090DAE /* shared.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60E419567F8E00090DAE /* shared.c */; };
+		5A2DCD75195F5F6100262A58 /* economy.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DCD74195F5F6100262A58 /* economy.c */; };
 		5A37A3BA1955F32800D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
 		5A37A3C41955F32800D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3C21955F32800D187B0 /* InfoPlist.strings */; };
 		5A37A3CA1955F32800D187B0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3C81955F32800D187B0 /* Credits.rtf */; };
@@ -62,6 +63,7 @@
 		5A0D60E119567F8E00090DAE /* house.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = house.c; sourceTree = "<group>"; };
 		5A0D60E219567F8E00090DAE /* mushroom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mushroom.h; sourceTree = "<group>"; };
 		5A0D60E419567F8E00090DAE /* shared.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = shared.c; sourceTree = "<group>"; };
+		5A2DCD74195F5F6100262A58 /* economy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = economy.c; sourceTree = "<group>"; };
 		5A37A3B61955F32800D187B0 /* Mushroom Boy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mushroom Boy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A37A3B91955F32800D187B0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5A37A3BC1955F32800D187B0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -136,6 +138,7 @@
 		5A0D60DE19567F8E00090DAE /* game */ = {
 			isa = PBXGroup;
 			children = (
+				5A2DCD74195F5F6100262A58 /* economy.c */,
 				5A4C2FFA1958D761009310E4 /* enemy.c */,
 				5A0D60E119567F8E00090DAE /* house.c */,
 				5A0D60E219567F8E00090DAE /* mushroom.h */,
@@ -335,6 +338,7 @@
 				5A0D60E719567F8E00090DAE /* house.c in Sources */,
 				5A0D60D319567F2000090DAE /* main.m in Sources */,
 				5A4C2FFB1958D761009310E4 /* enemy.c in Sources */,
+				5A2DCD75195F5F6100262A58 /* economy.c in Sources */,
 				5A0D60D719567F2000090DAE /* execute.c in Sources */,
 				5A0D60D819567F2000090DAE /* interpret.c in Sources */,
 				5A0D60DD19567F2000090DAE /* parse.c in Sources */,
