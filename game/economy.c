@@ -35,9 +35,9 @@
 
 #include "mushroom.h"
 
-static n_byte      map[HI_RES_MAP_AREA];
-static n_byte      economy[HI_RES_MAP_AREA];
-static n_byte      road[HI_RES_MAP_AREA];
+static n_byte  map[MAP_AREA];
+static n_byte  economy[MAP_AREA];
+static n_byte  road[MAP_AREA];
 
 extern n_byte * draw_screen(void);
 
@@ -45,20 +45,75 @@ extern n_byte * draw_screen(void);
 /* Roads are defined as either linking or radial from economic centers mapped onto the topology of the landscape */
 static void  economy_road(n_byte * local_map, n_byte * local_economy, n_byte * local_road)
 {
+    n_int max = 0;
+    n_int min = 0xffff;
+    n_byte2 *scratchpad = 0L;
+    n_int   py = 0;
+    n_int   delta;
     
+    scratchpad = io_new(sizeof(n_byte2)* MAP_AREA);
+    
+    if (scratchpad == 0L)
+    {
+        SHOW_ERROR("scratchpad to create economy could not be allocated");
+        return;
+    }
+    
+    io_erase((n_byte *)scratchpad, sizeof(n_byte2)* MAP_AREA);
+    
+    while (py < MAP_DIMENSION)
+    {
+        n_int py0 = ((py + (MAP_DIMENSION - 1)) & (MAP_DIMENSION - 1)) << MAP_BITS;
+        n_int py1 = ((py + 1) & (MAP_DIMENSION - 1)) << MAP_BITS;
+        n_int pym = py << MAP_BITS;
+        n_int px = 0;
+        while (px < MAP_DIMENSION)
+        {
+            n_int px0 = (px + (MAP_DIMENSION - 1)) & (MAP_DIMENSION - 1);
+            n_int px1 = (px + 1) & (MAP_DIMENSION - 1);
+            n_int dx = (n_int)local_economy[px1 | pym] - (n_int)local_economy[px0 | pym];
+            n_int dy = (n_int)local_economy[px | py1] - (n_int)local_economy[px | py0];
+            n_uint div = (dx * dx) + (dy * dy);
+            div = math_root(div);
+            if (div > max)
+            {
+                max = div;
+            }
+            if (div < min)
+            {
+                min = div;
+            }
+            scratchpad[px | pym] = div;
+            px++;
+        }
+        py++;
+    }
+    
+    delta = max - min;
+    
+    if (delta)
+    {
+        n_int loop = 0;
+        while (loop < MAP_AREA)
+        {
+            local_road[loop] = ((scratchpad[loop] - min) * 255) / delta;
+            loop++;
+        }
+    }
+    io_free((void**)&scratchpad);
 }
 
 n_int ecomony_init(n_byte2 * seeds)
 {
-    n_byte * actual = io_new(MAP_AREA * 2);
+    n_byte * actual = io_new(MAP_AREA);
 
     if (actual == 0L)
     {
         return SHOW_ERROR("Memory init economy failed to allocate");
     }
     
-    land_init(seeds, actual, map, &actual[MAP_AREA], 0);
-    land_init(seeds, actual, economy, &actual[MAP_AREA], 0);
+    land_init(seeds, map, 0L, actual, 0);
+    land_init(seeds, economy, 0L, actual, 0);
     
     io_free((void **)&actual);
     
@@ -67,13 +122,35 @@ n_int ecomony_init(n_byte2 * seeds)
     return 0;
 }
 
-void economy_draw(n_int px, n_int py)
+static void economy_micro(n_byte * value)
 {
     n_byte * screen = draw_screen();
     n_int loop = 0;
+    while (loop < 512)
+    {
+        io_copy(&value[MAP_DIMENSION * loop], &screen[1024 * loop], 512);
+        io_copy(&value[MAP_DIMENSION * loop], &screen[(1024 * loop) + 512], 512);
+        loop++;
+    }
     while (loop < 768)
     {
-        io_copy(&map[HI_RES_MAP_DIMENSION * loop], &screen[1024 * loop], 1024);
+        io_copy(&screen[1024 * (loop-512)], &screen[1024 * loop], 1024);
         loop++;
+    }
+}
+
+static n_int switcher = 0;
+
+void economy_draw(n_int px, n_int py)
+{
+    if (switcher)
+    {
+        economy_micro(road);
+        switcher = 0;
+    }
+    else
+    {
+        economy_micro(economy);
+        switcher = 1;
     }
 }
