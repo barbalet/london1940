@@ -71,8 +71,8 @@ static void  economy_road(n_byte * local_map, n_byte * local_economy, n_byte * l
         {
             n_int px0 = (px + (MAP_DIMENSION - 1)) & (MAP_DIMENSION - 1);
             n_int px1 = (px + 1) & (MAP_DIMENSION - 1);
-            n_int dx = (n_int)local_economy[px1 | pym] - (n_int)local_economy[px0 | pym];
-            n_int dy = (n_int)local_economy[px | py1] - (n_int)local_economy[px | py0];
+            n_int dx = (n_int)local_economy[px1 | pym] - (n_int)local_economy[px0 | pym] + (n_int)local_map[px1 | pym] - (n_int)local_map[px0 | pym];
+            n_int dy = (n_int)local_economy[px | py1] - (n_int)local_economy[px | py0]   + (n_int)local_map[px | py1] -  (n_int)local_map[px | py0];
             n_uint div = (dx * dx) + (dy * dy);
             div = math_root(div);
             if (div > max)
@@ -105,6 +105,8 @@ static void  economy_road(n_byte * local_map, n_byte * local_economy, n_byte * l
 
 n_int ecomony_init(n_byte2 * seeds)
 {
+    n_byte2  local_random[2];
+    
     n_byte * actual = io_new(MAP_AREA);
 
     if (actual == 0L)
@@ -112,8 +114,15 @@ n_int ecomony_init(n_byte2 * seeds)
         return SHOW_ERROR("Memory init economy failed to allocate");
     }
     
-    land_init(seeds, map, 0L, actual, 0);
-    land_init(seeds, economy, 0L, actual, 0);
+    local_random[0] = seeds[0];
+    local_random[1] = seeds[1];
+    
+    math_patch(map, actual, &math_random, local_random, MAP_BITS, 0, 7, 1);
+
+    local_random[0] = seeds[2];
+    local_random[1] = seeds[3];
+    
+    math_patch(economy, actual, &math_random, local_random, MAP_BITS, 0, 4, 1);
     
     io_free((void **)&actual);
     
