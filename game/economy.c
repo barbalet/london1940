@@ -41,12 +41,33 @@ static n_byte  road[MAP_AREA];
 
 extern n_byte * draw_screen(void);
 
+typedef n_byte2 (economy_scan)(n_byte * scan, n_int py0, n_int py1, n_int pym, n_int px);
 
-/* Roads are defined as either linking or radial from economic centers mapped onto the topology of the landscape */
-static void  economy_road(n_byte * local_map, n_byte * local_economy, n_byte * local_road)
+n_byte2 generate_road(n_byte * scan, n_int py0, n_int py1, n_int pym, n_int px)
 {
-    n_int max = 0;
-    n_int min = 0xffff;
+    n_int px0 = (px + (MAP_DIMENSION - 1)) & (MAP_DIMENSION - 1);
+    n_int px1 = (px + 1) & (MAP_DIMENSION - 1);
+    n_int dx = (n_int)scan[px1 | pym] - (n_int)scan[px0 | pym];
+    n_int dy = (n_int)scan[px | py1] - (n_int)scan[px | py0];
+    n_uint div = (dx * dx) + (dy * dy);
+    return math_root(div);
+}
+
+n_byte2 generate_flat(n_byte * scan, n_int py0, n_int py1, n_int pym, n_int px)
+{
+    n_int px0 = (px + (MAP_DIMENSION - 1)) & (MAP_DIMENSION - 1);
+    n_int px1 = (px + 1) & (MAP_DIMENSION - 1);
+    n_int dx = (n_int)scan[px1 | pym] - (n_int)scan[px0 | pym];
+    n_int dy = (n_int)scan[px | py1] - (n_int)scan[px | py0];
+    n_uint div = (dx * dx * dy * dy);
+    return 0xffff - math_root(div);
+}
+
+
+static n_int economy_scan_calculation(n_byte * input, n_byte * output, economy_scan calculation)
+{
+    n_int   max = 0;
+    n_int   min = 0xffff;
     n_byte2 *scratchpad = 0L;
     n_int   py = 0;
     n_int   delta;
@@ -55,8 +76,7 @@ static void  economy_road(n_byte * local_map, n_byte * local_economy, n_byte * l
     
     if (scratchpad == 0L)
     {
-        SHOW_ERROR("scratchpad to create economy could not be allocated");
-        return;
+        return SHOW_ERROR("scratchpad to create calculation could not be allocated");
     }
     
     io_erase((n_byte *)scratchpad, sizeof(n_byte2)* MAP_AREA);
@@ -69,12 +89,7 @@ static void  economy_road(n_byte * local_map, n_byte * local_economy, n_byte * l
         n_int px = 0;
         while (px < MAP_DIMENSION)
         {
-            n_int px0 = (px + (MAP_DIMENSION - 1)) & (MAP_DIMENSION - 1);
-            n_int px1 = (px + 1) & (MAP_DIMENSION - 1);
-            n_int dx = (n_int)local_economy[px1 | pym] - (n_int)local_economy[px0 | pym] + (n_int)local_map[px1 | pym] - (n_int)local_map[px0 | pym];
-            n_int dy = (n_int)local_economy[px | py1] - (n_int)local_economy[px | py0]   + (n_int)local_map[px | py1] -  (n_int)local_map[px | py0];
-            n_uint div = (dx * dx) + (dy * dy);
-            div = math_root(div);
+            n_byte2 div = (calculation)(input, py0, py1, pym, px);
             if (div > max)
             {
                 max = div;
@@ -96,12 +111,16 @@ static void  economy_road(n_byte * local_map, n_byte * local_economy, n_byte * l
         n_int loop = 0;
         while (loop < MAP_AREA)
         {
-            local_road[loop] = ((scratchpad[loop] - min) * 255) / delta;
+            output[loop] = ((scratchpad[loop] - min) * 255) / delta;
             loop++;
         }
     }
     io_free((void**)&scratchpad);
+    return 0;
 }
+
+
+/* Roads are defined as either linking or radial from economic centers mapped onto the topology of the landscape */
 
 n_int ecomony_init(n_byte2 * seeds)
 {
@@ -126,7 +145,7 @@ n_int ecomony_init(n_byte2 * seeds)
     
     io_free((void **)&actual);
     
-    economy_road(map, economy, road);
+    economy_scan_calculation(economy, road, generate_road);
     
     return 0;
 }

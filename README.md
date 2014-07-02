@@ -18,6 +18,14 @@ The game is played through a first person perspective interface. The player sees
 
 The game was originally developed by Tom Barbalet in 1998 with access to the Noble Ape Simulation. The current implementation takes source code from the original implementation and modernizes it with the existing Noble Ape Simulation.
 
+## NOBLE APE REQUIREMENT
+
+This source requires you to have:
+
+https://github.com/barbalet/nobleape
+
+At the same directory level as /mushroom/
+
 ## LICENSE
 
 http://www.nobleape.com/man/legal.html
