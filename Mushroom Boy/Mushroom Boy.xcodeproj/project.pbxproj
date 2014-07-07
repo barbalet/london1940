@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A05E15F196A453C00980652 /* NobleMushroomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05E15E196A453C00980652 /* NobleMushroomView.m */; };
 		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
 		5A0D60D319567F2000090DAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C319567F2000090DAE /* main.m */; };
 		5A0D60D419567F2000090DAE /* NobleMacView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C519567F2000090DAE /* NobleMacView.m */; };
@@ -25,7 +26,7 @@
 		5A37A3BA1955F32800D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
 		5A37A3C41955F32800D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3C21955F32800D187B0 /* InfoPlist.strings */; };
 		5A37A3CA1955F32800D187B0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3C81955F32800D187B0 /* Credits.rtf */; };
-		5A37A3D01955F32800D187B0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3CE1955F32800D187B0 /* MainMenu.xib */; };
+		5A37A3D01955F32800D187B0 /* Mushroom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3CE1955F32800D187B0 /* Mushroom.xib */; };
 		5A37A3D91955F32900D187B0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3D81955F32900D187B0 /* XCTest.framework */; };
 		5A37A3DA1955F32900D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
 		5A37A3E21955F32900D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3E01955F32900D187B0 /* InfoPlist.strings */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A05E15D196A453C00980652 /* NobleMushroomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NobleMushroomView.h; sourceTree = "<group>"; };
+		5A05E15E196A453C00980652 /* NobleMushroomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NobleMushroomView.m; sourceTree = "<group>"; };
 		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A0D60C219567F2000090DAE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5A0D60C319567F2000090DAE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -73,7 +76,7 @@
 		5A37A3C31955F32800D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A37A3C71955F32800D187B0 /* Mushroom Boy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mushroom Boy-Prefix.pch"; sourceTree = "<group>"; };
 		5A37A3C91955F32800D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		5A37A3CF1955F32800D187B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5A37A3CF1955F32800D187B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Mushroom.xib; sourceTree = "<group>"; };
 		5A37A3D71955F32900D187B0 /* Mushroom BoyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mushroom BoyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A37A3D81955F32900D187B0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5A37A3DF1955F32900D187B0 /* Mushroom BoyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mushroom BoyTests-Info.plist"; sourceTree = "<group>"; };
@@ -103,6 +106,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A05E15C196A453C00980652 /* macmushroom */ = {
+			isa = PBXGroup;
+			children = (
+				5A05E15D196A453C00980652 /* NobleMushroomView.h */,
+				5A05E15E196A453C00980652 /* NobleMushroomView.m */,
+			);
+			name = macmushroom;
+			path = ../../macmushroom;
+			sourceTree = "<group>";
+		};
 		5A0D60C019567F2000090DAE /* mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,11 +211,12 @@
 		5A37A3BF1955F32800D187B0 /* Mushroom Boy */ = {
 			isa = PBXGroup;
 			children = (
+				5A05E15C196A453C00980652 /* macmushroom */,
 				5A0D60DE19567F8E00090DAE /* game */,
 				5A0D60E319567F8E00090DAE /* gui */,
 				5A0D60C019567F2000090DAE /* mac */,
 				5A0D60C719567F2000090DAE /* noble */,
-				5A37A3CE1955F32800D187B0 /* MainMenu.xib */,
+				5A37A3CE1955F32800D187B0 /* Mushroom.xib */,
 				5A37A3C01955F32800D187B0 /* Supporting Files */,
 			);
 			path = "Mushroom Boy";
@@ -315,7 +329,7 @@
 			files = (
 				5A37A3C41955F32800D187B0 /* InfoPlist.strings in Resources */,
 				5A37A3CA1955F32800D187B0 /* Credits.rtf in Resources */,
-				5A37A3D01955F32800D187B0 /* MainMenu.xib in Resources */,
+				5A37A3D01955F32800D187B0 /* Mushroom.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +362,7 @@
 				5A0D60D519567F2000090DAE /* audio.c in Sources */,
 				5A0D60D919567F2000090DAE /* io.c in Sources */,
 				5A0D60DC19567F2000090DAE /* network.c in Sources */,
+				5A05E15F196A453C00980652 /* NobleMushroomView.m in Sources */,
 				5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */,
 				5A0D60D619567F2000090DAE /* compress.c in Sources */,
 			);
@@ -388,12 +403,12 @@
 			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
-		5A37A3CE1955F32800D187B0 /* MainMenu.xib */ = {
+		5A37A3CE1955F32800D187B0 /* Mushroom.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5A37A3CF1955F32800D187B0 /* Base */,
 			);
-			name = MainMenu.xib;
+			name = Mushroom.xib;
 			sourceTree = "<group>";
 		};
 		5A37A3E01955F32900D187B0 /* InfoPlist.strings */ = {
