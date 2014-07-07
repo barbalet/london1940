@@ -37,79 +37,37 @@
 
 @implementation NobleMushroomView
 
-#if 0
-
 - (void) awakeFromNib
 {
-/*    
-    fIdentification = NUM_VIEW;
-    
-    if ([[[self window] title] isEqualToString:@"Terrain"])
-    {
-        fIdentification = NUM_TERRAIN;
-    }
+
+    glMatrixMode (GL_PROJECTION);
+    glMatrixMode (GL_MODELVIEW);
+    glLoadIdentity ();
     [self startEverything];
- */
 }
+
+static n_int counter = 0;
 
 - (void) drawRect:(NSRect)rect
 {
-    /*
-    n_int         dimensionX = (n_int)rect.size.width;
-    n_int         dimensionY = (n_int)rect.size.height;
-    n_byte        * index = shared_draw(fIdentification);
-    
-    if (index == 0L) return;
-    
+    if (counter == 15)
     {
-        shared_cycle_state returned_value = shared_cycle((n_uint)CFAbsoluteTimeGetCurrent (), fIdentification, dimensionX, dimensionY);
-        if (returned_value == SHARED_CYCLE_DEBUG_OUTPUT)
-        {
-            [self debugOutput];
-        }
-        if (returned_value == SHARED_CYCLE_QUIT)
-        {
-            [self quitProcedure];
-        }
-    }
-    [[self openGLContext] makeCurrentContext];
-    
-    {
-        n_int           ly = 0;
-        n_int           loop = 0;
-        n_int			loopColors = 0;
-        n_byte2         fit[256*3];
-        
-        shared_color(fit, fIdentification);
-        
-        while(loopColors < 256)
-        {
-            colorTable[loopColors][0] = fit[loop++] >> 8;
-            colorTable[loopColors][1] = fit[loop++] >> 8;
-            colorTable[loopColors][2] = fit[loop++] >> 8;
-            loopColors++;
-        }
-        loop = 0;
-        while(ly < dimensionY)
-        {
-            n_int    lx = 0;
-            n_byte * indexLocalX = &index[(dimensionY-ly-1)*dimensionX];
-            while(lx < dimensionX)
-            {
-                unsigned char value = indexLocalX[lx++] ;
-                outputBuffer[loop++] = colorTable[value][0];
-                outputBuffer[loop++] = colorTable[value][1];
-                outputBuffer[loop++] = colorTable[value][2];
-            }
-            ly++;
-        }
-    }
-    
-    glDrawPixels((GLsizei)dimensionX, (GLsizei)dimensionY,GL_RGB,GL_UNSIGNED_BYTE, (const GLvoid *)outputBuffer);
-    [[self openGLContext] flushBuffer];
-    */
-}
+        [[self openGLContext] makeCurrentContext];
 
-#endif
+        /*shared_cycle_state returned_value = shared_cycle((n_uint)CFAbsoluteTimeGetCurrent (), fIdentification, dimensionX, dimensionY);
+        */
+        /*glClearColor(0, 0, 0, 0);*/
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+        if (shared_draw(fIdentification) == 0L) return;
+        
+        counter = 0;
+        
+        [[self openGLContext] flushBuffer];
+    }
+
+    counter++;
+    
+}
 
 @end

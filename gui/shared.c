@@ -37,6 +37,11 @@
 #include "mushroom.h"
 #include <stdio.h>
 
+#import <OpenGL/gl.h>
+#import <OpenGL/glext.h>
+#import <OpenGL/glu.h>
+#import <OpenGL/OpenGL.h>
+
 static n_byte  screen[1024 * 768] = {0};
 
 static n_byte  key_identification = 0;
@@ -46,19 +51,6 @@ static n_byte  key_down = 0;
 extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
 extern n_byte * draw_screen(void);
 
-static n_byte pixel_black(n_int px, n_int py, n_int dx, n_int dy, void * information)
-{
-    n_byte	*local_col = information;
-    
-    if ((px < 0) || (py < 0) || (px > 1023) || (py > 767))
-    {
-        return 0;
-    }
-    
-    local_col[ px | (py << 10) ] = 255;
-    return 0;
-}
-
 n_byte * draw_screen(void)
 {
     return screen;
@@ -66,14 +58,20 @@ n_byte * draw_screen(void)
 
 void draw_line(n_int x1, n_int y1, n_int x2, n_int y2)
 {
-    n_pixel 	 * local_draw = &pixel_black;
-    n_join		   local_kind;
-    n_int        dx = x2-x1;
-    n_int        dy = y2-y1;
-    local_kind.pixel_draw = local_draw;
-    local_kind.information = screen;
+    GLfloat fx1 = ((GLfloat)(x1))/1024;
+    GLfloat fy1 = ((GLfloat)(y1))/768;
     
-    (void)math_join(x1, y1, dx, dy, &local_kind);
+    GLfloat fx2 = ((GLfloat)(x2))/1024;
+    GLfloat fy2 = ((GLfloat)(y2))/768;
+    
+    glColor3f(1, 1, 1);
+    
+    glBegin(GL_LINES);
+    
+    glVertex2f(fx1, fy1);
+    glVertex2f(fx2, fy2);
+    
+    glEnd();
 }
 
 n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number)
@@ -147,39 +145,33 @@ void shared_about(n_constant_string value)
     
 }
 
-static n_int time_cycle = 0;
 
 n_byte * shared_draw(n_byte fIdentification)
 {
     static n_byte2  seed[2] = {0xf728, 0xe231};
     n_vect2         center;
-    time_cycle ++;
-    if (time_cycle > 59)
+    n_int px = 0;
+
+    while (px < 16)
     {
-        n_int px = 0;
-        economy_draw(0, 0);
-        while (px < 4)
+        n_int py = 0;
+        while (py < 16)
         {
-            n_int py = 0;
-            while (py < 4)
+            noble_building * building = house_create(seed);
+            
+            vect2_populate(&center, (px - 8) * 400, (py - 8) * 400);
+            
+            if (building)
             {
-                noble_building * building = house_create(seed);
-                
-                vect2_populate(&center, -100 + (px * 400), -100 + (py * 400));
-                time_cycle = 0;
-                /*io_erase(screen, (1024*768));*/
-                
-                if (building)
-                {
-                    house_transform(building, &center, math_random(seed) & 255);
-                    house_draw(building);
-                    io_free((void **)&building);
-                }
-                py++;
+                house_transform(building, &center, math_random(seed) & 255);
+                house_draw(building);
+                io_free((void **)&building);
             }
-            px++;
+            py++;
         }
+        px++;
     }
+
     /*enemy_move();*/
 
     return screen;

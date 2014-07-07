@@ -38,8 +38,8 @@
 #import "NobleMacView.h"
 
 @interface NobleMushroomView : NobleMacView
-/*
+
 - (void) awakeFromNib;
 - (void) drawRect:(NSRect)rect;
-*/
+
 @end
