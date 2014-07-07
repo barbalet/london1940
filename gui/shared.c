@@ -49,20 +49,13 @@ extern n_byte * draw_screen(void);
 static n_byte pixel_black(n_int px, n_int py, n_int dx, n_int dy, void * information)
 {
     n_byte	*local_col = information;
+    
+    if ((px < 0) || (py < 0) || (px > 1023) || (py > 767))
+    {
+        return 0;
+    }
+    
     local_col[ px | (py << 10) ] = 255;
-    return 0;
-}
-
-static n_int draw_out_of_range(n_int limit, n_int value)
-{
-    if (value < 0)
-    {
-        return 1;
-    }
-    if (value >= limit)
-    {
-        return 1;
-    }
     return 0;
 }
 
@@ -79,23 +72,6 @@ void draw_line(n_int x1, n_int y1, n_int x2, n_int y2)
     n_int        dy = y2-y1;
     local_kind.pixel_draw = local_draw;
     local_kind.information = screen;
-    
-    if (draw_out_of_range(1024, x1))
-    {
-        return;
-    }
-    if (draw_out_of_range(1024, x2))
-    {
-        return;
-    }
-    if (draw_out_of_range(768, y1))
-    {
-        return;
-    }
-    if (draw_out_of_range(768, y1))
-    {
-        return;
-    }
     
     (void)math_join(x1, y1, dx, dy, &local_kind);
 }
@@ -176,24 +152,35 @@ static n_int time_cycle = 0;
 n_byte * shared_draw(n_byte fIdentification)
 {
     static n_byte2  seed[2] = {0xf728, 0xe231};
+    n_vect2         center;
     time_cycle ++;
-    
     if (time_cycle > 59)
     {
-        noble_building * building = house_create(seed);
-        n_vect2          center = {1024/2, 768/2};
-        time_cycle = 0;
-        /*io_erase(screen, (1024*768));*/
+        n_int px = 0;
         economy_draw(0, 0);
-        
-        if (building)
+        while (px < 4)
         {
-            house_transform(building, &center, math_random(seed) & 255);
-            house_draw(building);
-            io_free((void **)&building);
+            n_int py = 0;
+            while (py < 4)
+            {
+                noble_building * building = house_create(seed);
+                
+                vect2_populate(&center, -100 + (px * 400), -100 + (py * 400));
+                time_cycle = 0;
+                /*io_erase(screen, (1024*768));*/
+                
+                if (building)
+                {
+                    house_transform(building, &center, math_random(seed) & 255);
+                    house_draw(building);
+                    io_free((void **)&building);
+                }
+                py++;
+            }
+            px++;
         }
     }
-    enemy_move();
+    /*enemy_move();*/
 
     return screen;
 }

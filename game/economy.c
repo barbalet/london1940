@@ -36,35 +36,42 @@
 #include "mushroom.h"
 
 static n_byte  map[MAP_AREA];
+static n_byte  flat[MAP_AREA];
 static n_byte  economy[MAP_AREA];
+static n_byte  sum[MAP_AREA];
 static n_byte  road[MAP_AREA];
 
 extern n_byte * draw_screen(void);
 
-typedef n_byte2 (economy_scan)(n_byte * scan, n_int py0, n_int py1, n_int pym, n_int px);
+typedef n_byte2 (economy_scan)(n_byte * scan1, n_byte * scan2, n_int py0, n_int py1, n_int pym, n_int px);
 
-n_byte2 generate_road(n_byte * scan, n_int py0, n_int py1, n_int pym, n_int px)
+n_byte2 generate_road(n_byte * scan1, n_byte * scan2, n_int py0, n_int py1, n_int pym, n_int px)
 {
     n_int px0 = (px + (MAP_DIMENSION - 1)) & (MAP_DIMENSION - 1);
     n_int px1 = (px + 1) & (MAP_DIMENSION - 1);
-    n_int dx = (n_int)scan[px1 | pym] - (n_int)scan[px0 | pym];
-    n_int dy = (n_int)scan[px | py1] - (n_int)scan[px | py0];
+    n_int dx = (n_int)scan1[px1 | pym] - (n_int)scan1[px0 | pym];
+    n_int dy = (n_int)scan1[px | py1]  - (n_int)scan1[px | py0];
     n_uint div = (dx * dx) + (dy * dy);
     return math_root(div);
 }
 
-n_byte2 generate_flat(n_byte * scan, n_int py0, n_int py1, n_int pym, n_int px)
+n_byte2 generate_flat(n_byte * scan1, n_byte * scan2, n_int py0, n_int py1, n_int pym, n_int px)
 {
     n_int px0 = (px + (MAP_DIMENSION - 1)) & (MAP_DIMENSION - 1);
     n_int px1 = (px + 1) & (MAP_DIMENSION - 1);
-    n_int dx = (n_int)scan[px1 | pym] - (n_int)scan[px0 | pym];
-    n_int dy = (n_int)scan[px | py1] - (n_int)scan[px | py0];
+    n_int dx = (n_int)scan1[px1 | pym] - (n_int)scan1[px0 | pym];
+    n_int dy = (n_int)scan1[px | py1]  - (n_int)scan1[px | py0];
     n_uint div = (dx * dx * dy * dy);
     return 0xffff - math_root(div);
 }
 
+n_byte2 generate_add(n_byte * scan1, n_byte * scan2, n_int py0, n_int py1, n_int pym, n_int px)
+{
+    n_int   location = px | pym;
+    return (n_byte2)scan1[location] + (n_byte2)scan2[location];
+}
 
-static n_int economy_scan_calculation(n_byte * input, n_byte * output, economy_scan calculation)
+static n_int economy_scan_calculation(n_byte * input1, n_byte * input2, n_byte * output, economy_scan calculation)
 {
     n_int   max = 0;
     n_int   min = 0xffff;
@@ -89,7 +96,7 @@ static n_int economy_scan_calculation(n_byte * input, n_byte * output, economy_s
         n_int px = 0;
         while (px < MAP_DIMENSION)
         {
-            n_byte2 div = (calculation)(input, py0, py1, pym, px);
+            n_byte2 div = (calculation)(input1, input2, py0, py1, pym, px);
             if (div > max)
             {
                 max = div;
@@ -141,11 +148,15 @@ n_int ecomony_init(n_byte2 * seeds)
     local_random[0] = seeds[2];
     local_random[1] = seeds[3];
     
-    math_patch(economy, actual, &math_random, local_random, MAP_BITS, 0, 4, 1);
+    math_patch(economy, actual, &math_random, local_random, MAP_BITS, 0, 7, 1);
     
     io_free((void **)&actual);
     
-    economy_scan_calculation(economy, road, generate_road);
+    economy_scan_calculation(map, 0L, flat, generate_flat);
+    
+    economy_scan_calculation(flat, economy, sum, generate_add);
+    
+    economy_scan_calculation(sum, 0L, road, generate_road);
     
     return 0;
 }
@@ -167,18 +178,31 @@ static void economy_micro(n_byte * value)
     }
 }
 
-static n_int switcher = 0;
+/*static n_int switcher = 0;*/
 
 void economy_draw(n_int px, n_int py)
 {
-    if (switcher)
+    economy_micro(map);
+/*
+    switch (switcher)
     {
-        economy_micro(road);
-        switcher = 0;
+        case 0:
+            economy_micro(map);
+            break;
+        case 1:
+            economy_micro(flat);
+            break;
+        case 2:
+            economy_micro(economy);
+            break;
+        case 3:
+            economy_micro(sum);
+            break;
+        default:
+            economy_micro(road);
+            switcher = -1;
+            break;
     }
-    else
-    {
-        economy_micro(economy);
-        switcher = 1;
-    }
+    switcher++;
+ */
 }
