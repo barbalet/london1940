@@ -80,7 +80,7 @@ void enemy_move(void)
             vely[lpx] = 0 - vely[lpx];
         }
         
-		draw_line(locx[lpx],locy[lpx], locx[lpx],locy[lpx]);
+		/*draw_line(locx[lpx],locy[lpx], locx[lpx],locy[lpx]);*/
         
 		lpx++;
 	}	

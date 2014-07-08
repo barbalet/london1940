@@ -32,6 +32,12 @@
  of this software.
  
  ****************************************************************/
+
+#import <OpenGL/gl.h>
+#import <OpenGL/glext.h>
+#import <OpenGL/glu.h>
+#import <OpenGL/OpenGL.h>
+
 #include "mushroom.h"
 
 void house_transform(noble_building * building, n_vect2 * center, n_int direction)
@@ -71,33 +77,65 @@ void house_transform(noble_building * building, n_vect2 * center, n_int directio
     }
 }
 
+void house_vertex(n_vect2 * point)
+{
+    GLfloat fx = ((GLfloat)(point->x))/1024;
+    GLfloat fy = ((GLfloat)(point->y))/768;
+    
+    glVertex2f(fx, fy);
+}
+
 static void house_drawroom(noble_room * room)
 {
-    draw_line(room->points[0].x, room->points[0].y, room->points[1].x, room->points[1].y);
-    draw_line(room->points[1].x, room->points[1].y, room->points[2].x, room->points[2].y);
-    draw_line(room->points[2].x, room->points[2].y, room->points[3].x, room->points[3].y);
-    draw_line(room->points[3].x, room->points[3].y, room->points[0].x, room->points[0].y);
+    glColor3f(0.5, 0.5, 0.5);
+    glBegin(GL_QUADS);
+    house_vertex(&room->points[4]);
+    house_vertex(&room->points[5]);
+    house_vertex(&room->points[6]);
+    house_vertex(&room->points[7]);
+    glEnd();
     
-    draw_line(room->points[4].x, room->points[4].y, room->points[5].x, room->points[5].y);
-    draw_line(room->points[5].x, room->points[5].y, room->points[6].x, room->points[6].y);
-    draw_line(room->points[6].x, room->points[6].y, room->points[7].x, room->points[7].y);
-    draw_line(room->points[7].x, room->points[7].y, room->points[4].x, room->points[4].y);
+    glColor3f(0.7, 0.7, 0.7);
+    
+    glBegin(GL_LINE_LOOP);
+    house_vertex(&room->points[0]);
+    house_vertex(&room->points[1]);
+    house_vertex(&room->points[2]);
+    house_vertex(&room->points[3]);
+    glEnd();
+
+    glColor3f(0.9, 0.9, 0.9);
     
     if ((room->window&1) == 1)
     {
-        draw_line(room->points[8].x, room->points[8].y, room->points[9].x, room->points[9].y);
+        glBegin(GL_LINES);
+        house_vertex(&room->points[8]);
+        house_vertex(&room->points[9]);
+        glEnd();
+
 	}
     if ((room->window&2) == 2)
     {
-        draw_line(room->points[10].x, room->points[10].y, room->points[11].x, room->points[11].y);
+        glBegin(GL_LINES);
+        house_vertex(&room->points[10]);
+        house_vertex(&room->points[11]);
+        glEnd();
+
 	}
     if ((room->window&4) == 4)
     {
-        draw_line(room->points[12].x, room->points[12].y, room->points[13].x, room->points[13].y);
+        glBegin(GL_LINES);
+        house_vertex(&room->points[12]);
+        house_vertex(&room->points[13]);
+        glEnd();
+
 	}
     if ((room->window&8) == 8)
     {
-        draw_line(room->points[14].x, room->points[14].y, room->points[15].x, room->points[15].y);
+        glBegin(GL_LINES);
+        house_vertex(&room->points[14]);
+        house_vertex(&room->points[15]);
+        glEnd();
 	}
 }
 
@@ -133,30 +171,30 @@ static void house_construct(noble_room * room, n_int topx, n_int topy, n_int bot
     vect2_populate(&room->points[1], topx, boty);
     vect2_populate(&room->points[2], botx, boty);
     vect2_populate(&room->points[3], botx, topy);
-    vect2_populate(&room->points[4], topx+4, topy+4);
-    vect2_populate(&room->points[5], topx+4, boty-4);
-    vect2_populate(&room->points[6], botx-4, boty-4);
-    vect2_populate(&room->points[7], botx-4, topy+4);
+    vect2_populate(&room->points[4], topx+6, topy+6);
+    vect2_populate(&room->points[5], topx+6, boty-6);
+    vect2_populate(&room->points[6], botx-6, boty-6);
+    vect2_populate(&room->points[7], botx-6, topy+6);
     
     if ((room->window&1) == 1)
     {
-        vect2_populate(&room->points[8], topx+2, topy+10);
-        vect2_populate(&room->points[9], topx+2, boty-10);
+        vect2_populate(&room->points[8], topx+3, topy+10);
+        vect2_populate(&room->points[9], topx+3, boty-10);
     }
     if ((room->window&2) == 2)
     {
-        vect2_populate(&room->points[10], botx-2, topy+10);
-        vect2_populate(&room->points[11], botx-2, boty-10);
+        vect2_populate(&room->points[10], botx-3, topy+10);
+        vect2_populate(&room->points[11], botx-3, boty-10);
     }
     if ((room->window&4) == 4)
     {
-        vect2_populate(&room->points[12], topx+10, boty-2);
-        vect2_populate(&room->points[13], botx-10, boty-2);
+        vect2_populate(&room->points[12], topx+10, boty-3);
+        vect2_populate(&room->points[13], botx-10, boty-3);
     }
     if ((room->window&8) == 8)
     {
-        vect2_populate(&room->points[14], topx+2, topy+10);
-        vect2_populate(&room->points[15], topx+2, boty-10);
+        vect2_populate(&room->points[14], topx+3, topy+10);
+        vect2_populate(&room->points[15], topx+3, boty-10);
     }
 }
 
@@ -259,3 +297,33 @@ noble_building * house_create(n_byte2 * seed)
     return building;
 }
 
+void house_draw_scene(void)
+{
+    static n_byte2  seed[2] = {0xf728, 0xe231};
+    n_vect2         center;
+    n_int px = 0;
+    
+    glClearColor(0, 0.2, 0, 0);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    while (px < 16)
+    {
+        n_int py = 0;
+        while (py < 16)
+        {
+            noble_building * building = house_create(seed);
+            
+            vect2_populate(&center, (px - 8) * 400, (py - 8) * 400);
+            
+            if (building)
+            {
+                house_transform(building, &center, math_random(seed) & 255);
+                house_draw(building);
+                io_free((void **)&building);
+            }
+            py++;
+        }
+        px++;
+    }
+}

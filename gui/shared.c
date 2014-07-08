@@ -37,11 +37,6 @@
 #include "mushroom.h"
 #include <stdio.h>
 
-#import <OpenGL/gl.h>
-#import <OpenGL/glext.h>
-#import <OpenGL/glu.h>
-#import <OpenGL/OpenGL.h>
-
 static n_byte  screen[1024 * 768] = {0};
 
 static n_byte  key_identification = 0;
@@ -55,7 +50,7 @@ n_byte * draw_screen(void)
 {
     return screen;
 }
-
+/*
 void draw_line(n_int x1, n_int y1, n_int x2, n_int y2)
 {
     GLfloat fx1 = ((GLfloat)(x1))/1024;
@@ -73,6 +68,7 @@ void draw_line(n_int x1, n_int y1, n_int x2, n_int y2)
     
     glEnd();
 }
+*/
 
 n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number)
 {
@@ -148,29 +144,7 @@ void shared_about(n_constant_string value)
 
 n_byte * shared_draw(n_byte fIdentification)
 {
-    static n_byte2  seed[2] = {0xf728, 0xe231};
-    n_vect2         center;
-    n_int px = 0;
-
-    while (px < 16)
-    {
-        n_int py = 0;
-        while (py < 16)
-        {
-            noble_building * building = house_create(seed);
-            
-            vect2_populate(&center, (px - 8) * 400, (py - 8) * 400);
-            
-            if (building)
-            {
-                house_transform(building, &center, math_random(seed) & 255);
-                house_draw(building);
-                io_free((void **)&building);
-            }
-            py++;
-        }
-        px++;
-    }
+    house_draw_scene();
 
     /*enemy_move();*/
 

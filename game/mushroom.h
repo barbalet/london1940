@@ -65,3 +65,4 @@ void house_draw(noble_building * building);
 n_int ecomony_init(n_byte2 * seeds);
 void  economy_draw(n_int px, n_int py);
 
+void house_draw_scene(void);

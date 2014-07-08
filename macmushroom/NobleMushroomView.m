@@ -50,14 +50,9 @@ static n_int counter = 0;
 
 - (void) drawRect:(NSRect)rect
 {
-    if (counter == 15)
+    if (counter == 120)
     {
         [[self openGLContext] makeCurrentContext];
-
-        /*shared_cycle_state returned_value = shared_cycle((n_uint)CFAbsoluteTimeGetCurrent (), fIdentification, dimensionX, dimensionY);
-        */
-        /*glClearColor(0, 0, 0, 0);*/
-        glClear(GL_COLOR_BUFFER_BIT);
         
         if (shared_draw(fIdentification) == 0L) return;
         
