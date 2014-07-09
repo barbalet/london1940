@@ -39,7 +39,6 @@
 
 - (void) awakeFromNib
 {
-
     glMatrixMode (GL_PROJECTION);
     glMatrixMode (GL_MODELVIEW);
     glLoadIdentity ();

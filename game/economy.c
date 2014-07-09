@@ -41,8 +41,6 @@ static n_byte  economy[MAP_AREA];
 static n_byte  sum[MAP_AREA];
 static n_byte  road[MAP_AREA];
 
-extern n_byte * draw_screen(void);
-
 typedef n_byte2 (economy_scan)(n_byte * scan1, n_byte * scan2, n_int py0, n_int py1, n_int pym, n_int px);
 
 n_byte2 generate_road(n_byte * scan1, n_byte * scan2, n_int py0, n_int py1, n_int pym, n_int px)
@@ -161,29 +159,13 @@ n_int ecomony_init(n_byte2 * seeds)
     return 0;
 }
 
-static void economy_micro(n_byte * value)
-{
-    n_byte * screen = draw_screen();
-    n_int loop = 0;
-    while (loop < 512)
-    {
-        io_copy(&value[MAP_DIMENSION * loop], &screen[1024 * loop], 512);
-        io_copy(&value[MAP_DIMENSION * loop], &screen[(1024 * loop) + 512], 512);
-        loop++;
-    }
-    while (loop < 768)
-    {
-        io_copy(&screen[1024 * (loop-512)], &screen[1024 * loop], 1024);
-        loop++;
-    }
-}
-
 /*static n_int switcher = 0;*/
 
 void economy_draw(n_int px, n_int py)
 {
+    /*
     economy_micro(map);
-/*
+
     switch (switcher)
     {
         case 0:

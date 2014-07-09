@@ -43,32 +43,10 @@ static n_byte  key_identification = 0;
 static n_byte2 key_value = 0;
 static n_byte  key_down = 0;
 
-extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
-extern n_byte * draw_screen(void);
+n_byte  terrain_turn = 0;
 
-n_byte * draw_screen(void)
-{
-    return screen;
-}
-/*
-void draw_line(n_int x1, n_int y1, n_int x2, n_int y2)
-{
-    GLfloat fx1 = ((GLfloat)(x1))/1024;
-    GLfloat fy1 = ((GLfloat)(y1))/768;
-    
-    GLfloat fx2 = ((GLfloat)(x2))/1024;
-    GLfloat fy2 = ((GLfloat)(y2))/768;
-    
-    glColor3f(1, 1, 1);
-    
-    glBegin(GL_LINES);
-    
-    glVertex2f(fx1, fy1);
-    glVertex2f(fx2, fy2);
-    
-    glEnd();
-}
-*/
+extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
+
 
 n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number)
 {
@@ -106,7 +84,8 @@ n_int shared_menu(n_int menuValue)
 
 void shared_rotate(n_double num, n_byte wwind)
 {
-    
+    n_int integer_rotation_256 = (n_int)((num * 256) / 360);
+    terrain_turn = (n_byte)(((n_int)terrain_turn + 512 + integer_rotation_256) & 255);
 }
 
 void shared_keyReceived(n_byte2 value, n_byte fIdentification)

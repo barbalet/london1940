@@ -40,6 +40,8 @@
 
 #include "mushroom.h"
 
+extern n_byte  terrain_turn;
+
 void house_transform(noble_building * building, n_vect2 * center, n_int direction)
 {
     n_int   loop_room = 0;
@@ -318,7 +320,7 @@ void house_draw_scene(void)
             
             if (building)
             {
-                house_transform(building, &center, math_random(seed) & 255);
+                house_transform(building, &center, terrain_turn);
                 house_draw(building);
                 io_free((void **)&building);
             }
