@@ -81,10 +81,32 @@ void house_transform(noble_building * building, n_vect2 * center, n_int directio
 
 void house_vertex(n_vect2 * point)
 {
-    GLfloat fx = ((GLfloat)(point->x))/1024;
-    GLfloat fy = ((GLfloat)(point->y))/768;
+    GLfloat fx = 0.2*((GLfloat)(point->x))/1024;
+    GLfloat fy = 0.2*((GLfloat)(point->y))/768;
     
     glVertex2f(fx, fy);
+}
+
+
+static void house_draw_fence(noble_fence * fence)
+{
+    glColor3f(0.6, 0.3, 0.3);
+    glBegin(GL_LINE);
+    house_vertex(&fence->points[0]);
+    house_vertex(&fence->points[1]);
+    glEnd();
+}
+
+
+static void house_draw_road(noble_road * road)
+{
+    glColor3f(0, 0, 0);
+    glBegin(GL_QUADS);
+    house_vertex(&road->points[0]);
+    house_vertex(&road->points[1]);
+    house_vertex(&road->points[2]);
+    house_vertex(&road->points[3]);
+    glEnd();
 }
 
 static void house_drawroom(noble_room * room)
@@ -299,33 +321,78 @@ noble_building * house_create(n_byte2 * seed)
     return building;
 }
 
+
+
 void house_draw_scene(void)
 {
     static n_byte2  seed[2] = {0xf728, 0xe231};
     n_vect2         center;
-    n_int px = 0;
+    n_int           px = 0;
     
     glClearColor(0, 0.2, 0, 0);
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    while (px < 16)
+    while (px < 8)
     {
         n_int py = 0;
-        while (py < 16)
+        while (py < 8)
         {
             noble_building * building = house_create(seed);
             
-            vect2_populate(&center, (px - 8) * 400, (py - 8) * 400);
+            vect2_populate(&center, (px - 4) * 800, (py - 4) * 800);
             
             if (building)
             {
-                house_transform(building, &center, terrain_turn);
+                house_transform(building, &center, math_random(seed) & 255);
                 house_draw(building);
                 io_free((void **)&building);
             }
             py++;
         }
+        px++;
+    }
+    
+    px = 0;
+    
+    while (px < 5)
+    {
+        noble_road temp_road;
+        temp_road.points[0].x = -3800;
+        temp_road.points[0].y = ((px - 2) * 1600)-500;
+        
+        temp_road.points[1].x = -3800;
+        temp_road.points[1].y = ((px - 2) * 1600)-300;
+        
+        temp_road.points[2].x = 3200;
+        temp_road.points[2].y = ((px - 2) * 1600)-300;
+        
+        temp_road.points[3].x = 3200;
+        temp_road.points[3].y = ((px - 2) * 1600)-500;
+        
+        house_draw_road(&temp_road);
+        px++;
+    }
+    
+    px = 0;
+    
+    while (px < 4)
+    {
+        noble_road temp_road;
+        temp_road.points[0].y = -3800;
+        temp_road.points[0].x = ((px - 2) * 3200)-500;
+    
+        temp_road.points[1].y = -3800;
+        temp_road.points[1].x = ((px - 2) * 3200)-300;
+        
+        temp_road.points[2].y = 3200;
+        temp_road.points[2].x = ((px - 2) * 3200)-300;
+        
+        temp_road.points[3].y = 3200;
+        temp_road.points[3].x = ((px - 2) * 3200)-500;
+        
+        house_draw_road(&temp_road);
+        
         px++;
     }
 }

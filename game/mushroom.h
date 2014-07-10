@@ -43,6 +43,18 @@
 #define MAX_ROOMS                   (8)
 #define GENETICS_COUNT              (64)
 
+#define POINTS_PER_ROAD             (4)
+#define POINTS_PER_FENCE            (2)
+
+
+typedef struct{
+    n_vect2  points[POINTS_PER_FENCE];
+}noble_fence;
+
+typedef struct{
+    n_vect2  points[POINTS_PER_ROAD];
+}noble_road;
+
 typedef struct{
     n_vect2  points[POINTS_PER_ROOM];
     n_byte   window;

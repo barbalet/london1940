@@ -49,7 +49,7 @@ static n_int counter = 0;
 
 - (void) drawRect:(NSRect)rect
 {
-    if (counter == 120)
+    if (counter == 5)
     {
         [[self openGLContext] makeCurrentContext];
         
