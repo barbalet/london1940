@@ -40,7 +40,11 @@
 
 #include "mushroom.h"
 
+
+
 extern n_byte  terrain_turn;
+extern n_int   terrain_x;
+extern n_int   terrain_y;
 
 void house_transform(noble_building * building, n_vect2 * center, n_int direction)
 {
@@ -321,85 +325,99 @@ noble_building * house_create(n_byte2 * seed)
     return building;
 }
 
-
+static n_int draw_scene_not_done = 0;
 
 void house_draw_scene(void)
 {
     static n_byte2  seed[2] = {0xf728, 0xe231};
     n_vect2         center;
-    n_int           px = 0;
-    GLuint terrain_display_list = glGenLists(1);
+    static GLuint  terrain_display_list = 0;
     
     glClearColor(0, 0.2, 0, 0);
 
     glClear(GL_COLOR_BUFFER_BIT);
-
-    glNewList(terrain_display_list, GL_COMPILE);
-
     
-    while (px < 8)
+    if (draw_scene_not_done < 2)
     {
-        n_int py = 0;
-        while (py < 8)
+        n_int           px = 0;
+        
+        terrain_display_list = glGenLists(1);
+        
+        glNewList(terrain_display_list, GL_COMPILE);
+        while (px < 8)
         {
-            noble_building * building = house_create(seed);
-            
-            vect2_populate(&center, (px - 4) * 800, (py - 4) * 800);
-            
-            if (building)
+            n_int py = 0;
+            while (py < 8)
             {
-                house_transform(building, &center, math_random(seed) & 255);
-                house_draw(building);
-                io_free((void **)&building);
+                noble_building * building = house_create(seed);
+                
+                vect2_populate(&center, (px - 4) * 800, (py - 4) * 800);
+                
+                if (building)
+                {
+                    house_transform(building, &center, math_random(seed) & 255);
+                    house_draw(building);
+                    io_free((void **)&building);
+                }
+                py++;
             }
-            py++;
+            px++;
         }
-        px++;
+        
+        px = 0;
+        
+        while (px < 5)
+        {
+            noble_road temp_road;
+            temp_road.points[0].x = -3800;
+            temp_road.points[0].y = ((px - 2) * 1600)-500;
+            
+            temp_road.points[1].x = -3800;
+            temp_road.points[1].y = ((px - 2) * 1600)-300;
+            
+            temp_road.points[2].x = 3200;
+            temp_road.points[2].y = ((px - 2) * 1600)-300;
+            
+            temp_road.points[3].x = 3200;
+            temp_road.points[3].y = ((px - 2) * 1600)-500;
+            
+            house_draw_road(&temp_road);
+            px++;
+        }
+        
+        px = 0;
+        
+        while (px < 4)
+        {
+            noble_road temp_road;
+            temp_road.points[0].y = -3800;
+            temp_road.points[0].x = ((px - 2) * 3200)-500;
+        
+            temp_road.points[1].y = -3800;
+            temp_road.points[1].x = ((px - 2) * 3200)-300;
+            
+            temp_road.points[2].y = 3200;
+            temp_road.points[2].x = ((px - 2) * 3200)-300;
+            
+            temp_road.points[3].y = 3200;
+            temp_road.points[3].x = ((px - 2) * 3200)-500;
+            
+            house_draw_road(&temp_road);
+            
+            px++;
+        }
+        glEndList();
+        draw_scene_not_done++;
     }
-    
-    px = 0;
-    
-    while (px < 5)
+    else
     {
-        noble_road temp_road;
-        temp_road.points[0].x = -3800;
-        temp_road.points[0].y = ((px - 2) * 1600)-500;
+        glTranslatef(terrain_x, terrain_y, 0);
         
-        temp_road.points[1].x = -3800;
-        temp_road.points[1].y = ((px - 2) * 1600)-300;
-        
-        temp_road.points[2].x = 3200;
-        temp_road.points[2].y = ((px - 2) * 1600)-300;
-        
-        temp_road.points[3].x = 3200;
-        temp_road.points[3].y = ((px - 2) * 1600)-500;
-        
-        house_draw_road(&temp_road);
-        px++;
+        glRotatef(terrain_turn, 0, 0, 1);
+        terrain_turn = 0;
+        /*glScalef(zoomFactor, zoomFactor, zoomFactor);*/
     }
     
-    px = 0;
-    
-    while (px < 4)
-    {
-        noble_road temp_road;
-        temp_road.points[0].y = -3800;
-        temp_road.points[0].x = ((px - 2) * 3200)-500;
-    
-        temp_road.points[1].y = -3800;
-        temp_road.points[1].x = ((px - 2) * 3200)-300;
-        
-        temp_road.points[2].y = 3200;
-        temp_road.points[2].x = ((px - 2) * 3200)-300;
-        
-        temp_road.points[3].y = 3200;
-        temp_road.points[3].x = ((px - 2) * 3200)-500;
-        
-        house_draw_road(&temp_road);
-        
-        px++;
-    }
-    glEndList();
     
     glCallList(terrain_display_list);
 }

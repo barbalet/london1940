@@ -45,6 +45,10 @@ static n_byte  key_down = 0;
 
 n_byte  terrain_turn = 0;
 
+n_int   terrain_x = 0;
+n_int   terrain_y = 0;
+
+
 extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
 
 
@@ -121,8 +125,38 @@ void shared_about(n_constant_string value)
 }
 
 
+
 n_byte * shared_draw(n_byte fIdentification)
 {
+    
+    if((key_down == 1) && (key_identification == fIdentification))
+    {
+        if ((key_value > 27) && (key_value < 32))
+        {
+            switch (key_value)
+            {
+                case 28:
+                    terrain_x --;
+                    break;
+                case 29:
+                    terrain_x ++;
+                    break;
+                case 30:
+                    terrain_y ++;
+                    break;
+                default:
+                    terrain_y --;
+                    break;
+            }
+        }
+    }
+    else
+    {
+        key_value = 0;
+        terrain_x = 0;
+        terrain_y = 0;
+    }
+    
     house_draw_scene();
 
     /*enemy_move();*/
@@ -167,7 +201,7 @@ void shared_script_debug_handle(n_string cStringFileName)
 
 n_uint shared_max_fps(void)
 {
-    return 1;
+    return 60;
 }
 
 #ifndef	_WIN32
