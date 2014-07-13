@@ -165,6 +165,11 @@ void shared_script_debug_handle(n_string cStringFileName)
     
 }
 
+n_uint shared_max_fps(void)
+{
+    return 30;
+}
+
 #ifndef	_WIN32
 
 n_int sim_thread_console_quit(void)
