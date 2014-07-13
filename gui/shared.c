@@ -123,16 +123,6 @@ void shared_about(n_constant_string value)
 
 n_byte * shared_draw(n_byte fIdentification)
 {
-    /*
-     terrain_display_list = glGenLists(1);
-     
-     glNewList(terrain_display_list, GL_COMPILE);
-     
-     polygonal_render_terrain();
-     
-     glEndList();
-     */
-    
     house_draw_scene();
 
     /*enemy_move();*/

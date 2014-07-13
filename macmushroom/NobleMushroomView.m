@@ -39,9 +39,6 @@
 
 - (void) awakeFromNib
 {
-    glMatrixMode (GL_PROJECTION);
-    glMatrixMode (GL_MODELVIEW);
-    glLoadIdentity ();
     [self startEverything];
 }
 
@@ -49,7 +46,17 @@ static n_int counter = 0;
 
 - (void) drawRect:(NSRect)rect
 {
-    if (counter == 5)
+    
+    NSSize size = [[self window] frame].size;
+
+    glViewport(0, 0, size.width, size.height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, size.width, 0, size.height, -1, 1);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    
+    if (counter == 120)
     {
         [[self openGLContext] makeCurrentContext];
         

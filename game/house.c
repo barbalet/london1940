@@ -81,13 +81,13 @@ void house_transform(noble_building * building, n_vect2 * center, n_int directio
 
 void house_vertex(n_vect2 * point)
 {
-    GLfloat fx = 0.2*((GLfloat)(point->x))/1024;
-    GLfloat fy = 0.2*((GLfloat)(point->y))/768;
+    GLfloat fx = ((GLfloat)(point->x));
+    GLfloat fy = ((GLfloat)(point->y));
     
     glVertex2f(fx, fy);
 }
 
-
+/*
 static void house_draw_fence(noble_fence * fence)
 {
     glColor3f(0.6, 0.3, 0.3);
@@ -96,7 +96,7 @@ static void house_draw_fence(noble_fence * fence)
     house_vertex(&fence->points[1]);
     glEnd();
 }
-
+*/
 
 static void house_draw_road(noble_road * road)
 {
@@ -328,11 +328,15 @@ void house_draw_scene(void)
     static n_byte2  seed[2] = {0xf728, 0xe231};
     n_vect2         center;
     n_int           px = 0;
+    GLuint terrain_display_list = glGenLists(1);
     
     glClearColor(0, 0.2, 0, 0);
 
     glClear(GL_COLOR_BUFFER_BIT);
 
+    glNewList(terrain_display_list, GL_COMPILE);
+
+    
     while (px < 8)
     {
         n_int py = 0;
@@ -395,4 +399,7 @@ void house_draw_scene(void)
         
         px++;
     }
+    glEndList();
+    
+    glCallList(terrain_display_list);
 }
