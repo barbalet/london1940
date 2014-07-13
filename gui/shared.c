@@ -167,7 +167,7 @@ void shared_script_debug_handle(n_string cStringFileName)
 
 n_uint shared_max_fps(void)
 {
-    return 30;
+    return 1;
 }
 
 #ifndef	_WIN32

@@ -39,36 +39,26 @@
 
 - (void) awakeFromNib
 {
-    [self startEverything];
-}
-
-static n_int counter = 0;
-
-- (void) drawRect:(NSRect)rect
-{
-    
     NSSize size = [[self window] frame].size;
-
+    [self startEverything];
+    
     glViewport(0, 0, size.width, size.height);
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0, size.width, 0, size.height, -1, 1);
+    
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
-    if (counter == 120)
-    {
-        [[self openGLContext] makeCurrentContext];
-        
-        if (shared_draw(fIdentification) == 0L) return;
-        
-        counter = 0;
-        
-        [[self openGLContext] flushBuffer];
-    }
+}
 
-    counter++;
+- (void) drawRect:(NSRect)rect
+{
+    [[self openGLContext] makeCurrentContext];
     
+    (void)shared_draw(fIdentification);
+    
+    [[self openGLContext] flushBuffer];
 }
 
 @end
