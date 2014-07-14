@@ -673,7 +673,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdk-Jl-Dny" customClass="NobleMushroomView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdk-Jl-Dny" customClass="NobleMacView">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     </customView>
                 </subviews>

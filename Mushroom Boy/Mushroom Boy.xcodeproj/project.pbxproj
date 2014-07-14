@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A05E15F196A453C00980652 /* NobleMushroomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A05E15E196A453C00980652 /* NobleMushroomView.m */; };
 		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
 		5A0D60D319567F2000090DAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C319567F2000090DAE /* main.m */; };
 		5A0D60D419567F2000090DAE /* NobleMacView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C519567F2000090DAE /* NobleMacView.m */; };
@@ -45,8 +44,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5A05E15D196A453C00980652 /* NobleMushroomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NobleMushroomView.h; sourceTree = "<group>"; };
-		5A05E15E196A453C00980652 /* NobleMushroomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NobleMushroomView.m; sourceTree = "<group>"; };
 		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A0D60C219567F2000090DAE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5A0D60C319567F2000090DAE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -106,16 +103,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A05E15C196A453C00980652 /* macmushroom */ = {
-			isa = PBXGroup;
-			children = (
-				5A05E15D196A453C00980652 /* NobleMushroomView.h */,
-				5A05E15E196A453C00980652 /* NobleMushroomView.m */,
-			);
-			name = macmushroom;
-			path = ../../macmushroom;
-			sourceTree = "<group>";
-		};
 		5A0D60C019567F2000090DAE /* mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,7 +198,6 @@
 		5A37A3BF1955F32800D187B0 /* Mushroom Boy */ = {
 			isa = PBXGroup;
 			children = (
-				5A05E15C196A453C00980652 /* macmushroom */,
 				5A0D60DE19567F8E00090DAE /* game */,
 				5A0D60E319567F8E00090DAE /* gui */,
 				5A0D60C019567F2000090DAE /* mac */,
@@ -362,7 +348,6 @@
 				5A0D60D519567F2000090DAE /* audio.c in Sources */,
 				5A0D60D919567F2000090DAE /* io.c in Sources */,
 				5A0D60DC19567F2000090DAE /* network.c in Sources */,
-				5A05E15F196A453C00980652 /* NobleMushroomView.m in Sources */,
 				5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */,
 				5A0D60D619567F2000090DAE /* compress.c in Sources */,
 			);
