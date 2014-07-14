@@ -85,10 +85,7 @@ void house_transform(noble_building * building, n_vect2 * center, n_int directio
 
 void house_vertex(n_vect2 * point)
 {
-    GLfloat fx = ((GLfloat)(point->x));
-    GLfloat fy = ((GLfloat)(point->y));
-    
-    glVertex2f(fx, fy);
+    glVertex2i((GLint)point->x, (GLint)point->y);
 }
 
 /*
