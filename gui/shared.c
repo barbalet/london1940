@@ -1,6 +1,6 @@
 /****************************************************************
 
- shared.h
+ shared.c
 
  =============================================================
 
@@ -36,8 +36,6 @@
 #include "shared.h"
 #include "mushroom.h"
 #include <stdio.h>
-
-static n_byte  screen[1024 * 768] = {0};
 
 static n_byte  key_identification = 0;
 static n_byte2 key_value = 0;
@@ -126,9 +124,8 @@ void shared_about(n_constant_string value)
 
 
 
-n_byte * shared_draw(n_byte fIdentification)
+void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_int dim_y)
 {
-    
     if((key_down == 1) && (key_identification == fIdentification))
     {
         if ((key_value > 27) && (key_value < 32))
@@ -160,23 +157,6 @@ n_byte * shared_draw(n_byte fIdentification)
     house_draw_scene();
 
     /*enemy_move();*/
-
-    return screen;
-}
-
-void shared_color(n_byte2 * fit, n_int fIdentification)
-{
-    n_int loop = 0;
-    n_int fitloop = 0;
-    while (loop < 256)
-    {
-        fit[fitloop++] = loop << 8;
-        fit[fitloop++] = loop << 8;
-        fit[fitloop++] = loop << 8;
-        
-        loop++;
-    }
-
 }
 
 n_int shared_new(n_uint seed)

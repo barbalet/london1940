@@ -54,9 +54,11 @@
 
 - (void) drawRect:(NSRect)rect
 {
+    NSSize size = rect.size;
+
     [[self openGLContext] makeCurrentContext];
-    
-    (void)shared_draw(fIdentification);
+        
+    shared_draw(0L, fIdentification, size.width, size.height);
     
     [[self openGLContext] flushBuffer];
 }
