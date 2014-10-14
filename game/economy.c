@@ -130,7 +130,7 @@ static n_int economy_scan_calculation(n_byte * input1, n_byte * input2, n_byte *
 n_int ecomony_init(n_byte2 * seeds)
 {
     n_byte2  local_random[2];
-    
+    n_int    refine = 0;
     n_byte * actual = io_new(MAP_AREA);
 
     if (actual == 0L)
@@ -141,12 +141,24 @@ n_int ecomony_init(n_byte2 * seeds)
     local_random[0] = seeds[0];
     local_random[1] = seeds[1];
     
-    math_patch(map, actual, &math_random, local_random, MAP_BITS, 0, 7, 1);
-
+    while (refine < 7)
+    {
+        math_patch(map, &math_memory_location, &math_random, local_random, refine);
+        math_round(map, actual, &math_memory_location);
+        refine++;
+    }
+    
     local_random[0] = seeds[2];
     local_random[1] = seeds[3];
     
-    math_patch(economy, actual, &math_random, local_random, MAP_BITS, 0, 7, 1);
+    refine = 0;
+    
+    while (refine < 7)
+    {
+        math_patch(economy, &math_memory_location, &math_random, local_random, refine);
+        math_round(economy, actual, &math_memory_location);
+        refine++;
+    }
     
     io_free((void **)&actual);
     
