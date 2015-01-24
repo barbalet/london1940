@@ -129,8 +129,6 @@ static n_int economy_scan_calculation(n_byte * input1, n_byte * input2, n_byte *
 
 n_int ecomony_init(n_byte2 * seeds)
 {
-    n_byte2  local_random[2];
-    n_int    refine = 0;
     n_byte * actual = io_new(MAP_AREA);
 
     if (actual == 0L)
@@ -138,34 +136,13 @@ n_int ecomony_init(n_byte2 * seeds)
         return SHOW_ERROR("Memory init economy failed to allocate");
     }
     
-    local_random[0] = seeds[0];
-    local_random[1] = seeds[1];
-    
-    while (refine < 7)
-    {
-        math_patch(map, &math_memory_location, &math_random, local_random, refine);
-        math_round(map, actual, &math_memory_location);
-        refine++;
-    }
-    
-    local_random[0] = seeds[2];
-    local_random[1] = seeds[3];
-    
-    refine = 0;
-    
-    while (refine < 7)
-    {
-        math_patch(economy, &math_memory_location, &math_random, local_random, refine);
-        math_round(economy, actual, &math_memory_location);
-        refine++;
-    }
+    land_creation(map, actual, seeds, 0L);
+    land_creation(economy, actual, &seeds[2], 0L);
     
     io_free((void **)&actual);
     
     economy_scan_calculation(map, 0L, flat, generate_flat);
-    
     economy_scan_calculation(flat, economy, sum, generate_add);
-    
     economy_scan_calculation(sum, 0L, road, generate_road);
     
     return 0;
