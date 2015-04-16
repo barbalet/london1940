@@ -56,11 +56,6 @@ n_int draw_error(n_constant_string error_text, n_constant_string location, n_int
 	return -1;
 }
 
-void shared_saved_string(shared_saved_string_type ssst, n_string value)
-{
-    
-}
-
 shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_x, n_int dim_y)
 {
     if((key_down == 1) && (key_identification == fIdentification))
