@@ -409,8 +409,8 @@ void house_draw_scene(void)
     else
     {
         glTranslatef(terrain_x, terrain_y, 0);
+        glRotatef(/*terrain_turn*/ 1, 0, 0, 1);
         
-        glRotatef(terrain_turn, 0, 0, 1);
         terrain_turn = 0;
         /*glScalef(zoomFactor, zoomFactor, zoomFactor);*/
     }

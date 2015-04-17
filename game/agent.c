@@ -1,6 +1,6 @@
 /****************************************************************
  
- mushroom.h
+ agent.c
  
  =============================================================
  
@@ -32,61 +32,37 @@
  of this software.
  
  ****************************************************************/
-#ifdef	_WIN32
-#include "../noble/noble.h"
-#else
-#include "noble.h"
-#endif
 
-#define POINTS_PER_ROOM             (16)
-#define POINTS_PER_ROOM_STRUCTURE   (8)
-#define MAX_ROOMS                   (8)
-#define GENETICS_COUNT              (64)
+#include "mushroom.h"
 
-#define POINTS_PER_ROAD             (4)
-#define POINTS_PER_FENCE            (2)
+static noble_agent mushroom_boy;
 
+void boy_init(void)
+{
+    mushroom_boy.location.x = 0;
+    mushroom_boy.location.y = 0;
+    mushroom_boy.facing = 0;
+}
 
-typedef struct{
-    n_vect2  points[POINTS_PER_FENCE];
-}noble_fence;
+n_vect2 * boy_location(void)
+{
+    return &mushroom_boy.location;
+}
 
-typedef struct{
-    n_vect2  points[POINTS_PER_ROAD];
-}noble_road;
+n_int boy_facing(void)
+{
+    return mushroom_boy.facing;
+}
 
-typedef struct{
-    n_vect2  points[POINTS_PER_ROOM];
-    n_byte   window;
-}noble_room;
+void boy_turn(n_int delta)
+{
+    mushroom_boy.facing = (mushroom_boy.facing + delta + 256) & 255;
+}
 
-typedef struct{
-    noble_room   room[MAX_ROOMS];
-    n_int        house[GENETICS_COUNT];
-    n_int        roomcount;
-}noble_building;
-
-
-typedef struct{
-    n_vect2 location;
-    n_int   facing;
-}noble_agent;
-
-extern void draw_line(n_int x1, n_int y1, n_int x2, n_int y2);
-
-void enemy_init(void);
-void enemy_move(void);
-noble_building * house_create(n_byte2 * seed);
-void house_transform(noble_building * building, n_vect2 * center, n_int direction);
-void house_draw(noble_building * building);
-
-n_int ecomony_init(n_byte2 * seeds);
-void  economy_draw(n_int px, n_int py);
-
-void house_draw_scene(void);
-
-void boy_init(void);
-n_vect2 * boy_location(void);
-n_int boy_facing(void);
-void boy_turn(n_int delta);
-void boy_move(n_int forwards);
+void boy_move(n_int forwards)
+{
+    n_vect2 direction;
+    vect2_direction(&direction, boy_facing(), 1);
+    
+    vect2_d(boy_location(), &direction, forwards, 16);
+}
