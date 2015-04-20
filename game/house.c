@@ -410,7 +410,7 @@ void house_draw_scene(void)
         n_vect2 * location_delta = boy_location_delta();
         glTranslatef(512, 384, 0);
         /* degrees not 256 to a rotation, but 360 */
-        glRotatef(boy_turn_delta(), 0, 0, 1);
+        glRotatef(1.40625 * boy_turn_delta(), 0, 0, 1);
         glTranslatef(location_delta->x - 512, location_delta->y - 384, 0);
 
         /*glScalef(zoomFactor, zoomFactor, zoomFactor);*/
