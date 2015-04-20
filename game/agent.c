@@ -75,12 +75,15 @@ void boy_move(n_int forwards)
     n_vect2 direction;
     n_vect2 local_location;
     n_vect2 * copy_location = boy_location();
-    
+    n_int   translated_facing;
     vect2_copy(&local_location, copy_location);
     
     mushroom_boy.facing = (mushroom_boy.facing + mushroom_boy.facing_delta + 256) & 255;
 
-    vect2_direction(&direction, boy_facing(), 1);
+    
+    translated_facing = (128+64+256 - boy_facing())&255;
+    
+    vect2_direction(&direction, translated_facing, 1);
     
     vect2_d(copy_location, &direction, forwards, 512);
     
