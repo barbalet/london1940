@@ -69,7 +69,9 @@ typedef struct{
 
 typedef struct{
     n_vect2 location;
+    n_vect2 location_delta;
     n_int   facing;
+    n_int   facing_delta;
 }noble_agent;
 
 extern void draw_line(n_int x1, n_int y1, n_int x2, n_int y2);
@@ -85,8 +87,17 @@ void  economy_draw(n_int px, n_int py);
 
 void house_draw_scene(void);
 
+
+
 void boy_init(void);
+
 n_vect2 * boy_location(void);
+n_vect2 * boy_location_delta(void);
+
 n_int boy_facing(void);
+n_int boy_turn_delta(void);
 void boy_turn(n_int delta);
+
 void boy_move(n_int forwards);
+
+void boy_cycle(void);

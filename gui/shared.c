@@ -41,11 +41,6 @@ static n_byte  key_identification = 0;
 static n_byte2 key_value = 0;
 static n_byte  key_down = 0;
 
-n_byte  terrain_turn = 0;
-
-n_int   terrain_x = 0;
-n_int   terrain_y = 0;
-
 
 extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
 
@@ -71,6 +66,9 @@ n_int shared_init(n_byte view, n_uint random)
     n_byte2   seed[4] = {0x343e, 0xf323, 0xed32, 0x32fa};
     enemy_init();
     ecomony_init(seed);
+    
+    boy_init();
+    
     return 0;
 }
 
@@ -86,8 +84,7 @@ n_int shared_menu(n_int menuValue)
 
 void shared_rotate(n_double num, n_byte wwind)
 {
-    n_int integer_rotation_256 = (n_int)((num * 256) / 360);
-    terrain_turn = (n_byte)(((n_int)terrain_turn + 512 + integer_rotation_256) & 255);
+    
 }
 
 void shared_keyReceived(n_byte2 value, n_byte fIdentification)
@@ -126,6 +123,9 @@ void shared_about(n_constant_string value)
 
 void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_int dim_y)
 {
+    n_int turn_delta = 0;
+    n_int move_delta = 0;
+    
     if((key_down == 1) && (key_identification == fIdentification))
     {
         if ((key_value > 27) && (key_value < 32))
@@ -133,29 +133,27 @@ void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_i
             switch (key_value)
             {
                 case 28:
-                    terrain_x --;
+                    turn_delta --;
                     break;
                 case 29:
-                    terrain_x ++;
+                    turn_delta ++;
                     break;
                 case 30:
-                    terrain_y ++;
+                    move_delta ++;
                     break;
                 default:
-                    terrain_y --;
+                    move_delta --;
                     break;
             }
         }
     }
-    else
-    {
-        key_value = 0;
-        terrain_x = 0;
-        terrain_y = 0;
-    }
+
+    boy_turn(turn_delta);
     
+    boy_move(move_delta);
     house_draw_scene();
 
+    boy_cycle();
     /*enemy_move();*/
 }
 

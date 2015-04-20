@@ -42,7 +42,6 @@
 
 
 
-extern n_byte  terrain_turn;
 extern n_int   terrain_x;
 extern n_int   terrain_y;
 
@@ -408,10 +407,11 @@ void house_draw_scene(void)
     }
     else
     {
-        glTranslatef(terrain_x, terrain_y, 0);
-        glRotatef(/*terrain_turn*/ 1, 0, 0, 1);
+        n_vect2 * location_delta = boy_location_delta();
         
-        terrain_turn = 0;
+        glTranslatef(location_delta->x, location_delta->y, 0);
+        glRotatef(boy_turn_delta(), 0, 0, 1);
+        
         /*glScalef(zoomFactor, zoomFactor, zoomFactor);*/
     }
     

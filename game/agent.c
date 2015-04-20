@@ -49,20 +49,47 @@ n_vect2 * boy_location(void)
     return &mushroom_boy.location;
 }
 
+n_vect2 * boy_location_delta(void)
+{
+    return &mushroom_boy.location_delta;
+}
+
+
 n_int boy_facing(void)
 {
     return mushroom_boy.facing;
 }
 
+n_int boy_turn_delta(void)
+{
+    return mushroom_boy.facing_delta;
+}
+
 void boy_turn(n_int delta)
 {
-    mushroom_boy.facing = (mushroom_boy.facing + delta + 256) & 255;
+    mushroom_boy.facing_delta += delta;
 }
 
 void boy_move(n_int forwards)
 {
     n_vect2 direction;
+    n_vect2 local_location;
+    n_vect2 * copy_location = boy_location();
+    
+    vect2_copy(&local_location, copy_location);
+    
+    mushroom_boy.facing = (mushroom_boy.facing + mushroom_boy.facing_delta + 256) & 255;
+
     vect2_direction(&direction, boy_facing(), 1);
     
-    vect2_d(boy_location(), &direction, forwards, 16);
+    vect2_d(copy_location, &direction, forwards, 512);
+    
+    vect2_subtract(&mushroom_boy.location_delta, copy_location, &local_location);
+}
+
+void boy_cycle(void)
+{
+    mushroom_boy.facing_delta = 0;
+    mushroom_boy.location_delta.x = 0;
+    mushroom_boy.location_delta.y = 0;
 }
