@@ -151,7 +151,7 @@ void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_i
     boy_turn(turn_delta);
     
     boy_move(move_delta);
-    house_draw_scene();
+    house_draw_scene(dim_x, dim_y);
 
     boy_cycle();
     /*enemy_move();*/

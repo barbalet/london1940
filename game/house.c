@@ -323,16 +323,22 @@ noble_building * house_create(n_byte2 * seed)
 
 static n_int draw_scene_not_done = 0;
 
-void house_draw_scene(void)
+void house_draw_scene(n_int dim_x, n_int dim_y)
 {
     static n_byte2  seed[2] = {0xf728, 0xe231};
-    n_vect2         center;
     static GLuint  terrain_display_list = 0;
+    
+    n_vect2 * location = boy_location();
+    n_vect2 offset;
+    n_vect2 center;
+    center.x = 0 - (dim_x >> 1);
+    center.y = 0 - (dim_y >> 1);
+    vect2_add(&offset, &center, location);
     
     glClearColor(0, 0.2, 0, 0);
 
     glClear(GL_COLOR_BUFFER_BIT);
-    
+
     if (draw_scene_not_done < 2)
     {
         n_int           px = 0;
@@ -408,14 +414,9 @@ void house_draw_scene(void)
     else
     {
         n_vect2 * location_delta = boy_location_delta();
-        glTranslatef(512, 384, 0);
-        /* degrees not 256 to a rotation, but 360 */
+        glTranslatef(0-offset.x , 0-offset.y, 0);
         glRotatef(1.40625 * boy_turn_delta(), 0, 0, 1);
-        glTranslatef(location_delta->x - 512, location_delta->y - 384, 0);
-
-        /*glScalef(zoomFactor, zoomFactor, zoomFactor);*/
+        glTranslatef(location_delta->x + offset.x, location_delta->y + offset.y, 0);
     }
-    
-    
     glCallList(terrain_display_list);
 }
