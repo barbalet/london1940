@@ -87,16 +87,16 @@ void house_vertex(n_vect2 * point)
     glVertex2i((GLint)point->x, (GLint)point->y);
 }
 
-/*
+
 static void house_draw_fence(noble_fence * fence)
 {
-    glColor3f(0.6, 0.3, 0.3);
-    glBegin(GL_LINE);
+    glColor3f(0.5, 0.2, 0.0);
+    glBegin(GL_LINES);
     house_vertex(&fence->points[0]);
     house_vertex(&fence->points[1]);
     glEnd();
 }
-*/
+
 
 static void house_draw_road(noble_road * road)
 {
@@ -408,6 +408,34 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
             
             px++;
         }
+        
+        px = 0;
+        while (px < 4)
+        {
+            n_int py = 0;
+            while (py < 4)
+            {
+                noble_fence temp_fence_x;
+                noble_fence temp_fence_y;
+                
+                temp_fence_x.points[0].x = ((px - 2) * 1600) + 500;
+                temp_fence_x.points[0].y = ((py - 2) * 1600) + 1100;
+                temp_fence_x.points[1].x = ((px - 2) * 1600) + 500;
+                temp_fence_x.points[1].y = ((py - 2) * 1600) - 100;
+                
+                temp_fence_y.points[0].x = ((px - 2) * 1600) + 1100;
+                temp_fence_y.points[0].y = ((py - 2) * 1600) + 500;
+                temp_fence_y.points[1].x = ((px - 2) * 1600) - 100;
+                temp_fence_y.points[1].y = ((py - 2) * 1600) + 500;
+
+                house_draw_fence(&temp_fence_x);
+                house_draw_fence(&temp_fence_y);
+                
+                py++;
+            }
+            px++;
+        }
+        
         glEndList();
         draw_scene_not_done++;
     }
