@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5C64CA8950B3BBFDE1DE0A35FCC43468B0633853",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F8F44F5CF0F7E4FD58C7DF1F25F319A07E944474" : 0,
+    "5C64CA8950B3BBFDE1DE0A35FCC43468B0633853" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2381427C-1162-4FC7-BEE2-53497E587732",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F8F44F5CF0F7E4FD58C7DF1F25F319A07E944474" : "nobleape\/",
+    "5C64CA8950B3BBFDE1DE0A35FCC43468B0633853" : "mushroom\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Mushroom Boy",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Mushroom Boy\/Mushroom Boy.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/barbalet\/mushroom.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5C64CA8950B3BBFDE1DE0A35FCC43468B0633853"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/barbalet\/nobleape.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F8F44F5CF0F7E4FD58C7DF1F25F319A07E944474"
+    }
+  ]
+}
