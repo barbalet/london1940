@@ -90,11 +90,17 @@ void house_vertex(n_vect2 * point)
 
 static void house_draw_fence(noble_fence * fence)
 {
+    glLineWidth(100);
+
     glColor3f(0.5, 0.2, 0.0);
     glBegin(GL_LINES);
+    
     house_vertex(&fence->points[0]);
     house_vertex(&fence->points[1]);
+
     glEnd();
+    glLineWidth(1);
+
 }
 
 
@@ -371,16 +377,16 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
         while (px < 5)
         {
             noble_road temp_road;
-            temp_road.points[0].x = -3800;
+            temp_road.points[0].x = -3700;
             temp_road.points[0].y = ((px - 2) * 1600)-500;
             
-            temp_road.points[1].x = -3800;
+            temp_road.points[1].x = -3700;
             temp_road.points[1].y = ((px - 2) * 1600)-300;
             
-            temp_road.points[2].x = 3200;
+            temp_road.points[2].x = 2900;
             temp_road.points[2].y = ((px - 2) * 1600)-300;
             
-            temp_road.points[3].x = 3200;
+            temp_road.points[3].x = 2900;
             temp_road.points[3].y = ((px - 2) * 1600)-500;
             
             house_draw_road(&temp_road);
@@ -392,16 +398,16 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
         while (px < 4)
         {
             noble_road temp_road;
-            temp_road.points[0].y = -3800;
+            temp_road.points[0].y = -3700;
             temp_road.points[0].x = ((px - 2) * 3200)-500;
         
-            temp_road.points[1].y = -3800;
+            temp_road.points[1].y = -3700;
             temp_road.points[1].x = ((px - 2) * 3200)-300;
             
-            temp_road.points[2].y = 3200;
+            temp_road.points[2].y = 2900;
             temp_road.points[2].x = ((px - 2) * 3200)-300;
             
-            temp_road.points[3].y = 3200;
+            temp_road.points[3].y = 2900;
             temp_road.points[3].x = ((px - 2) * 3200)-500;
             
             house_draw_road(&temp_road);
