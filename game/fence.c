@@ -1,6 +1,6 @@
 /****************************************************************
  
- house.c
+ fence.c
  
  =============================================================
  
@@ -32,55 +32,25 @@
  of this software.
  
  ****************************************************************/
+
+#import <OpenGL/gl.h>
+#import <OpenGL/glext.h>
+#import <OpenGL/glu.h>
+#import <OpenGL/OpenGL.h>
+
 #include "mushroom.h"
-#define	NUM	20
 
-static n_int    locx[NUM], locy[NUM];
-static n_int	velx[NUM], vely[NUM];
-static n_byte2  seed[2] = { 0x4342, 0xed34};
-
-void enemy_init(void)
+void fence_draw(noble_fence * fence)
 {
-	n_int	lpx = 0;
-	while (lpx < NUM){
-		locx[lpx] = math_random(seed) & 255;
-		locy[lpx] = math_random(seed) & 255;
-		velx[lpx] = (math_random(seed) % 31) - 15;
-		vely[lpx] = (math_random(seed) % 31) - 15;
-		lpx++;
-	}
+    glLineWidth(100);
+    
+    glColor3f(0.5, 0.2, 0.0);
+    glBegin(GL_LINES);
+    
+    house_vertex(&fence->points[0]);
+    house_vertex(&fence->points[1]);
+    
+    glEnd();
+    glLineWidth(1);
+    
 }
-
-void enemy_move(void)
-{
-	n_int	lpx = 0;
-	while(lpx < NUM)
-    {
-		locx[lpx] += velx[lpx] >> 3;
-		locy[lpx] += vely[lpx] >> 3;
-				
-		velx[lpx] += (math_random(seed) % 5) - 2;
-		vely[lpx] += (math_random(seed) % 5) - 2;
-		
-		if ((locx[lpx] < 12) && (velx[lpx] < 0))
-        {
-            velx[lpx] = 0 - velx[lpx];
-        }
-		if ((locy[lpx] < 12) && (vely[lpx] < 0))
-        {
-           vely[lpx] = 0 - vely[lpx];
-        }
-        
-		if ((locx[lpx] > 244) && (velx[lpx] > 0))
-        {
-            velx[lpx] = 0 - velx[lpx];
-        }
-		if ((locy[lpx] > 244) && (vely[lpx] > 0))
-        {
-            vely[lpx] = 0 - vely[lpx];
-        }
-                
-		lpx++;
-	}	
-}
-

@@ -40,12 +40,7 @@
 
 #include "mushroom.h"
 
-
-
-extern n_int   terrain_x;
-extern n_int   terrain_y;
-
-void house_transform(noble_building * building, n_vect2 * center, n_int direction)
+static void house_transform(noble_building * building, n_vect2 * center, n_int direction)
 {
     n_int   loop_room = 0;
     n_vect2 * min_max = vect2_min_max_init();
@@ -85,34 +80,6 @@ void house_transform(noble_building * building, n_vect2 * center, n_int directio
 void house_vertex(n_vect2 * point)
 {
     glVertex2i((GLint)point->x, (GLint)point->y);
-}
-
-
-static void house_draw_fence(noble_fence * fence)
-{
-    glLineWidth(100);
-
-    glColor3f(0.5, 0.2, 0.0);
-    glBegin(GL_LINES);
-    
-    house_vertex(&fence->points[0]);
-    house_vertex(&fence->points[1]);
-
-    glEnd();
-    glLineWidth(1);
-
-}
-
-
-static void house_draw_road(noble_road * road)
-{
-    glColor3f(0, 0, 0);
-    glBegin(GL_QUADS);
-    house_vertex(&road->points[0]);
-    house_vertex(&road->points[1]);
-    house_vertex(&road->points[2]);
-    house_vertex(&road->points[3]);
-    glEnd();
 }
 
 static void house_drawroom(noble_room * room)
@@ -389,7 +356,7 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
             temp_road.points[3].x = 2900;
             temp_road.points[3].y = ((px - 2) * 1600)-500;
             
-            house_draw_road(&temp_road);
+            road_draw(&temp_road);
             px++;
         }
         
@@ -410,7 +377,50 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
             temp_road.points[3].y = 2900;
             temp_road.points[3].x = ((px - 2) * 3200)-500;
             
-            house_draw_road(&temp_road);
+            road_draw(&temp_road);
+            
+            px++;
+        }
+        
+        px = 0;
+        
+        while (px < 5)
+        {
+            noble_road temp_road;
+            temp_road.points[0].x = -3700;
+            temp_road.points[0].y = ((px - 2) * 1600)-500;
+            
+            temp_road.points[1].x = -3700;
+            temp_road.points[1].y = ((px - 2) * 1600)-300;
+            
+            temp_road.points[2].x = 2900;
+            temp_road.points[2].y = ((px - 2) * 1600)-300;
+            
+            temp_road.points[3].x = 2900;
+            temp_road.points[3].y = ((px - 2) * 1600)-500;
+            
+            road_draw_marking(&temp_road);
+            px++;
+        }
+        
+        px = 0;
+        
+        while (px < 4)
+        {
+            noble_road temp_road;
+            temp_road.points[0].y = -3700;
+            temp_road.points[0].x = ((px - 2) * 3200)-500;
+            
+            temp_road.points[1].y = -3700;
+            temp_road.points[1].x = ((px - 2) * 3200)-300;
+            
+            temp_road.points[2].y = 2900;
+            temp_road.points[2].x = ((px - 2) * 3200)-300;
+            
+            temp_road.points[3].y = 2900;
+            temp_road.points[3].x = ((px - 2) * 3200)-500;
+            
+            road_draw_marking(&temp_road);
             
             px++;
         }
@@ -434,8 +444,8 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
                 temp_fence_y.points[1].x = ((px - 2) * 1600) - 100;
                 temp_fence_y.points[1].y = ((py - 2) * 1600) + 500;
 
-                house_draw_fence(&temp_fence_x);
-                house_draw_fence(&temp_fence_y);
+                fence_draw(&temp_fence_x);
+                fence_draw(&temp_fence_y);
                 
                 py++;
             }

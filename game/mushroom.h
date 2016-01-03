@@ -66,7 +66,6 @@ typedef struct{
     n_int        roomcount;
 }noble_building;
 
-
 typedef struct{
     n_vect2 location;
     n_vect2 location_delta;
@@ -74,12 +73,11 @@ typedef struct{
     n_int   facing_delta;
 }noble_agent;
 
-extern void draw_line(n_int x1, n_int y1, n_int x2, n_int y2);
+void house_vertex(n_vect2 * point);
 
 void enemy_init(void);
 void enemy_move(void);
 noble_building * house_create(n_byte2 * seed);
-void house_transform(noble_building * building, n_vect2 * center, n_int direction);
 void house_draw(noble_building * building);
 
 n_int ecomony_init(n_byte2 * seeds);
@@ -87,7 +85,10 @@ void  economy_draw(n_int px, n_int py);
 
 void house_draw_scene(n_int dim_x, n_int dim_y);
 
+void road_draw_marking(noble_road * road);
+void road_draw(noble_road * road);
 
+void fence_draw(noble_fence * fence);
 
 void boy_init(void);
 
