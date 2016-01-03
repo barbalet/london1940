@@ -44,19 +44,36 @@ void road_draw_marking(noble_road * road)
 {
     
     n_vect2 middle_line[2];
+    n_vect2 partial_line;
+    n_int   loop = 0;
+    n_vect2 delta_stepper;
     
     vect2_center(&middle_line[0], &road->points[0], &road->points[1]);
     vect2_center(&middle_line[1], &road->points[2], &road->points[3]);
     
+    vect2_divide(&partial_line, &middle_line[0], &middle_line[1], 200);
+    vect2_copy(&delta_stepper, &middle_line[0]);
+    
     glLineWidth(100);
     
     glColor3f(0.5, 0.5, 0.5);
-    glBegin(GL_LINES);
     
-    house_vertex(&middle_line[0]);
-    house_vertex(&middle_line[1]);
-    
-    glEnd();
+    while (loop < 200)
+    {
+        if (loop & 1)
+        {
+            vect2_d(&delta_stepper, &partial_line, 1, 1);
+        }
+        else
+        {
+            glBegin(GL_LINES);
+            house_vertex(&delta_stepper);
+            vect2_d(&delta_stepper, &partial_line, 1, 1);
+            house_vertex(&delta_stepper);
+            glEnd();
+        }
+        loop++;
+    }
     glLineWidth(1);
 }
 
