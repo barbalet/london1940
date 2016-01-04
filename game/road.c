@@ -33,11 +33,6 @@
  
  ****************************************************************/
 
-#import <OpenGL/gl.h>
-#import <OpenGL/glext.h>
-#import <OpenGL/glu.h>
-#import <OpenGL/OpenGL.h>
-
 #include "mushroom.h"
 
 void road_draw_marking(noble_road * road)
@@ -54,9 +49,8 @@ void road_draw_marking(noble_road * road)
     vect2_divide(&partial_line, &middle_line[0], &middle_line[1], 200);
     vect2_copy(&delta_stepper, &middle_line[0]);
     
-    glLineWidth(100);
-    
-    glColor3f(0.5, 0.5, 0.5);
+    gldraw_wide_line();
+    gldraw_darkgrey();
     
     while (loop < 200)
     {
@@ -66,24 +60,19 @@ void road_draw_marking(noble_road * road)
         }
         else
         {
-            glBegin(GL_LINES);
-            house_vertex(&delta_stepper);
+            n_vect2 line_origin;
+            
+            vect2_copy(&line_origin, &delta_stepper);
             vect2_d(&delta_stepper, &partial_line, 1, 1);
-            house_vertex(&delta_stepper);
-            glEnd();
+            gldraw_line(&line_origin, &delta_stepper);
         }
         loop++;
     }
-    glLineWidth(1);
+    gldraw_thin_line();
 }
 
 void road_draw(noble_road * road)
 {
-    glColor3f(0, 0, 0);
-    glBegin(GL_QUADS);
-    house_vertex(&road->points[0]);
-    house_vertex(&road->points[1]);
-    house_vertex(&road->points[2]);
-    house_vertex(&road->points[3]);
-    glEnd();
+   gldraw_black();
+   gldraw_quads(&road->points[0], 1);
 }

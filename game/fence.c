@@ -33,24 +33,12 @@
  
  ****************************************************************/
 
-#import <OpenGL/gl.h>
-#import <OpenGL/glext.h>
-#import <OpenGL/glu.h>
-#import <OpenGL/OpenGL.h>
-
 #include "mushroom.h"
 
 void fence_draw(noble_fence * fence)
 {
-    glLineWidth(100);
-    
-    glColor3f(0.5, 0.2, 0.0);
-    glBegin(GL_LINES);
-    
-    house_vertex(&fence->points[0]);
-    house_vertex(&fence->points[1]);
-    
-    glEnd();
-    glLineWidth(1);
-    
+    gldraw_wide_line();
+    gldraw_orange();
+    gldraw_line(&fence->points[0], &fence->points[1]);
+    gldraw_thin_line();
 }
