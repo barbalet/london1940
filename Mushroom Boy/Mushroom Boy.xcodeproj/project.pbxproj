@@ -35,6 +35,7 @@
 		7B0542261C3864C00079EF20 /* fence.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B0542241C3864C00079EF20 /* fence.c */; };
 		7B0542271C3864C00079EF20 /* road.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B0542251C3864C00079EF20 /* road.c */; };
 		7B8CE0981BA5BBF6000450D7 /* NobleShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B8CE0971BA5BBF6000450D7 /* NobleShared.m */; };
+		7BB191E91C3A2E0000DF03BA /* gldraw.c in Sources */ = {isa = PBXBuildFile; fileRef = 7BB191E81C3A2E0000DF03BA /* gldraw.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		7B0542251C3864C00079EF20 /* road.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = road.c; sourceTree = "<group>"; };
 		7B8CE0961BA5BBF6000450D7 /* NobleShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NobleShared.h; sourceTree = "<group>"; };
 		7B8CE0971BA5BBF6000450D7 /* NobleShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NobleShared.m; sourceTree = "<group>"; };
+		7BB191E81C3A2E0000DF03BA /* gldraw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gldraw.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				5A0D60C819567F2000090DAE /* audio.c */,
 				5A0D60C919567F2000090DAE /* compress.c */,
 				5A0D60CA19567F2000090DAE /* execute.c */,
+				7BB191E81C3A2E0000DF03BA /* gldraw.c */,
 				5A0D60CB19567F2000090DAE /* interpret.c */,
 				5A0D60CC19567F2000090DAE /* io.c */,
 				5A0D60CD19567F2000090DAE /* land.c */,
@@ -361,6 +364,7 @@
 				5A0D60D419567F2000090DAE /* NobleMacView.m in Sources */,
 				5A0D60DA19567F2000090DAE /* land.c in Sources */,
 				5A0D60DB19567F2000090DAE /* math.c in Sources */,
+				7BB191E91C3A2E0000DF03BA /* gldraw.c in Sources */,
 				5A0D60D519567F2000090DAE /* audio.c in Sources */,
 				7B8CE0981BA5BBF6000450D7 /* NobleShared.m in Sources */,
 				5A0D60D919567F2000090DAE /* io.c in Sources */,
