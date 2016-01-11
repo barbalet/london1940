@@ -415,7 +415,7 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
     }
     else
     {
-        gldraw_delta_move(&center, boy_location(), boy_location_delta(), boy_turn_delta());
+        gldraw_delta_move(&center, boy_location(), boy_location(), boy_facing());
     }
     gldraw_display_list();
 }

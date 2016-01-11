@@ -97,6 +97,8 @@ n_vect2 * boy_location_delta(void);
 
 n_int boy_facing(void);
 n_int boy_turn_delta(void);
+
+
 void boy_turn(n_int delta);
 
 void boy_move(n_int forwards);

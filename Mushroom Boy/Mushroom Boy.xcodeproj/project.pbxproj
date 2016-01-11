@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4ADFDFA51C41205800E633EF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADFDFA41C41205800E633EF /* OpenGL.framework */; };
 		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
 		5A0D60D319567F2000090DAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C319567F2000090DAE /* main.m */; };
 		5A0D60D419567F2000090DAE /* NobleMacView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C519567F2000090DAE /* NobleMacView.m */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4ADFDFA41C41205800E633EF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A0D60C219567F2000090DAE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5A0D60C319567F2000090DAE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ADFDFA51C41205800E633EF /* OpenGL.framework in Frameworks */,
 				5A37A3BA1955F32800D187B0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,6 +198,7 @@
 		5A37A3B81955F32800D187B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4ADFDFA41C41205800E633EF /* OpenGL.framework */,
 				5A37A3B91955F32800D187B0 /* Cocoa.framework */,
 				5A37A3D81955F32900D187B0 /* XCTest.framework */,
 				5A37A3BB1955F32800D187B0 /* Other Frameworks */,
@@ -508,6 +512,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mushroom Boy/Mushroom Boy-Prefix.pch";
 				INFOPLIST_FILE = "Mushroom Boy/Mushroom Boy-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nobleape.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -522,6 +527,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mushroom Boy/Mushroom Boy-Prefix.pch";
 				INFOPLIST_FILE = "Mushroom Boy/Mushroom Boy-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.nobleape.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
