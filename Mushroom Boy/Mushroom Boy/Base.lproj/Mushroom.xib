@@ -675,10 +675,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdk-Jl-Dny" customClass="NobleMacView">
-                        <rect key="frame" x="0.0" y="-168" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                     </customView>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="351" y="756"/>
         </window>
     </objects>
 </document>

@@ -402,8 +402,8 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
     n_vect2 center;
     center.x = 0 - (dim_x >> 1);
     center.y = 0 - (dim_y >> 1);
-    
     gldraw_background_green();
+    
 
     if (gldraw_scene_done())
     {
@@ -415,7 +415,7 @@ void house_draw_scene(n_int dim_x, n_int dim_y)
     }
     else
     {
-        gldraw_delta_move(&center, boy_location(), boy_location(), boy_facing());
+        gldraw_delta_move(&center, boy_location(), boy_facing());
     }
     gldraw_display_list();
 }
