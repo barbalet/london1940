@@ -79,7 +79,6 @@ void house_vertex(n_vect2 * point);
 
 void enemy_init(void);
 void enemy_move(void);
-noble_building * house_create(n_byte2 * seed, n_vect2 * center);
 void house_draw(noble_building * building);
 
 n_int ecomony_init(n_byte2 * seeds);
