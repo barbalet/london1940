@@ -35,9 +35,13 @@
 
 #include "mushroom.h"
 
+n_int road_is_intersection(n_vect2 * point)
+{
+    return 1;
+}
+
 void road_draw_marking(noble_road * road)
 {
-    
     n_vect2 middle_line[2];
     n_vect2 partial_line;
     n_int   loop = 0;
@@ -46,13 +50,13 @@ void road_draw_marking(noble_road * road)
     vect2_center(&middle_line[0], &road->points[0], &road->points[1]);
     vect2_center(&middle_line[1], &road->points[2], &road->points[3]);
     
-    vect2_divide(&partial_line, &middle_line[0], &middle_line[1], 200);
+    vect2_divide(&partial_line, &middle_line[0], &middle_line[1], 256);
     vect2_copy(&delta_stepper, &middle_line[0]);
     
     gldraw_wide_line();
     gldraw_darkgrey();
     
-    while (loop < 200)
+    while (loop < 256)
     {
         if (loop & 1)
         {

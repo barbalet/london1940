@@ -186,7 +186,7 @@ static n_int house_genetics(n_int * house, n_byte2 * seed)
 	return count;
 }
 
-noble_building * house_create(n_byte2 * seed)
+noble_building * house_create(n_byte2 * seed, n_vect2 * center)
 {
     n_int	         pointp = -4, pointm = -4;
     n_int	         loop = 2;
@@ -255,6 +255,9 @@ noble_building * house_create(n_byte2 * seed)
         house_construct(&room[roomcount++], 8, -4+(house[3]*20), -8, -4+(house[(abstract_rooms-1)*3]*20), 0);
     }
     building->roomcount = roomcount;
+    
+    house_transform(building, center, math_random(seed) & 255);
+
     return building;
 }
 
@@ -268,13 +271,14 @@ void house_draw_all(n_byte2 * seed, n_vect2 * center)
         n_int py = 0;
         while (py < 8)
         {
-            noble_building * building = house_create(seed);
+            noble_building * building;
             
-            vect2_populate(center, (px - 4) * 800, (py - 4) * 800);
+            vect2_populate(center, ((px - 4) * RESIDENCE_SPACE), ((py - 4) * RESIDENCE_SPACE));
+
+            building = house_create(seed, center);
             
             if (building)
             {
-                house_transform(building, center, math_random(seed) & 255);
                 house_draw(building);
                 io_free((void **)&building);
             }
@@ -288,17 +292,17 @@ void house_draw_all(n_byte2 * seed, n_vect2 * center)
     while (px < 5)
     {
         noble_road temp_road;
-        temp_road.points[0].x = -3700;
-        temp_road.points[0].y = ((px - 2) * 1600)-500;
+        temp_road.points[0].x = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road.points[0].y = ((px - 2) * RESIDENCE_SPACE * 2)-500;
         
-        temp_road.points[1].x = -3700;
-        temp_road.points[1].y = ((px - 2) * 1600)-300;
+        temp_road.points[1].x = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road.points[1].y = ((px - 2) * RESIDENCE_SPACE * 2)-300;
         
-        temp_road.points[2].x = 2900;
-        temp_road.points[2].y = ((px - 2) * 1600)-300;
+        temp_road.points[2].x = (RESIDENCE_SPACE * 4) - 300;
+        temp_road.points[2].y = ((px - 2) * RESIDENCE_SPACE * 2)-300;
         
-        temp_road.points[3].x = 2900;
-        temp_road.points[3].y = ((px - 2) * 1600)-500;
+        temp_road.points[3].x = (RESIDENCE_SPACE * 4) - 300;
+        temp_road.points[3].y = ((px - 2) * RESIDENCE_SPACE * 2)-500;
         
         road_draw(&temp_road);
         px++;
@@ -309,17 +313,17 @@ void house_draw_all(n_byte2 * seed, n_vect2 * center)
     while (px < 4)
     {
         noble_road temp_road;
-        temp_road.points[0].y = -3700;
-        temp_road.points[0].x = ((px - 2) * 3200)-500;
+        temp_road.points[0].y = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road.points[0].x = ((px - 2) * RESIDENCE_SPACE * 4)-500;
         
-        temp_road.points[1].y = -3700;
-        temp_road.points[1].x = ((px - 2) * 3200)-300;
+        temp_road.points[1].y = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road.points[1].x = ((px - 2) * RESIDENCE_SPACE * 4)-300;
         
-        temp_road.points[2].y = 2900;
-        temp_road.points[2].x = ((px - 2) * 3200)-300;
+        temp_road.points[2].y = (RESIDENCE_SPACE * 4) - 300;
+        temp_road.points[2].x = ((px - 2) * RESIDENCE_SPACE * 4)-300;
         
-        temp_road.points[3].y = 2900;
-        temp_road.points[3].x = ((px - 2) * 3200)-500;
+        temp_road.points[3].y = (RESIDENCE_SPACE * 4) - 300;
+        temp_road.points[3].x = ((px - 2) * RESIDENCE_SPACE * 4)-500;
         
         road_draw(&temp_road);
         
@@ -331,17 +335,17 @@ void house_draw_all(n_byte2 * seed, n_vect2 * center)
     while (px < 5)
     {
         noble_road temp_road;
-        temp_road.points[0].x = -3700;
-        temp_road.points[0].y = ((px - 2) * 1600)-500;
+        temp_road.points[0].x = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road.points[0].y = ((px - 2) * RESIDENCE_SPACE * 2)-500;
         
-        temp_road.points[1].x = -3700;
-        temp_road.points[1].y = ((px - 2) * 1600)-300;
+        temp_road.points[1].x = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road.points[1].y = ((px - 2) * RESIDENCE_SPACE * 2)-300;
         
-        temp_road.points[2].x = 2900;
-        temp_road.points[2].y = ((px - 2) * 1600)-300;
+        temp_road.points[2].x = (RESIDENCE_SPACE * 4) - 300;
+        temp_road.points[2].y = ((px - 2) * RESIDENCE_SPACE * 2)-300;
         
-        temp_road.points[3].x = 2900;
-        temp_road.points[3].y = ((px - 2) * 1600)-500;
+        temp_road.points[3].x = (RESIDENCE_SPACE * 4) - 300;
+        temp_road.points[3].y = ((px - 2) * RESIDENCE_SPACE * 2)-500;
         
         road_draw_marking(&temp_road);
         px++;
@@ -352,17 +356,17 @@ void house_draw_all(n_byte2 * seed, n_vect2 * center)
     while (px < 4)
     {
         noble_road temp_road;
-        temp_road.points[0].y = -3700;
-        temp_road.points[0].x = ((px - 2) * 3200)-500;
+        temp_road.points[0].y = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road.points[0].x = ((px - 2) * RESIDENCE_SPACE * 4)-500;
         
-        temp_road.points[1].y = -3700;
-        temp_road.points[1].x = ((px - 2) * 3200)-300;
+        temp_road.points[1].y = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road.points[1].x = ((px - 2) * RESIDENCE_SPACE * 4)-300;
         
-        temp_road.points[2].y = 2900;
-        temp_road.points[2].x = ((px - 2) * 3200)-300;
+        temp_road.points[2].y = (RESIDENCE_SPACE * 4) - 300;;
+        temp_road.points[2].x = ((px - 2) * RESIDENCE_SPACE * 4)-300;
         
-        temp_road.points[3].y = 2900;
-        temp_road.points[3].x = ((px - 2) * 3200)-500;
+        temp_road.points[3].y = (RESIDENCE_SPACE * 4) - 300;
+        temp_road.points[3].x = ((px - 2) * RESIDENCE_SPACE * 4)-500;
         
         road_draw_marking(&temp_road);
         
@@ -378,15 +382,15 @@ void house_draw_all(n_byte2 * seed, n_vect2 * center)
             noble_fence temp_fence_x;
             noble_fence temp_fence_y;
             
-            temp_fence_x.points[0].x = ((px - 2) * 1600) + 500;
-            temp_fence_x.points[0].y = ((py - 2) * 1600) + 1100;
-            temp_fence_x.points[1].x = ((px - 2) * 1600) + 500;
-            temp_fence_x.points[1].y = ((py - 2) * 1600) - 100;
+            temp_fence_x.points[0].x = ((px - 2) * RESIDENCE_SPACE * 2) + 500;
+            temp_fence_x.points[0].y = ((py - 2) * RESIDENCE_SPACE * 2) + 1100;
+            temp_fence_x.points[1].x = ((px - 2) * RESIDENCE_SPACE * 2) + 500;
+            temp_fence_x.points[1].y = ((py - 2) * RESIDENCE_SPACE * 2) - 100;
             
-            temp_fence_y.points[0].x = ((px - 2) * 1600) + 1100;
-            temp_fence_y.points[0].y = ((py - 2) * 1600) + 500;
-            temp_fence_y.points[1].x = ((px - 2) * 1600) - 100;
-            temp_fence_y.points[1].y = ((py - 2) * 1600) + 500;
+            temp_fence_y.points[0].x = ((px - 2) * RESIDENCE_SPACE * 2) + 1100;
+            temp_fence_y.points[0].y = ((py - 2) * RESIDENCE_SPACE * 2) + 500;
+            temp_fence_y.points[1].x = ((px - 2) * RESIDENCE_SPACE * 2) - 100;
+            temp_fence_y.points[1].y = ((py - 2) * RESIDENCE_SPACE * 2) + 500;
             
             fence_draw(&temp_fence_x);
             fence_draw(&temp_fence_y);

@@ -46,6 +46,7 @@
 #define POINTS_PER_ROAD             (4)
 #define POINTS_PER_FENCE            (2)
 
+#define RESIDENCE_SPACE             (800)
 
 typedef struct{
     n_vect2  points[POINTS_PER_FENCE];
@@ -64,6 +65,7 @@ typedef struct{
     noble_room   room[MAX_ROOMS];
     n_int        house[GENETICS_COUNT];
     n_int        roomcount;
+    n_byte       rotation;
 }noble_building;
 
 typedef struct{
@@ -77,7 +79,7 @@ void house_vertex(n_vect2 * point);
 
 void enemy_init(void);
 void enemy_move(void);
-noble_building * house_create(n_byte2 * seed);
+noble_building * house_create(n_byte2 * seed, n_vect2 * center);
 void house_draw(noble_building * building);
 
 n_int ecomony_init(n_byte2 * seeds);
@@ -85,6 +87,7 @@ void  economy_draw(n_int px, n_int py);
 
 void house_draw_scene(n_int dim_x, n_int dim_y);
 
+n_int road_is_intersection(n_vect2 * point);
 void road_draw_marking(noble_road * road);
 void road_draw(noble_road * road);
 
@@ -98,9 +101,6 @@ n_vect2 * boy_location_delta(void);
 n_int boy_facing(void);
 n_int boy_turn_delta(void);
 
-
 void boy_turn(n_int delta);
-
 void boy_move(n_int forwards);
-
 void boy_cycle(void);
