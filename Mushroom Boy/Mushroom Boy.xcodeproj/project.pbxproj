@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A4237E11C6C51F6001C3886 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A4237E01C6C51F6001C3886 /* game.c */; };
 		4ADFDFA51C41205800E633EF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADFDFA41C41205800E633EF /* OpenGL.framework */; };
 		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
 		5A0D60D319567F2000090DAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C319567F2000090DAE /* main.m */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A4237E01C6C51F6001C3886 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
 		4ADFDFA41C41205800E633EF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A0D60C219567F2000090DAE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		5A0D60DE19567F8E00090DAE /* game */ = {
 			isa = PBXGroup;
 			children = (
+				4A4237E01C6C51F6001C3886 /* game.c */,
 				7B0542241C3864C00079EF20 /* fence.c */,
 				7B0542251C3864C00079EF20 /* road.c */,
 				5A6AD3F61AE0D493008CB27B /* agent.c */,
@@ -356,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A0D60E819567F8E00090DAE /* shared.c in Sources */,
+				4A4237E11C6C51F6001C3886 /* game.c in Sources */,
 				5A0D60E719567F8E00090DAE /* house.c in Sources */,
 				5A0D60D319567F2000090DAE /* main.m in Sources */,
 				5A4C2FFB1958D761009310E4 /* enemy.c in Sources */,

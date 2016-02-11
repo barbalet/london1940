@@ -257,8 +257,6 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
 static void house_draw_all(n_byte2 * seed)
 {
     noble_building buildings[64];
-    noble_road     roads[9];
-    noble_fence    fences[32];
     
     n_int count = 0;
     n_int px = -4;
@@ -281,91 +279,12 @@ static void house_draw_all(n_byte2 * seed)
         px++;
     }
     
-    px = -2;
-    count = 0;
-    while (px < 3)
-    {
-        noble_road * temp_road = &roads[count++];
-        temp_road->points[0].x = 0 - (RESIDENCE_SPACE * 4) - 500;
-        temp_road->points[0].y = (px * RESIDENCE_SPACE * 2) - 500;
-        
-        temp_road->points[1].x = 0 - (RESIDENCE_SPACE * 4) - 500;
-        temp_road->points[1].y = (px * RESIDENCE_SPACE * 2)-300;
-        
-        temp_road->points[2].x = (RESIDENCE_SPACE * 4) - 300;
-        temp_road->points[2].y = (px * RESIDENCE_SPACE * 2)-300;
-        
-        temp_road->points[3].x = (RESIDENCE_SPACE * 4) - 300;
-        temp_road->points[3].y = (px * RESIDENCE_SPACE * 2)-500;
-        px++;
-    }
+    road_init();
+    road_draw();
     
-    px = -2;
-    
-    while (px < 2)
-    {
-        noble_road * temp_road = &roads[count++];
-        temp_road->points[0].x = (px * RESIDENCE_SPACE * 4) - 500;
-        temp_road->points[0].y = 0 - (RESIDENCE_SPACE * 4) - 500;
+    fence_init();
+    fence_draw();
 
-        temp_road->points[1].x = (px * RESIDENCE_SPACE * 4)-300;
-        temp_road->points[1].y = 0 - (RESIDENCE_SPACE * 4) - 500;
-
-        temp_road->points[2].x = (px * RESIDENCE_SPACE * 4)-300;
-        temp_road->points[2].y = (RESIDENCE_SPACE * 4) - 300;
-
-        temp_road->points[3].x = (px * RESIDENCE_SPACE * 4)-500;
-        temp_road->points[3].y = (RESIDENCE_SPACE * 4) - 300;
-        
-        px++;
-    }
-    
-    px = 0;
-    
-    while (px < 9)
-    {
-        road_draw(&roads[px]);
-        px++;
-    }
-    
-    px = 0;
-    
-    while (px < 9)
-    {
-        road_draw_marking(&roads[px]);
-        px++;
-    }
-    
-    count = 0;
-
-    px = -2;
-    while (px < 2)
-    {
-        n_int py = -2;
-        while (py < 2)
-        {
-            noble_fence * temp_fence_x = &fences[count++];
-            noble_fence * temp_fence_y = &fences[count++];
-            
-            temp_fence_x->points[0].x = (px * RESIDENCE_SPACE * 2) + 500;
-            temp_fence_x->points[0].y = (py * RESIDENCE_SPACE * 2) + 1100;
-            
-            temp_fence_x->points[1].x = (px * RESIDENCE_SPACE * 2) + 500;
-            temp_fence_x->points[1].y = (py * RESIDENCE_SPACE * 2) - 100;
-            
-            temp_fence_y->points[0].x = (px * RESIDENCE_SPACE * 2) + 1100;
-            temp_fence_y->points[0].y = (py * RESIDENCE_SPACE * 2) + 500;
-            
-            temp_fence_y->points[1].x = (px * RESIDENCE_SPACE * 2) - 100;
-            temp_fence_y->points[1].y = (py * RESIDENCE_SPACE * 2) + 500;
-            
-            fence_draw(temp_fence_x);
-            fence_draw(temp_fence_y);
-            
-            py++;
-        }
-        px++;
-    }
 }
 
 void house_draw_scene(n_int dim_x, n_int dim_y)

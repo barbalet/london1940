@@ -35,9 +35,49 @@
 
 #include "mushroom.h"
 
-n_int road_is_intersection(n_vect2 * point)
+static noble_road     roads[9];
+
+
+void road_init(void)
 {
-    return 1;
+    n_int px = -2;
+    n_int count = 0;
+    while (px < 3)
+    {
+        noble_road * temp_road = &roads[count++];
+        temp_road->points[0].x = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road->points[0].y = (px * RESIDENCE_SPACE * 2) - 500;
+        
+        temp_road->points[1].x = 0 - (RESIDENCE_SPACE * 4) - 500;
+        temp_road->points[1].y = (px * RESIDENCE_SPACE * 2)-300;
+        
+        temp_road->points[2].x = (RESIDENCE_SPACE * 4) - 300;
+        temp_road->points[2].y = (px * RESIDENCE_SPACE * 2)-300;
+        
+        temp_road->points[3].x = (RESIDENCE_SPACE * 4) - 300;
+        temp_road->points[3].y = (px * RESIDENCE_SPACE * 2)-500;
+        px++;
+    }
+    
+    px = -2;
+    
+    while (px < 2)
+    {
+        noble_road * temp_road = &roads[count++];
+        temp_road->points[0].x = (px * RESIDENCE_SPACE * 4) - 500;
+        temp_road->points[0].y = 0 - (RESIDENCE_SPACE * 4) - 500;
+        
+        temp_road->points[1].x = (px * RESIDENCE_SPACE * 4)-300;
+        temp_road->points[1].y = 0 - (RESIDENCE_SPACE * 4) - 500;
+        
+        temp_road->points[2].x = (px * RESIDENCE_SPACE * 4)-300;
+        temp_road->points[2].y = (RESIDENCE_SPACE * 4) - 300;
+        
+        temp_road->points[3].x = (px * RESIDENCE_SPACE * 4)-500;
+        temp_road->points[3].y = (RESIDENCE_SPACE * 4) - 300;
+        
+        px++;
+    }
 }
 
 void road_draw_marking(noble_road * road)
@@ -56,7 +96,7 @@ void road_draw_marking(noble_road * road)
     gldraw_wide_line();
     gldraw_darkgrey();
     
-    while (loop < 256)
+    while (loop < 264)
     {
         if (loop & 1)
         {
@@ -68,6 +108,7 @@ void road_draw_marking(noble_road * road)
             
             vect2_copy(&line_origin, &delta_stepper);
             vect2_d(&delta_stepper, &partial_line, 1, 1);
+
             gldraw_line(&line_origin, &delta_stepper);
         }
         loop++;
@@ -75,8 +116,27 @@ void road_draw_marking(noble_road * road)
     gldraw_thin_line();
 }
 
-void road_draw(noble_road * road)
+void road_draw_each(noble_road * road)
 {
    gldraw_black();
    gldraw_quads(&road->points[0], 1);
+}
+
+void road_draw(void)
+{
+    n_int px = 0;
+    
+    while (px < 9)
+    {
+        road_draw_each(&roads[px]);
+        px++;
+    }
+    
+    px = 0;
+    
+    while (px < 9)
+    {
+        road_draw_marking(&roads[px]);
+        px++;
+    }
 }

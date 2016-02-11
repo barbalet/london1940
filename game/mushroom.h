@@ -75,6 +75,9 @@ typedef struct{
     n_int   facing_delta;
 }noble_agent;
 
+void game_init(void);
+void game_draw(void);
+
 void house_vertex(n_vect2 * point);
 
 void enemy_init(void);
@@ -86,11 +89,11 @@ void  economy_draw(n_int px, n_int py);
 
 void house_draw_scene(n_int dim_x, n_int dim_y);
 
-n_int road_is_intersection(n_vect2 * point);
-void road_draw_marking(noble_road * road);
-void road_draw(noble_road * road);
+void road_init(void);
+void road_draw(void);
 
-void fence_draw(noble_fence * fence);
+void fence_init(void);
+void fence_draw(void);
 
 void boy_init(void);
 

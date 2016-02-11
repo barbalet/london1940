@@ -1,6 +1,6 @@
 /****************************************************************
  
- fence.c
+ game.c
  
  =============================================================
  
@@ -35,53 +35,13 @@
 
 #include "mushroom.h"
 
-static noble_fence    fences[32];
-
-
-void fence_draw_each(noble_fence * fence)
+void game_init(void)
 {
-    gldraw_wide_line();
-    gldraw_orange();
-    gldraw_line(&fence->points[0], &fence->points[1]);
-    gldraw_thin_line();
-}
-
-void fence_init(void)
-{
-    n_int count = 0;
     
-    n_int px = -2;
-    while (px < 2)
-    {
-        n_int py = -2;
-        while (py < 2)
-        {
-            noble_fence * temp_fence_x = &fences[count++];
-            noble_fence * temp_fence_y = &fences[count++];
-            
-            temp_fence_x->points[0].x = (px * RESIDENCE_SPACE * 2) + 500;
-            temp_fence_x->points[0].y = (py * RESIDENCE_SPACE * 2) + 1100;
-            
-            temp_fence_x->points[1].x = (px * RESIDENCE_SPACE * 2) + 500;
-            temp_fence_x->points[1].y = (py * RESIDENCE_SPACE * 2) - 100;
-            
-            temp_fence_y->points[0].x = (px * RESIDENCE_SPACE * 2) + 1100;
-            temp_fence_y->points[0].y = (py * RESIDENCE_SPACE * 2) + 500;
-            
-            temp_fence_y->points[1].x = (px * RESIDENCE_SPACE * 2) - 100;
-            temp_fence_y->points[1].y = (py * RESIDENCE_SPACE * 2) + 500;
-            
-            py++;
-        }
-        px++;
-    }
 }
 
-void fence_draw(void)
+void game_draw(void)
 {
-    n_int count = 0;
-    while (count < 32)
-    {
-        fence_draw_each(&fences[count++]);
-    }
+    
 }
+
