@@ -63,7 +63,16 @@ shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_
 
 n_int shared_init(n_byte view, n_uint random)
 {
-    n_byte2   seed[4] = {0x343e, 0xf323, 0xed32, 0x32fa};
+    n_byte2   seed[4];
+    n_byte2   *seed_random = (n_byte2*)&random;
+    
+    seed[0] = seed_random[0];
+    seed[1] = seed_random[1];
+    seed[2] = seed_random[2];
+    seed[3] = seed_random[3];
+
+    game_init(seed);
+    
     enemy_init();
     ecomony_init(seed);
     
@@ -149,12 +158,11 @@ void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_i
     }
 
     boy_turn(turn_delta);
-    
     boy_move(move_delta);
-    house_draw_scene(dim_x, dim_y);
-
     boy_cycle();
     /*enemy_move();*/
+
+    game_draw_scene(dim_x, dim_y);
 }
 
 n_int shared_new(n_uint seed)

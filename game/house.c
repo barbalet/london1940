@@ -35,6 +35,9 @@
 
 #include "mushroom.h"
 
+static  noble_building buildings[64];
+
+
 static void house_transform(noble_building * building, n_vect2 * center, n_int direction)
 {
     n_int   loop_room = 0;
@@ -100,7 +103,7 @@ static void house_drawroom(noble_room * room)
 	}
 }
 
-void house_draw(noble_building * building)
+static void house_draw_each(noble_building * building)
 {
     n_int   loop_room = 0;
     while (loop_room < building->roomcount)
@@ -253,11 +256,8 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
     house_transform(building, center, math_random(seed) & 255);
 }
 
-
-static void house_draw_all(n_byte2 * seed)
+void house_init(n_byte2 * seed)
 {
-    noble_building buildings[64];
-    
     n_int count = 0;
     n_int px = -4;
     
@@ -268,43 +268,19 @@ static void house_draw_all(n_byte2 * seed)
         {
             n_vect2 local_center;
             noble_building * building = &buildings[count++];
-            
             vect2_populate(&local_center, (px * RESIDENCE_SPACE), (py * RESIDENCE_SPACE));
-
             house_create(building, seed, &local_center);
-            house_draw(building);
-
             py++;
         }
         px++;
     }
-    
-    road_init();
-    road_draw();
-    
-    fence_init();
-    fence_draw();
-
 }
 
-void house_draw_scene(n_int dim_x, n_int dim_y)
+void house_draw(void)
 {
-    gldraw_background_green();
-    if (gldraw_scene_done())
+    n_int count = 0;
+    while (count < 64)
     {
-        n_byte2  seed[2] = {0xf728, 0xe231};
-        
-        gldraw_start_display_list();
-        house_draw_all(seed);
-        gldraw_end_display_list();
+        house_draw_each(&buildings[count++]);
     }
-    else
-    {
-        n_vect2 center;
-        center.x = 0 - (dim_x >> 1);
-        center.y = 0 - (dim_y >> 1);
-        
-        gldraw_delta_move(&center, boy_location(), boy_facing());
-    }
-    gldraw_display_list();
 }

@@ -83,9 +83,7 @@ void boy_move(n_int forwards)
     translated_facing = (128+64+256 - boy_facing())&255;
     
     vect2_direction(&direction, translated_facing, 1);
-        
-    vect2_d(copy_location, &direction, forwards, (26880/20));
-    
+    vect2_d(copy_location, &direction, forwards, (26880/20));    
     vect2_subtract(&mushroom_boy.location_delta, copy_location, &local_location);
 }
 

@@ -35,13 +35,33 @@
 
 #include "mushroom.h"
 
-void game_init(void)
+void game_init(n_byte2 * seed)
 {
-    
+    house_init(seed);
+    road_init();
+    fence_init();
 }
 
-void game_draw(void)
+void game_draw_scene(n_int dim_x, n_int dim_y)
 {
-    
+    gldraw_background_green();
+    if (gldraw_scene_done())
+    {        
+        gldraw_start_display_list();
+        house_draw();
+        road_draw();
+        
+        fence_draw();
+        gldraw_end_display_list();
+    }
+    else
+    {
+        n_vect2 center;
+        center.x = 0 - (dim_x >> 1);
+        center.y = 0 - (dim_y >> 1);
+        
+        gldraw_delta_move(&center, boy_location(), boy_facing());
+    }
+    gldraw_display_list();
 }
 
