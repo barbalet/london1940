@@ -73,6 +73,7 @@ typedef struct{
     n_vect2 location_delta;
     n_int   facing;
     n_int   facing_delta;
+    n_int   zooming;
 }noble_agent;
 
 void game_init(n_byte2 * seed);
@@ -99,10 +100,11 @@ void house_draw(void);
 void boy_init(void);
 
 n_vect2 * boy_location(void);
-n_vect2 * boy_location_delta(void);
 
 n_int boy_facing(void);
-n_int boy_turn_delta(void);
+
+void boy_zoom(n_int zoom);
+n_int boy_zooming(void);
 
 void boy_turn(n_int delta);
 void boy_move(n_int forwards);

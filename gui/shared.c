@@ -134,12 +134,16 @@ void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_i
 {
     n_int turn_delta = 0;
     n_int move_delta = 0;
+    n_int zoomed_delta = 0;
     
     if((key_down == 1) && (key_identification == fIdentification))
     {
-        if ((key_value > 27) && (key_value < 32))
+        n_int mod_key = key_value & 2047;
+        n_int shift_key = key_value >> 11;
+        
+        if ((mod_key > 27) && (mod_key < 32))
         {
-            switch (key_value)
+            switch (mod_key)
             {
                 case 28:
                     turn_delta --;
@@ -148,16 +152,31 @@ void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_i
                     turn_delta ++;
                     break;
                 case 30:
-                    move_delta ++;
+                    if (shift_key)
+                    {
+                        zoomed_delta++;
+                    }
+                    else
+                    {
+                        move_delta ++;
+                    }
                     break;
                 default:
-                    move_delta --;
+                    if (shift_key)
+                    {
+                        zoomed_delta--;
+                    }
+                    else
+                    {
+                        move_delta --;
+                    }
                     break;
             }
         }
     }
 
     boy_turn(turn_delta);
+    boy_zoom(zoomed_delta);
     boy_move(move_delta);
     boy_cycle();
     /*enemy_move();*/

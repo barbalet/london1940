@@ -42,16 +42,12 @@ void boy_init(void)
     mushroom_boy.location.x = 0;
     mushroom_boy.location.y = 0;
     mushroom_boy.facing = 0;
+    mushroom_boy.zooming = 0;
 }
 
 n_vect2 * boy_location(void)
 {
     return &mushroom_boy.location;
-}
-
-n_vect2 * boy_location_delta(void)
-{
-    return &mushroom_boy.location_delta;
 }
 
 
@@ -60,14 +56,23 @@ n_int boy_facing(void)
     return mushroom_boy.facing;
 }
 
-n_int boy_turn_delta(void)
-{
-    return mushroom_boy.facing_delta;
-}
-
 void boy_turn(n_int delta)
 {
     mushroom_boy.facing_delta += delta;
+}
+
+void boy_zoom(n_int zoom)
+{
+    n_int total_zoom = mushroom_boy.zooming + zoom;
+    if ((total_zoom > -20) && (total_zoom <40))
+    {
+        mushroom_boy.zooming = total_zoom;
+    }
+}
+
+n_int boy_zooming(void)
+{
+    return mushroom_boy.zooming;
 }
 
 void boy_move(n_int forwards)
