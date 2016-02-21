@@ -93,7 +93,27 @@ n_int shared_menu(n_int menuValue)
 
 void shared_rotate(n_double num, n_byte wwind)
 {
-    
+    n_int integer_rotation_256 = (n_int)((num * 256) / 360);
+    boy_turn(integer_rotation_256);
+}
+
+
+void shared_delta(n_double delta_x, n_double delta_y, n_byte wwind)
+{
+    if (delta_y > 0)
+    {
+        boy_move(-1);
+    }
+    if (delta_y < 0)
+    {
+        boy_move(1);
+    }
+}
+
+void shared_zoom(n_double num, n_byte wwind)
+{
+    n_int integer_zoom = (n_int)(num * 100);
+    boy_zoom(integer_zoom);
 }
 
 void shared_keyReceived(n_byte2 value, n_byte fIdentification)

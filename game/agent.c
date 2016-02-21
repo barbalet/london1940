@@ -64,7 +64,7 @@ void boy_turn(n_int delta)
 void boy_zoom(n_int zoom)
 {
     n_int total_zoom = mushroom_boy.zooming + zoom;
-    if ((total_zoom > -20) && (total_zoom <40))
+    if ((total_zoom > -20) && (total_zoom < 40))
     {
         mushroom_boy.zooming = total_zoom;
     }
