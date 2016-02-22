@@ -35,7 +35,7 @@
 
 #include "mushroom.h"
 
-static noble_fence    fences[32];
+static noble_fence    fences[8+16+8];
 
 
 void fence_draw_each(noble_fence * fence)
@@ -53,24 +53,38 @@ void fence_init(void)
     n_int px = -2;
     while (px < 2)
     {
+        n_int py = -1;
+        while (py < 1)
+        {
+            noble_fence * temp_fence_x = &fences[count++];
+            
+            temp_fence_x->points[0].x = (py * RESIDENCE_SPACE * 4) - 250;
+            temp_fence_x->points[0].y = (px * RESIDENCE_SPACE * 2) + 400;
+            
+            temp_fence_x->points[1].x = (py * RESIDENCE_SPACE * 4) + 2650;
+            temp_fence_x->points[1].y = (px * RESIDENCE_SPACE * 2) + 400;
+            
+            py++;
+        }
+        px++;
+    }
+    
+    px = -4;
+    while (px < 4)
+    {
         n_int py = -2;
         while (py < 2)
         {
+            if (((px+4) & 3) != 3)
+            {
             noble_fence * temp_fence_x = &fences[count++];
-            noble_fence * temp_fence_y = &fences[count++];
             
-            temp_fence_x->points[0].x = (px * RESIDENCE_SPACE * 2) + 500;
-            temp_fence_x->points[0].y = (py * RESIDENCE_SPACE * 2) + 1100;
-            
-            temp_fence_x->points[1].x = (px * RESIDENCE_SPACE * 2) + 500;
-            temp_fence_x->points[1].y = (py * RESIDENCE_SPACE * 2) - 100;
-            
-            temp_fence_y->points[0].x = (px * RESIDENCE_SPACE * 2) + 1100;
-            temp_fence_y->points[0].y = (py * RESIDENCE_SPACE * 2) + 500;
-            
-            temp_fence_y->points[1].x = (px * RESIDENCE_SPACE * 2) - 100;
-            temp_fence_y->points[1].y = (py * RESIDENCE_SPACE * 2) + 500;
-            
+                temp_fence_x->points[0].y = (py * RESIDENCE_SPACE * 2) - 250;
+                temp_fence_x->points[0].x = (px * RESIDENCE_SPACE * 1) + 400;
+                
+                temp_fence_x->points[1].y = (py * RESIDENCE_SPACE * 2) + 1050;
+                temp_fence_x->points[1].x = (px * RESIDENCE_SPACE * 1) + 400;
+            }
             py++;
         }
         px++;

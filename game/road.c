@@ -67,13 +67,13 @@ void road_init(void)
         temp_road->points[0].x = (px * RESIDENCE_SPACE * 4) - 500;
         temp_road->points[0].y = 0 - (RESIDENCE_SPACE * 4) - 500;
         
-        temp_road->points[1].x = (px * RESIDENCE_SPACE * 4)-300;
+        temp_road->points[1].x = (px * RESIDENCE_SPACE * 4) - 300;
         temp_road->points[1].y = 0 - (RESIDENCE_SPACE * 4) - 500;
         
-        temp_road->points[2].x = (px * RESIDENCE_SPACE * 4)-300;
+        temp_road->points[2].x = (px * RESIDENCE_SPACE * 4) - 300;
         temp_road->points[2].y = (RESIDENCE_SPACE * 4) - 300;
         
-        temp_road->points[3].x = (px * RESIDENCE_SPACE * 4)-500;
+        temp_road->points[3].x = (px * RESIDENCE_SPACE * 4) - 500;
         temp_road->points[3].y = (RESIDENCE_SPACE * 4) - 300;
         
         px++;
