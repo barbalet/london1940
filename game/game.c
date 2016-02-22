@@ -42,6 +42,26 @@ void game_init(n_byte2 * seed)
     fence_init();
 }
 
+static void game_grid(void)
+{
+    n_int loop = -3200;
+    n_vect2 horizontal_start = {-3200, -3200}, horizontal_end = {-3200, 3200};
+    n_vect2 vertical_start = {-3200, -3200}, vertical_end = {3200, -3200};
+    gldraw_black();
+    gldraw_thin_line();
+    while (loop < 3200)
+    {
+        horizontal_start.x = loop;
+        horizontal_end.x = loop;
+        vertical_start.y = loop;
+        vertical_end.y = loop;
+        gldraw_line(&horizontal_start, &horizontal_end);
+        gldraw_line(&vertical_start, &vertical_end);
+        
+        loop += 100;
+    }
+}
+
 void game_draw_scene(n_int dim_x, n_int dim_y)
 {
     gldraw_background_green();
@@ -52,6 +72,7 @@ void game_draw_scene(n_int dim_x, n_int dim_y)
         road_draw();
         
         fence_draw();
+        game_grid();
         gldraw_end_display_list();
     }
     else

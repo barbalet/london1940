@@ -59,7 +59,7 @@ void road_init(void)
         px++;
     }
     
-    px = -2;
+    px = -1;
     
     while (px < 2)
     {
