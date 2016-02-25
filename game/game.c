@@ -58,7 +58,7 @@ static void game_grid(void)
         gldraw_line(&horizontal_start, &horizontal_end);
         gldraw_line(&vertical_start, &vertical_end);
         
-        loop += 400;
+        loop += 100;
     }
 }
 
@@ -72,7 +72,7 @@ void game_draw_scene(n_int dim_x, n_int dim_y)
         road_draw();
         
         fence_draw();
-        /*game_grid();*/
+        game_grid();
         gldraw_end_display_list();
     }
     else
