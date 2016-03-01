@@ -148,32 +148,26 @@ n_int ecomony_init(n_byte2 * seeds)
     return 0;
 }
 
-/*static n_int switcher = 0;*/
-
-void economy_draw(n_int px, n_int py)
+static n_int offset_map_x(n_vect2 * point)
 {
-    /*
-    economy_micro(map);
+    n_int  p0 = map[point->x + (point->y * MAP_DIMENSION)];
+    n_int  p1 = map[((point->x + 1) & (MAP_DIMENSION - 1)) + (point->y * MAP_DIMENSION)];
 
-    switch (switcher)
-    {
-        case 0:
-            economy_micro(map);
-            break;
-        case 1:
-            economy_micro(flat);
-            break;
-        case 2:
-            economy_micro(economy);
-            break;
-        case 3:
-            economy_micro(sum);
-            break;
-        default:
-            economy_micro(road);
-            switcher = -1;
-            break;
-    }
-    switcher++;
- */
+    return p0 - p1;
 }
+
+static n_int offset_map_y(n_vect2 * point)
+{
+    n_int  p0 = map[point->x + (point->y * MAP_DIMENSION)];
+    n_int  p1 = map[point->x + (((point->x + 1) & (MAP_DIMENSION - 1)) * MAP_DIMENSION)];
+    return p0 - p1;
+}
+
+void offset_map(n_vect2 * offset, n_vect2 * point)
+{
+    offset->x = offset_map_x(point) * 10;
+    offset->y = offset_map_y(point) * 10;
+}
+
+
+

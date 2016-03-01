@@ -109,3 +109,6 @@ n_int boy_zooming(void);
 void boy_turn(n_int delta);
 void boy_move(n_int forwards);
 void boy_cycle(void);
+
+void offset_map(n_vect2 * offset, n_vect2 * point);
+

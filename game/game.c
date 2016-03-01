@@ -42,6 +42,7 @@ void game_init(n_byte2 * seed)
     fence_init();
 }
 
+/*
 static void game_grid(void)
 {
     n_int loop = -4000;
@@ -61,6 +62,60 @@ static void game_grid(void)
         loop += 100;
     }
 }
+*/
+
+static void game_grid(void)
+{
+    n_int loop_y = 0;
+    while (loop_y < 40)
+    {
+        
+        n_int loop_x = 0;
+        while (loop_x < 40)
+        {
+            n_vect2 offset00;
+            n_vect2 offset01;
+            n_vect2 offset10;
+            n_vect2 location;
+
+            location.x = loop_x;
+            location.y = loop_y;
+            
+            offset_map(&offset00, &location);
+            
+            location.x = loop_x + 1;
+            location.y = loop_y;
+            
+            offset_map(&offset10, &location);
+
+            location.x = loop_x;
+            location.y = loop_y + 1;
+            
+            offset_map(&offset01, &location);
+
+            location.x = loop_x * 100;
+            location.y = loop_y * 100;
+            
+            vect2_delta(&offset00, &location);
+            
+            location.x += 100;
+            
+            vect2_delta(&offset10, &location);
+            
+            location.x -= 100;
+            location.y += 100;
+
+            vect2_delta(&offset01, &location);
+            
+            gldraw_line(&offset00, &offset10);
+            gldraw_line(&offset00, &offset01);
+            
+            loop_x ++;
+        }
+        
+        loop_y ++;
+    }
+}
 
 void game_draw_scene(n_int dim_x, n_int dim_y)
 {
@@ -68,10 +123,10 @@ void game_draw_scene(n_int dim_x, n_int dim_y)
     if (gldraw_scene_done())
     {        
         gldraw_start_display_list();
-        house_draw();
+/*        house_draw();
         road_draw();
         
-        fence_draw();
+        fence_draw();*/
         game_grid();
         gldraw_end_display_list();
     }
