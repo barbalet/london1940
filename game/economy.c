@@ -165,8 +165,8 @@ static n_int offset_map_y(n_vect2 * point)
 
 void offset_map(n_vect2 * offset, n_vect2 * point)
 {
-    offset->x = offset_map_x(point) * 10;
-    offset->y = offset_map_y(point) * 10;
+    offset->x = offset_map_x(point) * 5;
+    offset->y = offset_map_y(point) * 5;
 }
 
 
