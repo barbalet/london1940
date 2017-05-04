@@ -123,11 +123,11 @@ void game_draw_scene(n_int dim_x, n_int dim_y)
     if (gldraw_scene_done())
     {        
         gldraw_start_display_list();
-/*        house_draw();
+        house_draw();
         road_draw();
         
-        fence_draw();*/
-        game_grid();
+        fence_draw();
+        /*game_grid();*/
         gldraw_end_display_list();
     }
     else
