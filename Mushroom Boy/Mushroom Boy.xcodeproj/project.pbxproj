@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A4237E11C6C51F6001C3886 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A4237E01C6C51F6001C3886 /* game.c */; };
+		4ABA181E1F5E643B00DFD769 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA181D1F5E643B00DFD769 /* tree.c */; };
 		4ADFDFA51C41205800E633EF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADFDFA41C41205800E633EF /* OpenGL.framework */; };
 		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
 		5A0D60D319567F2000090DAE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C319567F2000090DAE /* main.m */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		4A4237E01C6C51F6001C3886 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
+		4ABA181D1F5E643B00DFD769 /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
 		4ADFDFA41C41205800E633EF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5A0D60C219567F2000090DAE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				5A6AD3F61AE0D493008CB27B /* agent.c */,
 				5A2DCD74195F5F6100262A58 /* economy.c */,
 				5A4C2FFA1958D761009310E4 /* enemy.c */,
+				4ABA181D1F5E643B00DFD769 /* tree.c */,
 				5A0D60E119567F8E00090DAE /* house.c */,
 				5A0D60E219567F8E00090DAE /* mushroom.h */,
 			);
@@ -364,6 +367,7 @@
 				7B0542271C3864C00079EF20 /* road.c in Sources */,
 				5A2DCD75195F5F6100262A58 /* economy.c in Sources */,
 				5A0D60D819567F2000090DAE /* interpret.c in Sources */,
+				4ABA181E1F5E643B00DFD769 /* tree.c in Sources */,
 				5A0D60DD19567F2000090DAE /* parse.c in Sources */,
 				5A0D60D419567F2000090DAE /* NobleMacView.m in Sources */,
 				5A0D60DA19567F2000090DAE /* land.c in Sources */,

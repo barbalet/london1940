@@ -46,6 +46,9 @@
 #define POINTS_PER_ROAD             (4)
 #define POINTS_PER_FENCE            (2)
 
+#define POINTS_PER_TREE             (16)
+
+#define TREE_SPACE                  (400)
 #define RESIDENCE_SPACE             (800)
 
 typedef struct{
@@ -60,6 +63,12 @@ typedef struct{
     n_vect2  points[POINTS_PER_ROOM];
     n_byte   window;
 }noble_room;
+
+typedef struct{
+    n_int    points[POINTS_PER_TREE];
+    n_int    radius;
+    n_vect2  center;
+}noble_tree;
 
 typedef struct{
     noble_room   room[MAX_ROOMS];
@@ -96,6 +105,9 @@ void fence_draw(void);
 
 void house_init(n_byte2 * seed);
 void house_draw(void);
+
+void tree_init(n_byte2 * seed);
+void tree_draw(void);
 
 void boy_init(void);
 
