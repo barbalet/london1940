@@ -40,12 +40,12 @@ static  noble_tree trees[256];
 void tree_create(noble_tree * tree, n_byte2 * seed, n_vect2 * center)
 {
     n_int loop = 0;
-    n_int wandering = (math_random(seed) % 5) - 2;
+    n_int wandering = (math_random(seed) % 13) - 6;
     
     while (loop < POINTS_PER_TREE)
     {
-        wandering += (math_random(seed) % 5) - 2;
-        tree->points[loop] = 300-wandering;
+        wandering += (math_random(seed) % 13) - 6;
+        tree->points[loop] = 60-wandering;
         loop++;
     }
     tree->center.x = center->x;
@@ -57,6 +57,7 @@ void tree_create(noble_tree * tree, n_byte2 * seed, n_vect2 * center)
 static void tree_draw_each(noble_tree * tree)
 {
     n_vect2 quad[4];
+    n_vect2 unit[2] = {1, 1};
     n_int   loop = 0;
     gldraw_lightgreen();
     
@@ -65,11 +66,16 @@ static void tree_draw_each(noble_tree * tree)
         vect2_copy(&quad[0], &tree->center);
         
         vect2_direction(&quad[1], loop * 16, 600);
+        vect2_multiplier(&quad[1], &quad[1], (n_vect2 *)&unit, tree->points[loop&15] * tree->radius, 360);
+        
         loop++;
         vect2_direction(&quad[2], loop * 16, 600);
+        vect2_multiplier(&quad[2], &quad[2], (n_vect2 *)&unit, tree->points[loop&15] * tree->radius, 360);
+
         loop++;
         vect2_direction(&quad[3], loop * 16, 600);
-        
+        vect2_multiplier(&quad[3], &quad[3], (n_vect2 *)&unit, tree->points[loop&15] * tree->radius, 360);
+
         vect2_subtract(&quad[1], &quad[0], &quad[1]);
         vect2_subtract(&quad[2], &quad[0], &quad[2]);
         vect2_subtract(&quad[3], &quad[0], &quad[3]);
@@ -96,12 +102,11 @@ static n_int tree_offset(n_byte2 * seed)
 void tree_init(n_byte2 * seed)
 {
     n_int count = 0;
-    n_int px = -8;
-    
-    while (px < 8)
+    n_int px = -9;
+    while (px < 7)
     {
-        n_int py = -8;
-        while (py < 8)
+        n_int py = -9;
+        while (py < 7)
         {
             n_vect2 local_center;
             noble_tree * tree = &trees[count++];
