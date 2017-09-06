@@ -46,7 +46,7 @@
 #define POINTS_PER_ROAD             (4)
 #define POINTS_PER_FENCE            (2)
 
-#define POINTS_PER_TREE             (16)
+#define POINTS_PER_TREE             (32)
 
 #define TREE_SPACE                  (400)
 #define RESIDENCE_SPACE             (800)
@@ -66,6 +66,7 @@ typedef struct{
 
 typedef struct{
     n_int    points[POINTS_PER_TREE];
+    n_int    inner[POINTS_PER_TREE];
     n_int    radius;
     n_vect2  center;
 }noble_tree;

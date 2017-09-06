@@ -125,12 +125,13 @@ void game_draw_scene(n_int dim_x, n_int dim_y)
     {        
         gldraw_start_display_list();
 
-        tree_draw();
 
         house_draw();
         road_draw();
         
         fence_draw();
+        tree_draw();
+
         /*game_grid();*/
         gldraw_end_display_list();
     }
