@@ -66,7 +66,6 @@ typedef struct{
 
 typedef struct{
     n_int    points[POINTS_PER_TREE];
-    n_int    inner[POINTS_PER_TREE];
     n_int    radius;
     n_vect2  center;
 }noble_tree;
