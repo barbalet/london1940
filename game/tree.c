@@ -64,7 +64,7 @@ void tree_create(noble_tree * tree, n_byte2 * seed, n_vect2 * center)
 }
 
 
-static void tree_draw_each(noble_tree * tree)
+void tree_draw(noble_tree * tree)
 {
     n_vect2 quad[4];
     n_vect2 unit[2] = {1, 1};
@@ -99,35 +99,26 @@ static void tree_draw_each(noble_tree * tree)
     
 }
 
-
-void tree_draw(void)
-{
-    n_int count = 0;
-    while (count < 256)
-    {
-        tree_draw_each(&trees[count++]);
-    }
-}
-
 static n_int tree_offset(n_byte2 * seed)
 {
     return (math_random(seed) % 61) - 30;
 }
 
-void tree_init(n_byte2 * seed)
+void tree_init(noble_tree * trees, n_byte2 * seed, n_vect2 * edge)
 {
     n_int count = 0;
-    n_int px = -9;
-    while (px < 7)
+    n_int px = -1;
+    while (px < 1)
     {
-        n_int py = -9;
-        while (py < 7)
+        n_int py = -1;
+        while (py < 1)
         {
             n_vect2 local_center;
             noble_tree * tree = &trees[count++];
             vect2_populate(&local_center,
                            (px * TREE_SPACE)+(TREE_SPACE/2)+tree_offset(seed),
                            (py * TREE_SPACE)+(TREE_SPACE/2)+tree_offset(seed));
+            vect2_delta(&local_center, edge);
             tree_create(tree, seed, &local_center);
             py++;
         }

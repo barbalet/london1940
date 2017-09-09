@@ -111,6 +111,22 @@ static void house_draw_each(noble_building * building)
         house_drawroom(&building->room[loop_room]);
         loop_room++;
     }
+    if (building->tree_mod & 1)
+    {
+        tree_draw(&building->trees[0]);
+    }
+    if (building->tree_mod & 2)
+    {
+        tree_draw(&building->trees[1]);
+    }
+    if (building->tree_mod & 4)
+    {
+        tree_draw(&building->trees[2]);
+    }
+    if (building->tree_mod & 8)
+    {
+        tree_draw(&building->trees[3]);
+    }
 }
 
 /* 1=north, 2=south, 4=east, 8=west */
@@ -270,6 +286,11 @@ void house_init(n_byte2 * seed)
             noble_building * building = &buildings[count++];
             vect2_populate(&local_center, (px * RESIDENCE_SPACE), (py * RESIDENCE_SPACE));
             house_create(building, seed, &local_center);
+            
+            building->tree_mod = math_random(seed) & 15;
+            
+            tree_init(building->trees, seed, &local_center);
+            
             py++;
         }
         px++;

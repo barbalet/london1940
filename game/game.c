@@ -38,7 +38,6 @@
 void game_init(n_byte2 * seed)
 {
     house_init(seed);
-    tree_init(seed);
     road_init();
     fence_init();
 }
@@ -50,12 +49,11 @@ void game_draw_scene(n_int dim_x, n_int dim_y)
     {        
         gldraw_start_display_list();
 
+        road_draw();
 
         house_draw();
-        road_draw();
         
         fence_draw();
-        tree_draw();
 
         /*game_grid();*/
         gldraw_end_display_list();

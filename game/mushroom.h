@@ -75,6 +75,8 @@ typedef struct{
     n_int        house[GENETICS_COUNT];
     n_int        roomcount;
     n_byte       rotation;
+    noble_tree   trees[4];
+    n_byte       tree_mod;
 }noble_building;
 
 typedef struct{
@@ -106,8 +108,8 @@ void fence_draw(void);
 void house_init(n_byte2 * seed);
 void house_draw(void);
 
-void tree_init(n_byte2 * seed);
-void tree_draw(void);
+void tree_init(noble_tree * trees, n_byte2 * seed, n_vect2 * edge);
+void tree_draw(noble_tree * tree);
 
 void boy_init(void);
 
