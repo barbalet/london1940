@@ -35,47 +35,82 @@
 
 #include "mushroom.h"
 
-static noble_road     roads[9];
+static noble_road     roads[5];
 
 
-void road_init(void)
+void road_init(n_byte rotate)
 {
-    n_int px = -2;
+    n_int px = 0;
     n_int count = 0;
     while (px < 3)
     {
         noble_road * temp_road = &roads[count++];
-        temp_road->points[0].x = 0 - (RESIDENCE_SPACE * 4) - 500;
-        temp_road->points[0].y = (px * RESIDENCE_SPACE * 2) - 500;
         
-        temp_road->points[1].x = 0 - (RESIDENCE_SPACE * 4) - 500;
-        temp_road->points[1].y = (px * RESIDENCE_SPACE * 2)-300;
-        
-        temp_road->points[2].x = (RESIDENCE_SPACE * 4) - 300;
-        temp_road->points[2].y = (px * RESIDENCE_SPACE * 2)-300;
-        
-        temp_road->points[3].x = (RESIDENCE_SPACE * 4) - 300;
-        temp_road->points[3].y = (px * RESIDENCE_SPACE * 2)-500;
+        if (rotate)
+        {
+            temp_road->points[0].x = (px * RESIDENCE_SPACE * 2) - 500;
+            temp_road->points[0].y = 0 - 500;
+
+            temp_road->points[1].x = (px * RESIDENCE_SPACE * 2)-300;
+            temp_road->points[1].y = 0 - 500;
+
+            temp_road->points[2].x = (px * RESIDENCE_SPACE * 2)-300;
+            temp_road->points[2].y = (RESIDENCE_SPACE * 4) - 300;
+
+            temp_road->points[3].x = (px * RESIDENCE_SPACE * 2)-500;
+            temp_road->points[3].y = (RESIDENCE_SPACE * 4) - 300;
+        }
+        else
+        {
+            temp_road->points[0].x = 0 - 500;
+            temp_road->points[0].y = (px * RESIDENCE_SPACE * 2) - 500;
+            
+            temp_road->points[1].x = 0 - 500;
+            temp_road->points[1].y = (px * RESIDENCE_SPACE * 2)-300;
+            
+            temp_road->points[2].x = (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].y = (px * RESIDENCE_SPACE * 2)-300;
+            
+            temp_road->points[3].x = (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[3].y = (px * RESIDENCE_SPACE * 2)-500;
+        }
         px++;
     }
     
-    px = -1;
+    px = 0;
     
     while (px < 2)
     {
         noble_road * temp_road = &roads[count++];
-        temp_road->points[0].x = (px * RESIDENCE_SPACE * 4) - 500;
-        temp_road->points[0].y = 0 - (RESIDENCE_SPACE * 4) - 500;
         
-        temp_road->points[1].x = (px * RESIDENCE_SPACE * 4) - 300;
-        temp_road->points[1].y = 0 - (RESIDENCE_SPACE * 4) - 500;
-        
-        temp_road->points[2].x = (px * RESIDENCE_SPACE * 4) - 300;
-        temp_road->points[2].y = (RESIDENCE_SPACE * 4) - 300;
-        
-        temp_road->points[3].x = (px * RESIDENCE_SPACE * 4) - 500;
-        temp_road->points[3].y = (RESIDENCE_SPACE * 4) - 300;
-        
+        if (rotate)
+        {
+            temp_road->points[0].x = 0 - 500;
+            temp_road->points[0].y = (px * RESIDENCE_SPACE * 4) - 500;
+            
+            temp_road->points[1].x = 0 - 500;
+            temp_road->points[1].y = (px * RESIDENCE_SPACE * 4) - 300;
+            
+            temp_road->points[2].x = (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].y = (px * RESIDENCE_SPACE * 4) - 300;
+            
+            temp_road->points[3].x = (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[3].y = (px * RESIDENCE_SPACE * 4) - 500;
+        }
+        else
+        {
+            temp_road->points[0].x = (px * RESIDENCE_SPACE * 4) - 500;
+            temp_road->points[0].y = 0 - 500;
+            
+            temp_road->points[1].x = (px * RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[1].y = 0 - 500;
+            
+            temp_road->points[2].x = (px * RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].y = (RESIDENCE_SPACE * 4) - 300;
+            
+            temp_road->points[3].x = (px * RESIDENCE_SPACE * 4) - 500;
+            temp_road->points[3].y = (RESIDENCE_SPACE * 4) - 300;
+        }
         px++;
     }
 }
@@ -126,7 +161,7 @@ void road_draw(void)
 {
     n_int px = 0;
     
-    while (px < 9)
+    while (px < 5)
     {
         road_draw_each(&roads[px]);
         px++;
@@ -134,7 +169,7 @@ void road_draw(void)
     
     px = 0;
     
-    while (px < 9)
+    while (px < 5)
     {
         road_draw_marking(&roads[px]);
         px++;

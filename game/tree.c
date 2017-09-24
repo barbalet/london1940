@@ -35,8 +35,6 @@
 
 #include "mushroom.h"
 
-static  noble_tree trees[256];
-
 void tree_create(noble_tree * tree, n_byte2 * seed, n_vect2 * center)
 {
     n_int loop = 0;

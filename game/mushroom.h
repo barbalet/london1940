@@ -80,6 +80,17 @@ typedef struct{
 }noble_building;
 
 typedef struct{
+    noble_building house[16];
+    noble_fence    fence[8];
+    noble_road     road[5];
+    n_byte         rotation;
+}noble_twoblock;
+
+typedef struct{
+    noble_twoblock twoblock[16];
+}noble_neighborhood;
+
+typedef struct{
     n_vect2 location;
     n_vect2 location_delta;
     n_int   facing;
@@ -87,9 +98,12 @@ typedef struct{
     n_int   zooming;
 }noble_agent;
 
+
+void neighborhood_init(n_byte2 * seed);
+void neighborhood_draw(void);
+
 void game_init(n_byte2 * seed);
 void game_draw_scene(n_int dim_x, n_int dim_y);
-
 
 void house_vertex(n_vect2 * point);
 
@@ -99,10 +113,10 @@ void enemy_move(void);
 n_int ecomony_init(n_byte2 * seeds);
 void  economy_draw(n_int px, n_int py);
 
-void road_init(void);
+void road_init(n_byte rotate);
 void road_draw(void);
 
-void fence_init(void);
+void fence_init(n_byte rotate);
 void fence_draw(void);
 
 void house_init(n_byte2 * seed);

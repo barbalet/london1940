@@ -35,7 +35,7 @@
 
 #include "mushroom.h"
 
-static noble_fence    fences[8+16+8];
+static noble_fence    fences[8];
 
 
 void fence_draw_each(noble_fence * fence)
@@ -46,44 +46,67 @@ void fence_draw_each(noble_fence * fence)
     gldraw_thin_line();
 }
 
-void fence_init(void)
+void fence_init(n_byte rotate)
 {
     n_int count = 0;
     
-    n_int px = -2;
+    n_int px = 0;
     while (px < 2)
     {
-        n_int py = -1;
+        n_int py = 0;
         while (py < 1)
         {
             noble_fence * temp_fence_x = &fences[count++];
             
-            temp_fence_x->points[0].x = (py * RESIDENCE_SPACE * 4) - 250;
-            temp_fence_x->points[0].y = (px * RESIDENCE_SPACE * 2) + 400;
-            
-            temp_fence_x->points[1].x = (py * RESIDENCE_SPACE * 4) + 2650;
-            temp_fence_x->points[1].y = (px * RESIDENCE_SPACE * 2) + 400;
+            if (rotate)
+            {
+                temp_fence_x->points[0].y = (py * RESIDENCE_SPACE * 4) - 250;
+                temp_fence_x->points[0].x = (px * RESIDENCE_SPACE * 2) + 400;
+                
+                temp_fence_x->points[1].y = (py * RESIDENCE_SPACE * 4) + 2650;
+                temp_fence_x->points[1].x = (px * RESIDENCE_SPACE * 2) + 400;
+            }
+            else
+            {
+                temp_fence_x->points[0].x = (py * RESIDENCE_SPACE * 4) - 250;
+                temp_fence_x->points[0].y = (px * RESIDENCE_SPACE * 2) + 400;
+                
+                temp_fence_x->points[1].x = (py * RESIDENCE_SPACE * 4) + 2650;
+                temp_fence_x->points[1].y = (px * RESIDENCE_SPACE * 2) + 400;
+            }
             
             py++;
         }
         px++;
     }
-    
-    px = -4;
+    px = 0;
     while (px < 4)
     {
-        n_int py = -2;
+        n_int py = 0;
         while (py < 2)
         {
             if (((px+4) & 3) != 3)
             {
-            noble_fence * temp_fence_x = &fences[count++];
+                noble_fence * temp_fence_x = &fences[count++];
             
-                temp_fence_x->points[0].y = (py * RESIDENCE_SPACE * 2) - 250;
-                temp_fence_x->points[0].x = (px * RESIDENCE_SPACE * 1) + 400;
+                if (rotate)
+                {
+                    temp_fence_x->points[0].y = (px * RESIDENCE_SPACE * 1) + 400;
+                    temp_fence_x->points[0].x = (py * RESIDENCE_SPACE * 2) - 250;
+                    
+                    temp_fence_x->points[1].y = (px * RESIDENCE_SPACE * 1) + 400;
+                    temp_fence_x->points[1].x = (py * RESIDENCE_SPACE * 2) + 1050;
+                }
+                else
+                {
+                    temp_fence_x->points[0].x = (px * RESIDENCE_SPACE * 1) + 400;
+                    temp_fence_x->points[0].y = (py * RESIDENCE_SPACE * 2) - 250;
+                    
+                    temp_fence_x->points[1].x = (px * RESIDENCE_SPACE * 1) + 400;
+                    temp_fence_x->points[1].y = (py * RESIDENCE_SPACE * 2) + 1050;
+                }
                 
-                temp_fence_x->points[1].y = (py * RESIDENCE_SPACE * 2) + 1050;
-                temp_fence_x->points[1].x = (px * RESIDENCE_SPACE * 1) + 400;
+
             }
             py++;
         }
@@ -94,7 +117,7 @@ void fence_init(void)
 void fence_draw(void)
 {
     n_int count = 0;
-    while (count < 32)
+    while (count < 8)
     {
         fence_draw_each(&fences[count++]);
     }

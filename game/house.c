@@ -37,7 +37,6 @@
 
 static  noble_building buildings[64];
 
-
 static void house_transform(noble_building * building, n_vect2 * center, n_int direction)
 {
     n_int   loop_room = 0;
@@ -275,11 +274,11 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
 void house_init(n_byte2 * seed)
 {
     n_int count = 0;
-    n_int px = -4;
+    n_int px = 0;
     
     while (px < 4)
     {
-        n_int py = -4;
+        n_int py = 0;
         while (py < 4)
         {
             n_vect2 local_center;
@@ -300,7 +299,7 @@ void house_init(n_byte2 * seed)
 void house_draw(void)
 {
     n_int count = 0;
-    while (count < 64)
+    while (count < 16)
     {
         house_draw_each(&buildings[count++]);
     }

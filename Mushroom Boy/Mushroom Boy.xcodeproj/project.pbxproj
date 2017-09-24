@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4A4237E11C6C51F6001C3886 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A4237E01C6C51F6001C3886 /* game.c */; };
+		4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BBC1F782C1A0080F27F /* twoblock.c */; };
+		4A916BC11F783E180080F27F /* neighborhood.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BC01F783E180080F27F /* neighborhood.c */; };
 		4ABA181E1F5E643B00DFD769 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA181D1F5E643B00DFD769 /* tree.c */; };
 		4ADFDFA51C41205800E633EF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADFDFA41C41205800E633EF /* OpenGL.framework */; };
 		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
@@ -52,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		4A4237E01C6C51F6001C3886 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
+		4A916BBC1F782C1A0080F27F /* twoblock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twoblock.c; sourceTree = "<group>"; };
+		4A916BC01F783E180080F27F /* neighborhood.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = neighborhood.c; sourceTree = "<group>"; };
 		4ABA181D1F5E643B00DFD769 /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
 		4ADFDFA41C41205800E633EF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 			children = (
 				4A4237E01C6C51F6001C3886 /* game.c */,
 				7B0542241C3864C00079EF20 /* fence.c */,
+				4A916BBC1F782C1A0080F27F /* twoblock.c */,
+				4A916BC01F783E180080F27F /* neighborhood.c */,
 				7B0542251C3864C00079EF20 /* road.c */,
 				5A6AD3F61AE0D493008CB27B /* agent.c */,
 				5A2DCD74195F5F6100262A58 /* economy.c */,
@@ -366,6 +372,7 @@
 				5A6AD3F71AE0D493008CB27B /* agent.c in Sources */,
 				7B0542271C3864C00079EF20 /* road.c in Sources */,
 				5A2DCD75195F5F6100262A58 /* economy.c in Sources */,
+				4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */,
 				5A0D60D819567F2000090DAE /* interpret.c in Sources */,
 				4ABA181E1F5E643B00DFD769 /* tree.c in Sources */,
 				5A0D60DD19567F2000090DAE /* parse.c in Sources */,
@@ -380,6 +387,7 @@
 				5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */,
 				5A0D60D619567F2000090DAE /* compress.c in Sources */,
 				7B0542261C3864C00079EF20 /* fence.c in Sources */,
+				4A916BC11F783E180080F27F /* neighborhood.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
