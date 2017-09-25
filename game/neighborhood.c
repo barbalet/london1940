@@ -35,14 +35,35 @@
 
 #include "mushroom.h"
 
-noble_twoblock twoblock;
+noble_twoblock twoblock[36];
 
 void neighborhood_init(n_byte2 * seed, n_vect2 * location)
 {
-    twoblock_init(seed, location, &twoblock);
+    n_int   count = 0;
+    n_int   py = -3;
+    while (py < 3)
+    {
+        n_int px = -3;
+        while (px < 3)
+        {
+            n_vect2 additional;
+            additional.x = location->x + (px * 3400);
+            additional.y = location->y + (py * 3400);
+            twoblock_init(seed, &additional, &twoblock[count++]);
+            px++;
+        }
+        py++;
+    }
+    
+    
+    
 }
 
 void neighborhood_draw(void)
 {
-    twoblock_draw(&twoblock);
+    n_int   count = 0;
+    while (count < 36)
+    {
+        twoblock_draw(&twoblock[count++]);
+    }
 }

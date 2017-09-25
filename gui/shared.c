@@ -64,13 +64,23 @@ shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_
 n_int shared_init(n_byte view, n_uint random)
 {
     n_byte2   seed[4];
-    n_byte2   *seed_random = (n_byte2*)&random;
     
-    seed[0] = seed_random[0];
-    seed[1] = seed_random[1];
-    seed[2] = seed_random[2];
-    seed[3] = seed_random[3];
+    printf("random %lu\n", random);
+    
+    seed[3] = (random >>  0) & 0xffff;
+    seed[2] = (random >> 16) & 0xffff;
+    seed[1] = (random >> 32) & 0xffff;
+    seed[0] = (random >> 48) & 0xffff;
+    
+    seed[0] ^= seed[2];
+    seed[1] ^= seed[3];
 
+    math_random(seed);
+    math_random(seed);
+    math_random(seed);
+    math_random(seed);
+    math_random(seed);
+    
     game_init(seed);
     
     enemy_init();

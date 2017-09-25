@@ -164,12 +164,12 @@ void road_draw(noble_road * roads)
         road_draw_each(&roads[px]);
         px++;
     }
-    
+    /*
     px = 0;
-    
     while (px < 5)
     {
         road_draw_marking(&roads[px]);
         px++;
     }
+    */
 }

@@ -35,11 +35,12 @@
 
 #include "mushroom.h"
 
+#include <stdio.h>
+
 void twoblock_init(n_byte2 * seed, n_vect2 * location, noble_twoblock * twoblock)
 {
     twoblock->rotation = math_random(seed) & 1;
     house_init(seed, location, (noble_building*)&(twoblock->house));
-    
     road_init(twoblock->rotation , location, (noble_road*)&(twoblock->road));
     fence_init(twoblock->rotation , location, (noble_fence*)&(twoblock->fence));
 }
