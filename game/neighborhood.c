@@ -35,16 +35,14 @@
 
 #include "mushroom.h"
 
-void neighborhood_init(n_byte2 * seed)
+noble_twoblock twoblock;
+
+void neighborhood_init(n_byte2 * seed, n_vect2 * location)
 {
-    house_init(seed);
-    road_init(0);
-    fence_init(0);
+    twoblock_init(seed, location, &twoblock);
 }
 
 void neighborhood_draw(void)
 {
-    road_draw();
-    house_draw();
-    fence_draw();
+    twoblock_draw(&twoblock);
 }

@@ -35,10 +35,8 @@
 
 #include "mushroom.h"
 
-static noble_road     roads[5];
 
-
-void road_init(n_byte rotate)
+void road_init(n_byte rotate, n_vect2 * location, noble_road * roads)
 {
     n_int px = 0;
     n_int count = 0;
@@ -48,31 +46,31 @@ void road_init(n_byte rotate)
         
         if (rotate)
         {
-            temp_road->points[0].x = (px * RESIDENCE_SPACE * 2) - 500;
-            temp_road->points[0].y = 0 - 500;
+            temp_road->points[0].x = location->x + (px * RESIDENCE_SPACE * 2) - 500;
+            temp_road->points[0].y = location->y + 0 - 500;
 
-            temp_road->points[1].x = (px * RESIDENCE_SPACE * 2)-300;
-            temp_road->points[1].y = 0 - 500;
+            temp_road->points[1].x = location->x + (px * RESIDENCE_SPACE * 2)-300;
+            temp_road->points[1].y = location->y + 0 - 500;
 
-            temp_road->points[2].x = (px * RESIDENCE_SPACE * 2)-300;
-            temp_road->points[2].y = (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].x = location->x + (px * RESIDENCE_SPACE * 2)-300;
+            temp_road->points[2].y = location->y + (RESIDENCE_SPACE * 4) - 300;
 
-            temp_road->points[3].x = (px * RESIDENCE_SPACE * 2)-500;
-            temp_road->points[3].y = (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[3].x = location->x + (px * RESIDENCE_SPACE * 2)-500;
+            temp_road->points[3].y = location->y + (RESIDENCE_SPACE * 4) - 300;
         }
         else
         {
-            temp_road->points[0].x = 0 - 500;
-            temp_road->points[0].y = (px * RESIDENCE_SPACE * 2) - 500;
+            temp_road->points[0].x = location->x + 0 - 500;
+            temp_road->points[0].y = location->y + (px * RESIDENCE_SPACE * 2) - 500;
             
-            temp_road->points[1].x = 0 - 500;
-            temp_road->points[1].y = (px * RESIDENCE_SPACE * 2)-300;
+            temp_road->points[1].x = location->x + 0 - 500;
+            temp_road->points[1].y = location->y + (px * RESIDENCE_SPACE * 2)-300;
             
-            temp_road->points[2].x = (RESIDENCE_SPACE * 4) - 300;
-            temp_road->points[2].y = (px * RESIDENCE_SPACE * 2)-300;
+            temp_road->points[2].x = location->x + (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].y = location->y + (px * RESIDENCE_SPACE * 2)-300;
             
-            temp_road->points[3].x = (RESIDENCE_SPACE * 4) - 300;
-            temp_road->points[3].y = (px * RESIDENCE_SPACE * 2)-500;
+            temp_road->points[3].x = location->x + (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[3].y = location->y + (px * RESIDENCE_SPACE * 2)-500;
         }
         px++;
     }
@@ -85,31 +83,31 @@ void road_init(n_byte rotate)
         
         if (rotate)
         {
-            temp_road->points[0].x = 0 - 500;
-            temp_road->points[0].y = (px * RESIDENCE_SPACE * 4) - 500;
+            temp_road->points[0].x = location->x + 0 - 500;
+            temp_road->points[0].y = location->y + (px * RESIDENCE_SPACE * 4) - 500;
             
-            temp_road->points[1].x = 0 - 500;
-            temp_road->points[1].y = (px * RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[1].x = location->x + 0 - 500;
+            temp_road->points[1].y = location->y + (px * RESIDENCE_SPACE * 4) - 300;
             
-            temp_road->points[2].x = (RESIDENCE_SPACE * 4) - 300;
-            temp_road->points[2].y = (px * RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].x = location->x + (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].y = location->y + (px * RESIDENCE_SPACE * 4) - 300;
             
-            temp_road->points[3].x = (RESIDENCE_SPACE * 4) - 300;
-            temp_road->points[3].y = (px * RESIDENCE_SPACE * 4) - 500;
+            temp_road->points[3].x = location->x + (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[3].y = location->y + (px * RESIDENCE_SPACE * 4) - 500;
         }
         else
         {
-            temp_road->points[0].x = (px * RESIDENCE_SPACE * 4) - 500;
-            temp_road->points[0].y = 0 - 500;
+            temp_road->points[0].x = location->x + (px * RESIDENCE_SPACE * 4) - 500;
+            temp_road->points[0].y = location->y + 0 - 500;
             
-            temp_road->points[1].x = (px * RESIDENCE_SPACE * 4) - 300;
-            temp_road->points[1].y = 0 - 500;
+            temp_road->points[1].x = location->x + (px * RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[1].y = location->y + 0 - 500;
             
-            temp_road->points[2].x = (px * RESIDENCE_SPACE * 4) - 300;
-            temp_road->points[2].y = (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].x = location->x + (px * RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[2].y = location->y + (RESIDENCE_SPACE * 4) - 300;
             
-            temp_road->points[3].x = (px * RESIDENCE_SPACE * 4) - 500;
-            temp_road->points[3].y = (RESIDENCE_SPACE * 4) - 300;
+            temp_road->points[3].x = location->x + (px * RESIDENCE_SPACE * 4) - 500;
+            temp_road->points[3].y = location->y + (RESIDENCE_SPACE * 4) - 300;
         }
         px++;
     }
@@ -157,7 +155,7 @@ void road_draw_each(noble_road * road)
    gldraw_quads(&road->points[0], 1);
 }
 
-void road_draw(void)
+void road_draw(noble_road * roads)
 {
     n_int px = 0;
     

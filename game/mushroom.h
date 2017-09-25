@@ -99,8 +99,11 @@ typedef struct{
 }noble_agent;
 
 
-void neighborhood_init(n_byte2 * seed);
+void neighborhood_init(n_byte2 * seed, n_vect2 * location);
 void neighborhood_draw(void);
+
+void twoblock_init(n_byte2 * seed, n_vect2 * location, noble_twoblock * twoblock);
+void twoblock_draw(noble_twoblock * twoblock);
 
 void game_init(n_byte2 * seed);
 void game_draw_scene(n_int dim_x, n_int dim_y);
@@ -113,14 +116,14 @@ void enemy_move(void);
 n_int ecomony_init(n_byte2 * seeds);
 void  economy_draw(n_int px, n_int py);
 
-void road_init(n_byte rotate);
-void road_draw(void);
+void road_init(n_byte rotate, n_vect2 * location, noble_road * roads);
+void road_draw(noble_road * roads);
 
-void fence_init(n_byte rotate);
-void fence_draw(void);
+void fence_init(n_byte rotate, n_vect2 * location, noble_fence * fences);
+void fence_draw(noble_fence * fences);
 
-void house_init(n_byte2 * seed);
-void house_draw(void);
+void house_init(n_byte2 * seed, n_vect2 * location, noble_building * buildings);
+void house_draw(noble_building * buildings);
 
 void tree_init(noble_tree * trees, n_byte2 * seed, n_vect2 * edge);
 void tree_draw(noble_tree * tree);

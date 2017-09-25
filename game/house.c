@@ -35,7 +35,7 @@
 
 #include "mushroom.h"
 
-static  noble_building buildings[64];
+//static  noble_building buildings[64];
 
 static void house_transform(noble_building * building, n_vect2 * center, n_int direction)
 {
@@ -271,7 +271,7 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
     house_transform(building, center, math_random(seed) & 255);
 }
 
-void house_init(n_byte2 * seed)
+void house_init(n_byte2 * seed, n_vect2 * location, noble_building * buildings)
 {
     n_int count = 0;
     n_int px = 0;
@@ -283,20 +283,17 @@ void house_init(n_byte2 * seed)
         {
             n_vect2 local_center;
             noble_building * building = &buildings[count++];
-            vect2_populate(&local_center, (px * RESIDENCE_SPACE), (py * RESIDENCE_SPACE));
+            vect2_populate(&local_center, (px * RESIDENCE_SPACE) + location->x, (py * RESIDENCE_SPACE) + location->y);
             house_create(building, seed, &local_center);
-            
             building->tree_mod = math_random(seed) & 15;
-            
             tree_init(building->trees, seed, &local_center);
-            
             py++;
         }
         px++;
     }
 }
 
-void house_draw(void)
+void house_draw(noble_building * buildings)
 {
     n_int count = 0;
     while (count < 16)

@@ -37,7 +37,10 @@
 
 void game_init(n_byte2 * seed)
 {
-    neighborhood_init(seed);
+    n_vect2 initiate;
+    initiate.x = 500;
+    initiate.y = 500;
+    neighborhood_init(seed, &initiate);
 }
 
 void game_draw_scene(n_int dim_x, n_int dim_y)

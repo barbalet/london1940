@@ -35,19 +35,18 @@
 
 #include "mushroom.h"
 
-/*
- noble_building house[16];
- noble_fence    fence[8];
- noble_road     road[5];
- n_byte         rotation;
- */
-
-void twoblock_init(n_byte2 * seed, noble_twoblock * twoblock)
+void twoblock_init(n_byte2 * seed, n_vect2 * location, noble_twoblock * twoblock)
 {
-
+    twoblock->rotation = math_random(seed) & 1;
+    house_init(seed, location, (noble_building*)&(twoblock->house));
+    
+    road_init(twoblock->rotation , location, (noble_road*)&(twoblock->road));
+    fence_init(twoblock->rotation , location, (noble_fence*)&(twoblock->fence));
 }
 
 void twoblock_draw(noble_twoblock * twoblock)
 {
-
+    road_draw((noble_road*)&(twoblock->road));
+    house_draw((noble_building*)&(twoblock->house));
+    fence_draw((noble_fence*)&(twoblock->fence));
 }
