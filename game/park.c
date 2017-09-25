@@ -1,6 +1,6 @@
 /****************************************************************
  
- agent.c
+ park.c
  
  =============================================================
  
@@ -35,66 +35,56 @@
 
 #include "mushroom.h"
 
-static noble_agent mushroom_boy;
 
-void boy_init(void)
+void park_init(n_byte2 * seed, n_vect2 * location, noble_park * parks)
 {
-    mushroom_boy.location.x = 0;
-    mushroom_boy.location.y = 0;
-    mushroom_boy.facing = 0;
-    mushroom_boy.zooming = 0;
-}
-
-n_vect2 * boy_location(void)
-{
-    return &mushroom_boy.location;
-}
-
-
-n_int boy_facing(void)
-{
-    return mushroom_boy.facing;
-}
-
-void boy_turn(n_int delta)
-{
-    mushroom_boy.facing_delta += delta;
-}
-
-void boy_zoom(n_int zoom)
-{
-    n_int total_zoom = mushroom_boy.zooming + zoom;
-    if ((total_zoom > -29) && (total_zoom < 40))
+    n_int count = 0;
+    n_int px = 0;
+    
+    while (px < 4)
     {
-        mushroom_boy.zooming = total_zoom;
+        n_int py = 0;
+        while (py < 4)
+        {
+            n_vect2 local_center;
+            vect2_populate(&local_center, (px * RESIDENCE_SPACE) + location->x, (py * RESIDENCE_SPACE) + location->y);
+            parks->tree_mod[count] = math_random(seed) & 15;
+            tree_init(parks->trees[count], seed, &local_center);
+            
+            parks->trees[count][0].radius = (math_random(seed) % 16) + 16;
+            parks->trees[count][1].radius = (math_random(seed) % 16) + 16;
+            parks->trees[count][2].radius = (math_random(seed) % 16) + 16;
+            parks->trees[count][3].radius = (math_random(seed) % 16) + 16;
+
+            
+            count++;
+            py++;
+        }
+        px++;
     }
 }
 
-n_int boy_zooming(void)
+void park_draw(noble_park * park)
 {
-    return mushroom_boy.zooming;
-}
-
-void boy_move(n_int forwards)
-{
-    n_vect2 direction;
-    n_vect2 local_location;
-    n_vect2 * copy_location = boy_location();
-    n_int   translated_facing;
-    vect2_copy(&local_location, copy_location);
-    
-    mushroom_boy.facing = (mushroom_boy.facing + mushroom_boy.facing_delta + 256) & 255;
-    
-    translated_facing = (128+64+256 - boy_facing())&255;
-    
-    vect2_direction(&direction, translated_facing, 1);
-    vect2_d(copy_location, &direction, forwards, (26880/20));    
-    vect2_subtract(&mushroom_boy.location_delta, copy_location, &local_location);
-}
-
-void boy_cycle(void)
-{
-    mushroom_boy.facing_delta = 0;
-    mushroom_boy.location_delta.x = 0;
-    mushroom_boy.location_delta.y = 0;
+    n_int count = 0;
+    while (count < 16)
+    {
+        if (park->tree_mod[count] & 1)
+        {
+            tree_draw(&park->trees[count][0]);
+        }
+        if (park->tree_mod[count] & 2)
+        {
+            tree_draw(&park->trees[count][1]);
+        }
+        if (park->tree_mod[count] & 4)
+        {
+            tree_draw(&park->trees[count][2]);
+        }
+        if (park->tree_mod[count] & 8)
+        {
+            tree_draw(&park->trees[count][3]);
+        }
+        count++;
+    }
 }

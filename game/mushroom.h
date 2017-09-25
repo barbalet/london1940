@@ -80,6 +80,11 @@ typedef struct{
 }noble_building;
 
 typedef struct{
+    n_byte       tree_mod[16];
+    noble_tree   trees[16][4];
+}noble_park;
+
+typedef struct{
     noble_building house[16];
     noble_fence    fence[8];
     noble_road     road[5];
@@ -98,6 +103,9 @@ typedef struct{
     n_int   zooming;
 }noble_agent;
 
+
+void park_init(n_byte2 * seed, n_vect2 * location, noble_park * parks);
+void park_draw(noble_park * park);
 
 void neighborhood_init(n_byte2 * seed, n_vect2 * location);
 void neighborhood_draw(void);

@@ -35,21 +35,42 @@
 
 #include "mushroom.h"
 
-noble_twoblock twoblock[36];
+noble_twoblock twoblock[64 - 8];
+noble_park     park[8];
 
 void neighborhood_init(n_byte2 * seed, n_vect2 * location)
 {
-    n_int   count = 0;
-    n_int   py = -3;
-    while (py < 3)
+    n_int   park_count = 0;
+    n_int   twoblock_count = 0;
+    n_int   py = -4;
+    while (py < 4)
     {
-        n_int px = -3;
-        while (px < 3)
+        n_int px = -4;
+        while (px < 4)
         {
             n_vect2 additional;
+            n_byte2 park_probabilty = math_random(seed) & 255;
             additional.x = location->x + (px * 3400);
             additional.y = location->y + (py * 3400);
-            twoblock_init(seed, &additional, &twoblock[count++]);
+            
+            if (twoblock_count == (64-8))
+            {
+                park_probabilty = 255;
+            }
+            if (park_count == 8)
+            {
+                park_probabilty = 0;
+            }
+            
+            
+            if (park_probabilty > 207)
+            {
+                park_init(seed, &additional, &park[park_count++]);
+            }
+            else
+            {
+                twoblock_init(seed, &additional, &twoblock[twoblock_count++]);
+            }
             px++;
         }
         py++;
@@ -62,8 +83,13 @@ void neighborhood_init(n_byte2 * seed, n_vect2 * location)
 void neighborhood_draw(void)
 {
     n_int   count = 0;
-    while (count < 36)
+    while (count < (48+8))
     {
         twoblock_draw(&twoblock[count++]);
+    }
+    count = 0;
+    while (count < 8)
+    {
+        park_draw(&park[count++]);
     }
 }
