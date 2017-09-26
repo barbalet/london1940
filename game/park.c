@@ -41,6 +41,8 @@ void park_init(n_byte2 * seed, n_vect2 * location, noble_park * parks)
     n_int count = 0;
     n_int px = 0;
     
+    road_init(0, 1, location, (noble_road*)parks->road);
+    
     while (px < 4)
     {
         n_int py = 0;
@@ -56,7 +58,6 @@ void park_init(n_byte2 * seed, n_vect2 * location, noble_park * parks)
             parks->trees[count][2].radius = (math_random(seed) % 16) + 16;
             parks->trees[count][3].radius = (math_random(seed) % 16) + 16;
 
-            
             count++;
             py++;
         }
@@ -67,6 +68,9 @@ void park_init(n_byte2 * seed, n_vect2 * location, noble_park * parks)
 void park_draw(noble_park * park)
 {
     n_int count = 0;
+    
+    road_draw_ring(park->road);
+    
     while (count < 16)
     {
         if (park->tree_mod[count] & 1)

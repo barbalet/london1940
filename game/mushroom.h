@@ -80,8 +80,9 @@ typedef struct{
 }noble_building;
 
 typedef struct{
-    n_byte       tree_mod[16];
+    noble_road   road[4];
     noble_tree   trees[16][4];
+    n_byte       tree_mod[16];
 }noble_park;
 
 typedef struct{
@@ -124,8 +125,9 @@ void enemy_move(void);
 n_int ecomony_init(n_byte2 * seeds);
 void  economy_draw(n_int px, n_int py);
 
-void road_init(n_byte rotate, n_vect2 * location, noble_road * roads);
+void road_init(n_byte rotate, n_byte ring_road, n_vect2 * location, noble_road * roads);
 void road_draw(noble_road * roads);
+void road_draw_ring(noble_road * roads);
 
 void fence_init(n_byte rotate, n_vect2 * location, noble_fence * fences);
 void fence_draw(noble_fence * fences);
