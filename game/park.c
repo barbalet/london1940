@@ -53,10 +53,10 @@ void park_init(n_byte2 * seed, n_vect2 * location, noble_park * parks)
             parks->tree_mod[count] = math_random(seed) & 15;
             tree_init(parks->trees[count], seed, &local_center);
             
-            parks->trees[count][0].radius = (math_random(seed) % 16) + 16;
-            parks->trees[count][1].radius = (math_random(seed) % 16) + 16;
-            parks->trees[count][2].radius = (math_random(seed) % 16) + 16;
-            parks->trees[count][3].radius = (math_random(seed) % 16) + 16;
+            parks->trees[count][0].radius = (math_random(seed) % 10) + 16;
+            parks->trees[count][1].radius = (math_random(seed) % 10) + 16;
+            parks->trees[count][2].radius = (math_random(seed) % 10) + 16;
+            parks->trees[count][3].radius = (math_random(seed) % 10) + 16;
 
             count++;
             py++;

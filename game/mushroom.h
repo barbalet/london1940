@@ -50,6 +50,7 @@
 
 #define TREE_SPACE                  (400)
 #define RESIDENCE_SPACE             (800)
+#define FENCE_WABBLE_SPACE          (100)
 
 typedef struct{
     n_vect2  points[POINTS_PER_FENCE];
@@ -58,6 +59,12 @@ typedef struct{
 typedef struct{
     n_vect2  points[POINTS_PER_ROAD];
 }noble_road;
+
+typedef struct{
+    n_vect2  center;
+    n_vect2  first_axis;
+    n_vect2  second_axis;
+}noble_road_corner;
 
 typedef struct{
     n_vect2  points[POINTS_PER_ROOM];
@@ -129,7 +136,7 @@ void road_init(n_byte rotate, n_byte ring_road, n_vect2 * location, noble_road *
 void road_draw(noble_road * roads);
 void road_draw_ring(noble_road * roads);
 
-void fence_init(n_byte rotate, n_vect2 * location, noble_fence * fences);
+void fence_init(n_byte2 * seed, n_byte rotate, n_vect2 * location, noble_fence * fences);
 void fence_draw(noble_fence * fences);
 
 void house_init(n_byte2 * seed, n_vect2 * location, noble_building * buildings);

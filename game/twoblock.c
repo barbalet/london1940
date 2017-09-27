@@ -42,12 +42,12 @@ void twoblock_init(n_byte2 * seed, n_vect2 * location, noble_twoblock * twoblock
     twoblock->rotation = math_random(seed) & 1;
     house_init(seed, location, (noble_building*)&(twoblock->house));
     road_init(twoblock->rotation, 0, location, (noble_road*)&(twoblock->road));
-    fence_init(twoblock->rotation, location, (noble_fence*)&(twoblock->fence));
+    fence_init(seed, twoblock->rotation, location, (noble_fence*)&(twoblock->fence));
 }
 
 void twoblock_draw(noble_twoblock * twoblock)
 {
     road_draw((noble_road*)&(twoblock->road));
-    house_draw((noble_building*)&(twoblock->house));
     fence_draw((noble_fence*)&(twoblock->fence));
+    house_draw((noble_building*)&(twoblock->house));
 }
