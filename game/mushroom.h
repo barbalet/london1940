@@ -38,7 +38,7 @@
 #include "noble.h"
 #endif
 
-#define POINTS_PER_ROOM             (16)
+#define POINTS_PER_ROOM             (24)
 #define POINTS_PER_ROOM_STRUCTURE   (8)
 #define MAX_ROOMS                   (8)
 #define GENETICS_COUNT              (64)
@@ -69,6 +69,7 @@ typedef struct{
 typedef struct{
     n_vect2  points[POINTS_PER_ROOM];
     n_byte   window;
+    n_byte   door;
 }noble_room;
 
 typedef struct{

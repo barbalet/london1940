@@ -35,8 +35,6 @@
 
 #include "mushroom.h"
 
-//static  noble_building buildings[64];
-
 static void house_transform(noble_building * building, n_vect2 * center, n_int direction)
 {
     n_int   loop_room = 0;
@@ -100,6 +98,26 @@ static void house_drawroom(noble_room * room)
     {
         gldraw_line(&room->points[14], &room->points[15]);
 	}
+    
+    gldraw_red();
+    
+    if ((room->door&1) == 1)
+    {
+        gldraw_line(&room->points[16], &room->points[17]);
+    }
+    if ((room->door&2) == 2)
+    {
+        gldraw_line(&room->points[18], &room->points[19]);
+    }
+    if ((room->door&4) == 4)
+    {
+        gldraw_line(&room->points[20], &room->points[21]);
+    }
+    if ((room->door&8) == 8)
+    {
+        gldraw_line(&room->points[22], &room->points[23]);
+    }
+
 }
 
 static void house_draw_each(noble_building * building)
@@ -129,10 +147,11 @@ static void house_draw_each(noble_building * building)
 }
 
 /* 1=north, 2=south, 4=east, 8=west */
-static void house_construct(noble_room * room, n_int topx, n_int topy, n_int botx, n_int boty, n_byte window)
+static void house_construct(noble_room * room, n_int topx, n_int topy, n_int botx, n_int boty, n_byte window, n_byte door)
 {
+    n_int midx, midy;
     room->window = window;
-    
+    room->door = door;
     if (topx > botx)
     {
 		n_int temp = botx;
@@ -172,8 +191,32 @@ static void house_construct(noble_room * room, n_int topx, n_int topy, n_int bot
     }
     if ((room->window&8) == 8)
     {
-        vect2_populate(&room->points[14], topx+3, topy+10);
-        vect2_populate(&room->points[15], topx+3, boty-10);
+        vect2_populate(&room->points[14], topx+10, topy+3);
+        vect2_populate(&room->points[15], botx-10, topy+3);
+    }
+    
+    midx = (topx + botx) / 2;
+    midy = (topy + boty) / 2;
+    
+    if ((room->door&1) == 1)
+    {
+        vect2_populate(&room->points[16], topx+3, midy + 3);
+        vect2_populate(&room->points[17], topx+3, midy - 3);
+    }
+    if ((room->door&2) == 2)
+    {
+        vect2_populate(&room->points[18], botx-3, midy + 3);
+        vect2_populate(&room->points[19], botx-3, midy - 3);
+    }
+    if ((room->door&4) == 4)
+    {
+        vect2_populate(&room->points[20], midx + 3, boty-3);
+        vect2_populate(&room->points[21], midx - 3, boty-3);
+    }
+    if ((room->door&8) == 8)
+    {
+        vect2_populate(&room->points[22], midx + 3, topy+3);
+        vect2_populate(&room->points[23], midx - 3, topy+3);
     }
 }
 
@@ -219,12 +262,12 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
     
 	if (house[4] > 1)
     {
-        house_construct(&room[roomcount++], -8, -4, 8+(house[4]*20), -4+(house[3]*20), 10);//north + east
+        house_construct(&room[roomcount++], -8, -4, 8+(house[4]*20), -4+(house[3]*20), 2/*10*/,1);//north + east
         pointp = (house[3] * 20) - 4;
     }
     else
     {
-        house_construct(&room[roomcount++], -8 + (house[4]*20), -4, 8, -4+(house[3]*20), 9);//north + west
+        house_construct(&room[roomcount++], -8 + (house[4]*20), -4, 8, -4+(house[3]*20), 1+8/*9*/, 2);//north + west
         pointm = (house[3] * 20) - 4;
     }
     
@@ -232,12 +275,12 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
     {
         if (house[(loop * 3) + 1] > 1)
         {
-            house_construct(&room[roomcount++], 8, -4+(house[loop*3]*20), 8+(house[(loop*3)+1]*20), pointp, 2);//east
+            house_construct(&room[roomcount++], 8, -4+(house[loop*3]*20), 8+(house[(loop*3)+1]*20), pointp, 2, 1);//east
             pointp = (house[loop * 3] * 20) - 4;
         }
         else
         {
-            house_construct(&room[roomcount++], -8 + (house[(loop*3)+1]*20), -4+(house[loop*3]*20), -8, pointm, 1);//west
+            house_construct(&room[roomcount++], -8 + (house[(loop*3)+1]*20), -4+(house[loop*3]*20), -8, pointm, 1, 2);//west
             pointm = (house[loop * 3] * 20) - 4;
         }
         loop++;
@@ -245,26 +288,26 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
 		
 	if (house[((abstract_rooms - 1) * 3) + 1] > 1)
     {
-        house_construct(&room[roomcount++], -8, (house[0]*20)+4, 8+(house[((abstract_rooms-1)*3)+1]*20), -4+(house[(abstract_rooms-1)*3]*20), 4);
-        house_construct(&room[roomcount++], -8, pointm, -8-(house[((abstract_rooms-1)*3)+1]*20), (house[0]*20)+4, 1);
+        house_construct(&room[roomcount++], -8, (house[0]*20)+4, 8+(house[((abstract_rooms-1)*3)+1]*20), -4+(house[(abstract_rooms-1)*3]*20), 4, 8);
+        house_construct(&room[roomcount++], -8, pointm, -8-(house[((abstract_rooms-1)*3)+1]*20), (house[0]*20)+4, 1, 2);
         if (abstract_rooms != loop)
         {
-            house_construct(&room[roomcount++], 8, -4+(house[(abstract_rooms-1)*3]*20),8+(house[((abstract_rooms-1)*3)+1]*20), pointp, 2);
+            house_construct(&room[roomcount++], 8, -4+(house[(abstract_rooms-1)*3]*20),8+(house[((abstract_rooms-1)*3)+1]*20), pointp, 2, 1);
         }
     }
     else
     {
-        house_construct(&room[roomcount++], 8, (house[0]*20)+4, 8+(house[((abstract_rooms-1)*3)+1]*20), -4+(house[(abstract_rooms-1)*3]*20), 4);
-        house_construct(&room[roomcount++], 8, pointp, 8-(house[((abstract_rooms-1)*3)+1]*20), (house[0]*20)+4, 2);
+        house_construct(&room[roomcount++], 8, (house[0]*20)+4, 8+(house[((abstract_rooms-1)*3)+1]*20), -4+(house[(abstract_rooms-1)*3]*20), 4, 8);
+        house_construct(&room[roomcount++], 8, pointp, 8-(house[((abstract_rooms-1)*3)+1]*20), (house[0]*20)+4, 2, 1);
         if (abstract_rooms != loop)
         {
-            house_construct(&room[roomcount++], -8, -4+(house[(abstract_rooms-1)*3]*20), -8+(house[((abstract_rooms-1)*3)+1]*20),pointm, 1);
+            house_construct(&room[roomcount++], -8, -4+(house[(abstract_rooms-1)*3]*20), -8+(house[((abstract_rooms-1)*3)+1]*20),pointm, 1, 2);
         }
     }
     
     if(abstract_rooms > 2)
     {
-        house_construct(&room[roomcount++], 8, -4+(house[3]*20), -8, -4+(house[(abstract_rooms-1)*3]*20), 0);
+        house_construct(&room[roomcount++], 8, -4+(house[3]*20), -8, -4+(house[(abstract_rooms-1)*3]*20), 0, 12);
     }
     building->roomcount = roomcount;
     
