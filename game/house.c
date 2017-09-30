@@ -98,26 +98,28 @@ static void house_drawroom(noble_room * room)
     {
         gldraw_line(&room->points[14], &room->points[15]);
 	}
-    
-    gldraw_red();
+}
+
+static void house_drawdoor(noble_room * room)
+{
+    gldraw_lightgrey();
     
     if ((room->door&1) == 1)
     {
-        gldraw_line(&room->points[16], &room->points[17]);
+        gldraw_quads(&room->points[16], 1);
     }
     if ((room->door&2) == 2)
     {
-        gldraw_line(&room->points[18], &room->points[19]);
+        gldraw_quads(&room->points[20], 1);
     }
     if ((room->door&4) == 4)
     {
-        gldraw_line(&room->points[20], &room->points[21]);
+        gldraw_quads(&room->points[24], 1);
     }
     if ((room->door&8) == 8)
     {
-        gldraw_line(&room->points[22], &room->points[23]);
+        gldraw_quads(&room->points[28], 1);
     }
-
 }
 
 static void house_draw_each(noble_building * building)
@@ -126,6 +128,12 @@ static void house_draw_each(noble_building * building)
     while (loop_room < building->roomcount)
     {
         house_drawroom(&building->room[loop_room]);
+        loop_room++;
+    }
+    loop_room = 0;
+    while (loop_room < building->roomcount)
+    {
+        house_drawdoor(&building->room[loop_room]);
         loop_room++;
     }
     if (building->tree_mod & 1)
@@ -200,23 +208,32 @@ static void house_construct(noble_room * room, n_int topx, n_int topy, n_int bot
     
     if ((room->door&1) == 1)
     {
-        vect2_populate(&room->points[16], topx+3, midy + 3);
-        vect2_populate(&room->points[17], topx+3, midy - 3);
+        vect2_populate(&room->points[16], topx + 3, midy + 7);
+        vect2_populate(&room->points[17], topx + 3, midy - 7);
+        vect2_populate(&room->points[18], topx - 3, midy - 7);
+        vect2_populate(&room->points[19], topx - 3, midy + 7);
+
     }
     if ((room->door&2) == 2)
     {
-        vect2_populate(&room->points[18], botx-3, midy + 3);
-        vect2_populate(&room->points[19], botx-3, midy - 3);
+        vect2_populate(&room->points[20], botx - 3, midy + 7);
+        vect2_populate(&room->points[21], botx - 3, midy - 7);
+        vect2_populate(&room->points[22], botx + 3, midy - 7);
+        vect2_populate(&room->points[23], botx + 3, midy + 7);
     }
     if ((room->door&4) == 4)
     {
-        vect2_populate(&room->points[20], midx + 3, boty-3);
-        vect2_populate(&room->points[21], midx - 3, boty-3);
+        vect2_populate(&room->points[24], midx + 7, boty - 3);
+        vect2_populate(&room->points[25], midx - 7, boty - 3);
+        vect2_populate(&room->points[26], midx - 7, boty + 3);
+        vect2_populate(&room->points[27], midx + 7, boty + 3);
     }
     if ((room->door&8) == 8)
     {
-        vect2_populate(&room->points[22], midx + 3, topy+3);
-        vect2_populate(&room->points[23], midx - 3, topy+3);
+        vect2_populate(&room->points[28], midx + 7, topy + 3);
+        vect2_populate(&room->points[29], midx - 7, topy + 3);
+        vect2_populate(&room->points[30], midx - 7, topy - 3);
+        vect2_populate(&room->points[31], midx + 7, topy - 3);
     }
 }
 

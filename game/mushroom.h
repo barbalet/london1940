@@ -38,7 +38,7 @@
 #include "noble.h"
 #endif
 
-#define POINTS_PER_ROOM             (24)
+#define POINTS_PER_ROOM             (32)
 #define POINTS_PER_ROOM_STRUCTURE   (8)
 #define MAX_ROOMS                   (8)
 #define GENETICS_COUNT              (64)
