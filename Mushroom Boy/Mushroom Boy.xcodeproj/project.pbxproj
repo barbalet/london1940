@@ -11,6 +11,7 @@
 		4A4237E11C6C51F6001C3886 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A4237E01C6C51F6001C3886 /* game.c */; };
 		4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BBC1F782C1A0080F27F /* twoblock.c */; };
 		4A916BC11F783E180080F27F /* neighborhood.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BC01F783E180080F27F /* neighborhood.c */; };
+		4A960DC11F99C1B900D6E56B /* mac.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A960DC01F99C1B900D6E56B /* mac.xib */; };
 		4ABA181E1F5E643B00DFD769 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA181D1F5E643B00DFD769 /* tree.c */; };
 		4ADFDFA51C41205800E633EF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADFDFA41C41205800E633EF /* OpenGL.framework */; };
 		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
@@ -30,7 +31,6 @@
 		5A37A3BA1955F32800D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
 		5A37A3C41955F32800D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3C21955F32800D187B0 /* InfoPlist.strings */; };
 		5A37A3CA1955F32800D187B0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3C81955F32800D187B0 /* Credits.rtf */; };
-		5A37A3D01955F32800D187B0 /* Mushroom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3CE1955F32800D187B0 /* Mushroom.xib */; };
 		5A37A3D91955F32900D187B0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3D81955F32900D187B0 /* XCTest.framework */; };
 		5A37A3DA1955F32900D187B0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A37A3B91955F32800D187B0 /* Cocoa.framework */; };
 		5A37A3E21955F32900D187B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A37A3E01955F32900D187B0 /* InfoPlist.strings */; };
@@ -58,6 +58,7 @@
 		4A4237E01C6C51F6001C3886 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
 		4A916BBC1F782C1A0080F27F /* twoblock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twoblock.c; sourceTree = "<group>"; };
 		4A916BC01F783E180080F27F /* neighborhood.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = neighborhood.c; sourceTree = "<group>"; };
+		4A960DC01F99C1B900D6E56B /* mac.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mac.xib; sourceTree = "<group>"; };
 		4ABA181D1F5E643B00DFD769 /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
 		4ADFDFA41C41205800E633EF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		5A37A3C31955F32800D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5A37A3C71955F32800D187B0 /* Mushroom Boy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mushroom Boy-Prefix.pch"; sourceTree = "<group>"; };
 		5A37A3C91955F32800D187B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		5A37A3CF1955F32800D187B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Mushroom.xib; sourceTree = "<group>"; };
 		5A37A3D71955F32900D187B0 /* Mushroom BoyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mushroom BoyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A37A3D81955F32900D187B0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5A37A3DF1955F32900D187B0 /* Mushroom BoyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mushroom BoyTests-Info.plist"; sourceTree = "<group>"; };
@@ -128,6 +128,7 @@
 		5A0D60C019567F2000090DAE /* mac */ = {
 			isa = PBXGroup;
 			children = (
+				4A960DC01F99C1B900D6E56B /* mac.xib */,
 				7B8CE0961BA5BBF6000450D7 /* NobleShared.h */,
 				7B8CE0971BA5BBF6000450D7 /* NobleShared.m */,
 				5A0D60C119567F2000090DAE /* AppDelegate.h */,
@@ -235,7 +236,6 @@
 				5A0D60E319567F8E00090DAE /* gui */,
 				5A0D60C019567F2000090DAE /* mac */,
 				5A0D60C719567F2000090DAE /* noble */,
-				5A37A3CE1955F32800D187B0 /* Mushroom.xib */,
 				5A37A3C01955F32800D187B0 /* Supporting Files */,
 			);
 			path = "Mushroom Boy";
@@ -346,9 +346,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A960DC11F99C1B900D6E56B /* mac.xib in Resources */,
 				5A37A3C41955F32800D187B0 /* InfoPlist.strings in Resources */,
 				5A37A3CA1955F32800D187B0 /* Credits.rtf in Resources */,
-				5A37A3D01955F32800D187B0 /* Mushroom.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,14 +428,6 @@
 				5A37A3C91955F32800D187B0 /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		5A37A3CE1955F32800D187B0 /* Mushroom.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5A37A3CF1955F32800D187B0 /* Base */,
-			);
-			name = Mushroom.xib;
 			sourceTree = "<group>";
 		};
 		5A37A3E01955F32900D187B0 /* InfoPlist.strings */ = {
@@ -545,7 +537,6 @@
 		5A37A3E81955F32900D187B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mushroom Boy/Mushroom Boy-Prefix.pch";
@@ -560,7 +551,6 @@
 		5A37A3E91955F32900D187B0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mushroom Boy/Mushroom Boy-Prefix.pch";

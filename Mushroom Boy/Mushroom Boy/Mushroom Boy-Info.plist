@@ -27,7 +27,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright 1996-2016 Tom Barbalet. All rights reserved.</string>
 	<key>NSMainNibFile</key>
-	<string>Mushroom</string>
+	<string>mac</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
