@@ -72,7 +72,7 @@ static void house_transform(noble_building * building, n_vect2 * center, n_int d
     }
 }
 
-static void house_drawroom(noble_room * room)
+static void house_drawroom(noble_room * room, n_int room_number)
 {
     gldraw_darkgrey();
     gldraw_quads(&room->points[4], 1);
@@ -98,6 +98,20 @@ static void house_drawroom(noble_room * room)
     {
         gldraw_line(&room->points[14], &room->points[15]);
 	}
+#ifndef DEBUG_ROOM_NUMBER
+    {
+        n_string_block number_string = "1";
+        n_vect2  average = {0, 0};
+        
+        number_string[0] += room_number - 1;
+        
+        vect2_add(&average, &room->points[0], &room->points[1]);
+        vect2_add(&average, &average, &room->points[2]);
+        vect2_add(&average, &average, &room->points[3]);
+        gldraw_red();
+        gldraw_string(number_string, average.x / 4, average.y / 4);
+    }
+#endif
 }
 
 static void house_drawdoor(noble_room * room)
@@ -127,7 +141,7 @@ static void house_draw_each(noble_building * building)
     n_int   loop_room = 0;
     while (loop_room < building->roomcount)
     {
-        house_drawroom(&building->room[loop_room]);
+        house_drawroom(&building->room[loop_room], loop_room);
         loop_room++;
     }
     loop_room = 0;
@@ -266,12 +280,13 @@ static n_int house_genetics(n_int * house, n_byte2 * seed)
 
 void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
 {
-    n_int	         pointp = -4, pointm = -4;
-    n_int	         loop = 2;
-    n_int          * house;
     noble_room     * room;
+    n_int          * house;
     n_int            abstract_rooms;
     n_int            roomcount = 0;
+    n_int            pointp = -4;
+    n_int            pointm = -4;
+    n_int            loop = 2;
     
     abstract_rooms = house_genetics(building->house, seed);
     house = building->house;
@@ -279,12 +294,12 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
     
 	if (house[4] > 1)
     {
-        house_construct(&room[roomcount++], -8, -4, 8+(house[4]*20), -4+(house[3]*20), 2/*10*/,1);//north + east
+        house_construct(&room[roomcount++], -8, -4, 8+(house[4]*20), -4+(house[3]*20), 2/*10*/,/*1*/ 0);//north + east
         pointp = (house[3] * 20) - 4;
     }
     else
     {
-        house_construct(&room[roomcount++], -8 + (house[4]*20), -4, 8, -4+(house[3]*20), 1+8/*9*/, 2);//north + west
+        house_construct(&room[roomcount++], -8 + (house[4]*20), -4, 8, -4+(house[3]*20), 1+8/*9*/, /*2*/ 0);//north + west
         pointm = (house[3] * 20) - 4;
     }
     
