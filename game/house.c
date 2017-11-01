@@ -35,6 +35,17 @@
 
 #include "mushroom.h"
 
+
+/* 1=north, 2=south, 4=east, 8=west */
+
+enum direction_constant
+{
+    DC_NORTH        = 1,
+    DC_SOUTH        = 2,
+    DC_EAST         = 4,
+    DC_WEST         = 8
+};
+
 static void house_transform(noble_building * building, n_vect2 * center, n_int direction)
 {
     n_int   loop_room = 0;
@@ -82,19 +93,19 @@ static void house_drawroom(noble_room * room, n_int room_number)
 
     gldraw_lightgrey();
     
-    if ((room->window&1) == 1)
+    if (room->window & DC_NORTH)
     {
         gldraw_line(&room->points[8], &room->points[9]);
 	}
-    if ((room->window&2) == 2)
+    if (room->window & DC_SOUTH)
     {
         gldraw_line(&room->points[10], &room->points[11]);
 	}
-    if ((room->window&4) == 4)
+    if (room->window & DC_EAST)
     {
         gldraw_line(&room->points[12], &room->points[13]);
 	}
-    if ((room->window&8) == 8)
+    if (room->window & DC_WEST)
     {
         gldraw_line(&room->points[14], &room->points[15]);
 	}
@@ -118,19 +129,19 @@ static void house_drawdoor(noble_room * room)
 {
     gldraw_lightgrey();
     
-    if ((room->door&1) == 1)
+    if (room->door & DC_NORTH)
     {
         gldraw_quads(&room->points[16], 1);
     }
-    if ((room->door&2) == 2)
+    if (room->door & DC_SOUTH)
     {
         gldraw_quads(&room->points[20], 1);
     }
-    if ((room->door&4) == 4)
+    if (room->door & DC_EAST)
     {
         gldraw_quads(&room->points[24], 1);
     }
-    if ((room->door&8) == 8)
+    if (room->door & DC_WEST)
     {
         gldraw_quads(&room->points[28], 1);
     }
@@ -150,19 +161,19 @@ static void house_draw_each(noble_building * building)
         house_drawdoor(&building->room[loop_room]);
         loop_room++;
     }
-    if (building->tree_mod & 1)
+    if (building->tree_mod & DC_NORTH)
     {
         tree_draw(&building->trees[0]);
     }
-    if (building->tree_mod & 2)
+    if (building->tree_mod & DC_SOUTH)
     {
         tree_draw(&building->trees[1]);
     }
-    if (building->tree_mod & 4)
+    if (building->tree_mod & DC_EAST)
     {
         tree_draw(&building->trees[2]);
     }
-    if (building->tree_mod & 8)
+    if (building->tree_mod & DC_WEST)
     {
         tree_draw(&building->trees[3]);
     }
@@ -196,22 +207,22 @@ static void house_construct(noble_room * room, n_int topx, n_int topy, n_int bot
     vect2_populate(&room->points[6], botx-6, boty-6);
     vect2_populate(&room->points[7], botx-6, topy+6);
     
-    if ((room->window&1) == 1)
+    if (room->window & DC_NORTH)
     {
         vect2_populate(&room->points[8], topx+3, topy+10);
         vect2_populate(&room->points[9], topx+3, boty-10);
     }
-    if ((room->window&2) == 2)
+    if (room->window & DC_SOUTH)
     {
         vect2_populate(&room->points[10], botx-3, topy+10);
         vect2_populate(&room->points[11], botx-3, boty-10);
     }
-    if ((room->window&4) == 4)
+    if (room->window & DC_EAST)
     {
         vect2_populate(&room->points[12], topx+10, boty-3);
         vect2_populate(&room->points[13], botx-10, boty-3);
     }
-    if ((room->window&8) == 8)
+    if (room->window & DC_WEST)
     {
         vect2_populate(&room->points[14], topx+10, topy+3);
         vect2_populate(&room->points[15], botx-10, topy+3);
@@ -220,7 +231,7 @@ static void house_construct(noble_room * room, n_int topx, n_int topy, n_int bot
     midx = (topx + botx) / 2;
     midy = (topy + boty) / 2;
     
-    if ((room->door&1) == 1)
+    if (room->door & DC_NORTH)
     {
         vect2_populate(&room->points[16], topx + 3, midy + 7);
         vect2_populate(&room->points[17], topx + 3, midy - 7);
@@ -228,21 +239,21 @@ static void house_construct(noble_room * room, n_int topx, n_int topy, n_int bot
         vect2_populate(&room->points[19], topx - 3, midy + 7);
 
     }
-    if ((room->door&2) == 2)
+    if (room->door & DC_SOUTH)
     {
         vect2_populate(&room->points[20], botx - 3, midy + 7);
         vect2_populate(&room->points[21], botx - 3, midy - 7);
         vect2_populate(&room->points[22], botx + 3, midy - 7);
         vect2_populate(&room->points[23], botx + 3, midy + 7);
     }
-    if ((room->door&4) == 4)
+    if (room->door & DC_EAST)
     {
         vect2_populate(&room->points[24], midx + 7, boty - 3);
         vect2_populate(&room->points[25], midx - 7, boty - 3);
         vect2_populate(&room->points[26], midx - 7, boty + 3);
         vect2_populate(&room->points[27], midx + 7, boty + 3);
     }
-    if ((room->door&8) == 8)
+    if (room->door & DC_WEST)
     {
         vect2_populate(&room->points[28], midx + 7, topy + 3);
         vect2_populate(&room->points[29], midx - 7, topy + 3);
