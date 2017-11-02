@@ -291,68 +291,64 @@ static n_int house_genetics(n_int * house, n_byte2 * seed)
 
 void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
 {
-    noble_room     * room;
-    n_int          * house;
-    n_int            abstract_rooms;
-    n_int            roomcount = 0;
+    n_int            rooms = house_genetics(building->house, seed);
+    n_int            count = 0;
     n_int            pointp = -4;
     n_int            pointm = -4;
     n_int            loop = 2;
-    
-    abstract_rooms = house_genetics(building->house, seed);
-    house = building->house;
-    room  = building->room;
+    noble_room     * room = building->room;
+    n_int          * house = building->house;
     
 	if (house[4] > 1)
     {
-        house_construct(&room[roomcount++], -8, -4, 8+(house[4]*20), -4+(house[3]*20), 2/*10*/,/*1*/ 0);//north + east
+        house_construct(&room[count++], -8, -4, 8+(house[4]*20), -4+(house[3]*20), DC_SOUTH/*10*/,/*1*/ 0);//north + east
         pointp = (house[3] * 20) - 4;
     }
     else
     {
-        house_construct(&room[roomcount++], -8 + (house[4]*20), -4, 8, -4+(house[3]*20), 1+8/*9*/, /*2*/ 0);//north + west
+        house_construct(&room[count++], -8 + (house[4]*20), -4, 8, -4+(house[3]*20), DC_NORTH | DC_WEST/*9*/, /*2*/ 0);//north + west
         pointm = (house[3] * 20) - 4;
     }
     
-    while(loop < (abstract_rooms - 1))
+    while(loop < (rooms - 1))
     {
         if (house[(loop * 3) + 1] > 1)
         {
-            house_construct(&room[roomcount++], 8, -4+(house[loop*3]*20), 8+(house[(loop*3)+1]*20), pointp, 2, 1);//east
+            house_construct(&room[count++], 8, -4+(house[loop*3]*20), 8+(house[(loop*3)+1]*20), pointp, DC_SOUTH, DC_NORTH);//east
             pointp = (house[loop * 3] * 20) - 4;
         }
         else
         {
-            house_construct(&room[roomcount++], -8 + (house[(loop*3)+1]*20), -4+(house[loop*3]*20), -8, pointm, 1, 2);//west
+            house_construct(&room[count++], -8 + (house[(loop*3)+1]*20), -4+(house[loop*3]*20), -8, pointm, DC_NORTH, DC_SOUTH);//west
             pointm = (house[loop * 3] * 20) - 4;
         }
         loop++;
     }
 		
-	if (house[((abstract_rooms - 1) * 3) + 1] > 1)
+	if (house[((rooms - 1) * 3) + 1] > 1)
     {
-        house_construct(&room[roomcount++], -8, (house[0]*20)+4, 8+(house[((abstract_rooms-1)*3)+1]*20), -4+(house[(abstract_rooms-1)*3]*20), 4, 8);
-        house_construct(&room[roomcount++], -8, pointm, -8-(house[((abstract_rooms-1)*3)+1]*20), (house[0]*20)+4, 1, 2);
-        if (abstract_rooms != loop)
+        house_construct(&room[count++], -8, (house[0]*20)+4, 8+(house[((rooms-1)*3)+1]*20), -4+(house[(rooms-1)*3]*20), 4, 8);
+        house_construct(&room[count++], -8, pointm, -8-(house[((rooms-1)*3)+1]*20), (house[0]*20)+4, 1, 2);
+        if (rooms != loop)
         {
-            house_construct(&room[roomcount++], 8, -4+(house[(abstract_rooms-1)*3]*20),8+(house[((abstract_rooms-1)*3)+1]*20), pointp, 2, 1);
+            house_construct(&room[count++], 8, -4+(house[(rooms-1)*3]*20),8+(house[((rooms-1)*3)+1]*20), pointp, 2, 1);
         }
     }
     else
     {
-        house_construct(&room[roomcount++], 8, (house[0]*20)+4, 8+(house[((abstract_rooms-1)*3)+1]*20), -4+(house[(abstract_rooms-1)*3]*20), 4, 8);
-        house_construct(&room[roomcount++], 8, pointp, 8-(house[((abstract_rooms-1)*3)+1]*20), (house[0]*20)+4, 2, 1);
-        if (abstract_rooms != loop)
+        house_construct(&room[count++], 8, (house[0]*20)+4, 8+(house[((rooms-1)*3)+1]*20), -4+(house[(rooms-1)*3]*20), 4, 8);
+        house_construct(&room[count++], 8, pointp, 8-(house[((rooms-1)*3)+1]*20), (house[0]*20)+4, 2, 1);
+        if (rooms != loop)
         {
-            house_construct(&room[roomcount++], -8, -4+(house[(abstract_rooms-1)*3]*20), -8+(house[((abstract_rooms-1)*3)+1]*20),pointm, 1, 2);
+            house_construct(&room[count++], -8, -4+(house[(rooms-1)*3]*20), -8+(house[((rooms-1)*3)+1]*20),pointm, 1, 2);
         }
     }
     
-    if(abstract_rooms > 2)
+    if (rooms > 2)
     {
-        house_construct(&room[roomcount++], 8, -4+(house[3]*20), -8, -4+(house[(abstract_rooms-1)*3]*20), 0, 12);
+        house_construct(&room[count++], 8, -4+(house[3]*20), -8, -4+(house[(rooms-1)*3]*20), 0, 12);
     }
-    building->roomcount = roomcount;
+    building->roomcount = count;
     
     house_transform(building, center, math_random(seed) & 255);
 }
