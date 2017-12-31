@@ -40,6 +40,7 @@
 
 enum direction_constant
 {
+    DC_NONE         = 0,
     DC_NORTH        = 1,
     DC_SOUTH        = 2,
     DC_EAST         = 4,
@@ -301,12 +302,12 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
     
 	if (house[4] > 1)
     {
-        house_construct(&room[count++], -8, -4, 8+(house[4]*20), -4+(house[3]*20), DC_SOUTH/*10*/,/*1*/ 0);//north + east
+        house_construct(&room[count++], -8, -4, 8+(house[4]*20), -4+(house[3]*20), DC_SOUTH/*10*/,/*DC_NONE*/ DC_WEST);//north + east
         pointp = (house[3] * 20) - 4;
     }
     else
     {
-        house_construct(&room[count++], -8 + (house[4]*20), -4, 8, -4+(house[3]*20), DC_NORTH | DC_WEST/*9*/, /*2*/ 0);//north + west
+        house_construct(&room[count++], -8 + (house[4]*20), -4, 8, -4+(house[3]*20), DC_NORTH /*| DC_WEST*/, DC_WEST);//north + west
         pointm = (house[3] * 20) - 4;
     }
     
@@ -314,39 +315,39 @@ void house_create(noble_building * building, n_byte2 * seed, n_vect2 * center)
     {
         if (house[(loop * 3) + 1] > 1)
         {
-            house_construct(&room[count++], 8, -4+(house[loop*3]*20), 8+(house[(loop*3)+1]*20), pointp, DC_SOUTH, DC_NORTH);//east
+            house_construct(&room[count++], 8, -4+(house[loop*3]*20), 8+(house[(loop*3)+1]*20), pointp, DC_SOUTH, /*DC_NORTH*/ DC_EAST);//east
             pointp = (house[loop * 3] * 20) - 4;
         }
         else
         {
-            house_construct(&room[count++], -8 + (house[(loop*3)+1]*20), -4+(house[loop*3]*20), -8, pointm, DC_NORTH, DC_SOUTH);//west
+            house_construct(&room[count++], -8 + (house[(loop*3)+1]*20), -4+(house[loop*3]*20), -8, pointm, DC_NORTH, /*DC_SOUTH*/ DC_EAST);//west
             pointm = (house[loop * 3] * 20) - 4;
         }
         loop++;
     }
-		
+
 	if (house[((rooms - 1) * 3) + 1] > 1)
     {
-        house_construct(&room[count++], -8, (house[0]*20)+4, 8+(house[((rooms-1)*3)+1]*20), -4+(house[(rooms-1)*3]*20), 4, 8);
-        house_construct(&room[count++], -8, pointm, -8-(house[((rooms-1)*3)+1]*20), (house[0]*20)+4, 1, 2);
+        house_construct(&room[count++], -8, (house[0]*20)+4, 8+(house[((rooms-1)*3)+1]*20), -4+(house[(rooms-1)*3]*20), DC_EAST, DC_WEST);
+        house_construct(&room[count++], -8, pointm, -8-(house[((rooms-1)*3)+1]*20), (house[0]*20)+4, DC_NORTH, DC_SOUTH);
         if (rooms != loop)
         {
-            house_construct(&room[count++], 8, -4+(house[(rooms-1)*3]*20),8+(house[((rooms-1)*3)+1]*20), pointp, 2, 1);
+            house_construct(&room[count++], 8, -4+(house[(rooms-1)*3]*20),8+(house[((rooms-1)*3)+1]*20), pointp, DC_SOUTH, DC_NORTH);
         }
     }
     else
     {
-        house_construct(&room[count++], 8, (house[0]*20)+4, 8+(house[((rooms-1)*3)+1]*20), -4+(house[(rooms-1)*3]*20), 4, 8);
-        house_construct(&room[count++], 8, pointp, 8-(house[((rooms-1)*3)+1]*20), (house[0]*20)+4, 2, 1);
+        house_construct(&room[count++], 8, (house[0]*20)+4, 8+(house[((rooms-1)*3)+1]*20), -4+(house[(rooms-1)*3]*20), DC_EAST, DC_WEST);
+        house_construct(&room[count++], 8, pointp, 8-(house[((rooms-1)*3)+1]*20), (house[0]*20)+4, DC_SOUTH, DC_NORTH);
         if (rooms != loop)
         {
-            house_construct(&room[count++], -8, -4+(house[(rooms-1)*3]*20), -8+(house[((rooms-1)*3)+1]*20),pointm, 1, 2);
+            house_construct(&room[count++], -8, -4+(house[(rooms-1)*3]*20), -8+(house[((rooms-1)*3)+1]*20),pointm, DC_NORTH, DC_SOUTH);
         }
     }
     
     if (rooms > 2)
     {
-        house_construct(&room[count++], 8, -4+(house[3]*20), -8, -4+(house[(rooms-1)*3]*20), 0, 12);
+        house_construct(&room[count++], 8, -4+(house[3]*20), -8, -4+(house[(rooms-1)*3]*20), DC_NONE, DC_EAST | DC_WEST);
     }
     building->roomcount = count;
     
