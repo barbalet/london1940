@@ -35,7 +35,6 @@
 
 #include "mushroom.h"
 
-
 void road_init(n_byte rotate, n_byte ring_road, n_vect2 * location, noble_road * roads)
 {
     n_int px = 0;
@@ -170,14 +169,14 @@ void road_draw(noble_road * roads)
         road_draw_each(&roads[px]);
         px++;
     }
-    /*
+#ifdef DRAW_ROAD_MARKINGS
     px = 0;
     while (px < 5)
     {
         road_draw_marking(&roads[px]);
         px++;
     }
-    */
+#endif
 }
 
 void road_draw_ring(noble_road * roads)
@@ -189,12 +188,12 @@ void road_draw_ring(noble_road * roads)
         road_draw_each(&roads[px]);
         px++;
     }
-    /*
+#ifdef DRAW_ROAD_MARKINGS
      px = 0;
      while (px < 5)
      {
-     road_draw_marking(&roads[px]);
-     px++;
+         road_draw_marking(&roads[px]);
+         px++;
      }
-     */
+#endif
 }

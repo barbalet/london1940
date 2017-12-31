@@ -38,6 +38,9 @@
 #include "noble.h"
 #endif
 
+#undef DEBUG_ROOM_NUMBER
+#undef DRAW_ROAD_MARKINGS
+
 #define POINTS_PER_ROOM             (32)
 #define POINTS_PER_ROOM_STRUCTURE   (8)
 #define MAX_ROOMS                   (8)

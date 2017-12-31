@@ -35,7 +35,6 @@
 
 #include "mushroom.h"
 
-
 /* 1=north, 2=south, 4=east, 8=west */
 
 enum direction_constant
@@ -110,7 +109,7 @@ static void house_drawroom(noble_room * room, n_int room_number)
     {
         gldraw_line(&room->points[14], &room->points[15]);
 	}
-#ifndef DEBUG_ROOM_NUMBER
+#ifdef DEBUG_ROOM_NUMBER
     {
         n_string_block number_string = "1";
         n_vect2  average = {0, 0};

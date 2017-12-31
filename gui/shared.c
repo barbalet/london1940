@@ -41,10 +41,6 @@ static n_byte  key_identification = 0;
 static n_byte2 key_value = 0;
 static n_byte  key_down = 0;
 
-static n_int   mouse_first_location_x = 0;
-static n_int   mouse_first_location_y = 0;
-static n_byte  mouse_down = 0;
-
 extern n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number);
 
 n_int draw_error(n_constant_string error_text, n_constant_string location, n_int line_number)
