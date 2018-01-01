@@ -61,7 +61,7 @@ void game_draw_scene(n_int dim_x, n_int dim_y)
         center.x = 0 - (dim_x >> 1);
         center.y = 0 - (dim_y >> 1);
         
-        gldraw_delta_move(&center, boy_location(), boy_facing(), boy_zooming());
+        gldraw_delta_move(&center, agent_location(), agent_facing(), agent_zooming());
     }
     gldraw_display_list();
 }

@@ -130,9 +130,6 @@ void game_draw_scene(n_int dim_x, n_int dim_y);
 
 void house_vertex(n_vect2 * point);
 
-void enemy_init(void);
-void enemy_move(void);
-
 n_int ecomony_init(n_byte2 * seeds);
 void  economy_draw(n_int px, n_int py);
 
@@ -149,18 +146,18 @@ void house_draw(noble_building * buildings);
 void tree_init(noble_tree * trees, n_byte2 * seed, n_vect2 * edge);
 void tree_draw(noble_tree * tree);
 
-void boy_init(void);
+void agent_init(void);
 
-n_vect2 * boy_location(void);
+n_vect2 * agent_location(void);
 
-n_int boy_facing(void);
+n_int agent_facing(void);
 
-void boy_zoom(n_int zoom);
-n_int boy_zooming(void);
+void agent_zoom(n_int zoom);
+n_int agent_zooming(void);
 
-void boy_turn(n_int delta);
-void boy_move(n_int forwards);
-void boy_cycle(void);
+void agent_turn(n_int delta);
+void agent_move(n_int forwards);
+void agent_cycle(void);
 
 void offset_map(n_vect2 * offset, n_vect2 * point);
 

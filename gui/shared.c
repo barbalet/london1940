@@ -51,11 +51,6 @@ n_int draw_error(n_constant_string error_text, n_constant_string location, n_int
 
 shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_x, n_int dim_y)
 {
-    if((key_down == 1) && (key_identification == fIdentification))
-    {
-        /* control_key(key_identification, key_value); */
-    }
-    
     return SHARED_CYCLE_OK;
 }
 
@@ -80,11 +75,8 @@ n_int shared_init(n_byte view, n_uint random)
     math_random(seed);
     
     game_init(seed);
-    
-    enemy_init();
     ecomony_init(seed);
-    
-    boy_init();
+    agent_init();
     
     return 0;
 }
@@ -102,7 +94,7 @@ n_int shared_menu(n_int menuValue)
 void shared_rotate(n_double num, n_byte wwind)
 {
     n_int integer_rotation_256 = (n_int)((num * 256) / 360);
-    boy_turn(integer_rotation_256);
+    agent_turn(integer_rotation_256);
 }
 
 
@@ -110,18 +102,18 @@ void shared_delta(n_double delta_x, n_double delta_y, n_byte wwind)
 {
     if (delta_y > 0)
     {
-        boy_move(-1);
+        agent_move(-1);
     }
     if (delta_y < 0)
     {
-        boy_move(1);
+        agent_move(1);
     }
 }
 
 void shared_zoom(n_double num, n_byte wwind)
 {
     n_int integer_zoom = (n_int)(num * 100);
-    boy_zoom(integer_zoom);
+    agent_zoom(integer_zoom);
 }
 
 void shared_keyReceived(n_byte2 value, n_byte fIdentification)
@@ -203,12 +195,10 @@ void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_i
         }
     }
 
-    boy_turn(turn_delta);
-    boy_zoom(zoomed_delta);
-    boy_move(move_delta);
-    boy_cycle();
-    /*enemy_move();*/
-
+    agent_turn(turn_delta);
+    agent_zoom(zoomed_delta);
+    agent_move(move_delta);
+    agent_cycle();
     game_draw_scene(dim_x, dim_y);
 }
 
