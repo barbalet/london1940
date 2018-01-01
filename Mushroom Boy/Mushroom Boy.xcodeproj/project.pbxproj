@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		4A0CBEE71F78B0B40038948D /* park.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CBEE61F78B0B40038948D /* park.c */; };
 		4A4237E11C6C51F6001C3886 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A4237E01C6C51F6001C3886 /* game.c */; };
+		4A782CCC1FFA30C500B26BDB /* being.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC21FFA30C500B26BDB /* being.c */; };
+		4A782CCD1FFA30C500B26BDB /* body.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC31FFA30C500B26BDB /* body.c */; };
+		4A782CCE1FFA30C500B26BDB /* brain.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC41FFA30C500B26BDB /* brain.c */; };
+		4A782CCF1FFA30C500B26BDB /* drives.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC51FFA30C500B26BDB /* drives.c */; };
+		4A782CD01FFA30C500B26BDB /* episodic.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC81FFA30C500B26BDB /* episodic.c */; };
+		4A782CD11FFA30C500B26BDB /* food.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC91FFA30C500B26BDB /* food.c */; };
+		4A782CD21FFA30C500B26BDB /* social.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CCA1FFA30C500B26BDB /* social.c */; };
+		4A782CD31FFA30C500B26BDB /* speak.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CCB1FFA30C500B26BDB /* speak.c */; };
 		4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BBC1F782C1A0080F27F /* twoblock.c */; };
 		4A916BC11F783E180080F27F /* neighborhood.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BC01F783E180080F27F /* neighborhood.c */; };
 		4A960DC11F99C1B900D6E56B /* mac.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A960DC01F99C1B900D6E56B /* mac.xib */; };
@@ -55,6 +63,16 @@
 /* Begin PBXFileReference section */
 		4A0CBEE61F78B0B40038948D /* park.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = park.c; sourceTree = "<group>"; };
 		4A4237E01C6C51F6001C3886 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
+		4A782CC21FFA30C500B26BDB /* being.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = being.c; sourceTree = "<group>"; };
+		4A782CC31FFA30C500B26BDB /* body.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = body.c; sourceTree = "<group>"; };
+		4A782CC41FFA30C500B26BDB /* brain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = brain.c; sourceTree = "<group>"; };
+		4A782CC51FFA30C500B26BDB /* drives.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drives.c; sourceTree = "<group>"; };
+		4A782CC61FFA30C500B26BDB /* entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = entity.h; sourceTree = "<group>"; };
+		4A782CC71FFA30C500B26BDB /* entity_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = entity_internal.h; sourceTree = "<group>"; };
+		4A782CC81FFA30C500B26BDB /* episodic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = episodic.c; sourceTree = "<group>"; };
+		4A782CC91FFA30C500B26BDB /* food.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = food.c; sourceTree = "<group>"; };
+		4A782CCA1FFA30C500B26BDB /* social.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = social.c; sourceTree = "<group>"; };
+		4A782CCB1FFA30C500B26BDB /* speak.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = speak.c; sourceTree = "<group>"; };
 		4A916BBC1F782C1A0080F27F /* twoblock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twoblock.c; sourceTree = "<group>"; };
 		4A916BC01F783E180080F27F /* neighborhood.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = neighborhood.c; sourceTree = "<group>"; };
 		4A960DC01F99C1B900D6E56B /* mac.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mac.xib; sourceTree = "<group>"; };
@@ -123,6 +141,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A782CC11FFA30C500B26BDB /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				4A782CC21FFA30C500B26BDB /* being.c */,
+				4A782CC31FFA30C500B26BDB /* body.c */,
+				4A782CC41FFA30C500B26BDB /* brain.c */,
+				4A782CC51FFA30C500B26BDB /* drives.c */,
+				4A782CC61FFA30C500B26BDB /* entity.h */,
+				4A782CC71FFA30C500B26BDB /* entity_internal.h */,
+				4A782CC81FFA30C500B26BDB /* episodic.c */,
+				4A782CC91FFA30C500B26BDB /* food.c */,
+				4A782CCA1FFA30C500B26BDB /* social.c */,
+				4A782CCB1FFA30C500B26BDB /* speak.c */,
+			);
+			name = entity;
+			path = ../../../nobleape/sim/entity;
+			sourceTree = "<group>";
+		};
 		5A0D60C019567F2000090DAE /* mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +265,7 @@
 		5A37A3BF1955F32800D187B0 /* Mushroom Boy */ = {
 			isa = PBXGroup;
 			children = (
+				4A782CC11FFA30C500B26BDB /* entity */,
 				5A0D60DE19567F8E00090DAE /* game */,
 				5A0D60E319567F8E00090DAE /* gui */,
 				5A0D60C019567F2000090DAE /* mac */,
@@ -368,6 +405,7 @@
 				4A4237E11C6C51F6001C3886 /* game.c in Sources */,
 				5A0D60E719567F8E00090DAE /* house.c in Sources */,
 				5A0D60D319567F2000090DAE /* main.m in Sources */,
+				4A782CD21FFA30C500B26BDB /* social.c in Sources */,
 				4A0CBEE71F78B0B40038948D /* park.c in Sources */,
 				5A6AD3F71AE0D493008CB27B /* agent.c in Sources */,
 				7B0542271C3864C00079EF20 /* road.c in Sources */,
@@ -375,19 +413,26 @@
 				4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */,
 				5A0D60D819567F2000090DAE /* interpret.c in Sources */,
 				4ABA181E1F5E643B00DFD769 /* tree.c in Sources */,
+				4A782CD31FFA30C500B26BDB /* speak.c in Sources */,
 				5A0D60DD19567F2000090DAE /* parse.c in Sources */,
+				4A782CCE1FFA30C500B26BDB /* brain.c in Sources */,
 				5A0D60D419567F2000090DAE /* NobleMacView.m in Sources */,
+				4A782CCD1FFA30C500B26BDB /* body.c in Sources */,
+				4A782CD11FFA30C500B26BDB /* food.c in Sources */,
 				5A0D60DA19567F2000090DAE /* land.c in Sources */,
 				5A0D60DB19567F2000090DAE /* math.c in Sources */,
 				7BB191E91C3A2E0000DF03BA /* gldraw.c in Sources */,
+				4A782CCF1FFA30C500B26BDB /* drives.c in Sources */,
 				5A0D60D519567F2000090DAE /* audio.c in Sources */,
 				7B8CE0981BA5BBF6000450D7 /* NobleShared.m in Sources */,
+				4A782CCC1FFA30C500B26BDB /* being.c in Sources */,
 				5A0D60D919567F2000090DAE /* io.c in Sources */,
 				5A0D60DC19567F2000090DAE /* network.c in Sources */,
 				5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */,
 				5A0D60D619567F2000090DAE /* compress.c in Sources */,
 				7B0542261C3864C00079EF20 /* fence.c in Sources */,
 				4A916BC11F783E180080F27F /* neighborhood.c in Sources */,
+				4A782CD01FFA30C500B26BDB /* episodic.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
