@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A0884621FFAB2FB007988A2 /* city.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A0884601FFAB2FB007988A2 /* city.c */; };
 		4A0CBEE71F78B0B40038948D /* park.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CBEE61F78B0B40038948D /* park.c */; };
 		4A4237E11C6C51F6001C3886 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A4237E01C6C51F6001C3886 /* game.c */; };
 		4A782CCC1FFA30C500B26BDB /* being.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC21FFA30C500B26BDB /* being.c */; };
@@ -61,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A0884601FFAB2FB007988A2 /* city.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = city.c; sourceTree = "<group>"; };
+		4A0884611FFAB2FB007988A2 /* city.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = city.h; sourceTree = "<group>"; };
 		4A0CBEE61F78B0B40038948D /* park.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = park.c; sourceTree = "<group>"; };
 		4A4237E01C6C51F6001C3886 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
 		4A782CC21FFA30C500B26BDB /* being.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = being.c; sourceTree = "<group>"; };
@@ -141,6 +144,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A08845F1FFAB2FB007988A2 /* city */ = {
+			isa = PBXGroup;
+			children = (
+				4A0884601FFAB2FB007988A2 /* city.c */,
+				4A0884611FFAB2FB007988A2 /* city.h */,
+			);
+			name = city;
+			path = ../../city;
+			sourceTree = "<group>";
+		};
 		4A782CC11FFA30C500B26BDB /* entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +278,7 @@
 		5A37A3BF1955F32800D187B0 /* Mushroom Boy */ = {
 			isa = PBXGroup;
 			children = (
+				4A08845F1FFAB2FB007988A2 /* city */,
 				4A782CC11FFA30C500B26BDB /* entity */,
 				5A0D60DE19567F8E00090DAE /* game */,
 				5A0D60E319567F8E00090DAE /* gui */,
@@ -406,6 +420,7 @@
 				5A0D60E719567F8E00090DAE /* house.c in Sources */,
 				5A0D60D319567F2000090DAE /* main.m in Sources */,
 				4A782CD21FFA30C500B26BDB /* social.c in Sources */,
+				4A0884621FFAB2FB007988A2 /* city.c in Sources */,
 				4A0CBEE71F78B0B40038948D /* park.c in Sources */,
 				5A6AD3F71AE0D493008CB27B /* agent.c in Sources */,
 				7B0542271C3864C00079EF20 /* road.c in Sources */,

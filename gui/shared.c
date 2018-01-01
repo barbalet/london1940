@@ -35,6 +35,8 @@
 
 #include "shared.h"
 #include "mushroom.h"
+#include "city.h"
+
 #include <stdio.h>
 
 static n_byte  key_identification = 0;
@@ -51,6 +53,7 @@ n_int draw_error(n_constant_string error_text, n_constant_string location, n_int
 
 shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_x, n_int dim_y)
 {
+    city_cycle();
     return SHARED_CYCLE_OK;
 }
 
@@ -75,7 +78,8 @@ n_int shared_init(n_byte view, n_uint random)
     math_random(seed);
     
     game_init(seed);
-    ecomony_init(seed);
+    city_init(seed);
+    /*ecomony_init(seed);*/
     agent_init();
     
     return 0;

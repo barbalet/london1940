@@ -1,6 +1,6 @@
 /****************************************************************
  
- game.c
+ city.h
  
  =============================================================
  
@@ -33,35 +33,11 @@
  
  ****************************************************************/
 
-#include "mushroom.h"
+#ifdef    _WIN32
+#include "../noble/noble.h"
+#else
+#include "noble.h"
+#endif
 
-void game_init(n_byte2 * seed)
-{
-    n_vect2 initiate;
-    initiate.x = 500;
-    initiate.y = 500;
-    neighborhood_init(seed, &initiate);
-    
-}
-
-void game_draw_scene(n_int dim_x, n_int dim_y)
-{
-    gldraw_background_green();
-    if (gldraw_scene_done())
-    {        
-        gldraw_start_display_list();
-        neighborhood_draw();
-        /*game_grid();*/
-        gldraw_end_display_list();
-    }
-    else
-    {
-        n_vect2 center;
-        center.x = 0 - (dim_x >> 1);
-        center.y = 0 - (dim_y >> 1);
-        
-        gldraw_delta_move(&center, agent_location(), agent_facing(), agent_zooming());
-    }
-    gldraw_display_list();
-}
-
+void city_init(n_byte2 * seed);
+void city_cycle(void);

@@ -1,6 +1,6 @@
 /****************************************************************
  
- game.c
+ city.c
  
  =============================================================
  
@@ -33,35 +33,20 @@
  
  ****************************************************************/
 
-#include "mushroom.h"
+#include "city.h"
+#include "entity.h"
 
-void game_init(n_byte2 * seed)
+static noble_being beings[64];
+static n_uint beings_number;
+
+void city_init(n_byte2 * seed)
 {
-    n_vect2 initiate;
-    initiate.x = 500;
-    initiate.y = 500;
-    neighborhood_init(seed, &initiate);
+    beings_number = being_init_group(beings, seed, 50, 64);
+}
+
+void city_cycle(void)
+{
     
 }
 
-void game_draw_scene(n_int dim_x, n_int dim_y)
-{
-    gldraw_background_green();
-    if (gldraw_scene_done())
-    {        
-        gldraw_start_display_list();
-        neighborhood_draw();
-        /*game_grid();*/
-        gldraw_end_display_list();
-    }
-    else
-    {
-        n_vect2 center;
-        center.x = 0 - (dim_x >> 1);
-        center.y = 0 - (dim_y >> 1);
-        
-        gldraw_delta_move(&center, agent_location(), agent_facing(), agent_zooming());
-    }
-    gldraw_display_list();
-}
 
