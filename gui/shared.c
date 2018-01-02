@@ -53,7 +53,6 @@ n_int draw_error(n_constant_string error_text, n_constant_string location, n_int
 
 shared_cycle_state shared_cycle(n_uint ticks, n_byte fIdentification, n_int dim_x, n_int dim_y)
 {
-    city_cycle();
     return SHARED_CYCLE_OK;
 }
 
@@ -203,6 +202,7 @@ void shared_draw(n_byte * outputBuffer, n_byte fIdentification, n_int dim_x, n_i
     agent_zoom(zoomed_delta);
     agent_move(move_delta);
     agent_cycle();
+    city_cycle();
     game_draw_scene(dim_x, dim_y);
 }
 

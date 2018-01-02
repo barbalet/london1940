@@ -44,9 +44,166 @@ void city_init(n_byte2 * seed)
     beings_number = being_init_group(beings, seed, 50, 64);
 }
 
+
+void city_listen(noble_being * beings, n_uint beings_number, noble_being * local_being)
+{
+    being_listen_struct bls;
+    n_uint loop = 0;
+
+    if (local_being->delta.awake == 0) return;
+    
+    bls.max_shout_volume = 127;
+    bls.local = local_being;
+    /** clear shout values */
+    if (local_being->changes.shout[SHOUT_CTR] > 0)
+    {
+        local_being->changes.shout[SHOUT_CTR]--;
+    }
+    
+    while (loop < beings_number)
+    {
+        noble_being * other = &beings[loop];
+        if (other!= local_being)
+        {
+            being_listen_loop_no_sim(other, (void *) &bls);
+        }
+        loop++;
+    }
+}
+
+void city_sociability(noble_being * beings, n_uint beings_number, noble_being * local_being)
+{
+    drives_sociability_data dsd;
+    n_uint loop = 0;
+
+    dsd.beings_in_vacinity = 0;
+    dsd.being = local_being;
+    
+    while (loop < beings_number)
+    {
+        noble_being * other = &beings[loop];
+        if (other!= local_being)
+        {
+            drives_sociability_loop_no_sim(other, (void *) &dsd);
+        }
+        loop++;
+    }
+    being_crowding_cycle(local_being, dsd.beings_in_vacinity);
+}
+
+
 void city_cycle(void)
 {
+    n_uint loop = 0;
     
+    while (loop < beings_number)
+    {
+        beings[loop].delta.awake = FULLY_AWAKE;
+        loop++;
+    }
+
+    loop = 0;
+    while (loop < beings_number)
+    {
+        being_cycle_universal(&beings[loop]);
+        loop++;
+    }
+    
+    loop = 0;
+    while (loop < beings_number)
+    {
+        city_listen(beings, beings_number, &beings[loop]);
+        loop++;
+    }
+
+    loop = 0;
+    while (loop < beings_number)
+    {
+        episodic_cycle_no_sim(&beings[loop]);
+        loop++;
+    }
+/*
+ if (local_being->delta.awake == 0) return;
+ 
+ being_cycle_awake(local_sim, local_being);
+ */
+    
+    loop = 0;
+    while (loop < beings_number)
+    {
+        drives_hunger(&beings[loop]);
+        loop++;
+    }
+    
+    loop = 0;
+    while (loop < beings_number)
+    {
+        city_sociability(beings, beings_number, &beings[loop]);
+        loop++;
+    }
+
+
+    /*drives_sex(local_being, local_being->delta.awake, local_sim);*/
+    
+    
+    loop = 0;
+    while (loop < beings_number)
+    {
+        drives_fatigue(&beings[loop]);
+        loop++;
+    }
+    
+    
+    loop = 0;
+    while (loop < beings_number)
+    {
+        n_byte2 local_brain_state[3];
+        noble_being * local = &beings[loop];
+        if(being_brainstates(local, (local->delta.awake == 0), local_brain_state))
+        {
+            n_byte            *local_brain = being_brain(local);
+            if (local_brain != 0L)
+            {
+                brain_cycle(local_brain, local_brain_state);
+            }
+        }
+        loop++;
+    }
+/*
+ static void sim_brain_dialogue_loop(noble_simulation * local_sim, noble_being * local_being, void * data)
+{
+    n_byte     awake = 1;
+    n_byte    *local_internal = being_braincode_internal(local_being);
+    n_byte    *local_external = being_braincode_external(local_being);
+    if(local_being->delta.awake == 0)
+    {
+        awake=0;
+    }
+    brain_dialogue(local_sim, awake, local_being, local_being, local_internal, local_external, being_random(local_being)%SOCIAL_SIZE);
+    brain_dialogue(local_sim, awake, local_being, local_being, local_external, local_internal, being_random(local_being)%SOCIAL_SIZE);
+}
+
+    being_loop_no_thread(&sim, 0L, being_tidy_loop, &max_honor);
+    
+    being_loop(&sim, social_initial_loop, PROCESSING_LIGHT_WEIGHT);
+    
+    if (max_honor)
+    {
+        being_loop(&sim, being_recalibrate_honor_loop, PROCESSING_FEATHER_WEIGHT);
+    }
+    
+    being_loop(&sim, social_secondary_loop, PROCESSING_FEATHER_WEIGHT);
+
+    {
+        being_remove_loop2_struct * brls = being_remove_initial(&sim);
+        if (sim.ext_death != 0L)
+        {
+            being_loop_no_thread(&sim, 0L, being_remove_loop1, 0L);
+        }
+        being_loop_no_thread(&sim, 0L, being_remove_loop2, brls);
+        sim_being_remove_final(&sim, &brls);
+    }
+    */
 }
 
 
