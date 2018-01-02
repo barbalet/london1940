@@ -95,7 +95,8 @@ void city_sociability(noble_being * beings, n_uint beings_number, noble_being * 
 void city_cycle(void)
 {
     n_uint loop = 0;
-    
+    n_int  max_honor = 0;
+
     while (loop < beings_number)
     {
         beings[loop].delta.awake = FULLY_AWAKE;
@@ -122,11 +123,11 @@ void city_cycle(void)
         episodic_cycle_no_sim(&beings[loop]);
         loop++;
     }
-/*
- if (local_being->delta.awake == 0) return;
- 
- being_cycle_awake(local_sim, local_being);
- */
+    /*
+     if (local_being->delta.awake == 0) return;
+     
+     being_cycle_awake(local_sim, local_being);
+     */
     
     loop = 0;
     while (loop < beings_number)
@@ -182,16 +183,28 @@ void city_cycle(void)
     brain_dialogue(local_sim, awake, local_being, local_being, local_internal, local_external, being_random(local_being)%SOCIAL_SIZE);
     brain_dialogue(local_sim, awake, local_being, local_being, local_external, local_internal, being_random(local_being)%SOCIAL_SIZE);
 }
+ */
+    
+    loop = 0;
+    while (loop < beings_number)
+    {
+        being_tidy_loop_no_sim(&beings[loop], &max_honor);
+        loop++;
+    }
 
-    being_loop_no_thread(&sim, 0L, being_tidy_loop, &max_honor);
-    
+/*
     being_loop(&sim, social_initial_loop, PROCESSING_LIGHT_WEIGHT);
-    
+*/
     if (max_honor)
     {
-        being_loop(&sim, being_recalibrate_honor_loop, PROCESSING_FEATHER_WEIGHT);
+        loop = 0;
+        while (loop < beings_number)
+        {
+            being_recalibrate_honor_loop_no_sim(&beings[loop]);
+            loop++;
+        }
     }
-    
+    /*
     being_loop(&sim, social_secondary_loop, PROCESSING_FEATHER_WEIGHT);
 
     {
