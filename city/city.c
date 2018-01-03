@@ -44,7 +44,6 @@ void city_init(n_byte2 * seed)
     beings_number = being_init_group(beings, seed, 50, 64);
 }
 
-
 void city_listen(noble_being * beings, n_uint beings_number, noble_being * local_being)
 {
     being_listen_struct bls;
@@ -143,9 +142,7 @@ void city_cycle(void)
         loop++;
     }
 
-
     /*drives_sex(local_being, local_being->delta.awake, local_sim);*/
-    
     
     loop = 0;
     while (loop < beings_number)
@@ -162,7 +159,7 @@ void city_cycle(void)
         noble_being * local = &beings[loop];
         if(being_brainstates(local, (local->delta.awake == 0), local_brain_state))
         {
-            n_byte            *local_brain = being_brain(local);
+            n_byte *local_brain = being_brain(local);
             if (local_brain != 0L)
             {
                 brain_cycle(local_brain, local_brain_state);
@@ -217,6 +214,55 @@ void city_cycle(void)
         sim_being_remove_final(&sim, &brls);
     }
     */
+}
+
+static n_uint count = 0;
+
+void city_draw(void)
+{
+    n_uint loop = 0;
+    
+    char value[200] = {0};
+    
+    gldraw_red();
+    
+    value[0] = '0'+ (count/1000) % 10;
+    value[1] = '0'+ (count/100) % 10;
+    value[2] = '0'+ (count/10) % 10;
+    value[3] = '0'+ (count/1) % 10;
+    value[4] = 0;
+
+    
+    count ++;
+    
+    while (loop < beings_number)
+    {
+        n_vect2 line_start;
+        n_vect2 line_end;
+        
+
+        
+        line_start.x = line_end.x = beings[loop].delta.location[0];
+        line_start.y = line_end.y = beings[loop].delta.location[1];
+        
+        gldraw_string(value, line_start.x, line_start.y);
+
+        
+        line_start.x -= 10;
+        line_end.x += 10;
+        
+        gldraw_line(&line_start, &line_end);
+        
+        line_start.x += 10;
+        line_end.x -= 10;
+        
+        line_start.y -= 10;
+        line_end.y += 10;
+        
+        gldraw_line(&line_start, &line_end);
+
+        loop++;
+    }
 }
 
 

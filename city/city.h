@@ -41,3 +41,4 @@
 
 void city_init(n_byte2 * seed);
 void city_cycle(void);
+void city_draw(void);
