@@ -90,6 +90,85 @@ void city_sociability(noble_being * beings, n_uint beings_number, noble_being * 
     being_crowding_cycle(local_being, dsd.beings_in_vacinity);
 }
 
+void city_cycle_awake(noble_being * local)
+{
+    n_int          loc_s      = being_speed(local);
+    n_int          loc_h      = being_height(local);
+    /** tmp_speed is the optimum speed based on the gradient */
+    /** delta_energy is the energy required for movement */
+    being_nearest nearest;
+    n_int   tmp_speed = 10;/*being_temporary_speed(local, &test_land, &az);*/
+    n_byte  loc_state = BEING_STATE_ASLEEP;/*being_state_find(local, az, loc_s);*/
+    
+    if (local->delta.awake != FULLY_ASLEEP)
+    {
+        loc_state |= BEING_STATE_AWAKE;
+    }
+    
+    if (loc_s != 0)
+    {
+        loc_state |= BEING_STATE_MOVING;
+    }
+    
+    nearest.opposite_sex = 0L;
+    nearest.same_sex = 0L;
+    
+    /** If it sees water in the distance then turn */
+    /*
+    if (((loc_state & BEING_STATE_SWIMMING) != 0) || test_land)
+    {
+        being_swimming(sim, local, &tmp_speed);
+    }
+    else
+    {
+        being_not_swimming(sim, local, &tmp_speed, &nearest, &loc_s, &loc_state);
+    }
+    */
+    /*
+    if ((loc_state & (BEING_STATE_SWIMMING | BEING_STATE_GROOMING | BEING_STATE_ATTACK | BEING_STATE_SHOWFORCE)) == 0)
+    {
+        if ((loc_state & BEING_STATE_HUNGRY) != 0)
+        {
+            if (loc_s == 0)
+            {
+                n_byte  food_type;
+                n_int   energy = food_eat(being_location_x(local), being_location_y(local), az, &food_type, local);
+                
+#ifdef EPISODIC_ON
+                episodic_food(sim, local, energy, food_type);
+#endif
+                
+                being_energy_delta(local, energy);
+                being_reset_drive(local, DRIVE_HUNGER);
+                loc_state |= BEING_STATE_EATING;
+                if (loc_h < BEING_MAX_HEIGHT)
+                {
+                    if ((birth_days+AGE_OF_MATURITY) > today_days)
+                    {
+                        loc_h += ENERGY_TO_GROWTH(local,energy);
+                    }
+                }
+            }
+        }
+        else
+        {
+            social_goals(local);
+            if (loc_s==0)
+            {
+                loc_s = 10;
+            }
+        }
+    }
+    */
+    being_set_height(local, loc_h);
+    being_set_state(local, loc_state);
+    being_calculate_speed(local, tmp_speed, loc_state);
+    being_genetic_wandering(local, &nearest);
+#ifdef TERRITORY_ON
+    being_territory_index(local);
+#endif
+    /*being_mass_calculation(sim, local, loc_state);*/
+}
 
 void city_cycle(void)
 {
@@ -127,6 +206,14 @@ void city_cycle(void)
      
      being_cycle_awake(local_sim, local_being);
      */
+    
+    loop = 0;
+    
+    while (loop < beings_number)
+    {
+        city_cycle_awake(&beings[loop]);
+        loop++;
+    }
     
     loop = 0;
     while (loop < beings_number)
