@@ -36,12 +36,14 @@
 #include "city.h"
 #include "entity.h"
 
-static noble_being beings[64];
+#define MAX_NUMBER_APES (256)
+
+static noble_being beings[MAX_NUMBER_APES];
 static n_uint beings_number;
 
 void city_init(n_byte2 * seed)
 {
-    beings_number = being_init_group(beings, seed, 50, 64);
+    beings_number = being_init_group(beings, seed, (MAX_NUMBER_APES * 5)/7, MAX_NUMBER_APES);
 }
 
 void city_listen(noble_being * beings, n_uint beings_number, noble_being * local_being)
@@ -97,7 +99,7 @@ void city_cycle_awake(noble_being * local)
     /** tmp_speed is the optimum speed based on the gradient */
     /** delta_energy is the energy required for movement */
     being_nearest nearest;
-    n_int   tmp_speed = 10;/*being_temporary_speed(local, &test_land, &az);*/
+    n_int   tmp_speed = 1;/*being_temporary_speed(local, &test_land, &az);*/
     n_byte  loc_state = BEING_STATE_ASLEEP;/*being_state_find(local, az, loc_s);*/
     
     if (local->delta.awake != FULLY_ASLEEP)
@@ -238,7 +240,7 @@ void city_cycle(void)
         loop++;
     }
     
-    
+/*
     loop = 0;
     while (loop < beings_number)
     {
@@ -254,6 +256,7 @@ void city_cycle(void)
         }
         loop++;
     }
+ */
 /*
  static void sim_brain_dialogue_loop(noble_simulation * local_sim, noble_being * local_being, void * data)
 {

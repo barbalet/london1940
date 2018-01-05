@@ -60,14 +60,15 @@ void game_draw_scene(n_int dim_x, n_int dim_y)
         n_vect2 center;
         center.x = 0 - (dim_x >> 1);
         center.y = 0 - (dim_y >> 1);
-        gldraw_start_active_list();
-        city_draw();
-        gldraw_end_active_list();
-        
         gldraw_delta_move(&center, agent_location(), agent_facing(), agent_zooming());
         
-        gldraw_active_list();
     }
     gldraw_display_list();
+    
+    gldraw_start_active_list();
+    city_draw();
+    gldraw_end_active_list();
+    gldraw_active_list();
+
 }
 
