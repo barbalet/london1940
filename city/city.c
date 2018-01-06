@@ -330,13 +330,10 @@ void city_draw(void)
         n_vect2 line_start;
         n_vect2 line_end;
         
-
-        
         line_start.x = line_end.x = beings[loop].delta.location[0];
         line_start.y = line_end.y = beings[loop].delta.location[1];
         
         gldraw_string(value, line_start.x, line_start.y);
-
         
         line_start.x -= 10;
         line_end.x += 10;
