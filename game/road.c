@@ -156,8 +156,8 @@ void road_draw_marking(noble_road * road)
 
 void road_draw_each(noble_road * road)
 {
-   gldraw_black();
-   gldraw_quads(&road->points[0], 1);
+    gldraw_black();
+    gldraw_quads(&road->points[0], 1);
 }
 
 void road_draw(noble_road * roads)
