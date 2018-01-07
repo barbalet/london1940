@@ -62,23 +62,29 @@ n_byte city_being_can_move(n_vect2 * location, n_vect2 * delta)
 
 void city_being_move(n_vect2 * location)
 {
-    n_int px = location->x - TOP_LEFT_X;
-    n_int py = location->y - TOP_LEFT_Y;
+    n_int px = location->x;
+    n_int py = location->y;
     
     px = (px + DIMENSION_X) % DIMENSION_X;
     py = (py + DIMENSION_Y) % DIMENSION_Y;
     
-    location->x = px + TOP_LEFT_X;
-    location->y = py + TOP_LEFT_Y;
+    location->x = px;
+    location->y = py;
 }
 
 void city_being_range(n_vect2 * top_left, n_vect2 * bottom_right)
 {
-    top_left->x = TOP_LEFT_X;
-    top_left->y = TOP_LEFT_Y;
+    top_left->x = 0;
+    top_left->y = 0;
 
-    bottom_right->x = BOTTOM_RIGHT_X - 1;
-    bottom_right->y = BOTTOM_RIGHT_Y - 1;
+    bottom_right->x = DIMENSION_X - 1;
+    bottom_right->y = DIMENSION_Y - 1;
+}
+
+void city_translate(n_vect2 * pnt)
+{
+    pnt->x = pnt->x + TOP_LEFT_X;
+    pnt->y = pnt->y + TOP_LEFT_Y;
 }
 
 void city_init(n_byte2 * seed)
@@ -365,7 +371,6 @@ void city_draw(void)
     value[3] = '0'+ (count/1) % 10;
     value[4] = 0;
 
-    
     count ++;
     
     while (loop < beings_number)
@@ -376,6 +381,9 @@ void city_draw(void)
         line_start.x = line_end.x = beings[loop].delta.location[0];
         line_start.y = line_end.y = beings[loop].delta.location[1];
         
+        city_translate(&line_start);
+        city_translate(&line_end);
+
         gldraw_string(value, line_start.x, line_start.y);
         
         line_start.x -= 10;
