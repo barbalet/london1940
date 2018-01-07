@@ -148,7 +148,7 @@ void city_cycle_awake(noble_being * local)
     /** tmp_speed is the optimum speed based on the gradient */
     /** delta_energy is the energy required for movement */
     being_nearest nearest;
-    n_int   tmp_speed = 1;/*being_temporary_speed(local, &test_land, &az);*/
+    n_int   tmp_speed = 3;/*being_temporary_speed(local, &test_land, &az);*/
     n_byte  loc_state = BEING_STATE_ASLEEP;/*being_state_find(local, az, loc_s);*/
     
     if (local->delta.awake != FULLY_ASLEEP)
@@ -355,47 +355,40 @@ void city_cycle(void)
     */
 }
 
-static n_uint count = 0;
-
 void city_draw(void)
 {
     n_uint loop = 0;
     
-    char value[200] = {0};
-    
     gldraw_red();
-    
-    value[0] = '0'+ (count/1000) % 10;
-    value[1] = '0'+ (count/100) % 10;
-    value[2] = '0'+ (count/10) % 10;
-    value[3] = '0'+ (count/1) % 10;
-    value[4] = 0;
-
-    count ++;
     
     while (loop < beings_number)
     {
         n_vect2 line_start;
         n_vect2 line_end;
+        n_vect2 facing;
         
         line_start.x = line_end.x = beings[loop].delta.location[0];
         line_start.y = line_end.y = beings[loop].delta.location[1];
         
+        being_facing_vector(&beings[loop], &facing, 50);
+        
         city_translate(&line_start);
         city_translate(&line_end);
 
-        gldraw_string(value, line_start.x, line_start.y);
+        vect2_add(&facing, &line_start, &facing);
         
-        line_start.x -= 10;
-        line_end.x += 10;
+        gldraw_line(&line_start, &facing);
+        
+        line_start.x -= 5;
+        line_end.x += 5;
         
         gldraw_line(&line_start, &line_end);
         
-        line_start.x += 10;
-        line_end.x -= 10;
+        line_start.x += 5;
+        line_end.x -= 5;
         
-        line_start.y -= 10;
-        line_end.y += 10;
+        line_start.y -= 5;
+        line_end.y += 5;
         
         gldraw_line(&line_start, &line_end);
 
