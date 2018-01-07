@@ -235,7 +235,22 @@ void city_cycle(void)
     loop = 0;
     while (loop < beings_number)
     {
-        being_cycle_universal(&beings[loop]);
+        noble_being * local = &beings[loop];
+        being_immune_response(local);
+        
+#ifdef BRAINCODE_ON
+#ifdef BRAIN_ON
+        /** may need to add external probe linking too */
+        /*being_brain_probe(local);*/
+#endif
+#endif
+        
+        if ((local->delta.awake == 0) && local)
+        {
+            being_set_state(local, BEING_STATE_ASLEEP);
+            being_reset_drive(local, DRIVE_FATIGUE);
+        }
+        
         loop++;
     }
     
