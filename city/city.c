@@ -41,9 +41,52 @@
 static noble_being beings[MAX_NUMBER_APES];
 static n_uint beings_number;
 
+/*
+ -13600    -13600    -13600    -13600
+ 13400     10200     13600     10200
+ */
+
+#define TOP_LEFT_X (-13600)
+#define TOP_LEFT_Y (-13600)
+
+#define BOTTOM_RIGHT_X (13600)
+#define BOTTOM_RIGHT_Y (10200)
+
+#define DIMENSION_X (BOTTOM_RIGHT_X - TOP_LEFT_X)
+#define DIMENSION_Y (BOTTOM_RIGHT_Y - TOP_LEFT_Y)
+
+n_byte city_being_can_move(n_vect2 * location, n_vect2 * delta)
+{
+    return 1;
+}
+
+void city_being_move(n_vect2 * location)
+{
+    n_int px = location->x - TOP_LEFT_X;
+    n_int py = location->y - TOP_LEFT_Y;
+    
+    px = (px + DIMENSION_X) % DIMENSION_X;
+    py = (py + DIMENSION_Y) % DIMENSION_Y;
+    
+    location->x = px + TOP_LEFT_X;
+    location->y = py + TOP_LEFT_Y;
+}
+
+void city_being_range(n_vect2 * top_left, n_vect2 * bottom_right)
+{
+    top_left->x = TOP_LEFT_X;
+    top_left->y = TOP_LEFT_Y;
+
+    bottom_right->x = BOTTOM_RIGHT_X - 1;
+    bottom_right->y = BOTTOM_RIGHT_Y - 1;
+}
+
 void city_init(n_byte2 * seed)
 {
     beings_number = being_init_group(beings, seed, (MAX_NUMBER_APES * 5)/7, MAX_NUMBER_APES);
+    being_override_move(&city_being_move);
+    being_override_can_move(&city_being_can_move);
+    being_override_range(&city_being_range);
 }
 
 void city_listen(noble_being * beings, n_uint beings_number, noble_being * local_being)
@@ -352,10 +395,6 @@ void city_draw(void)
     }
 }
 
-/*
- -13600    -13600    -13600    -13600
-  13400     10200     13600     10200 
- */
 
 
 
