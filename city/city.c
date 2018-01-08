@@ -60,7 +60,7 @@ n_byte city_being_can_move(n_vect2 * location, n_vect2 * delta)
     return 1;
 }
 
-void city_being_move(n_vect2 * location)
+void city_being_wrap(n_vect2 * location)
 {
     n_int px = location->x;
     n_int py = location->y;
@@ -72,13 +72,10 @@ void city_being_move(n_vect2 * location)
     location->y = py;
 }
 
-void city_being_range(n_vect2 * top_left, n_vect2 * bottom_right)
+void city_being_initial_location(n_vect2 * location, n_byte2 * seed)
 {
-    top_left->x = 0;
-    top_left->y = 0;
-
-    bottom_right->x = DIMENSION_X - 1;
-    bottom_right->y = DIMENSION_Y - 1;
+    location->x = math_random(seed) % DIMENSION_X;
+    location->y = math_random(seed) % DIMENSION_Y;
 }
 
 void city_translate(n_vect2 * pnt)
@@ -90,9 +87,9 @@ void city_translate(n_vect2 * pnt)
 void city_init(n_byte2 * seed)
 {
     beings_number = being_init_group(beings, seed, (MAX_NUMBER_APES * 5)/7, MAX_NUMBER_APES);
-    being_override_move(&city_being_move);
-    being_override_can_move(&city_being_can_move);
-    being_override_range(&city_being_range);
+    being_wrap_override(&city_being_wrap);
+    being_can_move_override(&city_being_can_move);
+    being_initial_location_override(&city_being_initial_location);
 }
 
 void city_listen(noble_being * beings, n_uint beings_number, noble_being * local_being)
