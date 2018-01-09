@@ -10,6 +10,7 @@
 		4A0884621FFAB2FB007988A2 /* city.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A0884601FFAB2FB007988A2 /* city.c */; };
 		4A0CBEE71F78B0B40038948D /* park.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CBEE61F78B0B40038948D /* park.c */; };
 		4A4237E11C6C51F6001C3886 /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A4237E01C6C51F6001C3886 /* game.c */; };
+		4A55A64320048CB9008EE3DF /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A55A64220048CB8008EE3DF /* matrix.c */; };
 		4A782CCC1FFA30C500B26BDB /* being.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC21FFA30C500B26BDB /* being.c */; };
 		4A782CCD1FFA30C500B26BDB /* body.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC31FFA30C500B26BDB /* body.c */; };
 		4A782CCE1FFA30C500B26BDB /* brain.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A782CC41FFA30C500B26BDB /* brain.c */; };
@@ -66,6 +67,7 @@
 		4A0884611FFAB2FB007988A2 /* city.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = city.h; sourceTree = "<group>"; };
 		4A0CBEE61F78B0B40038948D /* park.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = park.c; sourceTree = "<group>"; };
 		4A4237E01C6C51F6001C3886 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
+		4A55A64220048CB8008EE3DF /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
 		4A782CC21FFA30C500B26BDB /* being.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = being.c; sourceTree = "<group>"; };
 		4A782CC31FFA30C500B26BDB /* body.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = body.c; sourceTree = "<group>"; };
 		4A782CC41FFA30C500B26BDB /* brain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = brain.c; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				4A4237E01C6C51F6001C3886 /* game.c */,
+				4A55A64220048CB8008EE3DF /* matrix.c */,
 				7B0542241C3864C00079EF20 /* fence.c */,
 				4A916BBC1F782C1A0080F27F /* twoblock.c */,
 				4A916BC01F783E180080F27F /* neighborhood.c */,
@@ -441,6 +444,7 @@
 				5A0D60D519567F2000090DAE /* audio.c in Sources */,
 				7B8CE0981BA5BBF6000450D7 /* NobleShared.m in Sources */,
 				4A782CCC1FFA30C500B26BDB /* being.c in Sources */,
+				4A55A64320048CB9008EE3DF /* matrix.c in Sources */,
 				5A0D60D919567F2000090DAE /* io.c in Sources */,
 				5A0D60DC19567F2000090DAE /* network.c in Sources */,
 				5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */,
