@@ -36,5 +36,28 @@
 #include "mushroom.h"
 #include "city.h"
 
+void matrix_init(void)
+{
+    
+}
 
+void matrix_add_line(n_vect2 * start, n_vect2 * finish)
+{
+    
+}
+
+void matrix_add_window(n_vect2 * start, n_vect2 end)
+{
+
+}
+
+void matrix_see_through(n_vect2 * origin, n_vect2 * delta)
+{
+    
+}
+
+void matrix_move_through(n_vect2 * origin, n_vect2 * delta)
+{
+    
+}
 
