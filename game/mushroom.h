@@ -115,6 +115,10 @@ typedef struct{
     n_int   zooming;
 }noble_agent;
 
+typedef struct{
+    n_vect2 start;
+    n_vect2 end;
+}matrix_plane;
 
 void park_init(n_byte2 * seed, n_vect2 * location, noble_park * parks);
 void park_draw(noble_park * park);
@@ -160,4 +164,10 @@ void agent_move(n_int forwards);
 void agent_cycle(void);
 
 void offset_map(n_vect2 * offset, n_vect2 * point);
+
+void matrix_add_window(n_vect2 * start, n_vect2 * end);
+void matrix_add_door(n_vect2 * start, n_vect2 * end);
+void matrix_add_wall(n_vect2 * start, n_vect2 * end);
+
+void matrix_account(void);
 

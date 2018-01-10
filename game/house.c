@@ -233,32 +233,32 @@ static void house_construct(noble_room * room, n_int topx, n_int topy, n_int bot
     
     if (room->door & DC_NORTH)
     {
-        vect2_populate(&room->points[16], topx + 3, midy + 7);
-        vect2_populate(&room->points[17], topx + 3, midy - 7);
-        vect2_populate(&room->points[18], topx - 3, midy - 7);
-        vect2_populate(&room->points[19], topx - 3, midy + 7);
+        vect2_populate(&room->points[16], topx + 2, midy + 5);
+        vect2_populate(&room->points[17], topx + 2, midy - 5);
+        vect2_populate(&room->points[18], topx - 2, midy - 5);
+        vect2_populate(&room->points[19], topx - 2, midy + 5);
 
     }
     if (room->door & DC_SOUTH)
     {
-        vect2_populate(&room->points[20], botx - 3, midy + 7);
-        vect2_populate(&room->points[21], botx - 3, midy - 7);
-        vect2_populate(&room->points[22], botx + 3, midy - 7);
-        vect2_populate(&room->points[23], botx + 3, midy + 7);
+        vect2_populate(&room->points[20], botx - 2, midy + 5);
+        vect2_populate(&room->points[21], botx - 2, midy - 5);
+        vect2_populate(&room->points[22], botx + 2, midy - 5);
+        vect2_populate(&room->points[23], botx + 2, midy + 5);
     }
     if (room->door & DC_EAST)
     {
-        vect2_populate(&room->points[24], midx + 7, boty - 3);
-        vect2_populate(&room->points[25], midx - 7, boty - 3);
-        vect2_populate(&room->points[26], midx - 7, boty + 3);
-        vect2_populate(&room->points[27], midx + 7, boty + 3);
+        vect2_populate(&room->points[24], midx + 5, boty - 2);
+        vect2_populate(&room->points[25], midx - 5, boty - 2);
+        vect2_populate(&room->points[26], midx - 5, boty + 2);
+        vect2_populate(&room->points[27], midx + 5, boty + 2);
     }
     if (room->door & DC_WEST)
     {
-        vect2_populate(&room->points[28], midx + 7, topy + 3);
-        vect2_populate(&room->points[29], midx - 7, topy + 3);
-        vect2_populate(&room->points[30], midx - 7, topy - 3);
-        vect2_populate(&room->points[31], midx + 7, topy - 3);
+        vect2_populate(&room->points[28], midx + 5, topy + 2);
+        vect2_populate(&room->points[29], midx - 5, topy + 2);
+        vect2_populate(&room->points[30], midx - 5, topy - 2);
+        vect2_populate(&room->points[31], midx + 5, topy - 2);
     }
 }
 

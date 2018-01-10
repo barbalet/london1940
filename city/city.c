@@ -33,6 +33,7 @@
  
  ****************************************************************/
 
+#include "mushroom.h"
 #include "city.h"
 #include "entity.h"
 
@@ -406,6 +407,7 @@ void city_draw(void)
 
         loop++;
     }
+    matrix_account();
 }
 
 

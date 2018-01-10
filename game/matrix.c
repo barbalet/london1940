@@ -36,28 +36,51 @@
 #include "mushroom.h"
 #include "city.h"
 
+static n_int number_windows;
+static matrix_plane recorded_windows[6000];
+
+static n_int number_doors;
+static matrix_plane recorded_doors[10000];
+
+static n_int number_walls;
+static matrix_plane recorded_walls[60000];
+
+
 void matrix_init(void)
 {
-    
+    number_windows = 0;
+    number_doors = 0;
 }
 
-void matrix_add_line(n_vect2 * start, n_vect2 * finish)
+void matrix_add_door(n_vect2 * start, n_vect2 * end)
 {
-    
+    recorded_windows[number_doors].start.x = start->x;
+    recorded_windows[number_doors].start.y = start->y;
+    recorded_windows[number_doors].end.x = end->x;
+    recorded_windows[number_doors].end.y = end->y;
+    number_doors ++;
 }
 
-void matrix_add_window(n_vect2 * start, n_vect2 end)
+void matrix_add_window(n_vect2 * start, n_vect2 * end)
 {
-
+    recorded_windows[number_windows].start.x = start->x;
+    recorded_windows[number_windows].start.y = start->y;
+    recorded_windows[number_windows].end.x = end->x;
+    recorded_windows[number_windows].end.y = end->y;
+    number_windows ++;
 }
 
-void matrix_see_through(n_vect2 * origin, n_vect2 * delta)
+void matrix_add_wall(n_vect2 * start, n_vect2 * end)
 {
-    
+    recorded_walls[number_walls].start.x = start->x;
+    recorded_walls[number_walls].start.y = start->y;
+    recorded_walls[number_walls].end.x = end->x;
+    recorded_walls[number_walls].end.y = end->y;
+    number_walls ++;
 }
 
-void matrix_move_through(n_vect2 * origin, n_vect2 * delta)
+void matrix_account(void)
 {
-    
+    /*printf("number windows %ld\n", number_windows);
+      printf("number doors %ld\n", number_doors);*/
 }
-
