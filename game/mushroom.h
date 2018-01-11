@@ -168,6 +168,7 @@ void offset_map(n_vect2 * offset, n_vect2 * point);
 void matrix_add_window(n_vect2 * start, n_vect2 * end);
 void matrix_add_door(n_vect2 * start, n_vect2 * end);
 void matrix_add_wall(n_vect2 * start, n_vect2 * end);
+void matrix_add_fence(n_vect2 * start, n_vect2 * end);
 
 void matrix_account(void);
 

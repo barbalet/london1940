@@ -41,6 +41,9 @@ void fence_draw_each(noble_fence * fence)
     gldraw_wide_line();
     gldraw_orange();
     gldraw_line(&fence->points[0], &fence->points[1]);
+    
+    matrix_add_fence(&fence->points[0], &fence->points[1]);
+    
     gldraw_thin_line();
 }
 

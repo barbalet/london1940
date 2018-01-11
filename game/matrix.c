@@ -45,20 +45,32 @@ static matrix_plane recorded_doors[10000];
 static n_int number_walls;
 static matrix_plane recorded_walls[60000];
 
+static n_int number_fences;
+static matrix_plane recorded_fences[1000];
 
 void matrix_init(void)
 {
     number_windows = 0;
     number_doors = 0;
+    number_fences = 0;
 }
 
 void matrix_add_door(n_vect2 * start, n_vect2 * end)
 {
-    recorded_windows[number_doors].start.x = start->x;
-    recorded_windows[number_doors].start.y = start->y;
-    recorded_windows[number_doors].end.x = end->x;
-    recorded_windows[number_doors].end.y = end->y;
+    recorded_doors[number_doors].start.x = start->x;
+    recorded_doors[number_doors].start.y = start->y;
+    recorded_doors[number_doors].end.x = end->x;
+    recorded_doors[number_doors].end.y = end->y;
     number_doors ++;
+}
+
+void matrix_add_fence(n_vect2 * start, n_vect2 * end)
+{
+    recorded_fences[number_fences].start.x = start->x;
+    recorded_fences[number_fences].start.y = start->y;
+    recorded_fences[number_fences].end.x = end->x;
+    recorded_fences[number_fences].end.y = end->y;
+    number_fences ++;
 }
 
 void matrix_add_window(n_vect2 * start, n_vect2 * end)
@@ -81,6 +93,7 @@ void matrix_add_wall(n_vect2 * start, n_vect2 * end)
 
 void matrix_account(void)
 {
-    /*printf("number windows %ld\n", number_windows);
-      printf("number doors %ld\n", number_doors);*/
+    printf("number windows %ld\n", number_windows);
+    printf("number doors %ld\n",   number_doors);
+    printf("number fences %ld\n",  number_fences);
 }
