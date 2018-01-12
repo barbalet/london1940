@@ -43,7 +43,7 @@ static n_int number_doors;
 static matrix_plane recorded_doors[10000];
 
 static n_int number_walls;
-static matrix_plane recorded_walls[60000];
+static matrix_plane recorded_walls[50000];
 
 static n_int number_fences;
 static matrix_plane recorded_fences[1000];
@@ -91,9 +91,33 @@ void matrix_add_wall(n_vect2 * start, n_vect2 * end)
     number_walls ++;
 }
 
+n_byte matrix_visually_blocked(n_vect2 * origin, n_vect2 * delta)
+{
+    n_int loop = 0;
+    while (loop < number_fences)
+    {
+        if (math_do_intersect(origin, delta, &recorded_fences[loop].start, &recorded_fences[loop].end))
+        {
+            return 1;
+        }
+        loop++;
+    }
+    loop = 0;
+    while (loop < number_walls)
+    {
+        if (math_do_intersect(origin, delta, &recorded_walls[loop].start, &recorded_walls[loop].end))
+        {
+            return 1;
+        }
+        loop++;
+    }
+    return 0;
+}
+
 void matrix_account(void)
 {
     printf("number windows %ld\n", number_windows);
     printf("number doors %ld\n",   number_doors);
+    printf("number walls %ld\n",   number_walls);
     printf("number fences %ld\n",  number_fences);
 }

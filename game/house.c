@@ -87,9 +87,14 @@ static void house_drawroom(noble_room * room, n_int room_number)
 {
     gldraw_darkgrey();
     gldraw_quads(&room->points[4], 1);
-    
+
     gldraw_grey();
     gldraw_quads(&room->points[0], 0);
+
+    matrix_add_wall(&room->points[0], &room->points[1]);
+    matrix_add_wall(&room->points[1], &room->points[2]);
+    matrix_add_wall(&room->points[2], &room->points[3]);
+    matrix_add_wall(&room->points[3], &room->points[0]);
 
     gldraw_lightgrey();
     
