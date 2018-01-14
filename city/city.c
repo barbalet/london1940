@@ -42,19 +42,8 @@
 static noble_being beings[MAX_NUMBER_APES];
 static n_uint beings_number;
 
-/*
- -13600    -13600    -13600    -13600
- 13400     10200     13600     10200
- */
-
-#define TOP_LEFT_X (-13600)
-#define TOP_LEFT_Y (-13600)
-
-#define BOTTOM_RIGHT_X (13600)
-#define BOTTOM_RIGHT_Y (10200)
-
-#define DIMENSION_X (BOTTOM_RIGHT_X - TOP_LEFT_X)
-#define DIMENSION_Y (BOTTOM_RIGHT_Y - TOP_LEFT_Y)
+#define DIMENSION_X (CITY_TOP_RIGHT_X - CITY_BOTTOM_LEFT_X)
+#define DIMENSION_Y (CITY_TOP_RIGHT_Y - CITY_BOTTOM_LEFT_Y)
 
 n_byte city_being_can_move(n_vect2 * location, n_vect2 * delta)
 {
@@ -81,8 +70,8 @@ void city_being_initial_location(n_vect2 * location, n_byte2 * seed)
 
 void city_translate(n_vect2 * pnt)
 {
-    pnt->x = pnt->x + TOP_LEFT_X;
-    pnt->y = pnt->y + TOP_LEFT_Y;
+    pnt->x = pnt->x + CITY_BOTTOM_LEFT_X;
+    pnt->y = pnt->y + CITY_BOTTOM_LEFT_Y;
 }
 
 void city_init(n_byte2 * seed)

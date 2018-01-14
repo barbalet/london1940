@@ -33,10 +33,12 @@
  
  ****************************************************************/
 
+#include "city.h"
 #include "mushroom.h"
 
 noble_twoblock twoblock[64 - 8];
 noble_park     park[8];
+noble_fence    fences[4];
 
 void neighborhood_init(n_byte2 * seed, n_vect2 * location)
 {
@@ -75,9 +77,26 @@ void neighborhood_init(n_byte2 * seed, n_vect2 * location)
         }
         py++;
     }
+
+    fences[0].points[0].x = CITY_BOTTOM_LEFT_X;
+    fences[0].points[0].y = CITY_BOTTOM_LEFT_Y;
+    fences[0].points[1].x = CITY_TOP_RIGHT_X;
+    fences[0].points[1].y = CITY_BOTTOM_LEFT_Y;
+
+    fences[1].points[0].x = CITY_TOP_RIGHT_X;
+    fences[1].points[0].y = CITY_BOTTOM_LEFT_Y;
+    fences[1].points[1].x = CITY_TOP_RIGHT_X;
+    fences[1].points[1].y = CITY_TOP_RIGHT_Y;
     
-    
-    
+    fences[2].points[0].x = CITY_TOP_RIGHT_X;
+    fences[2].points[0].y = CITY_TOP_RIGHT_Y;
+    fences[2].points[1].x = CITY_BOTTOM_LEFT_X;
+    fences[2].points[1].y = CITY_TOP_RIGHT_Y;
+
+    fences[3].points[0].x = CITY_BOTTOM_LEFT_X;
+    fences[3].points[0].y = CITY_TOP_RIGHT_Y;
+    fences[3].points[1].x = CITY_BOTTOM_LEFT_X;
+    fences[3].points[1].y = CITY_BOTTOM_LEFT_Y;
 }
 
 void neighborhood_draw(void)
@@ -92,4 +111,9 @@ void neighborhood_draw(void)
     {
         park_draw(&park[count++]);
     }
+    
+    fence_draw(&fences[0]);
+    fence_draw(&fences[1]);
+    fence_draw(&fences[2]);
+    fence_draw(&fences[3]);
 }

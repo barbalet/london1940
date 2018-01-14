@@ -39,6 +39,12 @@
 #include "noble.h"
 #endif
 
+#define CITY_BOTTOM_LEFT_X (-13605)
+#define CITY_BOTTOM_LEFT_Y (-13605)
+
+#define CITY_TOP_RIGHT_X (13605)
+#define CITY_TOP_RIGHT_Y (13605)
+
 void city_init(n_byte2 * seed);
 void city_cycle(void);
 void city_draw(void);
