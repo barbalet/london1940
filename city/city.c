@@ -74,12 +74,26 @@ void city_translate(n_vect2 * pnt)
     pnt->y = pnt->y + CITY_BOTTOM_LEFT_Y;
 }
 
+n_byte city_line_of_sight(noble_being * being, n_byte2 * location)
+{
+    n_vect2 start, delta, end, location_vect;
+    n_byte  return_value;
+    vect2_byte2(&location_vect, location);    
+    return_value = being_basic_line_of_sight(being, &location_vect, &start, &delta, &end);
+    if (return_value != 2)
+    {
+        return return_value;
+    }
+    return matrix_visually_open(&start, &end);
+}
+
 void city_init(n_byte2 * seed)
 {
     beings_number = being_init_group(beings, seed, (MAX_NUMBER_APES * 5)/7, MAX_NUMBER_APES);
     being_wrap_override(&city_being_wrap);
     being_can_move_override(&city_being_can_move);
     being_initial_location_override(&city_being_initial_location);
+    being_line_of_sight_override(&city_line_of_sight);
 }
 
 void city_listen(noble_being * beings, n_uint beings_number, noble_being * local_being)

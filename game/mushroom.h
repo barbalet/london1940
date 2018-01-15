@@ -170,5 +170,7 @@ void matrix_add_door(n_vect2 * start, n_vect2 * end);
 void matrix_add_wall(n_vect2 * start, n_vect2 * end);
 void matrix_add_fence(n_vect2 * start, n_vect2 * end);
 
+n_byte matrix_visually_open(n_vect2 * origin, n_vect2 * delta);
+
 void matrix_account(void);
 

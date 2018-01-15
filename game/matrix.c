@@ -91,14 +91,14 @@ void matrix_add_wall(n_vect2 * start, n_vect2 * end)
     number_walls ++;
 }
 
-n_byte matrix_visually_blocked(n_vect2 * origin, n_vect2 * delta)
+n_byte matrix_visually_open(n_vect2 * origin, n_vect2 * delta)
 {
     n_int loop = 0;
     while (loop < number_fences)
     {
         if (math_do_intersect(origin, delta, &recorded_fences[loop].start, &recorded_fences[loop].end))
         {
-            return 1;
+            return 0;
         }
         loop++;
     }
@@ -107,11 +107,11 @@ n_byte matrix_visually_blocked(n_vect2 * origin, n_vect2 * delta)
     {
         if (math_do_intersect(origin, delta, &recorded_walls[loop].start, &recorded_walls[loop].end))
         {
-            return 1;
+            return 0;
         }
         loop++;
     }
-    return 0;
+    return 1;
 }
 
 void matrix_account(void)
