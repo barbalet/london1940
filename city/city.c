@@ -161,10 +161,8 @@ void city_cycle_awake(noble_being * local)
     {
         loc_state |= BEING_STATE_MOVING;
     }
-    
     nearest.opposite_sex = 0L;
     nearest.same_sex = 0L;
-    
     /** If it sees water in the distance then turn */
     /*
     if (((loc_state & BEING_STATE_SWIMMING) != 0) || test_land)
