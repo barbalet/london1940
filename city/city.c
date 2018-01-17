@@ -74,12 +74,11 @@ void city_translate(n_vect2 * pnt)
     pnt->y = pnt->y + CITY_BOTTOM_LEFT_Y;
 }
 
-n_byte city_line_of_sight(noble_being * being, n_byte2 * location)
+n_byte city_line_of_sight(noble_being * being, n_vect2 * location)
 {
-    n_vect2 start, delta, end, location_vect;
+    n_vect2 start, delta, end;
     n_byte  return_value;
-    vect2_byte2(&location_vect, location);    
-    return_value = being_basic_line_of_sight(being, &location_vect, &start, &delta, &end);
+    return_value = being_basic_line_of_sight(being, location, &start, &delta, &end);
     if (return_value != 2)
     {
         return return_value;
@@ -146,7 +145,7 @@ static void city_calculate_speed(noble_being * local, n_int tmp_speed, n_byte lo
 {
     n_int          loc_s      = being_speed(local);
     
-    if (tmp_speed > 39) tmp_speed = 39;
+    if (tmp_speed > 10) tmp_speed = 10;
     if (tmp_speed < 0) tmp_speed = 0;
     
     if ((local->delta.awake != FULLY_AWAKE) || (loc_state & BEING_STATE_HUNGRY))
@@ -164,7 +163,6 @@ static void city_calculate_speed(noble_being * local, n_int tmp_speed, n_byte lo
     if (tmp_speed > loc_s) loc_s++;
     if (tmp_speed < loc_s) loc_s--;
     if (tmp_speed < loc_s) loc_s--;
-    if (tmp_speed < loc_s) loc_s--;
     
     being_set_speed(local, (n_byte)loc_s);
 }
@@ -176,7 +174,7 @@ void city_cycle_awake(noble_being * local)
     /** tmp_speed is the optimum speed based on the gradient */
     /** delta_energy is the energy required for movement */
     being_nearest nearest;
-    n_int   tmp_speed = 3;/*being_temporary_speed(local, &test_land, &az);*/
+    n_int   tmp_speed = being_random(local) & 3;/*being_temporary_speed(local, &test_land, &az);*/
     n_byte  loc_state = BEING_STATE_ASLEEP;/*being_state_find(local, az, loc_s);*/
     
     if (local->delta.awake != FULLY_ASLEEP)
@@ -190,55 +188,23 @@ void city_cycle_awake(noble_being * local)
     }
     nearest.opposite_sex = 0L;
     nearest.same_sex = 0L;
-    /** If it sees water in the distance then turn */
-    /*
-    if (((loc_state & BEING_STATE_SWIMMING) != 0) || test_land)
+
     {
-        being_swimming(sim, local, &tmp_speed);
+        n_vect2 right_close, right_medium, right_far;
+        n_vect2 straight_close, straight_medium, straight_far;
+        n_vect2 left_close, left_medium, left_far;
+        
+        being_facing_vector(local, &straight_close, 16);
+        
+        /*if (being_line_of_sight(local,))*/
+        
+        being_facing_vector(local, &straight_medium, 4);
+        being_facing_vector(local, &straight_far, 1);
+
+        
+        /*vect2_direction(vect, value->delta.direction_facing, divisor * 32);*/
+
     }
-    else
-    {
-        being_not_swimming(sim, local, &tmp_speed, &nearest, &loc_s, &loc_state);
-    }
-    */
-    /*
-    if ((loc_state & (BEING_STATE_SWIMMING | BEING_STATE_GROOMING | BEING_STATE_ATTACK | BEING_STATE_SHOWFORCE)) == 0)
-    {
-        if ((loc_state & BEING_STATE_HUNGRY) != 0)
-        {
-            if (loc_s == 0)
-            {
-                n_byte  food_type;
-                n_int   energy = food_eat(being_location_x(local), being_location_y(local), az, &food_type, local);
-                
-#ifdef EPISODIC_ON
-                episodic_food(sim, local, energy, food_type);
-#endif
-                
-                being_energy_delta(local, energy);
-                being_reset_drive(local, DRIVE_HUNGER);
-                loc_state |= BEING_STATE_EATING;
-                if (loc_h < BEING_MAX_HEIGHT)
-                {
-                    if ((birth_days+AGE_OF_MATURITY) > today_days)
-                    {
-                        loc_h += ENERGY_TO_GROWTH(local,energy);
-                    }
-                }
-            }
-        }
-        else
-        {
-            social_goals(local);
-            if (loc_s==0)
-            {
-                loc_s = 10;
-            }
-        }
-    }
-    */
-    
-    
     
     being_set_height(local, loc_h);
     being_set_state(local, loc_state);
