@@ -142,6 +142,33 @@ void city_sociability(noble_being * beings, n_uint beings_number, noble_being * 
     being_crowding_cycle(local_being, dsd.beings_in_vacinity);
 }
 
+static void city_calculate_speed(noble_being * local, n_int tmp_speed, n_byte loc_state)
+{
+    n_int          loc_s      = being_speed(local);
+    
+    if (tmp_speed > 39) tmp_speed = 39;
+    if (tmp_speed < 0) tmp_speed = 0;
+    
+    if ((local->delta.awake != FULLY_AWAKE) || (loc_state & BEING_STATE_HUNGRY))
+    {
+        if ((loc_state & BEING_STATE_SWIMMING) != 0)
+        {
+            tmp_speed = (being_energy(local) >> 7);
+        }
+        else
+        {
+            tmp_speed = 0;
+        }
+    }
+    
+    if (tmp_speed > loc_s) loc_s++;
+    if (tmp_speed < loc_s) loc_s--;
+    if (tmp_speed < loc_s) loc_s--;
+    if (tmp_speed < loc_s) loc_s--;
+    
+    being_set_speed(local, (n_byte)loc_s);
+}
+
 void city_cycle_awake(noble_being * local)
 {
     n_int          loc_s      = being_speed(local);
@@ -210,9 +237,12 @@ void city_cycle_awake(noble_being * local)
         }
     }
     */
+    
+    
+    
     being_set_height(local, loc_h);
     being_set_state(local, loc_state);
-    being_calculate_speed(local, tmp_speed, loc_state);
+    city_calculate_speed(local, tmp_speed, loc_state);
     being_genetic_wandering(local, &nearest);
 #ifdef TERRITORY_ON
     being_territory_index(local);
