@@ -34,8 +34,10 @@
  ****************************************************************/
 #ifdef	_WIN32
 #include "../noble/noble.h"
+#include "../noble/gldraw.h"
 #else
 #include "noble.h"
+#include "gldraw.h"
 #endif
 
 #undef DEBUG_ROOM_NUMBER

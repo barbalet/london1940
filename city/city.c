@@ -196,10 +196,23 @@ void city_cycle_awake(noble_being * local)
         
         being_facing_vector(local, &straight_close, 16);
         
+        if (city_line_of_sight(local, &straight_close))
+        {
+            being_facing_vector(local, &straight_medium, 4);
+            if (city_line_of_sight(local, &straight_close))
+            {
+                
+            }
+        }
+        else
+        {
+            
+        }
+        
+        being_facing_vector(local, &straight_far, 1);
+
         /*if (being_line_of_sight(local,))*/
         
-        being_facing_vector(local, &straight_medium, 4);
-        being_facing_vector(local, &straight_far, 1);
 
         
         /*vect2_direction(vect, value->delta.direction_facing, divisor * 32);*/

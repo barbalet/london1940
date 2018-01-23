@@ -66,6 +66,7 @@
 		4A0884601FFAB2FB007988A2 /* city.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = city.c; sourceTree = "<group>"; };
 		4A0884611FFAB2FB007988A2 /* city.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = city.h; sourceTree = "<group>"; };
 		4A0CBEE61F78B0B40038948D /* park.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = park.c; sourceTree = "<group>"; };
+		4A3D31912016FE1300EC741F /* gldraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gldraw.h; sourceTree = "<group>"; };
 		4A4237E01C6C51F6001C3886 /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
 		4A55A64220048CB8008EE3DF /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
 		4A782CC21FFA30C500B26BDB /* being.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = being.c; sourceTree = "<group>"; };
@@ -193,6 +194,7 @@
 		5A0D60C719567F2000090DAE /* noble */ = {
 			isa = PBXGroup;
 			children = (
+				4A3D31912016FE1300EC741F /* gldraw.h */,
 				5A0D60C819567F2000090DAE /* audio.c */,
 				5A0D60C919567F2000090DAE /* compress.c */,
 				7BB191E81C3A2E0000DF03BA /* gldraw.c */,
