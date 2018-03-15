@@ -211,6 +211,11 @@ n_int shared_new(n_uint seed)
     return 0;
 }
 
+n_int shared_new_agents(n_uint seed)
+{
+    return 0;
+}
+
 n_byte shared_openFileName(n_string cStringFileName, n_byte isScript)
 {
     return 0;
