@@ -1,3 +1,5 @@
+[![Noble Ape Sub-Project: Mushroom Boy](http://i.ytimg.com/vi/kVmrPhInpEU/hqdefault.jpg)](//www.youtube.com/watch?v=kVmrPhInpEU "Noble Ape Sub-Project: Mushroom Boy")
+
 ## DESCRIPTION
 
 An introverted socially-isolated 16-year-old boy genius builds a small nuclear device. Once his nuclear capabilities have been discovered he has to flee from secret service agents with his device. He travels mainly on foot through the city, eventually hiding in the wilderness with the assistance of militant green groups. The game explores a societal distrust of youth, perceptions of terrorism and political power and the socially unstructured pathway from adolescence to adulthood.
