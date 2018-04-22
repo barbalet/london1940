@@ -22,6 +22,7 @@
 		4A916BBD1F782C1A0080F27F /* twoblock.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BBC1F782C1A0080F27F /* twoblock.c */; };
 		4A916BC11F783E180080F27F /* neighborhood.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A916BC01F783E180080F27F /* neighborhood.c */; };
 		4A960DC11F99C1B900D6E56B /* mac.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A960DC01F99C1B900D6E56B /* mac.xib */; };
+		4AAB8BFF208C834000DB26DF /* tile.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AAB8BFE208C834000DB26DF /* tile.c */; };
 		4ABA181E1F5E643B00DFD769 /* tree.c in Sources */ = {isa = PBXBuildFile; fileRef = 4ABA181D1F5E643B00DFD769 /* tree.c */; };
 		4ADFDFA51C41205800E633EF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADFDFA41C41205800E633EF /* OpenGL.framework */; };
 		5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D60C219567F2000090DAE /* AppDelegate.m */; };
@@ -82,6 +83,7 @@
 		4A916BBC1F782C1A0080F27F /* twoblock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = twoblock.c; sourceTree = "<group>"; };
 		4A916BC01F783E180080F27F /* neighborhood.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = neighborhood.c; sourceTree = "<group>"; };
 		4A960DC01F99C1B900D6E56B /* mac.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = mac.xib; sourceTree = "<group>"; };
+		4AAB8BFE208C834000DB26DF /* tile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tile.c; sourceTree = "<group>"; };
 		4ABA181D1F5E643B00DFD769 /* tree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tree.c; sourceTree = "<group>"; };
 		4ADFDFA41C41205800E633EF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5A0D60C119567F2000090DAE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		5A0D60C719567F2000090DAE /* noble */ = {
 			isa = PBXGroup;
 			children = (
+				4AAB8BFE208C834000DB26DF /* tile.c */,
 				4A3D31912016FE1300EC741F /* gldraw.h */,
 				5A0D60C819567F2000090DAE /* audio.c */,
 				5A0D60C919567F2000090DAE /* compress.c */,
@@ -450,6 +453,7 @@
 				5A0D60D919567F2000090DAE /* io.c in Sources */,
 				5A0D60DC19567F2000090DAE /* network.c in Sources */,
 				5A0D60D219567F2000090DAE /* AppDelegate.m in Sources */,
+				4AAB8BFF208C834000DB26DF /* tile.c in Sources */,
 				5A0D60D619567F2000090DAE /* compress.c in Sources */,
 				7B0542261C3864C00079EF20 /* fence.c in Sources */,
 				4A916BC11F783E180080F27F /* neighborhood.c in Sources */,

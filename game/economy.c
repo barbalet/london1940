@@ -136,8 +136,8 @@ n_int ecomony_init(n_byte2 * seeds)
         return SHOW_ERROR("Memory init economy failed to allocate");
     }
     
-    land_creation(map, actual, seeds, 0L);
-    land_creation(economy, actual, &seeds[2], 0L);
+    tile_creation(map, actual, seeds);
+    tile_creation(economy, actual, &seeds[2]);
     
     io_free((void **)&actual);
     
