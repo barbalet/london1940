@@ -129,22 +129,14 @@ static n_int economy_scan_calculation(n_byte * input1, n_byte * input2, n_byte *
 
 n_int ecomony_init(n_byte2 * seeds)
 {
-    n_byte * actual = io_new(MAP_AREA);
-
-    if (actual == 0L)
-    {
-        return SHOW_ERROR("Memory init economy failed to allocate");
-    }
-    
-    tile_creation(map, actual, seeds);
-    tile_creation(economy, actual, &seeds[2]);
-    
-    io_free((void **)&actual);
+    /*
+    tile_creation(map, seeds);
+    tile_creation(economy, &seeds[2]);
     
     economy_scan_calculation(map, 0L, flat, generate_flat);
     economy_scan_calculation(flat, economy, sum, generate_add);
     economy_scan_calculation(sum, 0L, road, generate_road);
-    
+    */
     return 0;
 }
 
