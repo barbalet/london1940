@@ -1,0 +1,430 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4AD302B9281B8CC300C0E353 /* ASMacCG.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302B0281B8CC200C0E353 /* ASMacCG.m */; };
+		4AD302BA281B8CC300C0E353 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302B1281B8CC200C0E353 /* AppDelegate.m */; };
+		4AD302BB281B8CC300C0E353 /* ASMacView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302B3281B8CC200C0E353 /* ASMacView.m */; };
+		4AD302BC281B8CC300C0E353 /* ASShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302B4281B8CC200C0E353 /* ASShared.m */; };
+		4AD302BD281B8CC300C0E353 /* newmac.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AD302B6281B8CC200C0E353 /* newmac.xib */; };
+		4AD302BE281B8CC300C0E353 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302B7281B8CC200C0E353 /* main.m */; };
+		4AD302C5281B8CDE00C0E353 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302BF281B8CDE00C0E353 /* file.c */; };
+		4AD302C6281B8CDE00C0E353 /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302C0281B8CDE00C0E353 /* math.c */; };
+		4AD302C7281B8CDE00C0E353 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302C1281B8CDE00C0E353 /* io.c */; };
+		4AD302C8281B8CDE00C0E353 /* object.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302C2281B8CDE00C0E353 /* object.c */; };
+		4AD302C9281B8CDE00C0E353 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302C3281B8CDE00C0E353 /* memory.c */; };
+		4AD302CA281B8CDE00C0E353 /* vect.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302C4281B8CDE00C0E353 /* vect.c */; };
+		4AD302D0281B8D1900C0E353 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302CC281B8D1800C0E353 /* draw.c */; };
+		4AD302D1281B8D1900C0E353 /* oldcolor.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302CE281B8D1800C0E353 /* oldcolor.c */; };
+		4AD302D2281B8D1900C0E353 /* shared.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302CF281B8D1800C0E353 /* shared.c */; };
+		4AD302D7281B8E0300C0E353 /* pnglite.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302D4281B8E0300C0E353 /* pnglite.c */; };
+		4AD302D8281B8E0300C0E353 /* pngload.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AD302D6281B8E0300C0E353 /* pngload.c */; };
+		4AEB48D528302AED007A06ED /* filehandling.c in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB48D428302AED007A06ED /* filehandling.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4A061FE0281F87CA00C4ECF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4A276690281F328400757038 /* shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shared.h; path = ../../apesdk/shared.h; sourceTree = "<group>"; };
+		4AD30298281B8C4700C0E353 /* mapedit-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mapedit-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AD302AF281B8CC200C0E353 /* ASShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASShared.h; path = ../../apesdk/mac/ASShared.h; sourceTree = "<group>"; };
+		4AD302B0281B8CC200C0E353 /* ASMacCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASMacCG.m; path = ../../apesdk/mac/ASMacCG.m; sourceTree = "<group>"; };
+		4AD302B1281B8CC200C0E353 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../apesdk/mac/AppDelegate.m; sourceTree = "<group>"; };
+		4AD302B2281B8CC200C0E353 /* ASMacView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASMacView.h; path = ../../apesdk/mac/ASMacView.h; sourceTree = "<group>"; };
+		4AD302B3281B8CC200C0E353 /* ASMacView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASMacView.m; path = ../../apesdk/mac/ASMacView.m; sourceTree = "<group>"; };
+		4AD302B4281B8CC200C0E353 /* ASShared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASShared.m; path = ../../apesdk/mac/ASShared.m; sourceTree = "<group>"; };
+		4AD302B5281B8CC200C0E353 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../apesdk/mac/AppDelegate.h; sourceTree = "<group>"; };
+		4AD302B6281B8CC200C0E353 /* newmac.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = newmac.xib; path = ../../apesdk/mac/newmac.xib; sourceTree = "<group>"; };
+		4AD302B7281B8CC200C0E353 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../../apesdk/mac/main.m; sourceTree = "<group>"; };
+		4AD302B8281B8CC200C0E353 /* ASMacCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASMacCG.h; path = ../../apesdk/mac/ASMacCG.h; sourceTree = "<group>"; };
+		4AD302BF281B8CDE00C0E353 /* file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = file.c; path = ../../apesdk/toolkit/file.c; sourceTree = "<group>"; };
+		4AD302C0281B8CDE00C0E353 /* math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = math.c; path = ../../apesdk/toolkit/math.c; sourceTree = "<group>"; };
+		4AD302C1281B8CDE00C0E353 /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = io.c; path = ../../apesdk/toolkit/io.c; sourceTree = "<group>"; };
+		4AD302C2281B8CDE00C0E353 /* object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = object.c; path = ../../apesdk/toolkit/object.c; sourceTree = "<group>"; };
+		4AD302C3281B8CDE00C0E353 /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = memory.c; path = ../../apesdk/toolkit/memory.c; sourceTree = "<group>"; };
+		4AD302C4281B8CDE00C0E353 /* vect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vect.c; path = ../../apesdk/toolkit/vect.c; sourceTree = "<group>"; };
+		4AD302CB281B8CF000C0E353 /* toolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = toolkit.h; path = ../../apesdk/toolkit/toolkit.h; sourceTree = "<group>"; };
+		4AD302CC281B8D1800C0E353 /* draw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = draw.c; path = ../draw.c; sourceTree = "<group>"; };
+		4AD302CD281B8D1800C0E353 /* mapgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mapgui.h; path = ../mapgui.h; sourceTree = "<group>"; };
+		4AD302CE281B8D1800C0E353 /* oldcolor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = oldcolor.c; path = ../oldcolor.c; sourceTree = "<group>"; };
+		4AD302CF281B8D1800C0E353 /* shared.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shared.c; path = ../shared.c; sourceTree = "<group>"; };
+		4AD302D4281B8E0300C0E353 /* pnglite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pnglite.c; path = ../png/pnglite.c; sourceTree = "<group>"; };
+		4AD302D5281B8E0300C0E353 /* pnglite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pnglite.h; path = ../png/pnglite.h; sourceTree = "<group>"; };
+		4AD302D6281B8E0300C0E353 /* pngload.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngload.c; path = ../png/pngload.c; sourceTree = "<group>"; };
+		4AEB48D428302AED007A06ED /* filehandling.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = filehandling.c; path = ../filehandling.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4AD30295281B8C4700C0E353 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4AD3028F281B8C4700C0E353 = {
+			isa = PBXGroup;
+			children = (
+				4A276690281F328400757038 /* shared.h */,
+				4AD302D3281B8DEA00C0E353 /* png */,
+				4AD302AE281B8C7400C0E353 /* mac */,
+				4AD302AD281B8C6300C0E353 /* toolkit */,
+				4AD302AC281B8C5F00C0E353 /* draw */,
+				4AD3029A281B8C4700C0E353 /* mapedit-mac */,
+				4AD30299281B8C4700C0E353 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4AD30299281B8C4700C0E353 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4AD30298281B8C4700C0E353 /* mapedit-mac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4AD3029A281B8C4700C0E353 /* mapedit-mac */ = {
+			isa = PBXGroup;
+			children = (
+				4A061FE0281F87CA00C4ECF7 /* Info.plist */,
+			);
+			path = "mapedit-mac";
+			sourceTree = "<group>";
+		};
+		4AD302AC281B8C5F00C0E353 /* draw */ = {
+			isa = PBXGroup;
+			children = (
+				4AEB48D428302AED007A06ED /* filehandling.c */,
+				4AD302CC281B8D1800C0E353 /* draw.c */,
+				4AD302CD281B8D1800C0E353 /* mapgui.h */,
+				4AD302CE281B8D1800C0E353 /* oldcolor.c */,
+				4AD302CF281B8D1800C0E353 /* shared.c */,
+			);
+			name = draw;
+			sourceTree = "<group>";
+		};
+		4AD302AD281B8C6300C0E353 /* toolkit */ = {
+			isa = PBXGroup;
+			children = (
+				4AD302CB281B8CF000C0E353 /* toolkit.h */,
+				4AD302BF281B8CDE00C0E353 /* file.c */,
+				4AD302C1281B8CDE00C0E353 /* io.c */,
+				4AD302C0281B8CDE00C0E353 /* math.c */,
+				4AD302C3281B8CDE00C0E353 /* memory.c */,
+				4AD302C2281B8CDE00C0E353 /* object.c */,
+				4AD302C4281B8CDE00C0E353 /* vect.c */,
+			);
+			name = toolkit;
+			sourceTree = "<group>";
+		};
+		4AD302AE281B8C7400C0E353 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				4AD302B5281B8CC200C0E353 /* AppDelegate.h */,
+				4AD302B1281B8CC200C0E353 /* AppDelegate.m */,
+				4AD302B8281B8CC200C0E353 /* ASMacCG.h */,
+				4AD302B0281B8CC200C0E353 /* ASMacCG.m */,
+				4AD302B2281B8CC200C0E353 /* ASMacView.h */,
+				4AD302B3281B8CC200C0E353 /* ASMacView.m */,
+				4AD302AF281B8CC200C0E353 /* ASShared.h */,
+				4AD302B4281B8CC200C0E353 /* ASShared.m */,
+				4AD302B7281B8CC200C0E353 /* main.m */,
+				4AD302B6281B8CC200C0E353 /* newmac.xib */,
+			);
+			name = mac;
+			sourceTree = "<group>";
+		};
+		4AD302D3281B8DEA00C0E353 /* png */ = {
+			isa = PBXGroup;
+			children = (
+				4AD302D4281B8E0300C0E353 /* pnglite.c */,
+				4AD302D5281B8E0300C0E353 /* pnglite.h */,
+				4AD302D6281B8E0300C0E353 /* pngload.c */,
+			);
+			name = png;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4AD30297281B8C4700C0E353 /* mapedit-mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AD302A8281B8C4D00C0E353 /* Build configuration list for PBXNativeTarget "mapedit-mac" */;
+			buildPhases = (
+				4AD30294281B8C4700C0E353 /* Sources */,
+				4AD30295281B8C4700C0E353 /* Frameworks */,
+				4AD30296281B8C4700C0E353 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mapedit-mac";
+			productName = "mapedit-mac";
+			productReference = 4AD30298281B8C4700C0E353 /* mapedit-mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4AD30290281B8C4700C0E353 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					4AD30297281B8C4700C0E353 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 4AD30293281B8C4700C0E353 /* Build configuration list for PBXProject "mapedit-mac" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4AD3028F281B8C4700C0E353;
+			productRefGroup = 4AD30299281B8C4700C0E353 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4AD30297281B8C4700C0E353 /* mapedit-mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4AD30296281B8C4700C0E353 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AD302BD281B8CC300C0E353 /* newmac.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4AD30294281B8C4700C0E353 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AD302CA281B8CDE00C0E353 /* vect.c in Sources */,
+				4AD302D0281B8D1900C0E353 /* draw.c in Sources */,
+				4AD302D1281B8D1900C0E353 /* oldcolor.c in Sources */,
+				4AD302BE281B8CC300C0E353 /* main.m in Sources */,
+				4AD302BC281B8CC300C0E353 /* ASShared.m in Sources */,
+				4AD302C9281B8CDE00C0E353 /* memory.c in Sources */,
+				4AD302BA281B8CC300C0E353 /* AppDelegate.m in Sources */,
+				4AD302C8281B8CDE00C0E353 /* object.c in Sources */,
+				4AD302D2281B8D1900C0E353 /* shared.c in Sources */,
+				4AEB48D528302AED007A06ED /* filehandling.c in Sources */,
+				4AD302BB281B8CC300C0E353 /* ASMacView.m in Sources */,
+				4AD302B9281B8CC300C0E353 /* ASMacCG.m in Sources */,
+				4AD302D7281B8E0300C0E353 /* pnglite.c in Sources */,
+				4AD302C7281B8CDE00C0E353 /* io.c in Sources */,
+				4AD302C5281B8CDE00C0E353 /* file.c in Sources */,
+				4AD302C6281B8CDE00C0E353 /* math.c in Sources */,
+				4AD302D8281B8E0300C0E353 /* pngload.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4AD302A6281B8C4D00C0E353 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4AD302A7281B8C4D00C0E353 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4AD302A9281B8C4D00C0E353 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "mapedit-mac/mapedit_mac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "mapedit-mac/Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainNibFile = newmac;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apesdk.mapedit-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		4AD302AA281B8C4D00C0E353 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "mapedit-mac/mapedit_mac.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "mapedit-mac/Info.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainNibFile = newmac;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.apesdk.mapedit-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4AD30293281B8C4700C0E353 /* Build configuration list for PBXProject "mapedit-mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AD302A6281B8C4D00C0E353 /* Debug */,
+				4AD302A7281B8C4D00C0E353 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AD302A8281B8C4D00C0E353 /* Build configuration list for PBXNativeTarget "mapedit-mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AD302A9281B8C4D00C0E353 /* Debug */,
+				4AD302AA281B8C4D00C0E353 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4AD30290281B8C4700C0E353 /* Project object */;
+}

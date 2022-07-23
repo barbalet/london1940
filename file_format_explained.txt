@@ -1,0 +1,25 @@
+File format explained
+
+Sim Sea Lion supports standard file names with the addition of a date/time stamp in the file name that is special. These files:
+
+new_ashford.json
+
+new_ashford.png
+
+The JSON file when save becomes:
+
+new_ashford(220511_210516).json
+
+If the file was previously:
+
+new_ashford(220511_210021).json
+
+It would be re-saved as:
+
+new_ashford(220511_233149).json
+
+This corresponds to:
+
+new_ashford.png
+
+You can have many JSON files to one PNG file. You always drop the JSON file into the app to pick up the PNG file and the correct JSON to open.

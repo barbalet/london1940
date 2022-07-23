@@ -1,0 +1,7 @@
+ (Done) Combine the warfare and urban simulations
+
+Add map out to urban warfare 
+
+Use urban warfare as the basis of realtime map editing
+
+Within this process, consider a file format that will get in to "urban"
