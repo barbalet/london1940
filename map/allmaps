@@ -1,0 +1,186 @@
+#!/bin/bash
+
+large_maps_dir="${1}"
+railway_maps_dir="${2}"
+height_maps_dir="${3}"
+
+if [ ! "${large_maps_dir}" ]; then
+    echo "Please specify a directory containing large maps. 160, 173, etc"
+    exit
+fi
+
+if [[ "${large_maps_dir}" == "-"* ]]; then
+    echo "First parameter should be a directory, not an option"
+    exit
+fi
+
+if [ ! -d "${large_maps_dir}" ]; then
+    echo "First parameter should be a directory containing large maps. 160, 173, etc"
+    exit
+fi
+
+if [ ! "${railway_maps_dir}" ]; then
+    echo "Please specify a directory containing railway maps. 160, 173, etc"
+    exit
+fi
+
+if [ ! "${height_maps_dir}" ]; then
+    echo "Please specify a directory containing map elevations data."
+    exit
+fi
+
+if [[ "${railway_maps_dir}" == "-"* ]]; then
+    echo "Second parameter should be a directory, not an option"
+    exit
+fi
+
+if [ ! -d "${railway_maps_dir}" ]; then
+    echo "Second parameter should be a directory containing railway maps. 160, 173, etc"
+    exit
+fi
+
+if [ ! -d "${height_maps_dir}" ]; then
+    echo "Third parameter should be a directory containing elevation data."
+    exit
+fi
+
+if [ ! -d tiles ]; then
+    mkdir tiles
+fi
+
+if [ ! -d maps ]; then
+    mkdir maps
+fi
+
+heightmap_script=./heightmap
+if [ ! -f "${heightmap_script}" ]; then
+    heightmap_script=/usr/bin/heightmap
+    if [ ! -f "${heightmap_script}" ]; then
+	echo "${heightmap_script} is not installed"
+	exit
+    fi
+fi
+
+map2json_binary=./map2json
+if [ ! -f "${map2json_binary}" ]; then
+    map2json_binary=/usr/bin/map2json
+    if [ ! -f "${map2json_binary}" ]; then
+	echo "${map2json_binary} is not installed"
+	exit
+    fi
+fi
+
+mapoutdir_script=./mapoutdir
+if [ ! -f "${mapoutdir_script}" ]; then
+    mapoutdir_script=/usr/bin/mapoutdir
+    if [ ! -f "${mapoutdir_script}" ]; then
+	echo "${mapoutdir_script} is not installed"
+	exit
+    fi
+fi
+
+combinetiles_script=./combinetiles.py
+if [ ! -f "${combinetiles_script}" ]; then
+    combinetiles_script=/usr/bin/combinetiles
+    if [ ! -f "${combinetiles_script}" ]; then
+	echo "${combinetiles_script} is not installed"
+	exit
+    fi
+fi
+
+combinemaps_script=./combinemaps.py
+if [ ! -f "${combinemaps_script}" ]; then
+    combinemaps_script=/usr/bin/combinemaps
+    if [ ! -f "${combinemaps_script}" ]; then
+	echo "${combinemaps_script} is not installed"
+	exit
+    fi
+fi
+
+for entry in $(find ${large_maps_dir} -name '*.png'); do
+    # get the name of the tile
+    tile_name=$(echo -n "${entry}" | awk -F '.' '{print $1}')
+    if [[ "${tile_name}" == *"/"* ]]; then
+	tile_name=$(echo -n "${tile_name}" | awk -F '/' '{print $NF}')
+    fi
+
+    # if the json has been created then skip
+    if [ -f "maps/${tile_name}.json" ]; then
+	continue
+    fi
+
+    # clear the tiles directory
+    rm -f tiles/*
+
+    # extract tiles
+    echo ""
+    echo "Extracting tile images for map ${tile_name}"
+    echo ""
+    ${map2json_binary} -f "${entry}"
+
+    # extract railway and harbour json
+    railway_image_filename="${railway_maps_dir}/${tile_name}.png"
+    if [ -f "${railway_image_filename}" ]; then
+	echo ""
+	echo "Extracting railways and harbours for map ${tile_name}"
+	echo ""
+	${map2json_binary} -f "${railway_image_filename}" -o "tiles/railway.json"
+    else
+	echo "Railway image not found ${railway_image_filename}"
+    fi
+
+    # get height map
+    heightmap_data_filename="${height_maps_dir}/gt30w020n90.dem"
+    if [ -f "${heightmap_data_filename}" ]; then
+	echo ""
+	echo "Extracting elevations for map ${tile_name}"
+	echo ""
+	${heightmap_script} -d "${height_maps_dir}" --tile ${tile_name} > "tiles/heightmap.json"
+    else
+	echo "Height map data not found ${heightmap_data_filename}"
+    fi
+
+    # move the results into a dedicated directory
+    tiles_dir="tiles${tile_name}"
+    if [ ! -d "${tiles_dir}" ]; then
+	mkdir "${tiles_dir}"
+    fi
+    mv tiles/* "tiles${tile_name}"/
+
+    # create json files for each tile
+    echo ""
+    echo "Creating json for map ${tile_name} tiles"
+    echo ""
+    ${mapoutdir_script} "${tiles_dir}"
+
+    # assemble the tiles
+    echo ""
+    echo "Assembling tiles for map ${tile_name}"
+    echo ""
+    ${combinetiles_script} -d "${tiles_dir}" -o "maps/${tile_name}.json"
+done
+
+for entry in $(find ${large_maps_dir} -name '*.png'); do
+    # get the name of the tile
+    tile_name=$(echo -n "${entry}" | awk -F '.' '{print $1}')
+    if [[ "${tile_name}" == *"/"* ]]; then
+	tile_name=$(echo -n "${tile_name}" | awk -F '/' '{print $NF}')
+    fi
+
+    if [ -f "maps/${tile_name}.json" ]; then
+	if [ ! -f "maps/${tile_name}.png" ]; then
+	    ${map2json_binary} -f "maps/${tile_name}.json" -o "maps/${tile_name}.png"
+	fi
+    fi
+done
+
+echo ""
+echo "Assembling large maps into the final map"
+echo ""
+${combinemaps_script} -d maps -o allmaps.json --downscale 2
+if [ -f allmaps.json ]; then
+    echo ""
+    echo "Creating image for final map"
+    echo ""
+    ${map2json_binary} -f allmaps.json -o allmaps.png
+fi

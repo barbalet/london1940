@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Creates json files for map images in a given directory
+
+search_dir="${1}"
+
+if [ ! "$search_dir" ]; then
+    echo "Please specify a directory containing map images. mapoutdir [directory]"
+    exit
+fi
+
+if [ ! -d "$search_dir" ]; then
+    echo "$search_dir is not a directory"
+fi
+
+results_dir=results
+if [ ! -d "${results_dir}" ]; then
+    mkdir "${results_dir}"
+fi
+
+mapout_binary=./map2json
+if [ ! -f "${mapout_binary}" ]; then
+    mapout_binary=/usr/bin/map2json
+fi
+
+if [ -f "${results_dir}/index.txt" ]; then
+    rm "${results_dir}/index.txt"
+fi
+
+ctr=0
+for entry in $(find ${search_dir} -name '*.png'); do
+    ${mapout_binary} -f "${entry}" -o "${entry}".json
+    if [ -f roads.png ]; then
+	mv roads.png "${results_dir}/${ctr}.png"
+	echo "${ctr}. ${entry}" >> "${results_dir}/index.txt"
+	ctr=$((ctr + 1))
+    fi
+done

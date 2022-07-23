@@ -1,0 +1,29 @@
+"type": "woodland",
+"polygons"
+
+"type": "rivers",
+"points"
+
+"type": "lakes",
+"polygons"
+
+"type": "sea",
+"polygons"
+
+"type": "railway stations",
+"points"
+
+"type": "bridges",
+"points"
+
+"type": "junctions",
+"points"
+
+"type": "main roads",
+"points"
+
+"type": "minor roads",
+"points"
+
+"type": "buildings",
+"polygons"
