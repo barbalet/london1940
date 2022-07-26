@@ -1,6 +1,6 @@
 File format explained
 
-Sim Sea Lion supports standard file names with the addition of a date/time stamp in the file name that is special. These files:
+London1940 supports standard file names with the addition of a date/time stamp in the file name that is special. These files:
 
 new_ashford.json
 

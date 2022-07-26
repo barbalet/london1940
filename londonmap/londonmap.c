@@ -51,43 +51,23 @@
 #define HALF_WIDTH   (STANDARD_WIDTH/2)
 #define HALF_HEIGHT  (STANDARD_HEIGHT/2)
 
-#ifdef MAC_MAP_LOCATION
+
+#define FILE_NW "/Users/barbalet/london1940/newlondmaps/160.png"
+#define FILE_NE "/Users/barbalet/london1940/newlondmaps/161.png"
+#define FILE_SW "/Users/barbalet/london1940/newlondmaps/170.png"
+#define FILE_SE "/Users/barbalet/london1940/newlondmaps/171.png"
+
+#define FILE_NW_C "/Users/barbalet/london1940/output/160c.png"
+#define FILE_NE_C "/Users/barbalet/london1940/output/161c.png"
+#define FILE_SW_C "/Users/barbalet/london1940/output/170c.png"
+#define FILE_SE_C "/Users/barbalet/london1940/output/171c.png"
+
+#define FILE_NW_SMALL "/Users/barbalet/london1940/output/160_small.png"
+#define FILE_NE_SMALL "/Users/barbalet/london1940/output/161_small.png"
+#define FILE_SW_SMALL "/Users/barbalet/london1940/output/170_small.png"
+#define FILE_SE_SMALL "/Users/barbalet/london1940/output/171_small.png"
 
 
-
-#define FILE_NW "/Users/barbalet/gitlab/london1940/newlondmaps/160.png"
-#define FILE_NE "/Users/barbalet/gitlab/london1940/newlondmaps/161.png"
-#define FILE_SW "/Users/barbalet/gitlab/london1940/newlondmaps/170.png"
-#define FILE_SE "/Users/barbalet/gitlab/london1940/newlondmaps/171.png"
-
-#define FILE_NW_C "/Users/barbalet/output/160c.png"
-#define FILE_NE_C "/Users/barbalet/output/161c.png"
-#define FILE_SW_C "/Users/barbalet/output/170c.png"
-#define FILE_SE_C "/Users/barbalet/output/171c.png"
-
-#define FILE_NW_SMALL "/Users/barbalet/output/160_small.png"
-#define FILE_NE_SMALL "/Users/barbalet/output/161_small.png"
-#define FILE_SW_SMALL "/Users/barbalet/output/170_small.png"
-#define FILE_SE_SMALL "/Users/barbalet/output/171_small.png"
-
-#else
-
-#define FILE_NW "../newlondmaps/160.png"
-#define FILE_NE "../newlondmaps/161.png"
-#define FILE_SW "../newlondmaps/170.png"
-#define FILE_SE "../newlondmaps/171.png"
-
-#define FILE_NW_C "160c.png"
-#define FILE_NE_C "161c.png"
-#define FILE_SW_C "170c.png"
-#define FILE_SE_C "171c.png"
-
-#define FILE_NW_SMALL "160_small.png"
-#define FILE_NE_SMALL "161_small.png"
-#define FILE_SW_SMALL "170_small.png"
-#define FILE_SE_SMALL "171_small.png"
-
-#endif
 
 #include <math.h>
 #include <stdio.h>

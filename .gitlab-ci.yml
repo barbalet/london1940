@@ -17,12 +17,11 @@ build-map:
     - cd map
     - make
 
-test-londonmap:
-  stage: test
+build-londonmap:
+  stage: build
   script:
     - cd londonmap
     - ./londonmap.sh
-    - ./londonmap
 
 build-drawout:
   stage: build
