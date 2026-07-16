@@ -1,0 +1,37 @@
+{
+  "format": "london1940-phase0-fixtures",
+  "version": 1,
+  "description": "Inputs used to preserve the legacy map2json baseline. Expected feature counts are observations, not correctness assertions.",
+  "fixtures": [
+    {
+      "name": "ashford",
+      "png": "examples/new_ashford.png",
+      "pngSha256": "df4039b72ff2c3ab3f64504430581464191af8c9853766b6afdaa3b43f793283",
+      "width": 2174,
+      "height": 1754,
+      "depth": 24,
+      "legacyJson": "examples/new_ashford.json",
+      "legacyJsonSha256": "a41f2dc5e283e5386c9dcd037424034672cdc8a81da325c20f22d7c56c71471b"
+    },
+    {
+      "name": "canterbury",
+      "png": "examples/new_canterbury.png",
+      "pngSha256": "bceae61d20811fd02270ceaf3fa7954dab8acb11248458c3ff4121534996ea17",
+      "width": 1648,
+      "height": 1539,
+      "depth": 24,
+      "legacyJson": "examples/new_canterbury.json",
+      "legacyJsonSha256": "c598576b0574c577f3c9e85bbe7467c3010eb0fa916a0b6fa45b513616c276a4"
+    },
+    {
+      "name": "maidstone",
+      "png": "examples/new_maidstone.png",
+      "pngSha256": "3a887231a05610a871da75951901582f2d460c52dab7ed4f0b5a7b962f9e49c7",
+      "width": 2106,
+      "height": 1257,
+      "depth": 24,
+      "legacyJson": "examples/new_maidstone.json",
+      "legacyJsonSha256": "5684883e7a1aa3c7f0e0a45a588a2ccb3a3532ef069be14ffd6c0161675b99a2"
+    }
+  ]
+}

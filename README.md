@@ -227,6 +227,10 @@ the full source sheets. Processing all ten large maps with the current binary
 would make unreliable output expensive to review and regenerate. The ordered,
 testable plan is maintained in [ROADMAP.md](ROADMAP.md).
 
+Phase 0 is complete. Its tracked fixture manifest and capture command are in
+[`baseline/`](baseline/), and repository/dependency findings are recorded in
+[`docs/repository-provenance.md`](docs/repository-provenance.md).
+
 ## License and attribution
 
 Source code is provided under the terms in [LICENSE](LICENSE). Historical map

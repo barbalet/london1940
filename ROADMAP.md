@@ -7,7 +7,7 @@ before scaling to all ten source sheets or millions of agents.
 Each phase has an explicit completion gate. A phase is complete only when its
 gate is automated in CI or recorded as a reviewed data decision.
 
-## Phase 0: preserve a baseline
+## Phase 0: preserve a baseline — complete
 
 1. Record clean conversion logs, runtime, peak memory, output sizes, and feature
    counts for Ashford, Canterbury, and Maidstone.
@@ -20,6 +20,12 @@ gate is automated in CI or recorded as a reviewed data decision.
 
 **Completion gate:** one command captures the legacy baseline in an ignored
 build directory without modifying tracked files.
+
+**Completion evidence:** `baseline/capture.sh` performs the clean capture,
+`baseline/fixtures.json` pins the three inputs, and
+`docs/repository-provenance.md` records repository and dependency status. The
+reference capture is written to `build/phase0-baseline` with per-fixture logs,
+metrics, artifacts, and checksums.
 
 ## Phase 1: define one map format
 
