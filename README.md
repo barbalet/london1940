@@ -37,13 +37,13 @@ the conversion pipeline as external inputs.
 
 | Path | Purpose | Present state |
 | --- | --- | --- |
-| `map/` | `map2json`, tiling, feature extraction, JSON assembly, elevation import, and JSON rendering | Core C extractor builds; pipeline and format need repair |
-| `mapedit/` | Command-line renderer and macOS JSON/map editor | Requires an ApeSDK source tree that is absent here |
-| `londonmap/` | Experimental processing of four large London sheets | Uses hard-coded local paths and fixed dimensions |
-| `examples/` | Ashford, Canterbury, and Maidstone PNG/JSON examples | Useful fixtures, but no automated correctness checks |
-| `urban/` | Older generic urban simulation/game prototype | Adjacent research code; also requires ApeSDK |
-| `occupations/` | Early occupation taxonomy/data | Incomplete and not integrated with map conversion |
-| `newlondmaps.sh` | Legacy download helper | Downloads an opaque ZIP into a user-specific directory |
+| `map/` | `map2json`, tiling, feature extraction, JSON assembly, elevation import, and JSON rendering | Checked v1 extraction pipeline; legacy C engine is private |
+| `mapedit/` | Command-line renderer and macOS JSON/map editor | Archived pre-v1 research component |
+| `londonmap/` | Experimental processing of four large London sheets | Archived; paths replaced by explicit arguments |
+| `examples/` | Ashford, Canterbury, and Maidstone PNG/JSON examples | Automated extraction and validation fixtures |
+| `urban/` | Older generic urban simulation/game prototype | Archived adjacent research component |
+| `occupations/` | Early occupation taxonomy/data | Retained source data; not integrated |
+| `newlondmaps.sh` | Verified source-sheet acquisition | Downloads pinned sheets and checks Git blob digests |
 
 ## Intended data flow
 
@@ -82,11 +82,13 @@ implemented as a separate optional indexed-raster archive mode. Embedding the
 original PNG bytes in JSON would add Base64 overhead without improving on PNG's
 existing lossless compression.
 
-## Proposed JSON format
+## Version 1 JSON format
 
-The current JSON records useful concepts but has two incompatible polygon
-representations. A versioned format should be defined before processing the
-full-resolution sheets. At minimum, every document should contain:
+The legacy JSON records useful concepts but has two incompatible polygon
+representations. Phase 1 defines one canonical interchange format in
+[`schema/map-v1.schema.json`](schema/map-v1.schema.json), with its geometry and
+coordinate semantics documented in
+[`docs/map-format-v1.md`](docs/map-format-v1.md). A document begins:
 
 ```json
 {
@@ -94,109 +96,123 @@ full-resolution sheets. At minimum, every document should contain:
   "version": 1,
   "source": {
     "filename": "160.png",
-    "sha256": "..."
+    "sha256": "...",
+    "legacyFormat": "apesdk-array"
   },
-  "crs": "EPSG:27700",
+  "generator": {
+    "name": "legacy-map2json",
+    "version": null,
+    "extractionProfile": "legacy-default-unknown"
+  },
+  "attribution": {
+    "license": "CC-BY-4.0",
+    "text": "Contains derived data from historical Ordnance Survey maps supplied by the National Library of Scotland."
+  },
+  "encoding": {
+    "coordinates": "absolute-integer",
+    "sharedTables": false
+  },
+  "coordinates": {
+    "space": "sheet-pixel",
+    "units": "pixel",
+    "origin": "top-left",
+    "yAxis": "down",
+    "crs": null
+  },
   "tile": [0, 0],
   "offset": [0, 0],
   "resolution": [1557, 1113],
-  "bounds": [495000, 225000, 535000, 180000],
-  "terrain": [],
-  "urban": []
+  "layers": []
 }
 ```
 
-The final schema should use one polygon representation everywhere and define
-whether rings are closed, their winding order, how interior rings are stored,
-and whether coordinates are tile-local or sheet-global. Linear features should
-use explicit point arrays and link indices with defined widths and units.
-Coordinates should be integer and delta-encoded in the compact representation;
-repeated feature names and properties should use shared tables. The canonical
-uncompressed representation should be minified UTF-8 JSON with stable key and
-feature ordering. Distribution artifacts should be deterministic gzip files
-named `*.json.gz`; Zstandard can be benchmarked as an additional artifact, but
-must not be the only supported encoding.
+Version 1 uses `polygons[].rings` everywhere, explicit indexed networks, and
+absolute sheet-pixel integer coordinates. It deliberately does not use delta
+coordinates or shared tables: readable geometry makes legacy migration easier
+to audit, while gzip will provide transport compression in Phase 2. Canonical
+JSON is minified UTF-8 with sorted object keys, preserved layer/feature order,
+and one trailing newline.
 
 Every generated map should carry the source PNG's SHA-256 digest, converter
 version, extraction profile, coordinate reference system, and schema version.
 This makes outputs reproducible when extraction thresholds change.
 
+Legacy files can be migrated and validated now:
+
+```sh
+python3 tools/map_migrate.py migrate examples/new_ashford.json \
+  --source-root examples --output build/new_ashford.v1.json
+python3 tools/map_migrate.py validate build/new_ashford.v1.json
+```
+
+The test suite validates migrated documents twice: with the repository's
+semantic validator and independently with the `jsonschema` Draft 2020-12
+implementation. It also migrates a checked-in keyed-object fixture emitted by
+the legacy C writer itself.
+
+```sh
+python3 -m pip install -r requirements-test.txt
+python3 -m unittest discover -s tests -v
+```
+
+The complete Phase 2 validation—including two clean deterministic runs,
+canonical and gzip round-trips, every per-layer mask, reviewed expectations,
+and negative inputs—is run with:
+
+```sh
+./tests/run_phase2.sh
+```
+
+See [docs/validation-harness.md](docs/validation-harness.md) for artifact and
+metric details.
+
 ## Current status
 
 ### What works
 
-- `map/map2json` compiles on macOS with the supplied `Makefile`.
-- It reads the three example RGB PNGs and detects multiple feature classes.
-- The three checked-in example JSON documents are syntactically valid.
+- `map/map2json` builds on macOS and Linux with the supplied `Makefile`.
+- It converts all three example RGB PNGs directly to canonical format-v1 JSON.
+- Fresh extraction passes schema, semantic, compression, and all 27 reviewed
+  per-layer mask checks.
+- Normal extraction emits only the requested output; diagnostics are isolated
+  and opt-in.
+- Checked arguments and pipeline failures produce non-zero exits.
 - The Python map-combination utilities pass Python syntax compilation.
 - JSON can be rendered as a simplified feature map.
 
 ### What is broken or unverified
 
-- **The repository is not self-contained.** `mapedit/` and `urban/` reference
-  `../apesdk`, but this GitHub checkout contains neither that directory nor
-  submodule metadata. The related GitLab project has diverged and includes
-  components absent here.
-- **The two JSON dialects do not round-trip.** ApeSDK output writes polygon
-  collections as arrays, while the loader expects the older keyed-object form.
-  In a test conversion of `new_ashford.png`, extraction reported 116 building
-  polygons and 201 woodland areas; the immediate reload reported zero of both.
-- **The internal test can validate the wrong file.** After writing the requested
-  output, `map2json` reloads the literal path `map.json`. An `-o` conversion can
-  therefore read a stale file or fail to test the file it created.
-- **A successful exit does not prove success.** Several error paths return zero,
-  parse/load results can discard data silently, and feature counts are not
-  asserted.
-- **Memory use is excessive.** Default fixed maxima report approximately 1.1 GB
-  of map buffers even for the 2174 by 1754 Ashford example. Some downstream
-  routines still use compile-time maxima instead of configured values.
-- **Conversion pollutes the working directory.** A normal run emits numerous
-  intermediate PNG files plus `map2.json` without an isolated output directory
-  or a diagnostic-output switch.
-- **Command-line parsing is fragile.** Arguments are consumed in pairs even
-  though `--apesdk` is a flag, values are accessed without consistent bounds
-  checks, duplicated conditions exist, and there is no useful `--help` output.
-- **Coordinate parsing depends on filenames.** Georeferencing is inferred from
-  an undocumented underscore-delimited filename convention. Ordinary example
-  names consequently receive zero coordinates.
-- **Automation is not a test suite.** GitHub Actions only downloads an external
-  ZIP. GitLab CI builds selected components but does not validate schemas,
-  feature counts, determinism, compression, or rendered output.
-- **Scripts are machine-specific.** Several scripts and C files contain
-  `/Users/barbalet/...`, `~/london1940`, or sibling `mapblend` paths.
+- **The private C engine remains legacy code.** Its pair-stepping CLI and
+  incompatible serializer are deliberately hidden behind the checked driver;
+  direct use of `map2json-core` is unsupported.
 - **The large-sheet helper is unfinished.** The `shrinkmaps` program in the map
   data repository contains fixed local paths and its `main` only prints
   `Hello, World!`.
-- **Elevation validation is defective.** `heightmap.py` iterates elevation values
-  and then incorrectly uses each value as an array index.
-- **Installation has a copy-and-paste error.** The `Makefile` installs
-  `combinemaps.py` as `heightmap` instead of installing `heightmap.py`.
-- **Shell file iteration is unsafe.** Several scripts split `find` output on
-  whitespace and assume filenames contain no spaces.
-- **There is no authoritative schema, fixture manifest, quality baseline, or
-  documented release process.**
+- **Full-sheet ingestion is not implemented.** Acquisition is reproducible, but
+  tiling, overlap deduplication, georeferencing manifests, and sheet-level
+  validation remain Phase 6 work.
+- **Archived components are not supported builds.** `urban/`, `londonmap/`, and
+  `mapedit/` remain for research provenance; see
+  [docs/component-status.md](docs/component-status.md).
 
 ## Building the currently working component
 
-Requirements: a C11 compiler, `make`, and the standard maths library.
+Requirements: Python 3, a C11 compiler, `make`, and the standard maths library.
 
 ```sh
-cd map
-make
+python3 -m pip install -r requirements-test.txt
+make -C map
+./tests/run_supported.sh
 ```
-
-The following demonstrates the legacy interface, not a verified production
-workflow:
 
 ```sh
-./map2json -f ../examples/new_ashford.png -o map.json
-./map2json -f map.json -o rendered.png
+./map/map2json examples/new_ashford.png \
+  --output build/new_ashford.v1.json \
+  --work-dir build/map2json-work
 ```
 
-Run it in a disposable working directory because the extractor currently emits
-many intermediate files. Do not treat `Ended Successfully` as evidence of a
-correct round-trip until the validation work in [ROADMAP.md](ROADMAP.md) is
-complete.
+See [docs/map2json.md](docs/map2json.md) for profiles, diagnostics, failure
+semantics, validation, and measured memory use.
 
 ## Definition of a valid conversion
 
@@ -222,14 +238,15 @@ buildings or waterways.
 
 ## Development priorities
 
-The next work should stabilise the format and validation harness before adding
-the full source sheets. Processing all ten large maps with the current binary
-would make unreliable output expensive to review and regenerate. The ordered,
-testable plan is maintained in [ROADMAP.md](ROADMAP.md).
+The next work is Phase 4 repository reproducibility before adding the full
+source sheets. The ordered, testable plan is maintained in
+[ROADMAP.md](ROADMAP.md).
 
-Phase 0 is complete. Its tracked fixture manifest and capture command are in
+Phases 0 through 4 are complete. The tracked baseline fixture manifest and capture command are in
 [`baseline/`](baseline/), and repository/dependency findings are recorded in
-[`docs/repository-provenance.md`](docs/repository-provenance.md).
+[`docs/repository-provenance.md`](docs/repository-provenance.md). The v1 schema,
+format semantics, migration command, and tests are in `schema/`, `docs/`,
+`tools/`, and `tests/` respectively.
 
 ## License and attribution
 

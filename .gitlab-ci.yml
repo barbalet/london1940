@@ -1,39 +1,11 @@
-# This file is a template, and might need editing before it works on your project.
-# use the official gcc image, based on debian
-# can use verions as well, like gcc:5.2
-# see https://hub.docker.com/_/gcc/
-image: gcc
-
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
+image: python:3.13-bookworm
 
 before_script:
-  - git submodule sync --recursive
-  - git submodule update --init --recursive
-  
-build-map:
-  stage: build
-  script: 
-    - cd map
-    - make
+  - apt-get update
+  - apt-get install -y --no-install-recommends gcc make jq
+  - python -m pip install -r requirements-test.txt
 
-build-londonmap:
-  stage: build
+supported-pipeline:
+  stage: test
   script:
-    - cd londonmap
-    - ./londonmap.sh
-
-build-drawout:
-  stage: build
-  script:
-    - cd mapedit
-    - ./drawout.sh
-    - echo "Compile drawout complete."
-
-build-urban:
-  stage: build
-  script:
-    - echo "Compiling the code..."
-    - cd urban
-    - ./build.sh
-    - echo "Compile urban complete."
+    - ./tests/run_supported.sh

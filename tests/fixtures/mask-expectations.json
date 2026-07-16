@@ -1,0 +1,208 @@
+{
+  "format": "london1940-mask-expectations",
+  "version": 1,
+  "review": {
+    "date": "2026-07-15",
+    "scope": "Structural regression baseline; representative Ashford building, road, and woodland masks visually reviewed."
+  },
+  "fixtures": {
+    "new_ashford": {
+      "layers": {
+        "terrain.rivers": {
+          "minimumFeatures": {
+            "links": 2495,
+            "points": 2495,
+            "widths": 2495
+          },
+          "maskSha256": "2b4939246f1a33464015da0df9d92cbbfde189dab4dacf9441ee9f065f893e88"
+        },
+        "terrain.woodland": {
+          "minimumFeatures": {
+            "polygons": 201,
+            "rings": 201
+          },
+          "maskSha256": "2c65f3318cfbc4b5564c4ae5d2eb3c666d77f769d4293d48b0473238d9ed963c",
+          "topology": {"validRings": 195, "quarantinedRings": 6, "interiorRings": 0}
+        },
+        "urban.bridges": {
+          "minimumFeatures": {
+            "items": 8
+          },
+          "maskSha256": "52e21e74f2652043982bad81564a8eb60e93db7689c96d2358924580bd94d36b"
+        },
+        "urban.buildings": {
+          "minimumFeatures": {
+            "polygons": 116,
+            "rings": 116
+          },
+          "maskSha256": "13f06e48c72770d4fb1afafbc8a27dcd7d7c633e2be7efd3246fced9bf1bea77",
+          "topology": {"validRings": 113, "quarantinedRings": 3, "interiorRings": 0}
+        },
+        "urban.junctions": {
+          "minimumFeatures": {
+            "points": 33
+          },
+          "maskSha256": "df9905cf4785ac2d91bb7b14dab31add33bddd41baed83cc748203494fddbc9c"
+        },
+        "urban.main-roads": {
+          "minimumFeatures": {
+            "links": 1102,
+            "points": 1102
+          },
+          "maskSha256": "fb6c8399b8c532c308e5da6407cfa95bc49461a2798ed69531cd7369b7bcf008"
+        },
+        "urban.minor-roads": {
+          "minimumFeatures": {
+            "links": 2805,
+            "points": 2805
+          },
+          "maskSha256": "87eb61f61e705ad4e83714b0ef460cc9a715d13862e19f08dc0b7002b32f5bd4"
+        },
+        "urban.orchards": {
+          "minimumFeatures": {
+            "points": 29
+          },
+          "maskSha256": "c6a583d0f4eb241273a776aba4074f5591a4f10f700fd27b0aa14c13aa2ee404"
+        },
+        "urban.railway-stations": {
+          "minimumFeatures": {
+            "points": 3
+          },
+          "maskSha256": "47692b05f65671d2bbfde054a0cca01c75331a415cd731cde7fb7bfe6402b5e8"
+        }
+      }
+    },
+    "new_canterbury": {
+      "layers": {
+        "terrain.rivers": {
+          "minimumFeatures": {
+            "links": 848,
+            "points": 848,
+            "widths": 848
+          },
+          "maskSha256": "640cf4939e54d9086693a7edc4e1e87176170ad6eb922e658f830f600849e446"
+        },
+        "terrain.woodland": {
+          "minimumFeatures": {
+            "polygons": 197,
+            "rings": 197
+          },
+          "maskSha256": "c4a099c2cd4e772640dfc752d0160eb408141d1e4c328b4a41300dc61f284416",
+          "topology": {"validRings": 190, "quarantinedRings": 7, "interiorRings": 0}
+        },
+        "urban.bridges": {
+          "minimumFeatures": {
+            "items": 3
+          },
+          "maskSha256": "acaf7e6ea5606662e52e54f3fbb1ea6a8475aa080cc5d1310877d8e80690e521"
+        },
+        "urban.buildings": {
+          "minimumFeatures": {
+            "polygons": 382,
+            "rings": 382
+          },
+          "maskSha256": "857ad494110e806bbe26f57d360e50903e6f87be02c1b499cde91a7557e91d01",
+          "topology": {"validRings": 375, "quarantinedRings": 7, "interiorRings": 0}
+        },
+        "urban.junctions": {
+          "minimumFeatures": {
+            "points": 41
+          },
+          "maskSha256": "5bb5dfb6b3b657834f60d3d424605be57e8bc684f545edefbd874962122004e3"
+        },
+        "urban.main-roads": {
+          "minimumFeatures": {
+            "links": 1259,
+            "points": 1259
+          },
+          "maskSha256": "cbdb14a9f31a1677811750baec228006ae5cbaf564d52789e25c20a1e4f40d3e"
+        },
+        "urban.minor-roads": {
+          "minimumFeatures": {
+            "links": 1698,
+            "points": 1698
+          },
+          "maskSha256": "2c04593d5cc9f249449b9eef23462e396c084eb84cfd05766ea9cdfedd4cfccc"
+        },
+        "urban.orchards": {
+          "minimumFeatures": {
+            "points": 321
+          },
+          "maskSha256": "4ccb225f3a73be8b642b8c191e3a099c96fdb43a9d6fcf967ddcb2e70692018e"
+        },
+        "urban.railway-stations": {
+          "minimumFeatures": {
+            "points": 1
+          },
+          "maskSha256": "e8c5ec549ed503918efc71a747815830baee77c22985f18c56cba5d3770be1b2"
+        }
+      }
+    },
+    "new_maidstone": {
+      "layers": {
+        "terrain.rivers": {
+          "minimumFeatures": {
+            "links": 842,
+            "points": 842,
+            "widths": 842
+          },
+          "maskSha256": "8b8025aa8728f4b080f80067b37eab5391f5466508cfa5792c3fdebb6c6aec7e"
+        },
+        "terrain.woodland": {
+          "minimumFeatures": {
+            "polygons": 511,
+            "rings": 511
+          },
+          "maskSha256": "2290d9f745e1849723cf3adafc4bb2111182c4fd917eb6b05e2a0eafad118798",
+          "topology": {"validRings": 489, "quarantinedRings": 22, "interiorRings": 0}
+        },
+        "urban.bridges": {
+          "minimumFeatures": {
+            "items": 9
+          },
+          "maskSha256": "44a0d16e5122680e390ad30c6e9bf85f5efa5305eccd9e0d0c27e4379b71b5e3"
+        },
+        "urban.buildings": {
+          "minimumFeatures": {
+            "polygons": 446,
+            "rings": 446
+          },
+          "maskSha256": "5c27404373e621fde7f12e317c2234579fc15d4fda721892d49271a267eacb98",
+          "topology": {"validRings": 428, "quarantinedRings": 18, "interiorRings": 0}
+        },
+        "urban.junctions": {
+          "minimumFeatures": {
+            "points": 37
+          },
+          "maskSha256": "ff2b18c4f4ca62b798c8cbe898ae53c3f1faef0ed16b2d69f852388ac28097a4"
+        },
+        "urban.main-roads": {
+          "minimumFeatures": {
+            "links": 1099,
+            "points": 1099
+          },
+          "maskSha256": "dfc2b52c23f32c234b174f46fe9cfbf089bed8f492cf1bcb736dade8d3b23328"
+        },
+        "urban.minor-roads": {
+          "minimumFeatures": {
+            "links": 2625,
+            "points": 2625
+          },
+          "maskSha256": "2adc4a037ef8f15e284b995743e114b4b7ba9dbee8518801207d64331fc57e21"
+        },
+        "urban.orchards": {
+          "minimumFeatures": {
+            "points": 65
+          },
+          "maskSha256": "d9f75de93b718075ba9b400cfd942fd5f5d322b8e8f5e50b2b25a955ed6fc79b"
+        },
+        "urban.railway-stations": {
+          "minimumFeatures": {
+            "points": 2
+          },
+          "maskSha256": "5882146730779875ebbb477f3968bffca5dec6538e229bbf24093daafe9ca264"
+        }
+      }
+    }
+  }
+}

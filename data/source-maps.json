@@ -1,0 +1,20 @@
+{
+  "format": "london1940-source-map-manifest",
+  "version": 1,
+  "repository": "https://gitlab.com/apesdk/southeastengland1940maps",
+  "revision": "cb31a79468ad43a04967c0ab3c50b2be157b0562",
+  "license": "CC-BY-4.0",
+  "attribution": "Historical Ordnance Survey maps supplied by the National Library of Scotland",
+  "files": {
+    "160": {"path": "160.png", "gitBlobSha1": "84d8ab558b2119e4cc61e8f5c2208d609de1511b"},
+    "161": {"path": "161.png", "gitBlobSha1": "77d16c29ddf8da902589b722eb221ffc83136b58"},
+    "162": {"path": "162.png", "gitBlobSha1": "6d13a6e913737c99b7dcb7a7136c944bc45e77ce"},
+    "170": {"path": "170.png", "gitBlobSha1": "054a45b25b4962c3df56f31e1283b4945eb51f15"},
+    "171": {"path": "171.png", "gitBlobSha1": "166ca43157b4b03319dec90e2ab855874ee8bb38"},
+    "172": {"path": "172.png", "gitBlobSha1": "3380af760ad3dd1b49c3fde0cbd7bd4e65d53f0b"},
+    "173": {"path": "173.png", "gitBlobSha1": "df0a1624c79a7d11fd2009a6fcaa5b5dfbd0e485"},
+    "182": {"path": "182.png", "gitBlobSha1": "a53af47b0a5789123c45d8b2b21a7cc1f7b73213"},
+    "183": {"path": "183.png", "gitBlobSha1": "fb438b4db04371d3031656419a3c9cb32c6cb044"},
+    "184": {"path": "184.png", "gitBlobSha1": "3d38ce348f1e098ec62e9856b1801482972bb465"}
+  }
+}

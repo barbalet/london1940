@@ -657,19 +657,9 @@ void draw_screen_do_update(void)
 int mainish( int argc, const char *argv[] )
 {
     n_string_block png_filename_out = {0};
-    
-
-#ifdef FILE_LOCAL
-    filehandling_string_out(png_filename_out, (n_string) "/Users/barbalet/Documents/output.json", "_mix.png");
-
-    main_capture("/Users/barbalet/Documents/output.json");
-#else
-    filehandling_string_out(png_filename_out, (n_string) argv[1], "_mix.png");
-
     draw_check_arg_count(argc);
-
+    filehandling_string_out(png_filename_out, (n_string) argv[1], "_mix.png");
     main_capture(argv[1]);
-#endif
     if (screen_buffer)
     {
         write_png_file(png_filename_out, (int)resolution[0], (int)resolution[1], buffer);

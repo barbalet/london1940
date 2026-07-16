@@ -1,38 +1,30 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Creates json files for map images in a given directory
+set -euo pipefail
 
-search_dir="${1}"
-
-if [ ! "$search_dir" ]; then
-    echo "Please specify a directory containing map images. mapoutdir [directory]"
-    exit
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+    echo "usage: mapoutdir INPUT_DIR [OUTPUT_DIR]" >&2
+    exit 2
 fi
-
-if [ ! -d "$search_dir" ]; then
-    echo "$search_dir is not a directory"
+input_dir=$1
+output_dir=${2:-results}
+if [ ! -d "${input_dir}" ]; then
+    echo "mapoutdir: not a directory: ${input_dir}" >&2
+    exit 1
 fi
-
-results_dir=results
-if [ ! -d "${results_dir}" ]; then
-    mkdir "${results_dir}"
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+map2json=${MAP2JSON:-${script_dir}/map2json}
+if [ ! -x "${map2json}" ]; then
+    map2json=$(command -v map2json || true)
 fi
-
-mapout_binary=./map2json
-if [ ! -f "${mapout_binary}" ]; then
-    mapout_binary=/usr/bin/map2json
+if [ -z "${map2json}" ] || [ ! -x "${map2json}" ]; then
+    echo "mapoutdir: map2json is not built or installed" >&2
+    exit 1
 fi
-
-if [ -f "${results_dir}/index.txt" ]; then
-    rm "${results_dir}/index.txt"
-fi
-
-ctr=0
-for entry in $(find ${search_dir} -name '*.png'); do
-    ${mapout_binary} -f "${entry}" -o "${entry}".json
-    if [ -f roads.png ]; then
-	mv roads.png "${results_dir}/${ctr}.png"
-	echo "${ctr}. ${entry}" >> "${results_dir}/index.txt"
-	ctr=$((ctr + 1))
-    fi
-done
+mkdir -p "${output_dir}"
+while IFS= read -r -d '' entry; do
+    base=$(basename -- "${entry}" .png)
+    "${map2json}" "${entry}" --output "${output_dir}/${base}.v1.json" \
+        --work-dir "${output_dir}/.work"
+done < <(find "${input_dir}" -type f -name '*.png' -print0 | sort -z)
+rmdir "${output_dir}/.work" 2>/dev/null || true

@@ -227,7 +227,7 @@ static n_c_int line_length(n_c_int line_links[],
 static void prune_line_links(n_c_int line_links[],
                              n_c_int line_index, n_byte direction)
 {
-    n_c_int idx, length = 0;
+    n_c_int idx;
     n_c_int index = line_index, start_index = line_index;
     n_byte followed_link[MAX_ROAD_POINTS];
 
@@ -244,7 +244,6 @@ static void prune_line_links(n_c_int line_links[],
         followed_link[idx] = 1;
         /* clear the link */
         line_links[idx*2 + direction] = 0;
-        length++;
     }
 }
 

@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://london1940.org/schema/map-v1.schema.json",
+  "title": "London 1940 semantic map",
+  "description": "Canonical interchange format for simulation-relevant features extracted from historical map images.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "version", "source", "generator", "attribution", "encoding", "coordinates", "tile", "offset", "resolution", "layers"],
+  "properties": {
+    "format": {"const": "london1940-map"},
+    "version": {"const": 1},
+    "source": {"$ref": "#/$defs/source"},
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "extractionProfile"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": ["string", "null"]},
+        "extractionProfile": {"type": "string", "minLength": 1}
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["license", "text"],
+      "properties": {
+        "license": {"const": "CC-BY-4.0"},
+        "text": {"type": "string", "minLength": 1}
+      }
+    },
+    "encoding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coordinates", "sharedTables"],
+      "properties": {
+        "coordinates": {"const": "absolute-integer"},
+        "sharedTables": {"const": false}
+      }
+    },
+    "coordinates": {"$ref": "#/$defs/coordinates"},
+    "tile": {"$ref": "#/$defs/integerPair"},
+    "offset": {"$ref": "#/$defs/integerPair"},
+    "resolution": {
+      "type": "array",
+      "prefixItems": [{"type": "integer", "minimum": 1}, {"type": "integer", "minimum": 1}],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "geographicBounds": {"$ref": "#/$defs/geographicBounds"},
+    "layers": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/layer"}
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["filename", "sha256", "legacyFormat"],
+      "properties": {
+        "filename": {"type": "string", "minLength": 1},
+        "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "legacyFormat": {"enum": ["apesdk-array", "keyed-object", "v1"]}
+      }
+    },
+    "coordinates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["space", "units", "origin", "yAxis", "crs"],
+      "properties": {
+        "space": {"const": "sheet-pixel"},
+        "units": {"const": "pixel"},
+        "origin": {"const": "top-left"},
+        "yAxis": {"const": "down"},
+        "crs": {"type": ["string", "null"]}
+      }
+    },
+    "integerPair": {
+      "type": "array",
+      "prefixItems": [{"type": "integer"}, {"type": "integer"}],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "point": {"$ref": "#/$defs/integerPair"},
+    "ring": {
+      "type": "array",
+      "minItems": 3,
+      "items": {"$ref": "#/$defs/point"}
+    },
+    "polygon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rings"],
+      "properties": {
+        "legacyId": {"type": "string"},
+        "rings": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/ring"}}
+      }
+    },
+    "link": {
+      "type": "array",
+      "prefixItems": [{"type": "integer", "minimum": -1}, {"type": "integer", "minimum": -1}],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "pointDirection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["point", "direction"],
+      "properties": {
+        "point": {"$ref": "#/$defs/point"},
+        "direction": {"$ref": "#/$defs/integerPair"}
+      }
+    },
+    "layerBase": {
+      "type": "object",
+      "required": ["id", "category", "type", "geometry"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^(terrain|urban)\\.[a-z0-9-]+$"},
+        "category": {"enum": ["terrain", "urban"]},
+        "type": {"type": "string", "minLength": 1},
+        "geometry": {"enum": ["polygons", "points", "network", "point-directions"]}
+      }
+    },
+    "layer": {
+      "oneOf": [
+        {
+          "allOf": [
+            {"$ref": "#/$defs/layerBase"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "category", "type", "geometry", "polygons"],
+              "properties": {
+                "id": true, "category": true, "type": true,
+                "geometry": {"const": "polygons"},
+                "polygons": {"type": "array", "items": {"$ref": "#/$defs/polygon"}}
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {"$ref": "#/$defs/layerBase"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "category", "type", "geometry", "points"],
+              "properties": {
+                "id": true, "category": true, "type": true,
+                "geometry": {"const": "points"},
+                "points": {"type": "array", "items": {"$ref": "#/$defs/point"}}
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {"$ref": "#/$defs/layerBase"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "category", "type", "geometry", "points", "links"],
+              "properties": {
+                "id": true, "category": true, "type": true,
+                "geometry": {"const": "network"},
+                "points": {"type": "array", "items": {"$ref": "#/$defs/point"}},
+                "links": {"type": "array", "items": {"$ref": "#/$defs/link"}},
+                "widths": {"type": "array", "items": {"type": "integer", "minimum": 0}}
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {"$ref": "#/$defs/layerBase"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "category", "type", "geometry", "items"],
+              "properties": {
+                "id": true, "category": true, "type": true,
+                "geometry": {"const": "point-directions"},
+                "items": {"type": "array", "items": {"$ref": "#/$defs/pointDirection"}}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "geographicBounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["crs", "topLeft", "bottomRight"],
+      "properties": {
+        "crs": {"const": "EPSG:4326"},
+        "topLeft": {"$ref": "#/$defs/lonLat"},
+        "bottomRight": {"$ref": "#/$defs/lonLat"}
+      }
+    },
+    "lonLat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["longitude", "latitude"],
+      "properties": {
+        "longitude": {"type": "number", "minimum": -180, "maximum": 180},
+        "latitude": {"type": "number", "minimum": -90, "maximum": 90}
+      }
+    }
+  }
+}

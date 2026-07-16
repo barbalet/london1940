@@ -27,7 +27,7 @@ build directory without modifying tracked files.
 reference capture is written to `build/phase0-baseline` with per-fixture logs,
 metrics, artifacts, and checksums.
 
-## Phase 1: define one map format
+## Phase 1: define one map format — complete
 
 1. Write JSON Schema for `london1940-map` version 1.
 2. Choose a single representation for exterior and interior polygon rings.
@@ -44,7 +44,17 @@ metrics, artifacts, and checksums.
 **Completion gate:** all three example documents migrate to version 1, validate
 against the schema, and retain identical feature counts after load/save.
 
-## Phase 2: build the validation harness
+**Completion evidence:** `schema/map-v1.schema.json` is the normative Draft
+2020-12 schema; `docs/map-format-v1.md` defines geometry, coordinate, ordering,
+and encoding semantics; `tools/map_migrate.py` migrates ApeSDK arrays and keyed
+objects and emits canonical JSON; and `tests/test_map_migrate.py` proves all
+three examples preserve per-layer feature counts and canonical bytes through a
+second load/save. The same outputs and the schema itself are independently
+checked by the `jsonschema` Draft 2020-12 implementation. Tests also migrate a
+real keyed-object Canterbury file emitted by the legacy C writer, including
+exterior/interior building rings, and reject out-of-range network links.
+
+## Phase 2: build the validation harness — complete
 
 1. Add schema and semantic-invariant validation:
    - coordinates within declared bounds;
@@ -67,7 +77,17 @@ against the schema, and retain identical feature counts after load/save.
 **Completion gate:** CI proves JSON and gzip round-trips, reports every feature
 class independently, and reproduces identical outputs on two clean runs.
 
-## Phase 3: repair and isolate `map2json`
+**Completion evidence:** `tools/map_validate.py` implements independent schema
+and semantic validation, canonical/deep equality, deterministic gzip, per-layer
+PNG masks, exact hashes, and precision/recall/IoU metrics.
+`tests/fixtures/mask-expectations.json` pins reviewed hashes, topology quarantine
+counts, and non-zero feature minimums for all 27 example layers; 27 independent
+reference PNGs are decoded and compared at raw-pixel level. All masks were
+visually reviewed as per-town contact sheets. `tests/run_phase2.sh` performs two
+clean artifact runs and compares them byte-for-byte before running the positive
+and negative test suite. GitHub Actions executes the same command.
+
+## Phase 3: repair and isolate `map2json` — complete
 
 1. Replace pair-stepping argument parsing with a checked parser and add
    `--help`, `--version`, `--output`, `--work-dir`, `--diagnostics`,
@@ -92,7 +112,18 @@ class independently, and reproduces identical outputs on two clean runs.
 failed conversions are non-zero, normal runs produce only requested artifacts,
 and peak memory is measured and substantially below the legacy baseline.
 
-## Phase 4: make the repository reproducible
+**Completion evidence:** `tools/map2json.py` is the checked public driver and
+`map/map2json-core` is a private legacy extraction engine built by the
+`Makefile`. The driver provides the documented CLI, isolated scratch and
+diagnostic handling, dimension-scaled limits, atomic canonical v1 output, and
+self-validates the exact requested destination. `tests/run_phase3.sh` performs
+fresh extraction of all three examples and passes each result through Phase 2;
+`tests/test_map2json.py` covers output selection, isolation, diagnostic
+retention, checked limits, engine failure, and missing output. Measured peak RSS
+fell 38.8% for Ashford, 41.7% for Canterbury, and 33.3% for Maidstone relative
+to Phase 0. See `docs/map2json.md`.
+
+## Phase 4: make the repository reproducible — complete
 
 1. Restore and pin ApeSDK using a documented submodule or dependency-fetch
    mechanism; do not rely on an unversioned sibling directory.
@@ -110,6 +141,20 @@ and peak memory is measured and substantially below the legacy baseline.
 
 **Completion gate:** a fresh clone can build and run all supported tests from
 documented commands without author-specific paths or unverified downloads.
+
+**Completion evidence:** `dependencies/apesdk.lock.json` and
+`tools/fetch_apesdk.py` pin and verify the historical ApeSDK gitlink without
+making archived consumers part of the supported build. `data/source-maps.json`
+pins all ten sheets to one repository commit and per-file Git blob checksums;
+`tools/fetch_source_maps.py` provides streaming, atomic, verified acquisition.
+`map/heightmap.py` now validates exact DEM size and values, emits JSON, handles
+NODATA, and is covered by a small signed-big-endian fixture. The relocatable
+`Makefile` installs the correct heightmap and private map2json runtime and passes
+temporary-root install/uninstall testing. Author-specific active paths and
+unsafe shell file iteration are rejected by `tests/run_phase4.sh`.
+`docs/component-status.md` records the supported/archived boundary. GitHub and
+GitLab CI both install the same requirements and execute
+`tests/run_supported.sh`, the documented fresh-clone command.
 
 ## Phase 5: calibrate semantic extraction
 

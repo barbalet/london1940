@@ -27,6 +27,10 @@ n_c_int write_png_file(char* filename,
     n_byte4 i;
     unsigned char * image = buffer;
 
+    if (getenv("MAP2JSON_SUPPRESS_PNG") != NULL) {
+        return 0;
+    }
+
     if (bitsperpixel == 32) {
         error = lodepng_encode32_file(filename, image, width, height);
     }

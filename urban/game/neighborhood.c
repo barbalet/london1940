@@ -93,7 +93,6 @@ void neighborhood_object(void)
     n_file   *output_file = unknown_json( return_object, OBJECT_OBJECT );
     if ( output_file )
     {
-        // /Users/SOMEONE/Documents/neighborhood.json
         io_disk_write( output_file, "neighborhood.json" );
         io_file_free( &output_file );
     }

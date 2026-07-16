@@ -1461,6 +1461,18 @@ int main(int argc, char* argv[])
                   image_width, image_height,
                   output_filename);
 
+    if (getenv("MAP2JSON_EXTRACT_ONLY") != NULL) {
+        free(possible_roads);
+        free(dark_image);
+        free(thresholded);
+        free(thresholded_ref);
+        free(image_data);
+        free(original_data);
+        free_map_data(&mapdata);
+        printf("Ended Successfully\n");
+        return 0;
+    }
+
     /* test */
     load_map_json("map.json",
                   mapdata.buildings.vertices,

@@ -1,8 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
-make
-cp map2json ../../mapblend/
-cp mapoutdir ../../mapblend/
-cp combinetiles.py ../../mapblend/
-cp combinemaps.py ../../mapblend/
-cp allmaps ../../mapblend/
+set -eu
+echo "allyouneed.sh: archived legacy mapblend integration" >&2
+exit 2

@@ -13,6 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: newlondmaps
-      run: ./newlondmaps.sh
-
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+    - name: Install validation dependencies
+      run: python -m pip install -r requirements-test.txt
+    - name: Build and run all supported tests
+      run: ./tests/run_supported.sh

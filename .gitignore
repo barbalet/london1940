@@ -6,3 +6,5 @@ UserInterfaceState.xcuserstate
 xcschememanagement.plist
 *.xcbkptlist
 /build/
+/map/map2json-core
+/apesdk/

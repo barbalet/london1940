@@ -1,0 +1,8 @@
+{
+  "format": "london1940-dependency-lock",
+  "version": 1,
+  "name": "apesdk",
+  "url": "https://gitlab.com/apesdk/apesdk.git",
+  "revision": "a194b760d7f123e512de0207954d716b3d230fcb",
+  "provenance": "ApeSDK gitlink recorded by apesdk/london1940 main"
+}

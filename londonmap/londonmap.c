@@ -52,21 +52,6 @@
 #define HALF_HEIGHT  (STANDARD_HEIGHT/2)
 
 
-#define FILE_NW "/Users/barbalet/london1940/newlondmaps/160.png"
-#define FILE_NE "/Users/barbalet/london1940/newlondmaps/161.png"
-#define FILE_SW "/Users/barbalet/london1940/newlondmaps/170.png"
-#define FILE_SE "/Users/barbalet/london1940/newlondmaps/171.png"
-
-#define FILE_NW_C "/Users/barbalet/london1940/output/160c.png"
-#define FILE_NE_C "/Users/barbalet/london1940/output/161c.png"
-#define FILE_SW_C "/Users/barbalet/london1940/output/170c.png"
-#define FILE_SE_C "/Users/barbalet/london1940/output/171c.png"
-
-#define FILE_NW_SMALL "/Users/barbalet/london1940/output/160_small.png"
-#define FILE_NE_SMALL "/Users/barbalet/london1940/output/161_small.png"
-#define FILE_SW_SMALL "/Users/barbalet/london1940/output/170_small.png"
-#define FILE_SE_SMALL "/Users/barbalet/london1940/output/171_small.png"
-
 
 
 #include <math.h>
@@ -391,21 +376,21 @@ void coverage(char * name, unsigned char * coverage)
  #E -  8 - 232 high 232
  #F -  0 - 240 high 240
 
- /Users/barbalet/londonmap/londonmap/londonpng/160.png, #0, 16 - 248 high 240(A)
- /Users/barbalet/londonmap/londonmap/londonpng/160.png, #1, 8 - 232 high 216 (B)
- /Users/barbalet/londonmap/londonmap/londonpng/160.png, #2, 0 - 240 high 184 (C)
+ sheet 160, #0, 16 - 248 high 240(A)
+ sheet 160, #1, 8 - 232 high 216 (B)
+ sheet 160, #2, 0 - 240 high 184 (C)
 
- /Users/barbalet/londonmap/londonmap/londonpng/161.png, #0, 16 - 248 high 248(D)
- /Users/barbalet/londonmap/londonmap/londonpng/161.png, #1, 8 - 232 high 232 (E)
- /Users/barbalet/londonmap/londonmap/londonpng/161.png, #2, 0 - 240 high 240 (F)
+ sheet 161, #0, 16 - 248 high 248(D)
+ sheet 161, #1, 8 - 232 high 232 (E)
+ sheet 161, #2, 0 - 240 high 240 (F)
 
- /Users/barbalet/londonmap/londonmap/londonpng/170.png, #0, 16 - 248 high 240(A)
- /Users/barbalet/londonmap/londonmap/londonpng/170.png, #1, 8 - 232 high 216 (B)
- /Users/barbalet/londonmap/londonmap/londonpng/170.png, #2, 0 - 240 high 184 (C)
+ sheet 170, #0, 16 - 248 high 240(A)
+ sheet 170, #1, 8 - 232 high 216 (B)
+ sheet 170, #2, 0 - 240 high 184 (C)
 
- /Users/barbalet/londonmap/londonmap/londonpng/171.png, #0, 16 - 248 high 248(D)
- /Users/barbalet/londonmap/londonmap/londonpng/171.png, #1, 8 - 232 high 232 (E)
- /Users/barbalet/londonmap/londonmap/londonpng/171.png, #2, 0 - 240 high 240 (F)
+ sheet 171, #0, 16 - 248 high 248(D)
+ sheet 171, #1, 8 - 232 high 232 (E)
+ sheet 171, #2, 0 - 240 high 240 (F)
  
  */
 
@@ -429,13 +414,16 @@ void coverage(char * name, unsigned char * coverage)
 //(void)png_scrink(FILE_NW, FILE_NW_SMALL, &local_png, bitmap, 150+120 + 6 + 2, 300+170, HALF_WIDTH - 300-272 - 9, HALF_HEIGHT - 800 - 352);
 
 int main(int argc, const char * argv[]) {
-
+    if (argc != 3) {
+        fprintf(stderr, "usage: %s INPUT_PNG OUTPUT_PNG\n", argv[0]);
+        return 2;
+    }
     
     png_t local_png;
 
     unsigned char * bitmap = (unsigned char *) malloc(HALF_WIDTH * HALF_HEIGHT * 3);
 
-    png_scrink(FILE_NW, FILE_NW_SMALL, &local_png, bitmap, XSTART+XSPEC1, YSTART+YSPEC1, XEND, YEND, 0.001, 0.002);
+    png_scrink(argv[1], argv[2], &local_png, bitmap, XSTART+XSPEC1, YSTART+YSPEC1, XEND, YEND, 0.001, 0.002);
     
     // works
     //png_scrink(FILE_NE, FILE_NE_SMALL, &local_png, bitmap, XSTART+XSPEC2, YSTART+YSPEC2, XEND, YEND, 0.00, 0.00);
