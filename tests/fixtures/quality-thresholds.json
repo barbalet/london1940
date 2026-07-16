@@ -1,0 +1,24 @@
+{
+  "format": "london1940-quality-thresholds",
+  "version": 1,
+  "reviewed": "2026-07-15",
+  "realMapClasses": {
+    "terrain.rivers": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0},
+    "terrain.woodland": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0},
+    "urban.bridges": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0},
+    "urban.buildings": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0},
+    "urban.junctions": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0},
+    "urban.main-roads": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0},
+    "urban.minor-roads": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0},
+    "urban.orchards": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0},
+    "urban.railway-stations": {"minimumPrecision": 1.0, "minimumRecall": 1.0, "minimumIoU": 1.0}
+  },
+  "syntheticOnlyClasses": [
+    "terrain.lakes",
+    "terrain.sands",
+    "terrain.sea",
+    "urban.harbours",
+    "urban.railway-lines",
+    "urban.railway-tunnels"
+  ]
+}

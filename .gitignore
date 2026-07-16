@@ -8,3 +8,5 @@ xcschememanagement.plist
 /build/
 /map/map2json-core
 /apesdk/
+__pycache__/
+*.pyc

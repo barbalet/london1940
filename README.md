@@ -242,7 +242,7 @@ The next work is Phase 4 repository reproducibility before adding the full
 source sheets. The ordered, testable plan is maintained in
 [ROADMAP.md](ROADMAP.md).
 
-Phases 0 through 4 are complete. The tracked baseline fixture manifest and capture command are in
+Phases 0 through 5 are complete. The tracked baseline fixture manifest and capture command are in
 [`baseline/`](baseline/), and repository/dependency findings are recorded in
 [`docs/repository-provenance.md`](docs/repository-provenance.md). The v1 schema,
 format semantics, migration command, and tests are in `schema/`, `docs/`,

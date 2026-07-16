@@ -26,6 +26,8 @@ install:
 	install -m 755 $(APP) "$(BINDIR)/$(APP)"
 	install -m 755 $(ENGINE) "$(LIBEXECDIR)/$(ENGINE)"
 	install -m 644 ../tools/map_migrate.py "$(LIBEXECDIR)/map_migrate.py"
+	install -d "$(LIBEXECDIR)/profiles"
+	install -m 644 ../profiles/*.json "$(LIBEXECDIR)/profiles/"
 	install -m 755 mapoutdir "$(BINDIR)/mapoutdir"
 	install -m 755 combinetiles.py "$(BINDIR)/combinetiles"
 	install -m 755 combinemaps.py "$(BINDIR)/combinemaps"
@@ -43,6 +45,7 @@ uninstall:
 	rm -f "$(MANDIR)/$(APP).1.gz" "$(MANDIR)/combinetiles.1.gz" "$(MANDIR)/combinemaps.1.gz" "$(MANDIR)/heightmap.1.gz" "$(MANDIR)/allmaps.1.gz" "$(MANDIR)/mapoutdir.1.gz"
 	rm -f "$(LIBEXECDIR)/$(ENGINE)" "$(LIBEXECDIR)/map_migrate.py"
 	rm -rf "$(LIBEXECDIR)/__pycache__"
+	rm -rf "$(LIBEXECDIR)/profiles"
 	rmdir "$(LIBEXECDIR)" 2>/dev/null || true
 
 clean:

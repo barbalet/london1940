@@ -360,6 +360,40 @@ int main(int argc, char* argv[])
                 (strcmp(argv[i],"--maxbr")==0)) {
             max_bridges = atoi(argv[i+1]);
         }
+        if (strcmp(argv[i],"--woodsaveraging")==0) woods_averaging_radius = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--riveraveraging")==0) water_averaging_radius = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--maxriverwidth")==0) max_river_width = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--maxroadwidth")==0) max_road_width = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--minpossibleroadwidth")==0) min_possible_road_width = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--maxpossibleroadwidth")==0) max_possible_road_width = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--mainroadredthreshold")==0) road_main_threshold_red = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--mainroadgreenthreshold")==0) road_main_threshold_green = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--mainroadaveraging")==0) road_main_averaging_radius = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--mainroadminred")==0) road_main_min_red = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--mainroadmaxred")==0) road_main_max_red = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--mainroadmaxgreen")==0) road_main_max_green = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--minorroadaveraging")==0) road_minor_averaging_radius = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--minorroadjoinradius")==0) minor_road_join_ends_radius = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--potentialroadsradius")==0) potential_roads_radius = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--seaaveraging")==0) sea_averaging_radius = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--sandpatchsize")==0) sands_patch_size = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--sandtexturethreshold")==0) sands_texture_threshold = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--sandcoverage")==0) sands_coverage = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaylinered")==0) railway_line_color_red = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaylinegreen")==0) railway_line_color_green = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaylineblue")==0) railway_line_color_blue = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaytunnelred")==0) railway_tunnel_color_red = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaytunnelgreen")==0) railway_tunnel_color_green = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaytunnelblue")==0) railway_tunnel_color_blue = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaylinewidth")==0) railway_line_width = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaypointspacing")==0) railway_line_point_spacing = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--railwaylinkradius")==0) railway_line_link_radius = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--harbourred")==0) harbour_color_red = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--harbourgreen")==0) harbour_color_green = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--harbourblue")==0) harbour_color_blue = (n_byte)atoi(argv[i+1]);
+        if (strcmp(argv[i],"--harbourwidth")==0) harbour_width = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--harbourpointspacing")==0) harbour_point_spacing = atoi(argv[i+1]);
+        if (strcmp(argv[i],"--harbourlinkradius")==0) harbour_link_radius = atoi(argv[i+1]);
     }
 
     /* was a file specified */

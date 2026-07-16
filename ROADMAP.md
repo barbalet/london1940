@@ -156,7 +156,7 @@ unsafe shell file iteration are rejected by `tests/run_phase4.sh`.
 GitLab CI both install the same requirements and execute
 `tests/run_supported.sh`, the documented fresh-clone command.
 
-## Phase 5: calibrate semantic extraction
+## Phase 5: calibrate semantic extraction — complete
 
 1. Review reference masks for buildings, main/minor roads, railway lines and
    tunnels, stations, rivers, lakes/sea, woodland, orchards, sand, bridges, and
@@ -172,6 +172,21 @@ GitLab CI both install the same requirements and execute
 
 **Completion gate:** reviewed fixtures meet agreed per-class thresholds and
 threshold/profile changes create explicit, reviewable output differences.
+
+**Completion evidence:** `profiles/legacy-1.json` is the tracked release
+calibration surface loaded by `map2json`; malformed or incomplete profiles fail
+before extraction. `tests/fixtures/quality-thresholds.json` requires exact
+precision, recall, and IoU for all nine classes and 27 reviewed real-town masks.
+Six classes absent from the crops have explicit synthetic serialization/render
+coverage and are identified as synthetic-only rather than misrepresented as
+ground-truth calibration. `tools/map_quality.py` enforces the policy, merges a
+cross-tile overlap fixture without duplicate points or broken connectivity, and
+tests topology-preserving collinear simplification of a small building with an
+interior ring. The non-release `sensitivity-woodland-1` profile changes only
+woodland on Ashford (IoU 0.9064), producing an explicit comparison artifact.
+`tests/run_phase5.sh` performs fresh extraction, quality assessment, profile
+comparison, and runtime/peak-RSS measurement. Known symbol ambiguity and scope
+limits are documented in `docs/extraction-calibration.md`.
 
 ## Phase 6: ingest the ten source sheets
 

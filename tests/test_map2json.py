@@ -70,6 +70,11 @@ class DriverTests(unittest.TestCase):
         limits = DRIVER.extraction_limits(2174, 1754)
         self.assertLess(int(limits[1]), 10_485_760)
         self.assertLess(int(limits[3]), 2_621_440)
+        release, release_arguments = DRIVER.load_profile("legacy-1")
+        sensitivity, _ = DRIVER.load_profile("sensitivity-woodland-1")
+        changed = {key for key in release["parameters"] if release["parameters"][key] != sensitivity["parameters"][key]}
+        self.assertEqual({"woodlandThreshold"}, changed)
+        self.assertEqual(len(DRIVER.PROFILE_FLAGS) * 2, len(release_arguments))
 
     def test_explicit_metadata_overrides_filename_georeferencing(self):
         document = {"tile": [0, 0], "coordinates": {"crs": None}}

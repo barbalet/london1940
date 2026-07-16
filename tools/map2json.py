@@ -21,11 +21,55 @@ if (SOURCE_ROOT / "tools" / "map_migrate.py").is_file():
     ROOT = SOURCE_ROOT
     MIGRATE_PATH = ROOT / "tools" / "map_migrate.py"
     DEFAULT_ENGINE = ROOT / "map" / "map2json-core"
+    PROFILE_DIR = ROOT / "profiles"
 else:
     PREFIX = SCRIPT_PATH.parents[1]
     ROOT = PREFIX
     MIGRATE_PATH = PREFIX / "libexec" / "london1940" / "map_migrate.py"
     DEFAULT_ENGINE = PREFIX / "libexec" / "london1940" / "map2json-core"
+    PROFILE_DIR = PREFIX / "libexec" / "london1940" / "profiles"
+
+PROFILE_FLAGS = {
+    "buildingCoverage": "--coverage", "buildingRadius": "--proximalradius",
+    "buildingMaxPercent": "--maxsize", "buildingColorRed": "--proximalred",
+    "buildingColorGreen": "--proximalgreen", "buildingColorBlue": "--proximalblue",
+    "lineSearchRadius": "--linesearch", "woodlandThreshold": "--woodsthreshold",
+    "woodlandCoverage": "--woodscoverage", "woodlandAveragingRadius": "--woodsaveraging",
+    "riverCoverage": "--watercoverage", "riverPointSpacing": "--riverpointspacing",
+    "riverLinkRadius": "--riverlinkradius", "riverMinimumBlue": "--riverminblue",
+    "riverMaximumBlue": "--rivermaxblue", "riverMinimumBlue2": "--riverminblue2",
+    "riverMaximumBlue2": "--rivermaxblue2", "riverRedThreshold": "--riverred",
+    "riverGreenThreshold": "--rivergreen", "riverRedThreshold2": "--riverred2",
+    "riverBlueGreenDifference": "--riverbluegreen", "riverAveragingRadius": "--riveraveraging",
+    "maximumRiverWidth": "--maxriverwidth", "maximumRoadWidth": "--maxroadwidth",
+    "maximumClumpPoints": "--maxclumppoints", "minimumPossibleRoadWidth": "--minpossibleroadwidth",
+    "maximumPossibleRoadWidth": "--maxpossibleroadwidth", "roadLinkRadius": "--roadlinkradius",
+    "mainRoadCoverage": "--mainroadcoverage", "mainRoadRedThreshold": "--mainroadredthreshold",
+    "mainRoadGreenThreshold": "--mainroadgreenthreshold", "mainRoadAveragingRadius": "--mainroadaveraging",
+    "mainRoadMinimumRed": "--mainroadminred", "mainRoadMaximumRed": "--mainroadmaxred",
+    "mainRoadMaximumGreen": "--mainroadmaxgreen",
+    "minorRoadCoverage": "--minorroadcoverage", "minorRoadBackground": "--minorroadbackground",
+    "minorRoadRedThreshold": "--roadminorredthreshold", "minorRoadGreenThreshold": "--roadminorgreenthreshold",
+    "minorRoadMinimumRed": "--roadminorminred", "minorRoadMaximumRed": "--roadminormaxred",
+    "minorRoadAveragingRadius": "--minorroadaveraging", "minorRoadJoinRadius": "--minorroadjoinradius",
+    "potentialRoadRadius": "--potentialroadsradius", "roadPointSpacing": "--roadpointspacing",
+    "orchardTreeDiameter": "--treediam",
+    "orchardTreeSpacing": "--treespacing", "stationMinimumSize": "--minstationsize",
+    "stationMaximumSize": "--maxstationsize", "seaCoverage": "--seacoverage",
+    "seaAreaPercent": "--seathreshold", "seaRedLow": "--searedlow", "seaRedHigh": "--searedhigh",
+    "seaGreenLow": "--seagreenlow", "seaGreenHigh": "--seagreenhigh",
+    "seaBlueLow": "--seabluelow", "seaBlueHigh": "--seabluehigh",
+    "seaAveragingRadius": "--seaaveraging", "sandPatchSize": "--sandpatchsize",
+    "sandTextureThreshold": "--sandtexturethreshold", "sandCoverage": "--sandcoverage",
+    "railwayLineRed": "--railwaylinered", "railwayLineGreen": "--railwaylinegreen",
+    "railwayLineBlue": "--railwaylineblue", "railwayTunnelRed": "--railwaytunnelred",
+    "railwayTunnelGreen": "--railwaytunnelgreen", "railwayTunnelBlue": "--railwaytunnelblue",
+    "railwayLineWidth": "--railwaylinewidth", "railwayPointSpacing": "--railwaypointspacing",
+    "railwayLinkRadius": "--railwaylinkradius", "harbourRed": "--harbourred",
+    "harbourGreen": "--harbourgreen", "harbourBlue": "--harbourblue",
+    "harbourWidth": "--harbourwidth", "harbourPointSpacing": "--harbourpointspacing",
+    "harbourLinkRadius": "--harbourlinkradius", "tileOverlapPercent": "--overlap",
+}
 
 MIGRATE_SPEC = importlib.util.spec_from_file_location("map_migrate", MIGRATE_PATH)
 MAP_MIGRATE = importlib.util.module_from_spec(MIGRATE_SPEC)
@@ -47,7 +91,8 @@ def parser() -> argparse.ArgumentParser:
     result.add_argument("-o", "--output", type=Path, required=False, help="v1 JSON destination")
     result.add_argument("--work-dir", type=Path, help="parent directory for isolated scratch data")
     result.add_argument("--diagnostics", action="store_true", help="retain engine logs and diagnostic images")
-    result.add_argument("--profile", choices=("legacy-1",), default="legacy-1", help="versioned extraction profile")
+    result.add_argument("--profile", choices=("legacy-1", "sensitivity-woodland-1"), default="legacy-1",
+                        help="versioned extraction profile")
     result.add_argument("--format-version", type=int, choices=(1,), default=1)
     result.add_argument("--metadata", type=Path, help="explicit JSON georeferencing metadata")
     result.add_argument("--engine", type=Path, default=DEFAULT_ENGINE, help=argparse.SUPPRESS)
@@ -84,6 +129,26 @@ def extraction_limits(width: int, height: int) -> list[str]:
         "--maxstations", "1000",
         "--maxbridges", "1000",
     ]
+
+
+def load_profile(name: str) -> tuple[dict, list[str]]:
+    path = PROFILE_DIR / f"{name}.json"
+    try:
+        profile = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError) as error:
+        raise PipelineError(f"cannot load extraction profile {path}: {error}") from error
+    if profile.get("format") != "london1940-extraction-profile" or profile.get("version") != 1 or profile.get("name") != name:
+        raise PipelineError(f"invalid extraction profile identity: {path}")
+    parameters = profile.get("parameters")
+    if not isinstance(parameters, dict) or set(parameters) != set(PROFILE_FLAGS):
+        raise PipelineError(f"profile parameters differ from the supported calibration surface: {path}")
+    arguments = []
+    for key, flag in PROFILE_FLAGS.items():
+        value = parameters[key]
+        if not isinstance(value, int) or isinstance(value, bool):
+            raise PipelineError(f"profile parameter {key} must be an integer")
+        arguments.extend((flag, str(value)))
+    return profile, arguments
 
 
 def png_dimensions(path: Path) -> tuple[int, int]:
@@ -123,13 +188,14 @@ def run_pipeline(args: argparse.Namespace) -> Path:
     if not engine.is_file():
         raise PipelineError(f"extractor engine is missing; run make -C map ({engine})")
     width, height = png_dimensions(source)
+    profile, profile_arguments = load_profile(args.profile)
     work_parent = args.work_dir.resolve() if args.work_dir else None
     if work_parent:
         work_parent.mkdir(parents=True, exist_ok=True)
     scratch = Path(tempfile.mkdtemp(prefix="map2json-", dir=work_parent))
     legacy_path = scratch / "map.json"
     log_path = scratch / "extractor.log"
-    command = [str(engine), "-f", str(source), *extraction_limits(width, height), "--apesdk"]
+    command = [str(engine), "-f", str(source), *profile_arguments, *extraction_limits(width, height), "--apesdk"]
     try:
         environment = os.environ.copy()
         environment["MAP2JSON_EXTRACT_ONLY"] = "1"
@@ -148,7 +214,7 @@ def run_pipeline(args: argparse.Namespace) -> Path:
             MAP_MIGRATE.validate_v1(document)
         except (json.JSONDecodeError, MAP_MIGRATE.MapValidationError, KeyError, TypeError, ValueError) as error:
             raise PipelineError(f"extractor output is invalid: {error}") from error
-        document["generator"] = {"name": "map2json", "version": VERSION, "extractionProfile": args.profile}
+        document["generator"] = {"name": "map2json", "version": VERSION, "extractionProfile": profile["name"]}
         apply_metadata(document, args.metadata)
         MAP_MIGRATE.validate_v1(document)
         output.parent.mkdir(parents=True, exist_ok=True)
