@@ -203,17 +203,19 @@ static n_c_int closest_line_point(n_c_int x, n_c_int y,
 }
 
 static n_c_int line_length(n_c_int line_links[],
-                           n_c_int line_index, n_byte direction)
+                           n_c_int no_of_line_points,
+                           n_c_int line_index, n_byte direction,
+                           n_byte followed_link[])
 {
     n_c_int length = 0, index = line_index, start_index = line_index, idx;
-    n_byte followed_link[MAX_ROAD_POINTS];
 
-    memset(followed_link, 0, MAX_ROAD_POINTS*sizeof(n_byte));
+    memset(followed_link, 0, no_of_line_points*sizeof(n_byte));
 
-    while (line_links[index*2 + direction] != 0) {
+    while ((index >= 0) && (index < no_of_line_points) &&
+           (line_links[index*2 + direction] != 0)) {
         idx = index;
         index = line_links[index*2 + direction]-1;
-        if (index == -1) break;
+        if ((index < 0) || (index >= no_of_line_points)) break;
         if ((index == start_index) || (followed_link[index] != 0)) {
             /* loop detected */
             break;
@@ -225,18 +227,20 @@ static n_c_int line_length(n_c_int line_links[],
 }
 
 static void prune_line_links(n_c_int line_links[],
-                             n_c_int line_index, n_byte direction)
+                             n_c_int no_of_line_points,
+                             n_c_int line_index, n_byte direction,
+                             n_byte followed_link[])
 {
     n_c_int idx;
     n_c_int index = line_index, start_index = line_index;
-    n_byte followed_link[MAX_ROAD_POINTS];
 
-    memset(followed_link, 0, MAX_ROAD_POINTS*sizeof(n_byte));
+    memset(followed_link, 0, no_of_line_points*sizeof(n_byte));
 
-    while (line_links[index*2 + direction] != 0) {
+    while ((index >= 0) && (index < no_of_line_points) &&
+           (line_links[index*2 + direction] != 0)) {
         idx = index;
         index = line_links[index*2 + direction]-1;
-        if (index == -1) break;
+        if ((index < 0) || (index >= no_of_line_points)) break;
         if ((index == start_index) || (followed_link[index] != 0)) {
             /* loop detected */
             break;
@@ -253,16 +257,25 @@ static n_c_int prune_short_lines(n_c_int line_links[],
 {
     n_c_int p, length, links_removed = 0;
     n_byte direction;
+    n_byte * followed_link = (n_byte*)malloc(no_of_line_points*sizeof(n_byte));
+
+    if (followed_link == NULL) {
+        printf("Unable to allocate line traversal state\n");
+        return 0;
+    }
 
     for (p = 0; p < no_of_line_points; p++) {
         for (direction = NEXT_JUNCTION; direction <= PREV_JUNCTION; direction++) {
-            length = line_length(line_links, p, direction);
+            length = line_length(line_links, no_of_line_points, p, direction,
+                                 followed_link);
             if (length < min_length) {
-                prune_line_links(line_links, p, direction);
+                prune_line_links(line_links, no_of_line_points, p, direction,
+                                 followed_link);
                 links_removed += length;
             }
         }
     }
+    free(followed_link);
     if (links_removed > 0) {
         printf("Removed %d short links\n", links_removed);
     }

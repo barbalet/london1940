@@ -60,9 +60,8 @@ extract typed feature geometry  ---> diagnostic feature masks
 validate and canonicalise JSON
        |
        +---> minified .json
-       +---> compressed .json.gz
        |
-       v
+v
 combine tiles and sheets
        |
        v
@@ -81,6 +80,56 @@ of semantic extraction. If exact raster preservation is required, it should be
 implemented as a separate optional indexed-raster archive mode. Embedding the
 original PNG bytes in JSON would add Base64 overhead without improving on PNG's
 existing lossless compression.
+
+## C PNG/JSON round trip
+
+The source-color review path is C-only and does not stitch sheets. It crops the
+actual map interior from each original source PNG, writes plain JSON with RGB
+map data, renders that JSON back to PNG, and compares the generated pixels
+against the source crop. It does not write `.json.gz` artifacts.
+
+```sh
+make -C map
+map/pngjson \
+  --sources /Users/barbalet/southeastengland1940maps \
+  --output-dir /private/tmp/london1940-c-roundtrip \
+  --review-width 2048
+```
+
+The generated full PNGs and plain JSON files belong in `/private/tmp`, not in
+this repository.
+
+## London sheet build
+
+The London build must start from the original source sheets only:
+`160.png`, `161.png`, `170.png`, and `171.png` from the pinned
+`southeastengland1940maps` source repository. Do not use a generated London PNG
+as an input to extraction or stitching. For the current source-color review,
+ignore the sheet collars and map edges; only the actual map interior crop is
+round-tripped.
+
+The C round trip writes these temporary products per sheet:
+
+```text
+/private/tmp/london1940-c-roundtrip/160.map.json
+/private/tmp/london1940-c-roundtrip/160.map-from-json.png
+/private/tmp/london1940-c-roundtrip/160.map-from-json.review.png
+/private/tmp/london1940-c-roundtrip/manifest.json
+```
+
+Run all four source sheets with:
+
+```sh
+map/pngjson \
+  --sources /Users/barbalet/southeastengland1940maps \
+  --output-dir /private/tmp/london1940-c-roundtrip \
+  --review-width 2048
+```
+
+The visual round trip preserves contours, woodland coloring, roads, rails,
+rivers, buildings, labels, and other printed map detail because it stores the
+cropped source map pixels as JSON data. This is separate from the semantic
+feature extractor.
 
 ## Version 1 JSON format
 
@@ -129,9 +178,8 @@ coordinate semantics documented in
 Version 1 uses `polygons[].rings` everywhere, explicit indexed networks, and
 absolute sheet-pixel integer coordinates. It deliberately does not use delta
 coordinates or shared tables: readable geometry makes legacy migration easier
-to audit, while gzip will provide transport compression in Phase 2. Canonical
-JSON is minified UTF-8 with sorted object keys, preserved layer/feature order,
-and one trailing newline.
+to audit. Canonical JSON is minified UTF-8 with sorted object keys, preserved
+layer/feature order, and one trailing newline.
 
 Every generated map should carry the source PNG's SHA-256 digest, converter
 version, extraction profile, coordinate reference system, and schema version.
@@ -156,8 +204,8 @@ python3 -m unittest discover -s tests -v
 ```
 
 The complete Phase 2 validation—including two clean deterministic runs,
-canonical and gzip round-trips, every per-layer mask, reviewed expectations,
-and negative inputs—is run with:
+canonical round-trips, every per-layer mask, reviewed expectations, and negative
+inputs—is run with:
 
 ```sh
 ./tests/run_phase2.sh
@@ -171,14 +219,18 @@ metric details.
 ### What works
 
 - `map/map2json` builds on macOS and Linux with the supplied `Makefile`.
+- `map/pngjson` round-trips source sheet map interiors from PNG to plain JSON
+  back to PNG in C.
 - It converts all three example RGB PNGs directly to canonical format-v1 JSON.
 - Fresh extraction passes schema, semantic, compression, and all 27 reviewed
   per-layer mask checks.
 - Normal extraction emits only the requested output; diagnostics are isolated
   and opt-in.
 - Checked arguments and pipeline failures produce non-zero exits.
-- The Python map-combination utilities pass Python syntax compilation.
 - JSON can be rendered as a simplified feature map.
+- Sheets `160`, `161`, `170`, and `171` can be round-tripped independently from
+  original source PNG map interiors to plain JSON and back to PNG with exact
+  pixel comparison.
 
 ### What is broken or unverified
 
@@ -188,21 +240,20 @@ metric details.
 - **The large-sheet helper is unfinished.** The `shrinkmaps` program in the map
   data repository contains fixed local paths and its `main` only prints
   `Hello, World!`.
-- **Full-sheet ingestion is not implemented.** Acquisition is reproducible, but
-  tiling, overlap deduplication, georeferencing manifests, and sheet-level
-  validation remain Phase 6 work.
+- **Full ten-sheet ingestion is not complete.** The four-sheet London build is
+  reproducible, but the remaining sheets, human-reviewed sheet masks, and
+  release-quality boundary validation remain Phase 6 work.
 - **Archived components are not supported builds.** `urban/`, `londonmap/`, and
   `mapedit/` remain for research provenance; see
   [docs/component-status.md](docs/component-status.md).
 
 ## Building the currently working component
 
-Requirements: Python 3, a C11 compiler, `make`, and the standard maths library.
+Requirements for the C tools: a C11 compiler, `make`, and the standard maths
+library.
 
 ```sh
-python3 -m pip install -r requirements-test.txt
 make -C map
-./tests/run_supported.sh
 ```
 
 ```sh
@@ -223,11 +274,10 @@ A source sheet is converted successfully only when all of the following hold:
 - all coordinates, indices, ring rules, and feature properties satisfy semantic
   invariants;
 - canonical generation is byte-for-byte deterministic across two clean runs;
-- `gunzip(gzip(canonical JSON))` is byte-identical to the canonical JSON;
-- decoded data is deeply equal to the pre-compression data model;
+- decoded data is deeply equal to the source data model;
 - the semantic render meets per-class mask thresholds against reviewed fixtures;
 - no feature class disappears during a JSON load/save cycle;
-- malformed input produces a non-zero exit and an actionable message; and
+- malformed input produces a non-zero exit and an actionable message;
 - peak memory, runtime, and artifact sizes are recorded.
 
 Exact comparison should be used for JSON and binary masks. Reviewed tolerances
@@ -238,15 +288,17 @@ buildings or waterways.
 
 ## Development priorities
 
-The next work is Phase 4 repository reproducibility before adding the full
-source sheets. The ordered, testable plan is maintained in
-[ROADMAP.md](ROADMAP.md).
+Phases 0 through 5 are complete. The tracked baseline fixture manifest and
+capture command are in [`baseline/`](baseline/), and repository/dependency
+findings are recorded in [`docs/repository-provenance.md`](docs/repository-provenance.md).
+The v1 schema, format semantics, migration command, validation harness, quality
+gates, and C PNG/JSON round-trip tool are in `schema/`, `docs/`, `tools/`,
+`tests/`, and `map/`.
 
-Phases 0 through 5 are complete. The tracked baseline fixture manifest and capture command are in
-[`baseline/`](baseline/), and repository/dependency findings are recorded in
-[`docs/repository-provenance.md`](docs/repository-provenance.md). The v1 schema,
-format semantics, migration command, and tests are in `schema/`, `docs/`,
-`tools/`, and `tests/` respectively.
+The remaining roadmap work is Phase 6 full-sheet ingestion followed by Phase 7
+simulation integration. Phase 6 must keep distributable map artifacts compact
+enough that the `london1940` checkout, including chosen map outputs for release,
+remains below 100 MB.
 
 ## License and attribution
 

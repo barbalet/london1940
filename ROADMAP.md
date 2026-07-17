@@ -200,11 +200,17 @@ limits are documented in `docs/extraction-calibration.md`.
 5. Render and review per-class sheet masks.
 6. Combine sheets only after boundary links and georeferencing pass checks.
 7. Publish canonical `.json`, deterministic `.json.gz`, manifests, validation
-   reports, checksums, and attribution; keep diagnostics out of releases.
+   reports, checksums, attribution, and optional semantic PNG carriers; keep
+   diagnostics out of releases.
+8. Keep the release checkout, including compressed map artifacts selected for
+   tracking, below 100 MB. Use the JSON-PNG carrier utilities when visual
+   inspectability is useful, but require `png2json` extraction to reproduce the
+   canonical JSON bytes exactly.
 
 **Completion gate:** all ten sheets are reproducible from the manifest, every
-artifact passes schema/semantic/compression tests, and boundary-quality reports
-contain no unexplained feature loss.
+artifact passes schema/semantic/compression/carrier tests, the tracked checkout
+stays below 100 MB, and boundary-quality reports contain no unexplained feature
+loss.
 
 ## Phase 7: integrate the simulation
 

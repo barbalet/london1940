@@ -622,7 +622,9 @@ int main(int argc, char* argv[])
                                     (image_bitsperpixel/8));
                 if (original_data == NULL) {
                     printf("Unable to allocate original image data buffer\n");
-                    return 0;
+                    free(image_data);
+                    free_map_data(&mapdata);
+                    return 1;
                 }
                 memcpy(original_data, image_data,
                        image_width*image_height*(image_bitsperpixel/8));
@@ -630,13 +632,22 @@ int main(int argc, char* argv[])
                     (n_byte*)malloc(image_width*image_height*
                                     sizeof(n_byte));
                 if (thresholded == NULL) {
-                    printf("Unable to allocate memory for thresholded image");
+                    printf("Unable to allocate memory for thresholded image\n");
+                    free(original_data);
+                    free(image_data);
+                    free_map_data(&mapdata);
+                    return 1;
                 }
                 thresholded_ref =
                     (n_byte*)malloc(image_width*image_height*
                                     sizeof(n_byte));
                 if (thresholded_ref == NULL) {
-                    printf("Unable to allocate memory for thresholded reference image");
+                    printf("Unable to allocate memory for thresholded reference image\n");
+                    free(thresholded);
+                    free(original_data);
+                    free(image_data);
+                    free_map_data(&mapdata);
+                    return 1;
                 }
 
                 printf("Lines converting to binary image\n");
@@ -663,7 +674,7 @@ int main(int argc, char* argv[])
                                        image_bitsperpixel,
                                        harbour_point_spacing,
                                        mapdata.harbour.points,
-                                       MAX_ROAD_POINTS,
+                                       max_road_points,
                                        harbour_point_spacing);
                 mapdata.harbour.count =
                     remove_close_points(mapdata.harbour.points,
@@ -737,7 +748,7 @@ int main(int argc, char* argv[])
                                        image_bitsperpixel,
                                        railway_line_point_spacing,
                                        mapdata.railway_line.points,
-                                       MAX_ROAD_POINTS,
+                                       max_road_points,
                                        railway_line_point_spacing);
                 mapdata.railway_line.count =
                     remove_close_points(mapdata.railway_line.points,
@@ -812,7 +823,7 @@ int main(int argc, char* argv[])
                                        image_bitsperpixel,
                                        railway_line_point_spacing,
                                        mapdata.railway_tunnel.points,
-                                       MAX_ROAD_POINTS,
+                                       max_road_points,
                                        railway_line_point_spacing);
                 mapdata.railway_tunnel.count =
                     remove_close_points(mapdata.railway_tunnel.points,
@@ -900,7 +911,9 @@ int main(int argc, char* argv[])
     original_data = (n_byte*)malloc(image_width*image_height*(image_bitsperpixel/8)*sizeof(n_byte));
     if (original_data == NULL) {
         printf("Unable to allocate original image data buffer\n");
-        return 0;
+        free(image_data);
+        free_map_data(&mapdata);
+        return 1;
     }
 
     /* make a copy of the original image data */
@@ -908,27 +921,52 @@ int main(int argc, char* argv[])
 
     if (image_bitsperpixel != 3*8) {
         printf("Expected 3 bytes per pixel\n");
-        return 0;
+        free(image_data);
+        free(original_data);
+        free_map_data(&mapdata);
+        return 1;
     }
 
     thresholded = (n_byte*)malloc(image_width*image_height*sizeof(n_byte));
     if (thresholded == NULL) {
-        printf("Unable to allocate memory for thresholded image");
+        printf("Unable to allocate memory for thresholded image\n");
+        free(image_data);
+        free(original_data);
+        free_map_data(&mapdata);
+        return 1;
     }
 
     thresholded_ref = (n_byte*)malloc(image_width*image_height*sizeof(n_byte));
     if (thresholded_ref == NULL) {
-        printf("Unable to allocate memory for thresholded reference image");
+        printf("Unable to allocate memory for thresholded reference image\n");
+        free(thresholded);
+        free(image_data);
+        free(original_data);
+        free_map_data(&mapdata);
+        return 1;
     }
 
     dark_image = (n_byte*)malloc(image_width*image_height*sizeof(n_byte));
     if (dark_image == NULL) {
-        printf("Unable to allocate memory for dark image");
+        printf("Unable to allocate memory for dark image\n");
+        free(thresholded_ref);
+        free(thresholded);
+        free(image_data);
+        free(original_data);
+        free_map_data(&mapdata);
+        return 1;
     }
 
     possible_roads = (n_byte*)malloc(image_width*image_height*sizeof(n_byte));
     if (possible_roads == NULL) {
-        printf("Unable to allocate memory for potential roads image");
+        printf("Unable to allocate memory for potential roads image\n");
+        free(dark_image);
+        free(thresholded_ref);
+        free(thresholded);
+        free(image_data);
+        free(original_data);
+        free_map_data(&mapdata);
+        return 1;
     }
 
     /* detect sea/lakes */
@@ -953,7 +991,7 @@ int main(int argc, char* argv[])
                                       mapdata.sea.id,
                                       mapdata.sea.vertices,
                                       mapdata.sea.coords,
-                                      MAX_TOTAL_POLYGON_POINTS, 0);
+                                      max_total_polygon_points, 0);
     /* detection of sea or lakes just depends upon the percentage of the image
        covered by water color */
     sea_area_percent =
@@ -1009,7 +1047,7 @@ int main(int argc, char* argv[])
                                         mapdata.sands.id,
                                         mapdata.sands.vertices,
                                         mapdata.sands.coords,
-                                        MAX_TOTAL_POLYGON_POINTS, 0);
+                                        max_total_polygon_points, 0);
     sands_area_percent =
         get_polygons_total_area(image_width, image_height,
                                 mapdata.sands.count, mapdata.sands.vertices, mapdata.sands.coords);
@@ -1042,7 +1080,7 @@ int main(int argc, char* argv[])
                                            mapdata.orchards.id,
                                            mapdata.orchards.vertices,
                                            mapdata.orchards.coords,
-                                           MAX_TOTAL_POLYGON_POINTS, 1);
+                                           max_total_polygon_points, 1);
     write_png_file("orchard_stage1.png", image_width, image_height, 24, image_data);
     detect_dots(&mapdata.orchards, orchard_tree_spacing,
                 mapdata.orchard_points,
@@ -1102,7 +1140,7 @@ int main(int argc, char* argv[])
                                             mapdata.buildings.id,
                                             mapdata.buildings.vertices,
                                             mapdata.buildings.coords,
-                                            MAX_TOTAL_POLYGON_POINTS, 1);
+                                            max_total_polygon_points, 1);
 
     /* save building areas */
     write_png_file("buildings_stage4.png",
@@ -1153,7 +1191,7 @@ int main(int argc, char* argv[])
                                         mapdata.woods.id,
                                         mapdata.woods.vertices,
                                         mapdata.woods.coords,
-                                        MAX_TOTAL_POLYGON_POINTS, 0);
+                                        max_total_polygon_points, 0);
     write_png_file("woods_stage2.png",
                    image_width, image_height, 24, image_data);
     printf("%d woodland areas\n", mapdata.woods.count);
@@ -1197,7 +1235,7 @@ int main(int argc, char* argv[])
     mapdata.water.count =
         skeleton_to_points(image_data, image_width, image_height,
                            image_bitsperpixel, water_point_spacing,
-                           mapdata.water.points, MAX_ROAD_POINTS,
+                           mapdata.water.points, max_road_points,
                            water_point_spacing*3/2);
     mapdata.water.count =
         remove_close_points(mapdata.water.points, mapdata.water.count,
@@ -1254,7 +1292,7 @@ int main(int argc, char* argv[])
     /* detect railway stations */
     mapdata.no_of_stations =
         detect_blobs(thresholded_ref, image_width, image_height,
-                     line_search_radius, MAX_STATION_POINTS, mapdata.station_points,
+                     line_search_radius, max_station_points, mapdata.station_points,
                      min_station_size, max_station_size, image_data);
     if (mapdata.no_of_stations > 0) {
         printf("%d station points\n", mapdata.no_of_stations);
@@ -1269,7 +1307,7 @@ int main(int argc, char* argv[])
     mapdata.main_road.count =
         skeleton_to_points(image_data, image_width, image_height,
                            image_bitsperpixel, road_point_spacing,
-                           mapdata.main_road.points, MAX_ROAD_POINTS,
+                           mapdata.main_road.points, max_road_points,
                            road_point_spacing*3/2);
     /* remove any road points which are railway stations */
     mapdata.main_road.count =
@@ -1339,7 +1377,7 @@ int main(int argc, char* argv[])
     mapdata.minor_road.count =
         skeleton_to_points(image_data, image_width, image_height,
                            image_bitsperpixel, road_point_spacing,
-                           mapdata.minor_road.points, MAX_ROAD_POINTS,
+                           mapdata.minor_road.points, max_road_points,
                            road_point_spacing*3/2);
     /* remove surplus minor road points */
     mapdata.minor_road.count =
@@ -1384,7 +1422,7 @@ int main(int argc, char* argv[])
                          mapdata.minor_road.links,
                          mapdata.water.points, mapdata.water.count,
                          mapdata.water.links,
-                         mapdata.bridge_points, MAX_BRIDGES);
+                         mapdata.bridge_points, max_bridges);
     printf("%d bridges\n", mapdata.no_of_bridges);
 
     /* junctions */
@@ -1393,7 +1431,7 @@ int main(int argc, char* argv[])
                          mapdata.main_road.links,
                          mapdata.minor_road.points, mapdata.minor_road.count,
                          mapdata.minor_road.links,
-                         mapdata.junction_points, MAX_JUNCTIONS,
+                         mapdata.junction_points, max_junctions,
                          minor_road_join_ends_radius);
     printf("%d junctions\n", mapdata.no_of_junctions);
     /* all roads */

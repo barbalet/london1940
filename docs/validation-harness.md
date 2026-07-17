@@ -30,6 +30,27 @@ tests. Outputs are isolated under ignored `build/phase2`.
    then encoded again and compared byte-for-byte.
 5. Gzip uses compression level 9, timestamp zero, and no source filename. Both
    decompression equality and repeated compressed-byte equality are required.
+6. PNG carriers store deterministic gzipped canonical JSON in a private `loNg`
+   chunk with byte counts and SHA-256 checksums; extraction must reproduce the
+   canonical JSON bytes exactly.
+
+## PNG carriers
+
+`tools/json2png.py` writes a viewable semantic RGB preview of a v1 map and
+embeds the canonical JSON payload. The visible PNG is a map preview, not a
+bit-perfect reconstruction of the source scan. `tools/png2json.py` verifies the
+PNG structure, carrier metadata, gzip stream, byte counts, and checksums before
+writing JSON.
+
+```sh
+python3 tools/json2png.py build/map.v1.json --output build/map.carrier.png
+python3 tools/png2json.py build/map.carrier.png --output build/map.roundtrip.v1.json
+cmp build/map.v1.json build/map.roundtrip.v1.json
+```
+
+The carrier code is covered by unit tests for exact JSON round-trip, preview
+pixel stability, CLI wrappers, non-canonical JSON rejection, and corrupt or
+missing carrier chunks.
 
 ## Masks and expectations
 

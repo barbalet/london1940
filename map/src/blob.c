@@ -1,6 +1,63 @@
 #include "map2json.h"
 #include "toolkit.h"
 
+static n_c_int detect_blobs_push(n_byte img[], n_c_int width, n_c_int height,
+                                 n_c_int x, n_c_int y,
+                                 n_c_int r, n_c_int g, n_c_int b,
+                                 n_byte result[],
+                                 n_c_int bounding_box[],
+                                 n_c_int ** pending,
+                                 n_int * pending_capacity,
+                                 n_int * pending_count)
+{
+    n_int n, max_points, new_capacity;
+    n_c_int * resized;
+
+    if ((x < 0) || (x >= width) || (y < 0) || (y >= height)) {
+        return 1;
+    }
+    n = (n_int)y*width + x;
+    if (img[n] == BACKGROUND) {
+        return 1;
+    }
+    n *= 3;
+    if (result[n] != BACKGROUND) {
+        return 1;
+    }
+    if (*pending_count >= *pending_capacity) {
+        max_points = (n_int)width * (n_int)height;
+        new_capacity = (*pending_capacity) * 2;
+        if (new_capacity > max_points) {
+            new_capacity = max_points;
+        }
+        if (new_capacity <= *pending_capacity) {
+            printf("blob fill exceeded image point capacity\n");
+            return 0;
+        }
+        resized = (n_c_int*)realloc(*pending, new_capacity*2*sizeof(n_c_int));
+        if (resized == NULL) {
+            printf("Unable to grow blob fill stack\n");
+            return 0;
+        }
+        *pending = resized;
+        *pending_capacity = new_capacity;
+    }
+    result[n] = b;
+    result[n+1] = g;
+    result[n+2] = r;
+
+    (*pending)[(*pending_count)*2] = x;
+    (*pending)[(*pending_count)*2+1] = y;
+    (*pending_count)++;
+
+    if (x < bounding_box[0]) bounding_box[0] = x;
+    if (y < bounding_box[1]) bounding_box[1] = y;
+    if (x > bounding_box[2]) bounding_box[2] = x;
+    if (y > bounding_box[3]) bounding_box[3] = y;
+
+    return 1;
+}
+
 static n_c_int detect_blobs_point(n_byte img[], n_c_int width, n_c_int height,
                                   n_c_int x, n_c_int y,
                                   n_c_int r, n_c_int g, n_c_int b,
@@ -8,47 +65,57 @@ static n_c_int detect_blobs_point(n_byte img[], n_c_int width, n_c_int height,
                                   n_c_int bounding_box[], n_c_int search_radius,
                                   n_c_int depth, n_c_int max_depth)
 {
-    n_c_int n, xx, yy;
+    n_int pending_capacity = 1024;
+    n_int pending_count = 0;
+    n_int pending_index = 0;
+    n_int n;
+    n_c_int xx, yy, current_x, current_y;
+    n_c_int * pending = NULL;
 
-    if (depth > max_depth) {
-        return 0;
-    }
+    (void)depth;
+    (void)max_depth;
+
     if ((x < 0) || (x >= width) || (y < 0) || (y >= height)) {
         return 0;
     }
-    n = y*width + x;
-    if (img[n] == BACKGROUND) {
+    n = (n_int)y*width + x;
+    if ((img[n] == BACKGROUND) || (result[n*3] != BACKGROUND)) {
         return 0;
     }
-    n *= 3;
-    if (result[n] != BACKGROUND) {
+
+    pending = (n_c_int*)malloc(pending_capacity*2*sizeof(n_c_int));
+    if (pending == NULL) {
+        printf("Unable to allocate blob fill stack\n");
         return 0;
     }
-    result[n] = b;
-    result[n+1] = g;
-    result[n+2] = r;
+    if (detect_blobs_push(img, width, height, x, y, r, g, b, result,
+                          bounding_box, &pending,
+                          &pending_capacity, &pending_count) == 0) {
+        free(pending);
+        return 0;
+    }
 
-    if (x < bounding_box[0]) bounding_box[0] = x;
-    if (y < bounding_box[1]) bounding_box[1] = y;
-    if (x > bounding_box[2]) bounding_box[2] = x;
-    if (y > bounding_box[3]) bounding_box[3] = y;
-
-    for (yy = y - search_radius; yy <= y + search_radius; yy++) {
-        if (yy < 0) continue;
-        if (yy >= height) break;
-        for (xx = x - search_radius; xx <= x + search_radius; xx++) {
-            if (xx < 0) continue;
-            if (xx >= width) break;
-            if ((xx == x) && (yy == y)) {
-                continue;
+    while (pending_index < pending_count) {
+        current_x = pending[pending_index*2];
+        current_y = pending[pending_index*2+1];
+        pending_index++;
+        for (yy = current_y - search_radius; yy <= current_y + search_radius; yy++) {
+            for (xx = current_x - search_radius; xx <= current_x + search_radius; xx++) {
+                if ((xx == current_x) && (yy == current_y)) {
+                    continue;
+                }
+                if (detect_blobs_push(img, width, height, xx, yy, r, g, b,
+                                      result, bounding_box, &pending,
+                                      &pending_capacity, &pending_count) == 0) {
+                    free(pending);
+                    return 1;
+                }
             }
-            detect_blobs_point(img, width, height, xx, yy, r, g, b,
-                               result,
-                               bounding_box, search_radius,
-                               depth+1, max_depth);
         }
     }
-    return 1;
+
+    free(pending);
+    return (pending_count > 0);
 }
 
 /* blobby blobby blobby */

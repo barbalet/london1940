@@ -831,26 +831,32 @@ n_c_int create_map_data(n_c_int max_total_polygon_points,
 
     if (create_map_lines(max_road_points, &mapdata->water, 1) != 0) {
         free_map_data(mapdata);
+        return 1;
     }
 
     if (create_map_lines(max_road_points, &mapdata->main_road, 0) != 0) {
         free_map_data(mapdata);
+        return 1;
     }
 
     if (create_map_lines(max_road_points, &mapdata->minor_road, 0) != 0) {
         free_map_data(mapdata);
+        return 1;
     }
 
     if (create_map_lines(max_road_points, &mapdata->railway_line, 0) != 0) {
         free_map_data(mapdata);
+        return 1;
     }
 
     if (create_map_lines(max_road_points, &mapdata->harbour, 0) != 0) {
         free_map_data(mapdata);
+        return 1;
     }
 
     if (create_map_lines(max_road_points, &mapdata->railway_tunnel, 0) != 0) {
         free_map_data(mapdata);
+        return 1;
     }
 
     mapdata->junction_points = (n_c_int*)malloc(max_junctions*2*sizeof(n_c_int));

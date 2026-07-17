@@ -1,5 +1,6 @@
 APP=map2json
 ENGINE=map2json-core
+PNGJSON=pngjson
 VERSION=1.00
 PREFIX?=/usr/local
 DESTDIR?=
@@ -7,10 +8,16 @@ BINDIR=$(DESTDIR)$(PREFIX)/bin
 MANDIR=$(DESTDIR)$(PREFIX)/share/man/man1
 LIBEXECDIR=$(DESTDIR)$(PREFIX)/libexec/london1940
 
-all:
+all: $(ENGINE) $(APP) $(PNGJSON)
+
+$(ENGINE): src/*.c src/*.h
 	gcc -Wall -std=c11 -pedantic -O3 -o $(ENGINE) -Isrc src/*.c -lm
-	cp ../tools/map2json.py $(APP)
-	chmod +x $(APP)
+
+$(APP): $(ENGINE)
+	cp $(ENGINE) $(APP)
+
+$(PNGJSON): pngjson.c src/lodepng.c src/lodepng.h
+	gcc -Wall -std=c11 -pedantic -O3 -o $(PNGJSON) -Isrc pngjson.c src/lodepng.c -lm
 
 mac:
 	gcc -Wall -std=c11 -pedantic -O3 -o $(APP) -Isrc src/*.c -lm -Wl,-stack_size -Wl,0x1000000
@@ -24,6 +31,7 @@ source:
 install:
 	install -d "$(BINDIR)" "$(MANDIR)" "$(LIBEXECDIR)"
 	install -m 755 $(APP) "$(BINDIR)/$(APP)"
+	install -m 755 $(PNGJSON) "$(BINDIR)/$(PNGJSON)"
 	install -m 755 $(ENGINE) "$(LIBEXECDIR)/$(ENGINE)"
 	install -m 644 ../tools/map_migrate.py "$(LIBEXECDIR)/map_migrate.py"
 	install -d "$(LIBEXECDIR)/profiles"
@@ -41,7 +49,7 @@ install:
 	install -m 644 man/mapoutdir.1.gz "$(MANDIR)/mapoutdir.1.gz"
 
 uninstall:
-	rm -f "$(BINDIR)/$(APP)" "$(BINDIR)/mapoutdir" "$(BINDIR)/combinetiles" "$(BINDIR)/combinemaps" "$(BINDIR)/heightmap" "$(BINDIR)/allmaps"
+	rm -f "$(BINDIR)/$(APP)" "$(BINDIR)/$(PNGJSON)" "$(BINDIR)/mapoutdir" "$(BINDIR)/combinetiles" "$(BINDIR)/combinemaps" "$(BINDIR)/heightmap" "$(BINDIR)/allmaps"
 	rm -f "$(MANDIR)/$(APP).1.gz" "$(MANDIR)/combinetiles.1.gz" "$(MANDIR)/combinemaps.1.gz" "$(MANDIR)/heightmap.1.gz" "$(MANDIR)/allmaps.1.gz" "$(MANDIR)/mapoutdir.1.gz"
 	rm -f "$(LIBEXECDIR)/$(ENGINE)" "$(LIBEXECDIR)/map_migrate.py"
 	rm -rf "$(LIBEXECDIR)/__pycache__"
@@ -49,4 +57,4 @@ uninstall:
 	rmdir "$(LIBEXECDIR)" 2>/dev/null || true
 
 clean:
-	rm -f src/*.plist $(APP) $(ENGINE) .#* src/.#* result.png thresholded.png road*.png water*.png sea*.png woods*.png map.json buildings*.png lake*.png sands*.png railway_lines_stage*.png railway_tunnels_stage*.png streets*.png dark_image.png *~ src/*~ src/*.c.orig src/*.h.orig src/#* largemap.json load_test.png map.png railway.png railway.json
+	rm -f src/*.plist $(APP) $(ENGINE) $(PNGJSON) .#* src/.#* result.png thresholded.png road*.png water*.png sea*.png woods*.png map.json buildings*.png lake*.png sands*.png railway_lines_stage*.png railway_tunnels_stage*.png streets*.png dark_image.png *~ src/*~ src/*.c.orig src/*.h.orig src/#* largemap.json load_test.png map.png railway.png railway.json
